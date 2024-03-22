@@ -8,8 +8,8 @@ function Header() {
   const [userData, setUserData] = useState();
   const navigate = useNavigate();
   const handleRedirect = () => {
-    // window.location.href = "http://localhost:3000";
-    window.location.href = "https://www.luckyorgenius.com/";
+    window.location.href = "http://localhost:3000";
+    // window.location.href = "https://www.luckyorgenius.com/";
   };
   useEffect(() => {
     let data = localStorage.getItem("userdata");
