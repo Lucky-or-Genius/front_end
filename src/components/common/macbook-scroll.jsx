@@ -59,7 +59,7 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
           borderRadius="1.75rem"
           className="bg-[#0B0B0F] text-white border-neutral-200 dark:border-slate-800 font-semibold"
         >
-          Watch the guided tour
+          Watch our video
           <FaPlay />
         </Button>
       </motion.div>

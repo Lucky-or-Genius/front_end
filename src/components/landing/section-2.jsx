@@ -11,7 +11,7 @@ const Section2 = () => {
         transition={{ delay: 0.3, ease: "easeInOut", duration: 2 }}
         viewport={{ once: false }}
       >
-        Simplify the complex.
+        The alpha is in the details.
       </motion.h1>
 
       <motion.span
@@ -21,8 +21,8 @@ const Section2 = () => {
         transition={{ delay: 0.5, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-        Fey offers a streamlined view of real-time market data, effortlessly
-        giving you the big picture on your favorite companies.
+        <strong>Don’t listen to the weatherman’s</strong> sports picks. Compare expertise and past performance by subject area, timeframes & other variables to evaluate credibility.
+        Wherever the data is, whichever platform, we will extract it and validate it.
       </motion.span>
 
       <motion.div
@@ -32,11 +32,35 @@ const Section2 = () => {
         transition={{ delay: 0.5, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-        <span className="font-semibold">Brand 1</span>
-        <span className="font-semibold">Brand 2</span>
-        <span className="font-semibold">Brand 3</span>
-        <span className="font-semibold">Brand 4</span>
+        <div className="flex items-center space-x-2">
+          <img src="twitter.png" alt="Twitter" className="h-6 w-6" />
+          <span className="font-semibold">X / Twitter </span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <img src="youtube_logo.png" alt="YouTube" className="h-6 w-6" />
+          <span className="font-semibold">Youtube</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <img src="reddit.png" alt="Reddit" className="h-6 w-6" />
+          <span className="font-semibold">Reddit</span>
+        </div>
+        <div className="flex items-center space-x-2">
+          <img src="spotify.png" alt="Spotify" className="h-6 w-6" />
+          <span className="font-semibold">Spotify</span>
+        </div>     
       </motion.div>
+
+{/* 
+
+      <motion.span
+        className="text-[#5D636E] max-w-[820px] font-semibold text-base md:text-xl text-center mt-4"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.1, ease: "easeInOut" }}
+        viewport={{ once: false }}
+      >
+        <strong>Filter down countless forecasts</strong> down to those of use to you. Immediately receive alerts when new relevant insights are identified.
+      </motion.span> */}
     </div>
   );
 };

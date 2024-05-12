@@ -2,6 +2,7 @@ import React from "react";
 import { MacbookScroll } from "../components/common/macbook-scroll";
 import Section1 from "../components/landing/section-1";
 import Section2 from "../components/landing/section-2";
+import Section2first from "../components/landing/section-2-first";
 import Section3 from "../components/landing/section-3";
 import Section4 from "../components/landing/section-4";
 import Section5 from "../components/landing/section-5";
@@ -18,16 +19,17 @@ export default function LandingPage() {
         <MacbookScroll
           title={
             <h1 className="md:text-[64px] text-[32px] md:leading-[6rem] leading-[2rem]">
-              Finance is finally effortless.
+              Where influence meets accountability.
             </h1>
           }
-          src={`/wallpaper.jpg`}
+          src={`/landing_2.png`}
           showGradient={false}
         />
       </div>
       <Section1 />
-      <Section2 />
       <Section3 />
+      <Section2first />
+      <Section2 />
       <Section4 />
       <Section5 />
       <Section6 />

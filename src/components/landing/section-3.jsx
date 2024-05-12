@@ -12,7 +12,7 @@ const Section3 = () => {
           transition={{ delay: 0.3, ease: "easeInOut" }}
           viewport={{ once: false }}
         >
-          See the big picture.
+          Patent pending Ai system.
         </motion.h1>
         <motion.span
           className="text-[#5D636E] max-w-[420px] font-semibold text-base md:text-xl text-center md:text-start "
@@ -21,14 +21,13 @@ const Section3 = () => {
           transition={{ delay: 0.3, ease: "easeInOut" }}
           viewport={{ once: false }}
         >
-          Fey offers a streamlined view of real-time market data, effortlessly
-          giving you the big picture on your favorite companies.
+Our <strong>Ai based architecture</strong> is an end to end system, featuring influencer identification across mediums (audio, video, image etc), deep contextual prediction extraction and systemic RAG based, evidentiary validation. The system is patent pending. 
         </motion.span>
       </div>
 
       <div className="w-full flex justify-center">
         <motion.img
-          src="/keyboard.png"
+          src="/diagram3.png"
           alt=""
           className=""
           initial={{ opacity: 0 }}
