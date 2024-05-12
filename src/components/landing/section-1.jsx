@@ -45,7 +45,7 @@ const Section1 = () => {
       </motion.div>
 
       <motion.img
-        src="/profile.jpg"
+        src="/profile2.jpg"
         alt="Profile visual representation"
         className="mb-4"  // Adds margin bottom
         initial={{ opacity: 0 }}
