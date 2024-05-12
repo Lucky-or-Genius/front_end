@@ -114,11 +114,7 @@ function Markets() {
     <div className="market-section">
       <Header />
 
-      {marketData.length === 0 && (
-        <div className="loader">
-          <Skeleton />
-        </div>
-      )}
+      {marketData.length === 0 && <Skeleton />}
       {/* User Info Row Starts */}
       {marketData?.map((val, index) => {
         return (

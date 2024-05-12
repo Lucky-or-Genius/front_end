@@ -296,11 +296,7 @@ function Summaries() {
         sortByNumberOfPredictions={sortByNumberOfPredictions}
       />
 
-      {data.length === 0 && (
-        <div className="loader">
-          <Skeleton />
-        </div>
-      )}
+      {data.length === 0 && <Skeleton />}
 
       {/* Column Starts */}
       {data.map((val, index) => {

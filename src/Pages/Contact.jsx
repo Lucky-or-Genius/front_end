@@ -2,8 +2,8 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="h-full bg-[#0B0B0F] w-full px-4 md:px-20 py-12 flex justify-center">
-      <div className="md:w-4/5 w-full border-2 flex-col md:flex-row  rounded-3xl flex p-6 gap-6 border-[#181818]">
+    <div className="h-screen bg-[#0B0B0F] w-full px-4 md:px-20 py-12 flex justify-center">
+      <div className="md:w-4/5 md:h-[90vh] md:max-h-[900px] w-full border-2 flex-col md:flex-row  rounded-3xl flex p-6 gap-6 border-[#181818]">
         <div className="w-3/5 hidden md:flex">
           <img
             src="/contact-banner.png"

@@ -63,11 +63,7 @@ function MyChannels() {
       {/* Add Channel div Ends */}
       <ChannelSubHeader className={"!top-0 !relative"} />
       {/* Add Channel div Ends */}
-      {channelData.length === 0 && (
-        <div className="loader">
-          <Skeleton />
-        </div>
-      )}
+      {channelData.length === 0 && <Skeleton />}
       {/* Row Data Starts */}
       <div className=" h-full overflow-y-auto h-[72vh] flex flex-col gap-[2px]">
         {channelData.map((val, index) => {

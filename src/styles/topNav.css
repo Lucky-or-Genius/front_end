@@ -9,21 +9,17 @@
   padding: 16px;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
 }
 .topNav-header > .topNav-logo-div {
   display: flex;
   justify-content: center;
-  width: calc(70% - 10px);
-}
-.header-icon {
-  position: absolute;
-  left: 16px;
+  width: 15rem;
 }
 .topNav-header > svg {
-  width: 8%;
-  height: 8%;
+  width: 34px;
+  height: 34px;
 }
 .topNav-links {
   display: flex;

@@ -158,11 +158,7 @@ const LeaderBoards = () => {
         sortLeaderboardByScore={sortLeaderboardByScore}
         sortLeaderboardByBankroll={sortLeaderboardByBankroll}
       />
-      {data.length === 0 && (
-        <div className="loader">
-          <Skeleton />
-        </div>
-      )}
+      {data.length === 0 && <Skeleton />}
       {data?.map((val, index) => {
         return (
           <div className="" style={{ width: "100%" }} key={index}>

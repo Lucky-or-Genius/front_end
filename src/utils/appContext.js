@@ -15,6 +15,7 @@ const useAppContext = () => {
 };
 
 const AppContextProvider = ({ children }) => {
+  const navigate = useNavigate();
   const userCheckOrCreation = async (userInfo) => {
     try {
       const res = await userLogin(userInfo);
@@ -52,6 +53,14 @@ const AppContextProvider = ({ children }) => {
         });
     },
   });
+
+  // Check if user is logged in, if yes, navigate to '/feed'
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/feed");
+    }
+  }, []);
 
   const contextValue = { login };
 

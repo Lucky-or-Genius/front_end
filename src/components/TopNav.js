@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BiSolidCategory } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
 
 import "../styles/topNav.css";
 import logoIcon from "../assests/logo-icon.svg";
 import logoText from "../assests/logo-text.svg";
 
 const TopNav = () => {
+  const { pathname } = useLocation();
+  const [userData, setUserData] = useState();
+  const handleRedirect = () => {
+    // window.location.href = "http://localhost:3000";
+
+    window.location.href = "https://www.luckyorgenius.com/";
+  };
+  useEffect(() => {
+    let data = localStorage.getItem("userdata");
+    setUserData(JSON.parse(data));
+  }, []);
   return (
     <div className="topNav">
       <div className="topNav-header">
@@ -15,6 +28,18 @@ const TopNav = () => {
           <img className="logo-icon" alt="" src={logoIcon} />
           <img className="logo-text" alt="" src={logoText} />
         </div>
+        <img
+          onClick={async () => {
+            await localStorage.clear();
+            googleLogout();
+            window.location.reload();
+            console.log("clear");
+            handleRedirect();
+          }}
+          className="notification-icon"
+          alt=""
+          src="/logouticon.svg"
+        />
       </div>
 
       <div className="topNav-links">

@@ -165,11 +165,7 @@ const Predictions = () => {
         fetchSortedCategory={fetchSortedCategory}
       />
       {/* Header ENds */}
-      {data.length === 0 && (
-        <div className="loader">
-          <Skeleton />
-        </div>
-      )}
+      {data.length === 0 && <Skeleton />}
       {/* Array Data Starts */}
       {data.map((val, index) => {
         return (
