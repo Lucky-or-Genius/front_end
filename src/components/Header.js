@@ -10,7 +10,7 @@ function Header() {
   const handleRedirect = () => {
     // window.location.href = "http://localhost:3000";
 
-    window.location.href = "https://www.luckyorgenius/Feed";
+    window.location.href = "https://www.luckyorgenius/";
   };
   useEffect(() => {
     let data = localStorage.getItem("userdata");
