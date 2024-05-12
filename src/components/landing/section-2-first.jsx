@@ -8,7 +8,7 @@ const Section2first = () => {
         className="text-white font-bold text-xl md:text-[64px] mb-12" // Added margin-bottom here
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.9, ease: "easeInOut", duration: 2 }}
+        transition={{ delay: 0.7, ease: "easeInOut", duration: 2 }}
         viewport={{ once: false }}
       >
         Browse all predictions past and present.
@@ -18,10 +18,10 @@ const Section2first = () => {
         className="text-[#5D636E] max-w-[820px] font-semibold text-base md:text-xl text-center"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.1, ease: "easeInOut" }}
+        transition={{ delay: 0.9, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-Compare the opinions of different individuals and find new perspectives based on objective accuracy. 
+Compare the opinions of different individuals and find new perspectives based on objective accuracy. We believe that people should put their money where their mouth is. So we have put peoples words to the test, whether they intended it or not. 
       </motion.span>
 
       <motion.img
@@ -30,7 +30,7 @@ Compare the opinions of different individuals and find new perspectives based on
         className="mb-8"  // Increased margin-bottom for better spacing
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.6, ease: "easeInOut", duration: 0.5 }}
+        transition={{ delay: 1.1, ease: "easeInOut", duration: 0.5 }}
         viewport={{ once: false }}
       />
 
@@ -38,10 +38,10 @@ Compare the opinions of different individuals and find new perspectives based on
         className="text-white font-bold text-xl md:text-[64px] mb-12 mt-8" // Added top margin here as well for balanced spacing
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.6, ease: "easeInOut", duration: 2 }}
+        transition={{ delay: 0.7, ease: "easeInOut", duration: 2 }}
         viewport={{ once: false }}
       >
-        Every prediction is individually scored using Ai.
+        Ai based prediction validation.
       </motion.h1>
 
       <motion.span
@@ -51,7 +51,7 @@ Compare the opinions of different individuals and find new perspectives based on
         transition={{ delay: 0.9, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-Scoring is based on accuracy and timeframe with related real money betting markets identified when available. A combination of agentic LLM's and RAG systems combine to validate predictions. 
+Prediction validation and grading is based on accuracy and timeframe with related real money betting markets identified when available. A combination of agentic LLM's and RAG systems combine to validate predictions. Evidence, reseach and derived Ai reasoning is presented for the user to explore and confirm for themselves.
       </motion.span>
 
       <motion.img
@@ -60,7 +60,7 @@ Scoring is based on accuracy and timeframe with related real money betting marke
         className="mb-4"  // Adds margin bottom
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.6, ease: "easeInOut", duration: 0.5 }}
+        transition={{ delay: 1.1, ease: "easeInOut", duration: 0.5 }}
         viewport={{ once: false }}
       />
         

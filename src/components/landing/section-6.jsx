@@ -10,25 +10,25 @@ const Section6 = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ delay: 0.3, ease: "easeInOut", duration: 2 }}
+        transition={{ delay: 0.5, ease: "easeInOut", duration: 2 }}
         viewport={{ once: false }}
       >
-        The Magic of clarity
+        Individual and market wisom.
       </motion.h1>
       <motion.span
         className="text-[#5D636E] max-w-[820px] font-semibold pb-6 text-base md:text-xl text-center"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5, ease: "easeInOut" }}
+        transition={{ delay: 0.7, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-        Fey curates essential insights from industry giants, ensuring you get a
-        clear view without clutter — all packed within an intuitive interface.
+      <strong>Instantly see and compare</strong> forecasts made by public figures to real betting lines found on active prediction markets.
+      When we say we want to make words matter, we mean it. Compare the sharpest and most incentivised markets to the predictions of your favourite influencers.
       </motion.span>
 
       <ScrollContainer
         children={
-          <img src="/macbook-3.png" alt="screen" className="w-[40rem] h-full" />
+          <img src="/markets.png" alt="screen" className="w-[40rem] h-full" />
         }
       />
     </div>

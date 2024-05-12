@@ -30,10 +30,10 @@ export default function LandingPage() {
       <Section3 />
       <Section2first />
       <Section2 />
-      <Section4 />
-      <Section5 />
+      {/* <Section4 />
+      <Section5 /> */}
+      {/* <Section7 /> */}
       <Section6 />
-      <Section7 />
       <Section8 />
       <Section9 />
     </div>

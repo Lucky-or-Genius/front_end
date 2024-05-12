@@ -22,7 +22,7 @@ const Section2 = () => {
         viewport={{ once: false }}
       >
         <strong>Don’t listen to the weatherman’s</strong> sports picks. Compare expertise and past performance by subject area, timeframes & other variables to evaluate credibility.
-        Wherever the data is, whichever platform, we will extract it and validate it.
+        Wherever the data is, whichever platform, whenver it was said, we will find it, extract it, validate it and present it to you.
       </motion.span>
 
       <motion.div

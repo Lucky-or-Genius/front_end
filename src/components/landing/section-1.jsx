@@ -8,7 +8,7 @@ const Section1 = () => {
         className="text-white font-bold text-xl md:text-[64px]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.5, ease: "easeInOut", duration: 2 }}
+        transition={{ delay: 0.7, ease: "easeInOut", duration: 2 }}
         viewport={{ once: false }}
       >
         Verify lifelong reputations instantly.
@@ -18,10 +18,10 @@ const Section1 = () => {
         className="text-[#5D636E] max-w-[820px] font-semibold text-base md:text-xl text-center"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, ease: "easeInOut" }}
+        transition={{ delay: 1.1, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-        <strong>Reputations should be built</strong> up slowly and verified quickly. Using proprietary deep Ai systems, we identify, extract and score forecasts (past & present). Based on historic accuracy, we rank influencers on our leaderboards for instant comparison.
+        <strong>Reputations should be built</strong> up slowly and verified quickly. Using proprietary deep Ai systems, we identify, extract and grade forecasts (past & present) made by influencers across any digital medium (text, audio, video). The leaderboard keeps people accountable.
       </motion.span>
 
       <motion.img
@@ -30,7 +30,7 @@ const Section1 = () => {
         className="mb-8"  // Increased margin bottom for better spacing
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 1.1, ease: "easeInOut", duration: 0.5 }}
+        transition={{ delay: 1.3, ease: "easeInOut", duration: 0.5 }}
         viewport={{ once: false }}
       />
 
@@ -38,10 +38,10 @@ const Section1 = () => {
         className="text-[#5D636E] max-w-[820px] font-semibold text-base md:text-xl text-center mb-8"  // Consistent vertical spacing
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, ease: "easeInOut" }}
+        transition={{ delay: 0.7, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-        Predictions are systemically categorised. See where forecasters are strongest and weakest, and compare their performance to others.
+        Predictions are systemically categorised. See where forecasters are strongest and weakest, and compare their performance to others. Throw away words are carefully picked up, graded, aggregated, categorised and presented.
       </motion.div>
 
       <motion.img

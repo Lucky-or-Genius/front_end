@@ -12,7 +12,7 @@ const Section9 = () => {
         transition={{ delay: 0.3, ease: "easeInOut", duration: 2 }}
         viewport={{ once: false }}
       >
-        See the big picture.
+        Enjoy a better signal to noise ratio.
       </motion.h1>
       <motion.span
         className="text-[#5D636E] max-w-[800px] font-semibold text-base md:text-xl text-center "
@@ -21,8 +21,7 @@ const Section9 = () => {
         transition={{ delay: 0.5, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-        Fey offers a streamlined view of real-time market data, effortlessly
-        giving you the big picture on your favorite companies.
+        We filter out the noise, spotlight value and only notify you when subjects of relevance to you are mentioned.
       </motion.span>
       <div className="">
         <button className="bg-[#1C1C1C] rounded-3xl text-white py-2 w-48 px-6 animate-bounce transition-all ease-in-out">
