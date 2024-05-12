@@ -55,7 +55,7 @@ Prediction validation and grading is based on accuracy and timeframe with relate
       </motion.span>
 
       <motion.img
-        src="/predictions_expanded.jpg"
+        src="/predictions_expanded2.jpg"
         alt="Leaderboards visual representation"
         className="mb-4"  // Adds margin bottom
         initial={{ opacity: 0 }}
