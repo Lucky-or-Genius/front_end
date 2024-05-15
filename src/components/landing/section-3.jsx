@@ -47,10 +47,10 @@ const Section3 = () => {
 
       <div className="w-full flex justify-center relative z-10">
   <motion.img
-    src="/Pipeline2_fix.png"
+    src="/patent.png"
     alt="Pipeline Diagram"
     className="w-full h-auto"
-    style={{ filter: 'blur(0px) brightness(0.4)', transform: 'scale(1.5)' }} // Apply blur, darken, and zoom
+    style={{ filter: 'blur(0px) brightness(0.5)', transform: 'scale(1)' }} // Apply blur, darken, and zoom
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
     transition={{ delay: 0.7, ease: "easeInOut", duration: 0.5 }}

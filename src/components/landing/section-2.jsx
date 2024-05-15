@@ -26,29 +26,29 @@ const Section2 = () => {
         </motion.span>
 
         <motion.div
-          className="max-w-screen-xl w-full grid md:grid-cols-4 grid-cols-2 text-white gap-4 text-4xl my-6"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, ease: "easeInOut" }}
-          viewport={{ once: false }}
-        >
-          <div className="flex items-center space-x-2">
-            <img src="twitter.png" alt="Twitter" className="h-16 w-16" />
-            <span className="font-semibold text-[#9CA3AF]">Twitter</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <img src="youtube_logo.png" alt="YouTube" className="h-16 w-16" />
-            <span className="font-semibold text-[#9CA3AF]">YouTube</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <img src="reddit.png" alt="Reddit" className="h-16 w-16" />
-            <span className="font-semibold text-[#9CA3AF]">Reddit</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <img src="spotify.png" alt="Spotify" className="h-16 w-16" />
-            <span className="font-semibold text-[#9CA3AF]">Spotify</span>
-          </div>
-        </motion.div>
+  className="max-w-screen-xl w-full grid md:grid-cols-4 grid-cols-2 text-white gap-4 text-4xl my-6"
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.7, ease: "easeInOut" }}
+  viewport={{ once: false }}
+>
+  <div className="flex items-center space-x-4"> {/* Increased spacing */}
+    <img src="twitter.png" alt="Twitter" className="h-12 w-12" />
+    <span className="font-semibold text-[#9CA3AF]">Twitter</span>
+  </div>
+  <div className="flex items-center space-x-4"> {/* Increased spacing */}
+    <img src="youtube_logo.png" alt="YouTube" className="h-12 w-12" />
+    <span className="font-semibold text-[#9CA3AF]">YouTube</span>
+  </div>
+  <div className="flex items-center space-x-4"> {/* Increased spacing */}
+    <img src="reddit.png" alt="Reddit" className="h-12 w-12" />
+    <span className="font-semibold text-[#9CA3AF]">Reddit</span>
+  </div>
+  <div className="flex items-center space-x-4"> {/* Increased spacing */}
+    <img src="spotify.png" alt="Spotify" className="h-12 w-12" />
+    <span className="font-semibold text-[#9CA3AF]">Spotify</span>
+  </div>
+</motion.div>
       </div>
     </div>
   );
