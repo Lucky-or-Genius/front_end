@@ -23,7 +23,7 @@ const Section6 = () => {
         viewport={{ once: false }}
       >
         <strong>Instantly see and compare</strong> forecasts made by public figures to real betting lines found on active prediction markets.
-        When we say we want to make words matter, we mean it. See how forecasts made by your favorite influencers stack up against the sharpest and most incentivized markets.
+        See how forecasts made by your favorite influencers stack up against the sharpest and most incentivized markets.
       </motion.span>
 
       <div className="relative mb-8 mt-6">
