@@ -28,7 +28,7 @@ const Section2first = () => {
         <motion.img
           src="/predictions_landing.png"
           alt="Leaderboards visual representation"
-          className="w-full h-auto"
+          className="w-full h-auto rounded-lg"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.7, ease: "easeInOut", duration: 0.5 }}
@@ -61,7 +61,7 @@ const Section2first = () => {
         <motion.img
           src="/predictions_expanded.png"
           alt="Leaderboards visual representation"
-          className="w-full h-auto"
+          className="w-full h-auto rounded-lg"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.7, ease: "easeInOut", duration: 0.5 }}

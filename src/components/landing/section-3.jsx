@@ -49,7 +49,7 @@ const Section3 = () => {
   <motion.img
     src="/patent.png"
     alt="Pipeline Diagram"
-    className="w-full h-auto"
+    className="w-full h-auto rounded-lg"
     style={{ filter: 'blur(0px) brightness(0.5)', transform: 'scale(1)' }} // Apply blur, darken, and zoom
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}

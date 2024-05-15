@@ -25,7 +25,7 @@ const Section6 = () => {
         <strong>Instantly see and compare</strong> forecasts made by public figures to real betting lines found on active prediction markets.
         See how forecasts made by your favorite influencers stack up against the sharpest and most incentivized markets.
       </motion.span>
-
+className="w-full h-auto rounded-lg"
       <div className="relative mb-8 mt-6">
         <div className="relative w-full">
           <motion.img

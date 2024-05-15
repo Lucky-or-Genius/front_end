@@ -21,21 +21,22 @@ const Section1 = () => {
   transition={{ delay: 0.5, ease: "easeInOut" }}
   viewport={{ once: false }}
 >
-  <strong>Reputations should be built</strong> up slowly and verified quickly. Lucky or Genius uses AI to identify, track and scores all forecasts extracted from any online text, audio or video content, based on their accuracy. The forecasters are graded based on the quality of their predictions and then ranked on our leaderboard for instant comparison.
+  <strong>Reputations should be built</strong> up slowly and verified quickly. AI is used to track and score all forecasts extracted from any digital medium  based on their accuracy. 
 </motion.span>
 
 <div className="relative mb-8 mt-6">
   <motion.img
     src="/fixed_leaderboard.png"
     alt="Leaderboards visual representation"
-    className="w-full h-auto"
+    className="w-full h-auto rounded-lg"
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
     transition={{ delay: 0.7, ease: "easeInOut", duration: 0.5 }}
     viewport={{ once: false }}
   />
-  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-50"></div>
+  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-50 rounded-lg"></div>
 </div>
+
 
 <motion.h1
   className="text-white font-bold text-xl md:text-[64px] mt-12 mb-6"
@@ -60,7 +61,7 @@ const Section1 = () => {
   <motion.img
     src="/profile2.jpg"
     alt="Profile visual representation"
-    className="w-full h-auto"
+    className="w-full h-auto rounded-lg"
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
     transition={{ delay: 0.5, ease: "easeInOut", duration: 0.5 }}
