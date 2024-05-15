@@ -26,7 +26,7 @@ const Section1 = () => {
 
 <div className="relative mb-8 mt-6">
   <motion.img
-    src="/Leaderboards.png"
+    src="/Leaderboards_fix.png"
     alt="Leaderboards visual representation"
     className="w-full h-auto"
     initial={{ opacity: 0 }}

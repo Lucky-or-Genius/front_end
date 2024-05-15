@@ -47,7 +47,7 @@ const Section3 = () => {
 
       <div className="w-full flex justify-center relative z-10">
   <motion.img
-    src="/pipeline2.png"
+    src="/Pipeline2_fix.png"
     alt="Pipeline Diagram"
     className="w-full h-auto"
     style={{ filter: 'blur(0px) brightness(0.4)', transform: 'scale(1.5)' }} // Apply blur, darken, and zoom
