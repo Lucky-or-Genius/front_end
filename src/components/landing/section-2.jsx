@@ -33,19 +33,19 @@ const Section2 = () => {
   viewport={{ once: false }}
 >
   <div className="flex items-center space-x-4"> {/* Increased spacing */}
-    <img src="twitter.png" alt="Twitter" className="h-12 w-12" />
+    <img src="twitter.png" alt="Twitter" className="h-10 w-10" />
     <span className="font-semibold text-[#9CA3AF]">Twitter</span>
   </div>
   <div className="flex items-center space-x-4"> {/* Increased spacing */}
-    <img src="youtube_logo.png" alt="YouTube" className="h-12 w-12" />
+    <img src="youtube_logo.png" alt="YouTube" className="h-10 w-10" />
     <span className="font-semibold text-[#9CA3AF]">YouTube</span>
   </div>
   <div className="flex items-center space-x-4"> {/* Increased spacing */}
-    <img src="reddit.png" alt="Reddit" className="h-12 w-12" />
+    <img src="reddit.png" alt="Reddit" className="h-10 w-10" />
     <span className="font-semibold text-[#9CA3AF]">Reddit</span>
   </div>
   <div className="flex items-center space-x-4"> {/* Increased spacing */}
-    <img src="spotify.png" alt="Spotify" className="h-12 w-12" />
+    <img src="spotify.png" alt="Spotify" className="h-10 w-10" />
     <span className="font-semibold text-[#9CA3AF]">Spotify</span>
   </div>
 </motion.div>
