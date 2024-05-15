@@ -7,9 +7,9 @@ const Section8 = () => {
         <h1 className="font-bold text-l md:text-[64px] pb-6">
           Skip the intro, get the info.
         </h1>
-        <span className="text-[#5D636E] font-semibold text-base md:text-xl pb-6 max-w-[820px]">
-          Lucky or Genius tracks influencers across multiple media platforms, 24/7 and presents all insights found within, in one user-friendly console.
-          We also follow trending news and embed the most relevant predictions to the trending topic, so you can see current predictions about current discourse by your favourite influencers whose historic performance can be checked.
+        <span className="text-[#9CA3AF] font-semibold text-base md:text-xl pb-6 max-w-[820px]">
+        Track content creators around the clock across all major media platforms. Get all the important insights without wasting time on intros, ads and irrelevant subjects.
+        A custom feed for topics you care about, with relevant predictions and insights from the best forecasters.
         </span>
       </div>
       <div className="relative flex justify-end w-full md:w-1/2">

@@ -15,13 +15,13 @@ const Section9 = () => {
         Enjoy a better signal to noise ratio.
       </motion.h1>
       <motion.span
-        className="text-[#5D636E] max-w-[800px] font-semibold text-base md:text-xl text-center "
+        className="text-[#9CA3AF] max-w-[800px] font-semibold text-base md:text-xl text-center "
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-        We filter out the noise, spotlight value and only notify you when subjects of relevance to you are mentioned.
+        <strong>We filter out the noise</strong>, spotlight value and only notify you when subjects of relevance to you are mentioned.
       </motion.span>
       <div className="">
         <button className="bg-[#1C1C1C] rounded-3xl text-white py-2 w-48 px-6 animate-bounce transition-all ease-in-out">
@@ -36,7 +36,7 @@ const Section9 = () => {
           className=""
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.6, ease: "easeInOut", duration: 0.5 }}
+          transition={{ delay: 0.7, ease: "easeInOut", duration: 0.5 }}
           viewport={{ once: false }}
         />
       </div>

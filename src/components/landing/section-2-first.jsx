@@ -8,62 +8,67 @@ const Section2first = () => {
         className="text-white font-bold text-xl md:text-[64px] mb-12" // Added margin-bottom here
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.7, ease: "easeInOut", duration: 2 }}
+        transition={{ delay: 0.3, ease: "easeInOut", duration: 2 }}
         viewport={{ once: false }}
       >
-        Browse all predictions past and present.
+        Browse all predictions..
       </motion.h1>
 
       <motion.span
-        className="text-[#5D636E] max-w-[820px] font-semibold text-base md:text-xl text-center"
+        className="text-[#9CA3AF] max-w-[820px] font-semibold text-base md:text-xl text-center"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, ease: "easeInOut" }}
+        transition={{ delay: 0.5, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-Compare the opinions of different individuals and find new perspectives based on objective accuracy. We believe that people should put their money where their mouth is. So we have put peoples words to the test, whether they intended it or not. 
+        Browse all predictions past, present and deleted! Effortlessly compare the opinions of different individuals and find new perspectives based on objective accuracy.
       </motion.span>
 
-      <motion.img
-        src="/predictions_landing.png"
-        alt="Leaderboards visual representation"
-        className="mb-8"  // Increased margin-bottom for better spacing
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 1.1, ease: "easeInOut", duration: 0.5 }}
-        viewport={{ once: false }}
-      />
+      <div className="relative mb-8 mt-6">  {/* Wrapped in a div */}
+        <motion.img
+          src="/predictions_landing.png"
+          alt="Leaderboards visual representation"
+          className="w-full h-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.7, ease: "easeInOut", duration: 0.5 }}
+          viewport={{ once: false }}
+        />
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-70"></div>  {/* Gradient overlay */}
+      </div>
 
       <motion.h1
         className="text-white font-bold text-xl md:text-[64px] mb-12 mt-8" // Added top margin here as well for balanced spacing
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.7, ease: "easeInOut", duration: 2 }}
+        transition={{ delay: 0.3, ease: "easeInOut", duration: 2 }}
         viewport={{ once: false }}
       >
-        Ai based prediction validation.
+        AI-powered prediction validation.
       </motion.h1>
 
       <motion.span
         className="text-[#5D636E] max-w-[820px] font-semibold text-base md:text-xl text-center"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, ease: "easeInOut" }}
+        transition={{ delay: 0.5, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-Prediction validation and grading is based on accuracy and timeframe with related real money betting markets identified when available. A combination of agentic LLM's and RAG systems combine to validate predictions. Evidence, reseach and derived Ai reasoning is presented for the user to explore and confirm for themselves.
+        <strong>Every prediction</strong> is individually scored using a combination of agentic LLMs and RAG systems. The justifications and reasoning are presented along with the original segment, clipped and available for instant replay.
       </motion.span>
 
-      <motion.img
-        src="/predictions_expanded.png"
-        alt="Leaderboards visual representation"
-        className="mb-4"  // Adds margin bottom
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 1.1, ease: "easeInOut", duration: 0.5 }}
-        viewport={{ once: false }}
-      />
-        
+      <div className="relative mb-4 mt-6">  {/* Wrapped in a div */}
+        <motion.img
+          src="/predictions_expanded.png"
+          alt="Leaderboards visual representation"
+          className="w-full h-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.7, ease: "easeInOut", duration: 0.5 }}
+          viewport={{ once: false }}
+        />
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-80"></div>  {/* Gradient overlay */}
+      </div>
     </div>
   );
 };

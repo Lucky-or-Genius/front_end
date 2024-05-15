@@ -56,15 +56,18 @@ function Navbar() {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink
-            to="/login"
-            className="nav-link signup-btn"
-            activeClassName="active"
-            onClick={toggleSideNav}
-          >
-            Sign up
-          </NavLink>
-        </li>
+  <NavLink
+    to="/login"
+    className="nav-link signup-btn"
+    activeClassName="active"
+    onClick={toggleSideNav}
+    style={{ color: 'white', borderColor: '#4a6edb', borderWidth: '1px', borderStyle: 'solid' }} // Change font color and border color
+  >
+    Log In
+  </NavLink>
+</li>
+
+
       </ul>
     </nav>
   );
