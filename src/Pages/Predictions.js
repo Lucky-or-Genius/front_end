@@ -13,7 +13,7 @@ import {
   getSortedPrediction,
   getSortedCategory,
 } from "../services/Predictions.service";
-import infoIcon from "../assests/hover_info6.png";
+import infoIcon from "../assets/hover_info6.png";
 import SubHeader from "../components/predictions/subheader";
 import PredictionVideo from "../components/predictions/video";
 import Skeleton from "../components/common/skeleton";

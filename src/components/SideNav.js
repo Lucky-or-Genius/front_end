@@ -1,8 +1,8 @@
 import React from "react";
 import "../styles/sidenav.css";
 import { NavLink } from "react-router-dom";
-import logoIcon from "../assests/logo-icon.svg";
-import logoText from "../assests/logo-text.svg";
+import logoIcon from "../assets/logo-icon.svg";
+import logoText from "../assets/logo-text.svg";
 import { HiOutlineHeart } from "react-icons/hi2";
 function Sidenav() {
   return (

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./style.css";
-import logoIcon from "../../../assests/logo-icon.svg";
-import logoText from "../../../assests/logo-text.svg";
+import logoIcon from "../../../assets/logo-icon.svg";
+import logoText from "../../../assets/logo-text.svg";
+import { HiOutlineFingerPrint } from "react-icons/hi";
 
 function Navbar() {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
@@ -12,63 +13,75 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-logo flex">
-      <img className="md:w-16 w-10" alt="icon" src={logoIcon} />
-        <img className="md:w-48 w-32" alt="text" src={logoText} />
+    <nav className="navbar font-calibre pt-10">
+      <div className="md:w-2/3 w-full flex justify-between items-center">
+        <div className="flex w-full">
+          <div className="navbar-logo flex pr-4">
+            <img className="md:w-10 w-10" alt="icon" src={logoIcon} />
+            <img className="md:w-32 w-32" alt="text" src={logoText} />
+          </div>
+
+          <ul className={`navbar-nav ${isSideNavOpen ? "open" : ""} gap-4`}>
+            <li className="nav-item">
+              <NavLink
+                exact
+                to="/"
+                className="nav-link"
+                activeClassName="active"
+                onClick={toggleSideNav}
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/about"
+                className="nav-link"
+                activeClassName="active"
+                onClick={toggleSideNav}
+              >
+                About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/contact"
+                className="nav-link"
+                activeClassName="active"
+                onClick={toggleSideNav}
+              >
+                Contact Us
+              </NavLink>
+            </li>
+            <li className="nav-item flex md:hidden">
+              <NavLink
+                to="/login"
+                className="nav-link px-4 rounded-2xl py-0.5 flex items-center gap-2 group border border-[#4a6edb] !text-white font-[600] hover:shadow-sm transition-all ease-in-out duration-400 hover:shadow-[#4a6edb]"
+                activeClassName="active"
+                onClick={toggleSideNav}
+              >
+                <HiOutlineFingerPrint className="group-hover:text-white text-gray-600 transition-all ease-in-out duration-600" />
+                Login
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+        <button
+          className={`navbar-toggle ${isSideNavOpen ? "open" : ""}`}
+          onClick={toggleSideNav}
+        >
+          <span className="navbar-toggle-icon"></span>
+        </button>
+        <NavLink
+          to="/login"
+          className="nav-link hidden px-4 rounded-2xl py-0.5 md:flex items-center gap-2 group border border-[#4a6edb] !text-white font-[600] hover:shadow-sm transition-all ease-in-out duration-400 hover:shadow-[#4a6edb]"
+          activeClassName="active"
+          onClick={toggleSideNav}
+        >
+          <HiOutlineFingerPrint className="group-hover:text-white text-gray-600 transition-all ease-in-out duration-600" />
+          Login
+        </NavLink>
       </div>
-      <button
-        className={`navbar-toggle ${isSideNavOpen ? "open" : ""}`}
-        onClick={toggleSideNav}
-      >
-        <span className="navbar-toggle-icon"></span>
-      </button>
-      <ul className={`navbar-nav ${isSideNavOpen ? "open" : ""}`}>
-        <li className="nav-item">
-          <NavLink
-            exact
-            to="/"
-            className="nav-link"
-            activeClassName="active"
-            onClick={toggleSideNav}
-          >
-            Home
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/about"
-            className="nav-link"
-            activeClassName="active"
-            onClick={toggleSideNav}
-          >
-            About
-          </NavLink>
-        </li>
-        <li className="nav-item">
-          <NavLink
-            to="/contact"
-            className="nav-link"
-            activeClassName="active"
-            onClick={toggleSideNav}
-          >
-            Contact Us
-          </NavLink>
-        </li>
-        <li className="nav-item">
-  <NavLink
-    to="/login"
-    className="nav-link signup-btn"
-    activeClassName="active"
-    onClick={toggleSideNav}
-    style={{ color: 'white', borderColor: '#4a6edb', borderWidth: '1px', borderStyle: 'solid' }} // Change font color and border color
-  >
-    Log In
-  </NavLink>
-</li>
-
-
-      </ul>
     </nav>
   );
 }

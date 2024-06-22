@@ -10,10 +10,26 @@
   height: 40vmin;
   pointer-events: none;
 }
-.landing{
+.landing {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-optical-sizing: auto;
   scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "Calibre";
+  src: url("../src/assets/fonts/calibre/TestCalibre-Regular-BF661746edbee52.otf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Calibre";
+  src: url("../src/assets/fonts/calibre/TestCalibre-Bold-BF661746ed7c530.otf")
+    format("truetype");
+  font-weight: bold;
+  font-style: normal;
 }
 
 @media (prefers-reduced-motion: no-preference) {

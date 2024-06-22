@@ -1,17 +1,12 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: #0b0b0f;
-  padding: 16px 64px;
-  top: 0;
-  position: sticky;
-  z-index: 1000;
-  font-family: "Inter", sans-serif;
 }
 
 .navbar-logo img {
-  height: 40px;
+  height: 20px;
 }
 
 .navbar-toggle {
@@ -62,9 +57,9 @@
 
 .nav-link {
   text-decoration: none;
-  color: #545454;
-  font-weight: 500;
-  font-size: 18px;
+  color: #747474;
+  font-weight: 100;
+  font-size: 14px;
 }
 
 .nav-link.active {

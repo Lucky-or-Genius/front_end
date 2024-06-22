@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "../common/modal";
-import infoIcon from "../../assests/hover_info.png";
+import infoIcon from "../../assets/hover_info.png";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const ProofModal = ({ setShowModal, showModal, val, loading }) => {
@@ -164,8 +164,9 @@ const ProofModal = ({ setShowModal, showModal, val, loading }) => {
                         position: "relative",
                         fontWeight: "600",
                       }}
-                    >N/A
-                      { /* {val[0]?.error !== null ? val[0]?.error : "N/A"} */}
+                    >
+                      N/A
+                      {/* {val[0]?.error !== null ? val[0]?.error : "N/A"} */}
                     </div>
                   </div>
                 </div>

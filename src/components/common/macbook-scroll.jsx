@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "../../utils/cn";
 import { FaPlay } from "react-icons/fa";
-import logoIcon from "../../assests/logo-icon.svg";
+import logoIcon from "../../assets/logo-icon.svg";
 import { Button } from "./moving-border-button";
 
 export const MacbookScroll = ({ src, showGradient, title, badge }) => {
@@ -57,10 +57,10 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
       >
         <Button
           borderRadius="1.75rem"
-          className="bg-[#0B0B0F] text-white border-neutral-200 dark:border-slate-800 font-semibold"
+          className="bg-[#0B0B0F] text-white border-neutral-200 dark:border-slate-800 font-thin"
         >
-          Watch our video
-          <FaPlay />
+          <FaPlay className="text-[12px]" />
+          Watch the guided tour
         </Button>
       </motion.div>
       <motion.h2

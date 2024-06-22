@@ -8,7 +8,11 @@ const {
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        calibre: ['"Calibre"', "sans-serif"],
+      },
+    },
   },
   plugins: [
     // rest of the code

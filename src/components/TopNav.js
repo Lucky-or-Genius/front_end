@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 
 import "../styles/topNav.css";
-import logoIcon from "../assests/logo-icon.svg";
-import logoText from "../assests/logo-text.svg";
+import logoIcon from "../assets/logo-icon.svg";
+import logoText from "../assets/logo-text.svg";
 
 const TopNav = () => {
   const { pathname } = useLocation();
