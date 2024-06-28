@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .mask-image-radial-fade {
+    mask-image: radial-gradient(rgb(0, 0, 0), transparent 50%);
+  }
+}
+
 .App {
   text-align: center;
 }
@@ -24,6 +30,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Calibre";
+  src: url("../src/assets/fonts/calibre/TestCalibre-Semibold-BF661746ed9242e.otf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
 @font-face {
   font-family: "Calibre";
   src: url("../src/assets/fonts/calibre/TestCalibre-Bold-BF661746ed7c530.otf")

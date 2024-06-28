@@ -13,7 +13,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar font-calibre pt-10">
+    <nav className="navbar font-calibre pt-10 md:pb-4">
       <div className="md:w-2/3 w-full flex justify-between items-center">
         <div className="flex w-full">
           <div className="navbar-logo flex pr-4">
