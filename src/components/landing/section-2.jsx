@@ -19,7 +19,7 @@ const Section2 = () => {
           Never miss an actionable insight.
         </motion.h1>
         <motion.span
-          className="text-[#9CA3AF] max-w-[820px] font-semibold text-sm md:text-base  text-center my-6"
+          className="text-[#9CA3AF] max-w-[520px] text-sm md:text-base  text-center my-6"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, ease: "easeInOut" }}
@@ -30,7 +30,7 @@ const Section2 = () => {
           alerts when new insights of relevance to you are found.
         </motion.span>
         <motion.div
-          className="max-w-[720px] grid md:grid-cols-4 grid-cols-2 text-white gap-6 text-4xl my-6"
+          className="max-w-[520px] grid md:grid-cols-4 grid-cols-2 text-white gap-6 text-4xl my-6"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, ease: "easeInOut" }}

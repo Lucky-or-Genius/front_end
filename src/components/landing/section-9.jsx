@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import Footer from "./footer";
 
 const Section9 = () => {
   return (
@@ -45,6 +46,7 @@ const Section9 = () => {
           viewport={{ once: false }}
         />
       </div>
+      <Footer />
     </div>
   );
 };

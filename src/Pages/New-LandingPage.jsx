@@ -11,11 +11,13 @@ import Section7 from "../components/landing/section-7";
 import Section8 from "../components/landing/section-8";
 import Section9 from "../components/landing/section-9";
 import StickyScroll from "../components/landing/sticky-scroll";
+import ImageContainer from "../components/landing/imageContainer";
+import MobileScroll from "../components/landing/mob-scroll-conatiner";
 import "../styles/landingpage.css"; // Corrected import path
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col landing">
+    <div className="flex flex-col landing font-calibre">
       <div className="overflow-hidden bg-[#0B0B0F] w-full">
         <MacbookScroll
           title={
@@ -28,16 +30,17 @@ export default function LandingPage() {
           showGradient={true}
         />
       </div>
-      <Section1 />
+      {/* <Section1 /> */}
       <Section2 />
       <Section2first />
+      <ImageContainer />
       <Section6 />
       <Section3 />
       {/* <Section4 />
       <Section5 /> */}
       {/* <Section7 /> */}
       <StickyScroll />
-
+      <MobileScroll />
       {/* <Section8 /> */}
       <Section9 />
     </div>

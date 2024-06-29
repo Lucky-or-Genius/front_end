@@ -17,7 +17,7 @@
   pointer-events: none;
 }
 .landing {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  /* font-family: "Plus Jakarta Sans", sans-serif; */
   font-optical-sizing: auto;
   scroll-behavior: smooth;
 }

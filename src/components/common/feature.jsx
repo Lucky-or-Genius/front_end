@@ -38,7 +38,7 @@ export const AirdropsCard = ({ id }) => {
         alt={`image for ${id}`}
         height={200}
         width={400}
-        className="rounded-2xl w-full h-full"
+        className="rounded-2xl object-cover w-full h-full"
       />
     </FeatureCard>
   );
@@ -61,12 +61,12 @@ export const WorldRecessionCard = ({ id }) => {
 export const DenialCard = ({ id }) => {
   return (
     <FeatureCard id={id} className="bg-neutral-100">
-      <image
-        src={"/landing/Spendinglanding.webp"}
+      <img
+        src={"/predictions_landing.png"}
         alt={`image for ${id}`}
         height={400}
         width={400}
-        className="aspect-square object-cover rounded-3xl w-full h-full"
+        className="aspect-square object-cover rounded-2xl w-full h-full"
       />
     </FeatureCard>
   );
@@ -77,9 +77,7 @@ export const DebateCard = ({ id }) => {
     <FeatureCard id={id} className="bg-neutral-100">
       <div className="grid grid-rows-2 w-full h-full p-3">
         <image
-          src={
-            "https://media1.tenor.com/m/sIBXbAf_oEcAAAAC/ref-with-yellow-cards-fifa18.gif"
-          }
+          src={"/predictions_landing.png"}
           alt={`image for ${id}`}
           height={150} // Adjust the height to create a rectangular image
           width={300} // Adjust the width to create a rectangular image

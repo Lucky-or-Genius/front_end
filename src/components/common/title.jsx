@@ -18,10 +18,10 @@ const FeatureTitle = ({ children, id, buttonText, subtitle }) => {
   }, [isInView, id, setInViewTopic, inViewStore]);
 
   return (
-    <div ref={ref} className="feature-title py-16 flex flex-col gap-4">
+    <div ref={ref} className="feature-title py-24 flex flex-col gap-4">
       <p
         className={cn(
-          `text-5xl font-bold transition-colors`,
+          `text-3xl font-bold transition-colors`,
           isInView ? "text-white" : "text-neutral-700/50 "
         )}
       >
@@ -30,7 +30,7 @@ const FeatureTitle = ({ children, id, buttonText, subtitle }) => {
       {subtitle && subtitle !== "" && (
         <p
           className={cn(
-            "text-sm py-2",
+            "text-base py-2",
             isInView ? "text-slate-400" : "text-neutral-700/50"
           )}
         >

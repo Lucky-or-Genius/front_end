@@ -4,7 +4,7 @@ import { cn } from "../../utils/cn";
 import { FaPlay } from "react-icons/fa";
 import logoIcon from "../../assets/logo-icon.svg";
 import { Button } from "./moving-border-button";
-import newSrc from "../../assets/landing2.svg";
+// import newSrc from "../landing2.svg";
 
 export const MacbookScroll = ({ src, showGradient, title }) => {
   const ref = useRef(null);
@@ -25,7 +25,7 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
   useEffect(() => {
     const unsubscribe = scrollYProgress.onChange((latest) => {
       if (latest >= 0.4) {
-        setCurrentSrc(newSrc);
+        setCurrentSrc("/images/img-3.png");
       } else {
         setCurrentSrc(src);
       }
@@ -47,7 +47,7 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
   const translate = useTransform(
     scrollYProgress,
     [0, 1],
-    [isMobile ? 0 : 0, 2000]
+    [isMobile ? 0 : 0, 1800]
   );
   const rotate = useTransform(
     scrollYProgress,

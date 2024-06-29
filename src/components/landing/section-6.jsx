@@ -6,7 +6,7 @@ const Section6 = () => {
   return (
     <div className="w-full bg-[#0B0B0F] justify-center px-4 py-28 md:px-20 items-center flex gap-8 flex-col">
       <motion.h1
-        className="text-white font-bold text-xl pb-6 md:text-[40px]"
+        className="text-white font-bold text-xl pb-2 md:text-[40px]"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -16,7 +16,7 @@ const Section6 = () => {
         Individual and market wisdom.
       </motion.h1>
       <motion.span
-        className="text-[#9CA3AF] max-w-[720px] font-semibold pb-6 text-sm md:text-base text-center"
+        className="text-[#9CA3AF] max-w-[520px] pb-6 text-sm md:text-base text-center"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, ease: "easeInOut" }}
