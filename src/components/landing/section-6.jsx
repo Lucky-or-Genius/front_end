@@ -31,7 +31,7 @@ const Section6 = () => {
         <motion.img
           src="/markets2.png"
           alt="Leaderboards visual representation"
-          className="w-2/5 h-auto rounded-lg"
+          className=" w-full md:w-2/5 h-auto rounded-lg"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.4, ease: "easeInOut" }}

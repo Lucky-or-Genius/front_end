@@ -33,7 +33,7 @@ const Section2first = () => {
         <motion.img
           src="/predictions_expanded.png"
           alt="Leaderboards visual representation"
-          className="w-2/5 h-auto rounded-lg"
+          className="w-full md:w-2/5 h-auto rounded-lg"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ ease: "easeInOut" }}
