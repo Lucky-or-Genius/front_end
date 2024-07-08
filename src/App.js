@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Login from "./Pages/Login";
-import Dashboard from "./Pages/Dashboard";
+import DashboardLayout from "./Pages/DashboardLayout";
 import LandingPage from "./Pages/New-LandingPage";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/common/navbar/navbar";
@@ -31,7 +31,7 @@ function App() {
   }
   return (
     <div>
-      <Dashboard />
+      <DashboardLayout />
     </div>
   );
 }

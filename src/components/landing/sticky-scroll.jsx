@@ -46,17 +46,17 @@ const SecondSection = () => {
   // const setFullScreenFeature = useTopicStore((state) => state.setFullscreenFeature)
 
   return (
-    <div className="bg-[#0B0B0F] hidden md:flex">
+    <div className="bg-[#000] hidden md:flex h-100vh">
       <div className="relative w-full mx-auto">
         {/* {topics?.map((topic) => (
           <topic.visual key={topic.id} id={topic.id} />
           
         ))}
         <button onClick={() => setFullScreenFeature(null)} className={cn('back-to-site-btn fixed bottom-8 right-[calc(50%-67px)] transform  bg-black text-white px-4 py-1.5 rounded-xl font-semibold shadow-lg z-[9999999] flex items-center text-sm hover:bg-black/80 opacity-0 translate-y-[300px]')}><span>Back to site</span><XIcon className='ml-2 h-4 w-4' /></button> */}
-        <div className="mx-auto max-w-6xl px-6 ">
+        <div className="mx-auto max-w-[1280px] px-6 ">
           <div className=" md:flex w-full gap-20 items-start">
-            <div className="w-full py-[10vh] md:py-[20vh]">
-              <ul>
+            <div className="w-full py-[10vh]">
+              <ul className="flex flex-col">
                 {topics?.map((topic) => (
                   <li key={topic.id}>
                     <FeatureTitle
@@ -70,8 +70,8 @@ const SecondSection = () => {
                 ))}
               </ul>
             </div>
-            <div className="md:sticky md:top-0 w-4/5 md:w-full h-fit md:h-screen md:flex items-center">
-              <div className="fixed top-6 right-6 w-full md:relative h-1/2 md:w-full [&:not(:has(>_.active-card))]:bg-transparent md:[&:has(>_.active-card)]:bg-transparent rounded-3xl">
+            <div className="md:sticky md:top-0 md:w-full h-fit md:h-screen 3xl:h-[60vh] md:flex items-center">
+              <div className="fixed right-6 top-6 w-full md:relative h-1/2 md:w-full [&:not(:has(>_.active-card))]:bg-transparent md:[&:has(>_.active-card)]:bg-transparent">
                 {topics?.map((topic) => (
                   <topic.card id={topic.id} key={topic.id} />
                 ))}

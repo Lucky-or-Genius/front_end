@@ -33,15 +33,16 @@ const Feed = () => {
 
   return (
     <div className="feed-section">
-      <Header />
+      {/* <Header /> */}
 
       {loading && <FeedSkeleton />}
 
       {!loading && (
         <div className="feed-container">
+          {/* <h1 className="">Feed </h1> */}
           <div className="feed-part1">
             <div className="recent-predictions">
-              <div className="rp-heading">
+              <div className="font-raleway text-2xl font-[500] text-primary400 py-4">
                 <label>Recent Predictions</label>
               </div>
               {feedData.map((feed, index) => (

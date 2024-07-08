@@ -58,7 +58,7 @@ const AppContextProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      navigate("/feed");
+      navigate("/Feed");
     }
   }, []);
 

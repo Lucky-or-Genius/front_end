@@ -21,7 +21,11 @@ function Navbar() {
             <img className="md:w-32 w-32" alt="text" src={logoText} />
           </div>
 
-          <ul className={`navbar-nav ${isSideNavOpen ? "open" : ""} gap-4`}>
+          <ul
+            className={`navbar-nav ${
+              isSideNavOpen ? "open" : ""
+            } gap-4 !3xl:text-xl`}
+          >
             <li className="nav-item">
               <NavLink
                 exact
@@ -74,7 +78,7 @@ function Navbar() {
         </button>
         <NavLink
           to="/login"
-          className="nav-link hidden px-4 rounded-2xl py-0.5 md:flex items-center gap-2 group border border-[#4a6edb] !text-white font-[600] hover:shadow-sm transition-all ease-in-out duration-400 hover:shadow-[#4a6edb]"
+          className="nav-link hidden px-4 rounded-2xl 3xl:text-xl py-0.5 md:flex items-center gap-2 group border border-[#4a6edb] !text-white font-[600] hover:shadow-sm transition-all ease-in-out duration-400 hover:shadow-[#4a6edb]"
           activeClassName="active"
           onClick={toggleSideNav}
         >

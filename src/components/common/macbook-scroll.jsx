@@ -57,10 +57,12 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  useEffect(() => {}, [rotate]);
+
   return (
     <div
       ref={ref}
-      className="scroll-smooth h-[200vh] md:h-[350vh] min-h-[100vh] md:min-h-full flex flex-col items-center md:py-40 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.8]"
+      className="scroll-smooth h-[200vh] md:h-[350vh] min-h-[100vh] 3xl:h-[150vh] md:min-h-full flex flex-col items-center md:py-40 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.8] 3xl:scale-[1.5]"
     >
       <motion.div
         className="w-full pb-4 flex justify-center"
@@ -159,11 +161,13 @@ export const Lid = ({ scaleX, scaleY, rotate, translate, imgSrc }) => {
         }}
         className="md:h-96 h-[10rem] w-[22rem] md:w-[32rem] absolute inset-0 bg-[#010101] rounded-2xl p-2"
       >
-        <div className="absolute inset-0 bg-[#272729] rounded-lg" />
+        {/* <div className="relative inset-0 bg-[#272729] rounded-lg" /> */}
         <motion.img
           src={imgSrc}
           alt="aceternity logo"
-          className="object-cover object-left-top absolute rounded-lg inset-0 h-full w-full"
+          className={`${
+            rotate === 0 ? "sticky top-0 z-[99]" : ""
+          } object-cover object-left-top absolute rounded-lg inset-0 h-full w-full`}
         />
       </motion.div>
     </div>

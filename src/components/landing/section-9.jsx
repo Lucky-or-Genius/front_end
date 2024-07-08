@@ -4,7 +4,7 @@ import Footer from "./footer";
 
 const Section9 = () => {
   return (
-    <div className="w-full h-screen flex bg-black justify-center px-4 items-center md:px-20 gap-6 flex flex-col relative">
+    <div className="w-full h-screen flex bg-[#000000] justify-center px-4 items-center md:px-20 gap-6 flex flex-col relative">
       <div
         className="absolute top-[3%] left-[10%] w-[80%] h-[80%] pointer-events-none bg-radial-pattern bg-left-center bg-8x8 opacity-80 mask-image-radial-fade"
         style={{ maskImage: "radial-gradient(rgb(0, 0, 0), transparent 50%)" }}

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const imageContainer = () => {
   return (
-    <div className="h-screen w-full p-6 lg:p-16 bg-black flex justify-center items-center">
+    <div className="h-screen w-full p-6 lg:p-16 bg-[#000000] flex justify-center items-center">
       <motion.img
         src="/images/future.webp"
         initial={{ opacity: 0 }}

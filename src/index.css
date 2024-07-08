@@ -1,13 +1,88 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+:root {
+  --primary-color: #001d3d;
+  --primary-color-900: #003580;
+  --primary-color-800: #0047a6;
+  --primary-color-700: #0059c9;
+  --primary-color-600: #296ce5;
+  --primary-color-400: #7394ff;
+  --primary-color-300: #96aaff;
+  --primary-color-200: #b6c1ff;
+  --primary-color-100: #d5d9ff;
+  --primary-color-50: #f2f2ff;
+  --secondary: #57c2a8;
+  --secondary-color-900: #004433;
+  --secondary-color-800: #005a44;
+  --secondary-color-700: #007055;
+  --secondary-color-600: #008568;
+  --secondary-color-500: #13af92;
+  --secondary-color-400: #009a7c;
+  --secondary-color-200: #88d5c0;
+  --secondary-color-100: #b8e7d9;
+  --secondary-color-50: #b8e7d9;
+  --black: #1d1d1d;
+  --gray-900: #393939;
+  --gray-800: #4b4b4b;
+  --gray-700: #5e5e5e;
+  --gray-600: #727272;
+  --gray-500: #868686;
+  --gray-400: #9b9b9b;
+  --gray-300: #b0b0b0;
+  --gray-200: #c6c6c6;
+  --gray-100: #dddddd;
+  --gray-50: #f3f3f3;
+  --white: #ffffff;
+  --error-color: #ff4242;
+  --error-light-color: #ffbcbc81;
+}
+
+/* ANT DESIGN COMPONENTS CSS */
+
+.ant-layout .ant-layout-sider {
+  background: var(--primary-color) !important;
+}
+.ant-menu-light.ant-menu-root.ant-menu-inline,
+.ant-menu-light.ant-menu-root.ant-menu-vertical {
+  background: var(--primary-color) !important;
+}
+.ant-layout .ant-layout-sider-trigger {
+  background-color: transparent !important;
+  border-right: 2px solid var(--primary-color) !important;
+}
+.ant-menu-light .ant-menu-item-selected {
+  background-color: #ffffff30;
+  color: var(--white) !important;
+}
+.ant-menu-light.ant-menu-inline .ant-menu-item,
+.ant-menu-light .ant-menu-item {
+  color: #ffffff50;
+}
+.ant-menu-light:not(.ant-menu-horizontal)
+  .ant-menu-item:not(.ant-menu-item-selected):hover,
+.ant-menu-light .ant-menu-item:hover {
+  color: #ffffff80;
+  background: #ffffff10;
+}
+.ant-menu-item .ant-menu-item-disabled {
+  color: var(--gray-300) !important;
+}
+.ant-menu-inline-collapsed > .ant-menu-item-disabled .ant-menu-item-icon {
+  color: var(--gray-300) !important;
+}
+.ant-drawer .ant-drawer-header,
+.ant-drawer .ant-drawer-body {
+  background: var(--primary-color) !important;
 }

@@ -14,8 +14,8 @@ const RouterData = () => {
   return (
     <AppContextProvider>
       <Routes>
-        <Route path="/Login" element={<Navigate to="/feed" />} />
-        <Route path="/feed" element={<Feed />} />
+        <Route path="/Login" element={<Navigate to="/Feed" />} />
+        <Route path="/Feed" element={<Feed />} />
         <Route path="/LeaderBoards" element={<LeaderBoards />} />
         <Route path="/Summaries" element={<Summaries />} />
         <Route path="/Predictions" element={<Predictions />} />

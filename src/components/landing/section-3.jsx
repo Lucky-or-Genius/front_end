@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Section3 = () => {
   return (
-    <div className="w-full flex bg-[#0B0B0F] bg-gradient-to-b from-[#0F1014] items-center px-4 py-28 md:px-20 flex gap-8 flex-col relative">
+    <div className="w-full flex bg-[#000000] bg-gradient-to-b from-[#0F1014] items-center px-4 py-28 md:px-20 flex gap-8 flex-col relative">
       {/* Blurred and darkened background image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -15,15 +15,15 @@ const Section3 = () => {
       ></div>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black opacity-50 z-0"></div>
+      {/* <div className="absolute inset-0 bg-black opacity-50 z-0"></div> */}
 
       {/* Left gradient overlay */}
-      <div
+      {/* <div
         className="absolute inset-0 z-0"
         style={{
           background: "linear-gradient(to right, black, transparent 50%)",
         }}
-      ></div>
+      ></div> */}
 
       {/* Right gradient overlay */}
       <div
