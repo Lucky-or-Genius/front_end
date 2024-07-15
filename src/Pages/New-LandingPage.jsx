@@ -13,11 +13,13 @@ import Section9 from "../components/landing/section-9";
 import StickyScroll from "../components/landing/sticky-scroll";
 import ImageContainer from "../components/landing/imageContainer";
 import MobileScroll from "../components/landing/mob-scroll-conatiner";
+import Navbar from "../components/common/navbar/navbar";
 import "../styles/landingpage.css"; // Corrected import path
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col landing font-calibre">
+      <Navbar />
       <div className="overflow-hidden bg-[#0B0B0F] w-full">
         <MacbookScroll
           title={

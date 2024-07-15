@@ -38,7 +38,7 @@ const AppContextProvider = ({ children }) => {
       })
         .then((response) => response.json())
         .then((userInfo) => {
-          console.log("User Information:", userInfo);
+          navigate("/dashboard/Feed");
           localStorage.setItem("userdata", JSON.stringify(userInfo));
 
           const params = {
@@ -53,14 +53,6 @@ const AppContextProvider = ({ children }) => {
         });
     },
   });
-
-  // Check if user is logged in, if yes, navigate to '/feed'
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/Feed");
-    }
-  }, []);
 
   const contextValue = { login };
 

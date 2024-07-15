@@ -43,32 +43,32 @@ const Index = () => {
 
   const generalItems = [
     {
-      key: "/Feed",
+      key: "/dashboard/Feed",
       label: "Feed",
       icon: <GoStack />,
     },
     {
-      key: "/LeaderBoards",
+      key: "/dashboard/LeaderBoards",
       label: "Leaderboards",
       icon: <FiLayout />,
     },
     {
-      key: "/Summaries",
+      key: "/dashboard/Summaries",
       label: "Summaries",
       icon: <FiKey />,
     },
     {
-      key: "/Predictions",
+      key: "/dashboard/Predictions",
       label: "Predictions",
       icon: <FiSend />,
     },
     {
-      key: "/MyChannels",
+      key: "/dashboard/MyChannels",
       label: "MyChannels",
       icon: <BsHddStack />,
     },
     {
-      key: "/Favourites",
+      key: "/dashboard/Favourites",
       label: "Favourites",
       icon: <BsHddStack />,
     },
