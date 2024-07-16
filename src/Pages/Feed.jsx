@@ -5,7 +5,6 @@ import ShareModal from "../components/shareModal";
 import FeedSkeleton from "../components/common/feed-skeleton";
 import { getFeedDetails } from "../services/Feed.service";
 import { leaderBoardData } from "../services/Leaderboards.service";
-import Header from "../components/Header";
 import "../styles/feed.css";
 import FeedCard from "../components/feed-card";
 
@@ -14,6 +13,11 @@ const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [topPredictors, setTopPredictors] = useState([{}]);
   const [loading, setLoading] = useState(false);
+  const [openRowIndex, setOpenRowIndex] = useState(null);
+
+  const handleRowClick = (index) => {
+    setOpenRowIndex(openRowIndex === index ? null : index);
+  };
 
   const getFeed = async () => {
     setLoading(true);
@@ -68,6 +72,8 @@ const Feed = () => {
                         prediction={card.prediction}
                         setOpenShare={setOpenShare}
                         status={card.status}
+                        onCardClick={() => handleRowClick(index)}
+                        isOpen={openRowIndex === index}
                       />
                     ))}
                   </div>
