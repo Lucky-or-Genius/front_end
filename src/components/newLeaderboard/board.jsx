@@ -53,7 +53,7 @@ const Board = ({ data }) => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-4 text-lg">
+            <div className="flex items-center gap-4 text-base">
               <span
                 className=""
                 style={{
@@ -68,12 +68,12 @@ const Board = ({ data }) => {
               {item.is_favourite ? (
                 <IoMdHeart
                   // onClick={() => toggleFavourite(index, val?.user_id)}
-                  className="cursor-pointer text-error"
+                  className="cursor-pointer text-error  text-xl"
                 />
               ) : (
                 <IoMdHeartEmpty
                   // onClick={() => toggleFavourite(index, val?.user_id)}
-                  className="cursor-pointer text-[#ffffff60]"
+                  className="cursor-pointer text-[#ffffff60] text-xl"
                 />
               )}
             </div>

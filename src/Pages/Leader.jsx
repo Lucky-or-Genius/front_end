@@ -60,28 +60,38 @@ const Leader = () => {
           <FaArrowLeftLong /> Back
         </Link>
       </div>
-      <div className="flex items-center gap-6 w-full justify-center">
-        <img
-          src={userPredictions[0]?.image_url}
-          alt=""
-          width={100}
-          height={100}
-          className="w-20 h-20 rounded-full object-cover"
-        />
-        <div className="flex flex-col justify-around h-full">
-          <span className="text-white font-raleway text-3xl">
-            {userPredictions[0]?.first_name +
-              " " +
-              userPredictions[0]?.last_name}
-          </span>
-          <div className="text-[#ffffff60] font-poppins text-lg">
-            Area of Accuracy :{" "}
-            <span className="text-primary400">
-              {userPredictions[0]?.category}
+      {userPredictions?.length > 0 ? (
+        <div className="flex items-center gap-6 w-full justify-center">
+          <img
+            src={userPredictions[0]?.image_url}
+            alt=""
+            width={100}
+            height={100}
+            className="w-20 h-20 rounded-full object-cover"
+          />
+          <div className="flex flex-col justify-around h-full">
+            <span className="text-white font-raleway text-3xl">
+              {userPredictions[0]?.first_name +
+                " " +
+                userPredictions[0]?.last_name}
             </span>
+            <div className="text-[#ffffff60] font-poppins text-lg">
+              Area of Accuracy :{" "}
+              <span className="text-primary400">
+                {userPredictions[0]?.category}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="flex items-center gap-4 w-full justify-center">
+          <div className="w-20 h-20 rounded-full bg-[#ffffff30] animate-pulse" />
+          <div className="flex flex-col justify-around h-full gap-2">
+            <span className="w-56 h-8 rounded-full bg-[#ffffff30] animate-pulse" />
+            <span className="w-44 h-6 rounded-full bg-[#ffffff30] animate-pulse" />
+          </div>
+        </div>
+      )}
       <div className="w-full flex justify-center py-6">
         <div className="w-4/5 grid grid-cols-4 font-raleway gap-4">
           <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
