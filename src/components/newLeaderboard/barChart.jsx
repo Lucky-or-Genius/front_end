@@ -13,13 +13,6 @@ const BarChart = ({ data }) => {
     var option;
 
     option = {
-      legend: {
-        textStyle: {
-          fontFamily: "Raleway, sans-serif",
-          color: "white",
-        },
-      },
-
       tooltip: {
         textStyle: {
           fontFamily: "Raleway, sans-serif",
@@ -36,6 +29,9 @@ const BarChart = ({ data }) => {
             color: "white",
           },
         },
+        splitLine: {
+          show: false,
+        },
       },
       yAxis: {
         axisLabel: {
@@ -44,12 +40,15 @@ const BarChart = ({ data }) => {
             color: "white",
           },
         },
+        splitLine: {
+          show: false,
+        },
       },
       series: [{ type: "bar" }],
     };
 
     option && myChart.setOption(option);
-  }, []);
+  }, [categories]);
 
   return (
     <div

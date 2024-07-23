@@ -8,7 +8,7 @@ import { getSinglePrediction } from "../services/Predictions.service";
 import "../styles/feedCard.css";
 import { useNavigate } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
-import { FaRegCalendarPlus } from "react-icons/fa6";
+import { FaRegCalendarPlus, FaYoutube } from "react-icons/fa6";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
 import infoIcon from "../assets/hover_info.png";
@@ -98,7 +98,8 @@ const FeedCard = ({
         <p>{prediction}</p>
       </div>
       <div className="flex w-full items-center gap-6 text-[#ffffff80] text-sm pt-4">
-        <span className="">#{category}</span>
+        <span className="bg-[#ffffff10] px-2 rounded-full">#{category}</span>
+
         <p className="flex gap-2 items-center ">
           <FaRegCalendarPlus /> <span>{madeOn}</span>
         </p>
@@ -107,6 +108,9 @@ const FeedCard = ({
           <FaFlagCheckered />{" "}
           <span>{resolvedOn !== null ? resolvedOn : "Null"}</span>
         </p>
+        <span className="bg-[#ffffff10] px-2 rounded-full flex gap-2 items-center">
+          Source : <FaYoutube />
+        </span>
         <span
           className="font-bold"
           style={{
@@ -115,6 +119,8 @@ const FeedCard = ({
                 ? "#c2964b"
                 : status === "TRUE"
                 ? "#23B678"
+                : status === "PARTIALLY TRUE"
+                ? "#388E3C"
                 : "#E72E2E",
           }}
         >
@@ -162,52 +168,51 @@ const FeedCard = ({
           {loading ? (
             ""
           ) : (
-            <div className="predictionActive-row-1 pt-6">
-              <div className="row-section-1">
-                <div className="analytics-row-1 ">
-                  <div className="block">
-                    <span>Made on</span>
-                    <div className="value">{val[0]?.publish_date}</div>
+            <div className="grid grid-cols-2 gap-4 pt-6">
+              <div className="grid grid-cols-1 gap-4">
+                <div className="bg-[#ffffff20] shadow-md rounded-xl grid grid-cols-2 w-full p-4 gap-4 font-poppins">
+                  <div className=" text-[#ffffff60]">
+                    <span className="font-raleway">Made on</span>
+                    <div className="text-white md:text-base text-sm">
+                      {val[0]?.publish_date}
+                    </div>
                   </div>
-                  <div className="block justify-end">
-                    <span>Resolves on</span>
-                    <div className="value">{val[0]?.fixed_date}</div>
+                  <div className="block justify-end text-[#ffffff60]">
+                    <span className="font-raleway">Resolves on</span>
+                    <div className="text-white md:text-base text-sm">
+                      {val[0]?.fixed_date}
+                    </div>
                   </div>
-                  <div className="block">
-                    <span>Prediction Accuracy </span>
-                    <div className="value">{val[0]?.prediction_accuracy}%</div>
+                  <div className="block text-[#ffffff60]">
+                    <span className="font-raleway leading-1">
+                      Predictor Accuracy{" "}
+                    </span>
+                    <div className="text-white md:text-base text-sm">
+                      {val[0]?.prediction_accuracy}%
+                    </div>
                   </div>
-                  <div className="block">
-                    <span>Status</span>
+                  <div className="block text-[#ffffff60]">
+                    <span className="font-raleway">Status</span>
                     <div
                       style={{
-                        position: "relative",
-                        fontSize: "16px",
-                        fontWeight: "800",
                         color:
                           val[0]?.prediction_validation === "TRUE"
-                            ? "#10d200"
+                            ? "#23B678"
                             : val[0]?.prediction_validation === "PARTIALLY TRUE"
                             ? "#388E3C"
                             : val[0]?.prediction_validation === "PENDING"
-                            ? "#374C98"
-                            : "#f70000",
-                        display: "flex",
-                        alignItems: "center",
-                        width: "182px",
-                        height: "20px",
-                        flexShrink: "0",
+                            ? "#c2964b"
+                            : "#E72E2E",
                       }}
-                      // "#10d200" : "#b32a2a"
+                      className="font-[600] md:text-base text-sm"
                     >
                       {val[0]?.prediction_validation}
                     </div>
                   </div>
                 </div>
-                {/* Below Part starts */}
-                <div className="details-row-2">
-                  <div className="block">
-                    <span className="topic">
+                <div className="grid grid-cols-4 gap-2">
+                  <div className="flex flex-col  shadow-md">
+                    <span className="bg-primary p-4 flex justify-center items-center rounded-t-lg md:rounded-t-xl font-raleway text-sm text-[#ffffff80]">
                       Points{" "}
                       <img
                         src={infoIcon}
@@ -221,13 +226,7 @@ const FeedCard = ({
                         }}
                       />
                     </span>
-                    <div
-                      className="value"
-                      style={{
-                        backgroundColor:
-                          val[0]?.score < 0 ? "#B32A2A" : "#50D200",
-                      }}
-                    >
+                    <div className="h-24 rounded-b-lg md:rounded-b-xl bg-[#ffffff20] flex justify-center items-center font-poppins text-sm md:text-lg text-white">
                       <div
                         style={{
                           position: "relative",
@@ -242,8 +241,8 @@ const FeedCard = ({
                       </div>
                     </div>
                   </div>
-                  <div className="block">
-                    <span className="topic">
+                  <div className="flex flex-col shadow-md">
+                    <span className="bg-primary p-4 flex justify-center items-center rounded-t-lg md:rounded-t-xl font-raleway text-sm text-[#ffffff80]">
                       Timeline
                       <img
                         src={infoIcon}
@@ -257,13 +256,7 @@ const FeedCard = ({
                         }}
                       />
                     </span>
-                    <div
-                      className="value"
-                      style={{
-                        backgroundColor:
-                          val[0]?.days_since > 60 ? "#50D200" : "#B32A2A",
-                      }}
-                    >
+                    <div className="h-24 rounded-b-lg md:rounded-b-xl bg-[#ffffff20] flex justify-center items-center font-poppins text-sm md:text-lg text-white">
                       <div
                         style={{
                           position: "relative",
@@ -277,8 +270,11 @@ const FeedCard = ({
                       </div>
                     </div>
                   </div>
-                  <div className="block">
-                    <span className="topic">
+                  <div className="flex flex-col shadow-md">
+                    <span
+                      className="bg-primary p-4 flex justify-center items-center rounded-t-lg md:rounded-t-xl font-raleway text-sm text-[#ffffff80]
+text-sm text-[#ffffff80"
+                    >
                       Error %
                       <img
                         src={infoIcon}
@@ -292,13 +288,7 @@ const FeedCard = ({
                         }}
                       />
                     </span>
-                    <div
-                      className="value"
-                      style={{
-                        backgroundColor: "#fff",
-                        color: "#333",
-                      }}
-                    >
+                    <div className="h-24 rounded-b-lg md:rounded-b-xl bg-[#ffffff20] flex justify-center items-center font-poppins text-sm md:text-lg text-white">
                       <div
                         style={{
                           position: "relative",
@@ -310,8 +300,11 @@ const FeedCard = ({
                       </div>
                     </div>
                   </div>
-                  <div className="block">
-                    <span className="topic">
+                  <div className="flex flex-col shadow-md">
+                    <span
+                      className="bg-primary p-4 flex justify-center items-center rounded-t-lg md:rounded-t-xl font-raleway text-sm text-[#ffffff80]
+text-sm text-[#ffffff80"
+                    >
                       Type
                       <img
                         src={infoIcon}
@@ -325,16 +318,7 @@ const FeedCard = ({
                         }}
                       />
                     </span>
-                    <div
-                      className="value"
-                      style={{
-                        backgroundColor: "#9d43bd",
-                        fontSize:
-                          val[0]?.prediction_type !== "BINARY"
-                            ? "20px"
-                            : "20px",
-                      }}
-                    >
+                    <div className="h-24 rounded-b-lg md:rounded-b-xl bg-[#ffffff20] flex justify-center items-center font-poppins text-sm md:text-base text-white">
                       <div
                         style={{
                           position: "relative",
@@ -348,16 +332,19 @@ const FeedCard = ({
                     </div>
                   </div>
                 </div>
-                {/* Below Part Ends */}
               </div>
-              {/* Youtube Video Starts */}
+
               <div className="row-section-2">
                 <iframe
-                  className="w-full h-[20vh] md:h-[30vh] object-cover"
+                  className="w-full h-[20vh] md:h-full rounded-lg md:rounded-xl object-cover"
                   alt=""
                   src={`https://www.youtube.com/embed/${val[0]?.youtube_id}?start=${val[0]?.youtube_start_time}`}
                 />
+
+                {/* Below Part Ends */}
               </div>
+              {/* Youtube Video Starts */}
+
               {/* YouTube Video Ends */}
             </div>
           )}

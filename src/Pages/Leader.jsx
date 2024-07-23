@@ -15,6 +15,7 @@ import { getPredictionSingle } from "../services/Predictions.service";
 import Tabs from "../components/newLeaderboard/tabs";
 import BarChart from "../components/newLeaderboard/barChart";
 import PieChart from "../components/newLeaderboard/pieChart";
+import PredictionSection from "../components/newLeaderboard/prediction-section";
 
 const Leader = () => {
   const [userData, setUserData] = useState({});
@@ -47,11 +48,14 @@ const Leader = () => {
         </div>
       ),
     },
-    { title: "Predictions", content: "This is the content of the 2nd tab" },
+    {
+      title: "Predictions",
+      content: <PredictionSection userPredictions={userPredictions} />,
+    },
   ];
 
   return (
-    <div className="bg-primary min-h-screen w-full p-8 overflow-y-auto h-full relative">
+    <div className="bg-primary min-h-screen w-full p-4 2md:p-8 overflow-y-auto h-full relative">
       <div>
         <Link
           to={"/dashboard/LeaderBoards"}
@@ -93,7 +97,7 @@ const Leader = () => {
         </div>
       )}
       <div className="w-full flex justify-center py-6">
-        <div className="w-4/5 grid grid-cols-4 font-raleway gap-4">
+        <div className="w-4/5 grid grid-cols-2 md:grid-cols-4 font-raleway gap-4">
           <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
             <MdPendingActions className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
             <span className="text-[#ffffff60] text-[16px]">

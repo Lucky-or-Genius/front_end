@@ -8,6 +8,7 @@ import MyChannels from "../Pages/MyChannels";
 import Favourites from "../Pages/Favourites";
 import NewLeaderboard from "../Pages/NewLeaderboard";
 import LeaderPage from "../Pages/Leader";
+import PredictionDetails from "../Pages/Prediction-details";
 
 const routes = [
   {
@@ -29,6 +30,10 @@ const routes = [
   {
     path: "/dashboard/Predictions",
     element: <Predictions />,
+  },
+  {
+    path: "/dashboard/Predictions/:id",
+    element: <PredictionDetails />,
   },
   {
     path: "/dashboard/Markets",

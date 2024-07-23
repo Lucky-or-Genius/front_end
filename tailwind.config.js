@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       screens: {
         "3xl": "1800px",
+        "2md": "1200px",
       },
       fontFamily: {
         calibre: ['"Calibre"', "sans-serif"],
