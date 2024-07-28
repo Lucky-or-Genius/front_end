@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Image from "../assets/hover_info2.png";
 import { MdPendingActions } from "react-icons/md";
 import { CgShutterstock } from "react-icons/cg";
 import { FaChartLine } from "react-icons/fa";
 import { IoAnalyticsOutline } from "react-icons/io5";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   getProfilesBySubjects,
   getSortedProfilesBySubjects,
 } from "../services/Profiles.service";
 import { getPredictionSingle } from "../services/Predictions.service";
-import Tabs from "../components/newLeaderboard/tabs";
+import Tabs from "../components/common/tabs";
 import BarChart from "../components/newLeaderboard/barChart";
 import PieChart from "../components/newLeaderboard/pieChart";
 import PredictionSection from "../components/newLeaderboard/prediction-section";
@@ -20,6 +19,7 @@ import PredictionSection from "../components/newLeaderboard/prediction-section";
 const Leader = () => {
   const [userData, setUserData] = useState({});
   const [userPredictions, setUserPredictions] = useState({});
+  const navigate = useNavigate();
   const id = useParams().id;
 
   useEffect(() => {
@@ -29,7 +29,8 @@ const Leader = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [id]);
+
   useEffect(() => {
     const fetchUserPrediction = async () => {
       const res = await getPredictionSingle(id);
@@ -37,7 +38,7 @@ const Leader = () => {
     };
 
     fetchUserPrediction();
-  }, []);
+  }, [id]);
 
   const items = [
     {
@@ -57,12 +58,12 @@ const Leader = () => {
   return (
     <div className="bg-primary min-h-screen w-full p-4 2md:p-8 overflow-y-auto h-full relative">
       <div>
-        <Link
-          to={"/dashboard/LeaderBoards"}
-          className="absolute left-10 top-10 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center"
+        <div
+          className="absolute left-10 top-10 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center cursor-pointer"
+          onClick={() => navigate(-1)}
         >
           <FaArrowLeftLong /> Back
-        </Link>
+        </div>
       </div>
       {userPredictions?.length > 0 ? (
         <div className="flex items-center gap-6 w-full justify-center">

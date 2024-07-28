@@ -30,7 +30,6 @@ const Board = ({ data }) => {
               <img
                 src={item.image_url}
                 alt="image"
-                className=""
                 width={40}
                 height={40}
                 className="rounded-full w-10 h-10 object-cover"

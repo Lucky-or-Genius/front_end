@@ -48,8 +48,11 @@ const PredictionCard = ({
           <div className="profile-name">
             <span className="flex items-center text-[#ffffff80] gap-4">
               <h5
-                className={"cursor-pointer hover:underline"}
-                onClick={() => navigate(`/dashboard/Leaderboards/${userId}`)}
+                className={"cursor-pointer hover:underline z-[9]"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(`/dashboard/Leaderboards/${userId}`);
+                }}
               >
                 {user}
               </h5>
