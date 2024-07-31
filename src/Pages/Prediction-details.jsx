@@ -35,7 +35,7 @@ const Predictor = () => {
   const items = [
     {
       content: (
-        <div className="font-poppins text-white text-[14px] md:text-[18px]">
+        <div className="font-poppins text-white text-sm md:text-base">
           {predictionData?.length > 0 && predictionData[0]?.justification}
         </div>
       ),
@@ -43,7 +43,7 @@ const Predictor = () => {
     },
     {
       content: (
-        <div className="font-poppins text-white text-[14px] md:text-[18px]">
+        <div className="font-poppins text-white text-sm md:text-base">
           {predictionData?.length > 0 &&
             clearData(predictionData[0]?.summaries).map((point, idx) => (
               <li key={idx} style={{ marginBottom: "10px" }}>
@@ -61,7 +61,7 @@ const Predictor = () => {
             predictionData[0]?.sources.map((val, index) => {
               return (
                 <div
-                  className="font-poppins text-white text-[14px] md:text-[18px]"
+                  className="font-poppins text-white text-sm md:text-base"
                   key={index}
                 >
                   {clearData(val).map((point, idx) => (
@@ -86,6 +86,7 @@ const Predictor = () => {
           <FaArrowLeftLong /> Back
         </div>
       </div>
+
       {predictionData?.length > 0 ? (
         <div className="flex items-center gap-6 w-full justify-center">
           <img

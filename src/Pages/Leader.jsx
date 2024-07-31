@@ -15,6 +15,7 @@ import Tabs from "../components/common/tabs";
 import BarChart from "../components/newLeaderboard/barChart";
 import PieChart from "../components/newLeaderboard/pieChart";
 import PredictionSection from "../components/newLeaderboard/prediction-section";
+import ChartFilters from "../components/newLeaderboard/chart-filters";
 
 const Leader = () => {
   const [userData, setUserData] = useState({});
@@ -44,9 +45,14 @@ const Leader = () => {
     {
       title: "Analytics",
       content: (
-        <div className="flex flex-col w-full text-white font-poppins gap-6">
-          <BarChart data={userData[0]} /> <PieChart />{" "}
-        </div>
+        <>
+          <div className="">
+            <ChartFilters />
+          </div>
+          <div className="flex flex-col w-full text-white font-poppins gap-6">
+            <BarChart data={userData[0]} /> <PieChart />{" "}
+          </div>
+        </>
       ),
     },
     {

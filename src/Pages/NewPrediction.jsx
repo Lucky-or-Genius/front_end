@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import PredictionCard from "../components/newPrediction/prediction-card";
 import { getPredictions } from "../services/Predictions.service";
 
+import Filters from "../components/newPrediction/filters";
+
 const NewPrediction = () => {
   const [predictions, setPredictions] = useState();
 
@@ -14,14 +16,15 @@ const NewPrediction = () => {
     fetchPredictionData();
   }, []);
 
-  console.log(predictions);
-
   return (
     <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10">
       <div className="w-full flex py-6 justify-center">
         <span className="font-raleway text-3xl text-white font-[600]">
           Predictions
         </span>
+      </div>
+      <div className="pb-6 w-full justify-center flex items-center">
+        <Filters />
       </div>
       <div className="grid grid-cols-1 2md:grid-cols-2 px-2 md:px-6 gap-4">
         {predictions?.map((prediction, index) => (

@@ -57,8 +57,8 @@ const PredictionCard = ({
             </span>
           </div>
         </div>
-        <span className="px-2 bg-[#ffffff10] rounded-full text-[12px] text-center">
-          #{category}
+        <span className="px-2 bg-[#ffffff10] rounded-full text-[12px] text-center flex gap-2 items-center">
+          Source : <FaYoutube />
         </span>
       </div>
       <div className="flex flex-col justify-between h-[80%] pt-2">
@@ -77,12 +77,12 @@ const PredictionCard = ({
             </p>
           </div>
           <div className="flex gap-4">
-            <span className="bg-[#ffffff10] px-2 w-fit rounded-full flex gap-2 items-center">
-              Source : <FaYoutube />
-            </span>
+            <div className="bg-[#ffffff10] px-2 rounded-full flex gap-2 items-center overflow-hidden text-ellipsis whitespace-nowrap clamp-line-1 md:max-w-24">
+              #{category}
+            </div>
 
             <span
-              className="font-bold"
+              className="font-bold flex gap-2"
               style={{
                 color:
                   status === "PENDING"
