@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image } from "react-bootstrap";
-import { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { FaPlus } from "react-icons/fa";
-import { IoChatbubbleEllipses } from "react-icons/io5";
-import { RiSendPlaneFill } from "react-icons/ri";
 // import { getSinglePrediction } from "../services/Predictions.service";
 // import "../styles/feedCard.css";
 import { useNavigate } from "react-router-dom";
@@ -66,46 +63,51 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
       <div className="card-description font-raleway">
         <p>{predictionData[0]?.prediction}</p>
       </div>
-      <div className="flex w-full items-center gap-6 text-[#ffffff80] text-sm pt-4">
-        <span className="bg-[#ffffff10] px-2 rounded-full">
-          #{predictionData[0]?.category}
-        </span>
-
-        <p className="flex gap-2 items-center ">
-          <FaRegCalendarPlus /> <span>{predictionData[0]?.publish_date}</span>
-        </p>
-        <CgArrowLongRightC />
-        <p className="flex gap-2 items-center ">
-          <FaFlagCheckered />{" "}
-          <span>
-            {predictionData[0]?.fixed_date !== null
-              ? predictionData[0]?.fixed_date
-              : "Null"}
+      <div className="flex w-full gap-4 text-[#ffffff80] text-sm pt-4 flex-col md:flex-row">
+        <div className="flex gap-6">
+          <span className="bg-[#ffffff10] px-2 rounded-full">
+            #{predictionData[0]?.category}
           </span>
-        </p>
-        <span className="bg-[#ffffff10] px-2 rounded-full flex gap-2 items-center">
-          Source : <FaYoutube />
-        </span>
-        <span
-          className="font-bold"
-          style={{
-            color:
-              predictionData[0]?.prediction_validation === "PENDING"
-                ? "#c2964b"
-                : predictionData[0]?.prediction_validation === "TRUE"
-                ? "#23B678"
-                : predictionData[0]?.prediction_validation === "PARTIALLY TRUE"
-                ? "#388E3C"
-                : "#E72E2E",
-          }}
-        >
-          # {predictionData[0]?.prediction_validation}
-        </span>
+
+          <p className="flex gap-2 items-center ">
+            <FaRegCalendarPlus /> <span>{predictionData[0]?.publish_date}</span>
+          </p>
+          <CgArrowLongRightC />
+          <p className="flex gap-2 items-center ">
+            <FaFlagCheckered />{" "}
+            <span>
+              {predictionData[0]?.fixed_date !== null
+                ? predictionData[0]?.fixed_date
+                : "Null"}
+            </span>
+          </p>
+        </div>
+        <div className="flex gap-6">
+          <span className="bg-[#ffffff10] px-2 rounded-full flex gap-2 items-center">
+            Source : <FaYoutube />
+          </span>
+          <span
+            className="font-bold"
+            style={{
+              color:
+                predictionData[0]?.prediction_validation === "PENDING"
+                  ? "#c2964b"
+                  : predictionData[0]?.prediction_validation === "TRUE"
+                  ? "#23B678"
+                  : predictionData[0]?.prediction_validation ===
+                    "PARTIALLY TRUE"
+                  ? "#388E3C"
+                  : "#E72E2E",
+            }}
+          >
+            # {predictionData[0]?.prediction_validation}
+          </span>
+        </div>
       </div>
 
       {isOpen && (
         <>
-          <div className="grid grid-cols-2 gap-4 pt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
             <div className="grid grid-cols-1 gap-4">
               <div className="bg-[#ffffff20] shadow-md rounded-xl grid grid-cols-2 w-full p-4 gap-4 font-poppins">
                 <div className=" text-[#ffffff60]">
@@ -165,7 +167,7 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
                       }}
                     />
                   </span>
-                  <div className="h-24 rounded-b-lg md:rounded-b-xl bg-[#ffffff20] flex justify-center items-center font-poppins text-sm md:text-lg text-white">
+                  <div className="h-24 rounded-b-lg md:rounded-b-xl bg-[#ffffff20] flex justify-center items-center font-poppins text-center text-sm md:text-lg text-white">
                     <div
                       style={{
                         position: "relative",
@@ -196,7 +198,7 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
                       }}
                     />
                   </span>
-                  <div className="h-24 rounded-b-lg md:rounded-b-xl bg-[#ffffff20] flex justify-center items-center font-poppins text-sm md:text-lg text-white">
+                  <div className="h-24 rounded-b-lg md:rounded-b-xl bg-[#ffffff20] flex justify-center items-center text-center font-poppins text-sm md:text-lg text-white">
                     <div
                       style={{
                         position: "relative",
@@ -215,7 +217,7 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
                     className="bg-primary p-4 flex justify-center items-center rounded-t-lg md:rounded-t-xl font-raleway text-sm text-[#ffffff80]
 text-sm text-[#ffffff80"
                   >
-                    Error %
+                    Error
                     <img
                       src={infoIcon}
                       alt="Info"

@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  FiKey,
-  FiLayout,
-  FiSend,
-  FiLogOut,
-  FiHeadphones,
-} from "react-icons/fi";
+import { FiKey, FiLayout, FiSend, FiLogOut } from "react-icons/fi";
 import { GoStack } from "react-icons/go";
-import { MdOutlineSubject } from "react-icons/md";
 import { BsHddStack } from "react-icons/bs";
-import { AiOutlineUser } from "react-icons/ai";
 import { Layout, Menu } from "antd";
-import logoIcon from "../../../assets/logo-icon.svg";
+import logoIcon from "../../../assets/logo.png";
 import { googleLogout } from "@react-oauth/google";
 import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
 // import logoText from ".../../../assets/logo-text.svg";
@@ -165,7 +157,6 @@ const Index = () => {
       </Menu>
       <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12  py-4 text-white rounded-lg">
         <img
-          className="user-photo"
           src={userData?.picture}
           width={10}
           height={10}

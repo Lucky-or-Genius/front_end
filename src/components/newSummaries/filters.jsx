@@ -10,22 +10,12 @@ const filters = () => {
         Filters{" "}
         <IoOptionsOutline className="border border-primary400 rounded-full p-1 w-6 h-6" />
       </span>
-
       <div className="gap-2 flex font-raleway">
         <button className="hover:bg-[#ffffff20] rounded-full gap-2 text-white px-4 py-1 flex items-center focus:bg-[#ffffff20] border border-[#ffffff20]">
-          All <PiSortDescendingBold />
+          Predictions <PiSortDescendingBold />
         </button>
         <button className="hover:bg-[#ffffff20] rounded-full gap-2 text-white px-4 py-1 flex items-center focus:bg-[#ffffff20] border border-[#ffffff20]">
-          True <PiSortDescendingBold />
-        </button>
-        <button className="hover:bg-[#ffffff20] rounded-full gap-2 text-white px-4 py-1 flex items-center focus:bg-[#ffffff20] border border-[#ffffff20]">
-          False <PiSortDescendingBold />
-        </button>
-        <button className="hover:bg-[#ffffff20] rounded-full gap-2 text-white px-4 py-1 flex items-center focus:bg-[#ffffff20] border border-[#ffffff20]">
-          Pending <PiSortDescendingBold />
-        </button>
-        <button className="hover:bg-[#ffffff20] rounded-full gap-2 text-white px-4 py-1 flex items-center focus:bg-[#ffffff20] border border-[#ffffff20]">
-          Partially True <PiSortDescendingBold />
+          Publish Date <PiSortDescendingBold />
         </button>
       </div>
     </div>

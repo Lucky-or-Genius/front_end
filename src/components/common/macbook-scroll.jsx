@@ -34,35 +34,29 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
     return () => unsubscribe();
   }, [scrollYProgress, src]);
 
-  const scaleX = useTransform(
-    scrollYProgress,
-    [0, 0.3],
-    [isMobile ? 1.15 : 1.2, isMobile ? 1.2 : 1.5]
-  );
+  // const scaleX = useTransform(
+  //   scrollYProgress,
+  //   [0, 0.3],
+  //   [, isMobile ? 1.2 : 1.5]
+  // );
   const scaleY = useTransform(
     scrollYProgress,
     [0, 0.3],
-    [isMobile ? 1.55 : 0.6, isMobile ? 1.55 : 1.5]
+    [, isMobile ? 1.55 : 1.5]
   );
   const translate = useTransform(
     scrollYProgress,
     [0, 1],
     [isMobile ? 0 : 0, 1800]
   );
-  const rotate = useTransform(
-    scrollYProgress,
-    [0.1, 0.12, 0.3],
-    [isMobile ? -50 : -28, -28, 0]
-  );
+  const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [, -28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  useEffect(() => {}, [rotate]);
 
   return (
     <div
       ref={ref}
-      className="scroll-smooth h-[200vh] md:h-[350vh] min-h-[100vh] 3xl:h-[150vh] md:min-h-full flex flex-col items-center md:py-40 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.8] 3xl:scale-[1.5]"
+      className="scroll-smooth  min-h-[100vh] md:min-h-full flex flex-col items-center md:py-40 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.8] 3xl:scale-[1.5]"
     >
       <motion.div
         className="w-full pb-4 flex justify-center"
@@ -95,11 +89,10 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
       </motion.h2>
       {/* Lid */}
       <Lid
-        imgSrc={currentSrc}
-        scaleX={scaleX}
-        scaleY={scaleY}
-        rotate={rotate}
-        translate={translate}
+        imgSrc={"/images/img-3.png"}
+        scaleX={isMobile ? 1.15 : 1.2}
+        scaleY={isMobile ? 1.55 : 0.6}
+        rotate={isMobile ? -50 : -28}
       />
       {/* Base area */}
       <div className="md:h-[16rem] h-[14rem] w-[22rem] md:w-[32rem] bg-gray-200 dark:bg-[#272729] rounded-2xl overflow-hidden relative -z-10">
@@ -128,7 +121,7 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
   );
 };
 
-export const Lid = ({ scaleX, scaleY, rotate, translate, imgSrc }) => {
+export const Lid = ({ scaleX, scaleY, rotate, imgSrc }) => {
   return (
     <div className="relative [perspective:800px]">
       <div
@@ -146,7 +139,13 @@ export const Lid = ({ scaleX, scaleY, rotate, translate, imgSrc }) => {
           className="absolute inset-0 bg-[#010101] rounded-lg flex items-center justify-center"
         >
           <span className="text-white w-[24px]">
-            <img alt="" src={logoIcon} width={40} height={40} />
+            <img
+              alt=""
+              src={logoIcon}
+              width={40}
+              height={40}
+              className="w-full h-full"
+            />
           </span>
         </div>
       </div>
@@ -155,7 +154,7 @@ export const Lid = ({ scaleX, scaleY, rotate, translate, imgSrc }) => {
           scaleX: scaleX,
           scaleY: scaleY,
           rotateX: rotate,
-          translateY: translate,
+          translateY: 0,
           transformStyle: "preserve-3d",
           transformOrigin: "top",
         }}
@@ -163,11 +162,9 @@ export const Lid = ({ scaleX, scaleY, rotate, translate, imgSrc }) => {
       >
         {/* <div className="relative inset-0 bg-[#272729] rounded-lg" /> */}
         <motion.img
-          src={imgSrc}
+          src={"/images/img-3.png"}
           alt="aceternity logo"
-          className={`${
-            rotate === 0 ? "sticky top-0 z-[99]" : ""
-          } object-cover object-left-top absolute rounded-lg inset-0 h-full w-full`}
+          className={`object-cover h-full w-full`}
         />
       </motion.div>
     </div>

@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from "react";
 
-const Tabs = ({ items, className }) => {
+const Tabs = ({ items, className, defaultOpen }) => {
   const firstBtnRef = useRef(null);
 
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(defaultOpen ? 1 : 0);
 
   useEffect(() => {
     if (firstBtnRef.current) {

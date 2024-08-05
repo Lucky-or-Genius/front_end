@@ -88,12 +88,15 @@ const Board = ({ data }) => {
                   </Popover>
                 </div>
                 <div className="flex gap-2 w-full text-[#ffffff60] items-center">
-                  <div className="text-[#ffffff60] text-xs">
+                  <Link
+                    className="text-[#ffffff60] text-xs"
+                    to={`/dashboard/LeaderBoards/${item.user_id}?defaultOpen=predictions`}
+                  >
                     <span className="text-primary400">
                       {item.total_predictions}
                     </span>{" "}
                     Predictions
-                  </div>
+                  </Link>
                   <span className="text-[#ffffff60] text-lg"> |</span>
                   <div className="text-[#ffffff60] text-xs">
                     <span className="text-primary400">

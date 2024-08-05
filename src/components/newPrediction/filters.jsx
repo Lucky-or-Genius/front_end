@@ -29,43 +29,43 @@ const Filters = () => {
         <div className="">
           <Popper
             children={
-              <div className="">
-                <div className="">
+              <div className="font-raleway p-4 flex w-full items-end flex-col">
+                <div className="grid grid-cols-2 gap-2 text-sm">
                   <button
-                    className={`True ${
-                      activeButton1 === "True" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton1Click("True")}
                   >
                     True
                   </button>
                   <button
-                    className={`False ${
-                      activeButton1 === "False" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton1Click("False")}
                   >
                     False
                   </button>
                   <button
-                    className={`ParticallyTrue ${
-                      activeButton1 === "PARTIALLY TRUE" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton1Click("PARTIALLY TRUE")}
                   >
                     Part True
                   </button>
                   <button
-                    className={`Pending ${
-                      activeButton1 === "Pending" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton1Click("Pending")}
                   >
                     Pending
                   </button>
                 </div>
                 <button
-                  className={`w-full flex justify-center items-center gap-2 text-white cursor-pointer active:border-2 border-white rounded-lg p-2 ${
+                  className={`w-fit flex flex-end items-center text-sm gap-2 bg-[#ffffff70] text-black cursor-pointer rounded-lg p-2 mt-2 ${
                     activeButton1 === " " ? "active" : ""
                   }`}
                   onClick={() => {
@@ -75,11 +75,11 @@ const Filters = () => {
                 >
                   Reset <IoReloadOutline />
                 </button>
-                <div className="apply">
+                {/* <div className="apply">
                   <button className="apply-btn" onClick={() => handleApply()}>
                     Apply
                   </button>
-                </div>
+                </div> */}
               </div>
             }
             trigger={
@@ -92,59 +92,59 @@ const Filters = () => {
         <div className="">
           <Popper
             children={
-              <div className="">
-                <div className="">
+              <div className="font-raleway p-4 flex w-full items-end flex-col ">
+                <div className="grid grid-cols-2 gap-2 text-sm">
                   <button
-                    className={`Economy ${
-                      activeButton2 === "Economy" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton2Click("Economy")}
                   >
                     Economy
                   </button>
                   <button
-                    className={`Finance ${
-                      activeButton2 === "Finance" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton2Click("Finance")}
                   >
                     Finance
                   </button>
                   <button
-                    className={`Politics ${
-                      activeButton2 === "Politics" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton1Click("Politics")}
                   >
                     Politics
                   </button>
                   <button
-                    className={`SciTech ${
-                      activeButton2 === "Sci %26 Tech" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton2Click("Sci %26 Tech")}
                   >
                     Sci & Tech
                   </button>
                   <button
-                    className={`Social ${
-                      activeButton2 === "Social %26 Health" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton2Click("Social %26 Health")}
                   >
                     Social & Health
                   </button>
                   <button
-                    className={`Other ${
-                      activeButton2 === "Other" ? "active" : ""
-                    }`}
+                    className={
+                      "w-full bg-[#ffffff20] text-white p-2 rounded-md hover:bg-[#ffffff40] transition-all ease-in-out"
+                    }
                     onClick={() => handleButton2Click("Other")}
                   >
                     Others
                   </button>
                 </div>
                 <button
-                  className={`w-full flex justify-center items-center gap-2 text-white cursor-pointer active:border-2 border-white rounded-lg p-2 ${
+                  className={`w-fit flex flex-end items-center text-sm gap-2 bg-[#ffffff70] text-black cursor-pointer rounded-lg p-2 mt-2 ${
                     activeButton2 === " " ? "active" : ""
                   }`}
                   onClick={() => {
@@ -154,9 +154,9 @@ const Filters = () => {
                 >
                   Reset <IoReloadOutline />
                 </button>
-                <div className="apply" onClick={() => handleApply()}>
+                {/* <div className="apply" onClick={() => handleApply()}>
                   <button className="apply-btn">Apply</button>
-                </div>
+                </div> */}
               </div>
             }
             trigger={

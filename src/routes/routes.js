@@ -1,6 +1,7 @@
 import React from "react";
 import Feed from "../Pages/Feed";
-import Summaries from "../Pages/Summaries";
+import Summaries from "../Pages/NewSummaries";
+import SummariesDetails from "../Pages/SummariesDetails";
 import Predictions from "../Pages/NewPrediction";
 import Markets from "../Pages/Markets";
 import Profiles from "../Pages/Profiles";
@@ -26,6 +27,10 @@ const routes = [
   {
     path: "/dashboard/Summaries",
     element: <Summaries />,
+  },
+  {
+    path: "/dashboard/Summaries/:id",
+    element: <SummariesDetails />,
   },
   {
     path: "/dashboard/Predictions",

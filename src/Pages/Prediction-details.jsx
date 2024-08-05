@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { getSinglePrediction } from "../services/Predictions.service";
 import PredictorCard from "../components/newPrediction/predictor-card";
+import { CgShutterstock } from "react-icons/cg";
+import { FaChartLine } from "react-icons/fa";
+import { MdPendingActions } from "react-icons/md";
 import Tabs from "../components/common/tabs";
 
 const Predictor = () => {
@@ -88,28 +91,66 @@ const Predictor = () => {
       </div>
 
       {predictionData?.length > 0 ? (
-        <div className="flex items-center gap-6 w-full justify-center">
-          <img
-            src={predictionData[0]?.image_url}
-            alt=""
-            width={100}
-            height={100}
-            className="w-20 h-20 rounded-full object-cover"
-          />
-          <div className="flex flex-col justify-around h-full">
-            <span className="text-white font-raleway text-3xl">
-              {predictionData[0]?.first_name +
-                " " +
-                predictionData[0]?.last_name}
-            </span>
-            <div className="text-[#ffffff60] font-poppins text-lg">
-              Area of Accuracy :{" "}
-              <span className="text-primary400">
-                {predictionData[0]?.category}
+        <>
+          <div className="flex items-center gap-6 w-full justify-center">
+            <img
+              src={predictionData[0]?.image_url}
+              alt=""
+              width={100}
+              height={100}
+              className="w-14 h-14 rounded-full object-cover"
+            />
+            <div className="flex flex-col justify-around h-full">
+              <Link
+                className="text-white font-raleway text-3xl"
+                to={`/dashboard/LeaderBoards/${predictionData[0]?.user_id}`}
+              >
+                {predictionData[0]?.first_name +
+                  " " +
+                  predictionData[0]?.last_name}
+              </Link>
+            </div>
+          </div>
+
+          <div className="w-full md:w-4/5 grid grid-cols-2 md:grid-cols-4 font-raleway gap-4 py-10">
+            <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
+              <MdPendingActions className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
+              <span className="text-[#ffffff60] text-[16px]">
+                Pending Predictions
+              </span>
+              <span className="text-[24px] text-white">
+                {predictionData[0]?.all_pending_predictions}
+              </span>
+            </div>
+            <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
+              <CgShutterstock className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
+              <span className="text-[#ffffff60] text-[16px]">
+                Total Predictions
+              </span>
+              <span className="text-[24px] text-white">
+                {predictionData[0]?.all_predictions}
+              </span>
+            </div>
+            <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
+              <FaChartLine className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
+              <span className="text-[#ffffff60] text-[16px]">
+                Predictor Accuracy
+              </span>
+              <span className="text-[24px] text-white">
+                {predictionData[0]?.prediction_accuracy} %
+              </span>
+            </div>
+            <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
+              <FaChartLine className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
+              <span className="text-[#ffffff60] text-[16px]">
+                Current Streak
+              </span>
+              <span className="text-[24px] text-white">
+                {predictionData[0]?.current_streak}
               </span>
             </div>
           </div>
-        </div>
+        </>
       ) : (
         <div className="flex items-center gap-4 w-full justify-center">
           <div className="w-20 h-20 rounded-full bg-[#ffffff30] animate-pulse" />
