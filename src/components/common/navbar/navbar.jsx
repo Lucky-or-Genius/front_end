@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./style.css";
-import logoIcon from "../../../assets/logo-icon.svg";
-import logoText from "../../../assets/logo-text.svg";
+import logoIcon from "../../../assets/logo.png";
 import { HiOutlineFingerPrint } from "react-icons/hi";
 
 function Navbar() {
@@ -15,12 +14,11 @@ function Navbar() {
   return (
     <nav className="navbar font-calibre pt-10 md:pb-4">
       <div className="md:w-2/3 w-full flex justify-between items-center">
-        <div className="flex w-full">
-          <div className="navbar-logo flex pr-4">
-            <img className="md:w-10 w-10" alt="icon" src={logoIcon} />
-            <img className="md:w-32 w-32" alt="text" src={logoText} />
-          </div>
+        <div className="flex pr-4 ">
+          <img className="w-56 h-full" alt="text" src={logoIcon} />
+        </div>
 
+        <div className="flex gap-8">
           <ul
             className={`navbar-nav ${
               isSideNavOpen ? "open" : ""
@@ -69,22 +67,23 @@ function Navbar() {
               </NavLink>
             </li>
           </ul>
+
+          <button
+            className={`navbar-toggle ${isSideNavOpen ? "open" : ""}`}
+            onClick={toggleSideNav}
+          >
+            <span className="navbar-toggle-icon"></span>
+          </button>
+          <NavLink
+            to="/login"
+            className="nav-link hidden px-4 rounded-2xl 3xl:text-xl py-0.5 md:flex items-center gap-2 group border border-[#4a6edb] !text-white font-[600] hover:shadow-sm transition-all ease-in-out duration-400 hover:shadow-[#4a6edb]"
+            activeClassName="active"
+            onClick={toggleSideNav}
+          >
+            <HiOutlineFingerPrint className="group-hover:text-white text-gray-600 transition-all ease-in-out duration-600" />
+            Login
+          </NavLink>
         </div>
-        <button
-          className={`navbar-toggle ${isSideNavOpen ? "open" : ""}`}
-          onClick={toggleSideNav}
-        >
-          <span className="navbar-toggle-icon"></span>
-        </button>
-        <NavLink
-          to="/login"
-          className="nav-link hidden px-4 rounded-2xl 3xl:text-xl py-0.5 md:flex items-center gap-2 group border border-[#4a6edb] !text-white font-[600] hover:shadow-sm transition-all ease-in-out duration-400 hover:shadow-[#4a6edb]"
-          activeClassName="active"
-          onClick={toggleSideNav}
-        >
-          <HiOutlineFingerPrint className="group-hover:text-white text-gray-600 transition-all ease-in-out duration-600" />
-          Login
-        </NavLink>
       </div>
     </nav>
   );

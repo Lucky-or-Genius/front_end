@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import {
   allSummarySources,
@@ -11,6 +11,10 @@ import {
   getSummarySummaries,
 } from "../services/summaries.services";
 import Tabs from "../components/common/tabs";
+import Summaries from "../components/newSummaries/summaries";
+import Predictions from "../components/newSummaries/predictions";
+import People from "../components/newSummaries/people";
+import Transcript from "../components/newSummaries/transcript";
 
 const SummariesDetails = () => {
   const navigate = useNavigate();
@@ -20,25 +24,11 @@ const SummariesDetails = () => {
   const [prediction, setPrediction] = useState([]);
   const [summaries, setSummaries] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchSummaries = async () => {
-  //     try {
-  //       const response = await summarySourceById(id);
-  //       // setSummaries(response.data);
-  //       console.log(response);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-
-  //   fetchSummaries();
-  // }, []);
   useEffect(() => {
     const fetchSummaries = async () => {
       try {
         const response = await getSummarySummaries(id);
-        // setSummaries(response.data);
-        console.log(response);
+        setSummaries(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -50,8 +40,7 @@ const SummariesDetails = () => {
     const fetchPredictions = async () => {
       try {
         const response = await getSummaryPrediction(id);
-        // setSummaries(response.data);
-        console.log(response);
+        setPrediction(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -63,8 +52,7 @@ const SummariesDetails = () => {
     const fetchPeople = async () => {
       try {
         const response = await getSummaryPeople(id);
-        // setSummaries(response.data);
-        console.log(response);
+        setPeople(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -76,8 +64,7 @@ const SummariesDetails = () => {
     const fetchTranscript = async () => {
       try {
         const response = await getFullTranscript(id);
-        // setSummaries(response.data);
-        console.log(response);
+        setTranscript(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -85,15 +72,22 @@ const SummariesDetails = () => {
 
     fetchTranscript();
   }, []);
-
+  console.log(transcript);
   const items = [
-    { title: "Predictions", content: "hello1" },
-    { title: "Summaries", content: "hello2" },
-    { title: "Transcript", content: "hello3" },
+    {
+      title: "Predictions",
+      content: <Predictions predictionData={prediction} />,
+    },
+    { title: "Summaries", content: <Summaries summariesData={summaries} /> },
+    { title: "People", content: <People peopleData={people} /> },
+    {
+      title: "Transcript",
+      content: <Transcript transcriptData={transcript} />,
+    },
   ];
 
   return (
-    <div className="bg-primary min-h-screen w-full px-4 2md:px-20 2md:py-10 overflow-y-hidden h-full relative flex gap-6">
+    <div className="bg-primary min-h-screen w-full px-4 2md:px-20 2md:py-10 overflow-y-hidden h-full relative flex gap-6 justify-center">
       <div
         className="absolute left-2 top-4 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center cursor-pointer"
         onClick={() => navigate(-1)}
@@ -101,10 +95,9 @@ const SummariesDetails = () => {
         <FaArrowLeftLong /> Back
       </div>
 
-      <div className="w-full">
+      <div className="w-full flex justify-center">
         <Tabs items={items} className={"!w-full"} />
       </div>
-      <div className="w-1/3">people</div>
     </div>
   );
 };
