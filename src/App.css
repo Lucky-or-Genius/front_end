@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .mask-image-radial-fade {
+    mask-image: radial-gradient(rgb(0, 0, 0), transparent 50%);
+  }
+}
+
 .App {
   text-align: center;
 }
@@ -10,10 +16,33 @@
   height: 40vmin;
   pointer-events: none;
 }
-.landing{
-  font-family: "Plus Jakarta Sans", sans-serif;
+.landing {
+  /* font-family: "Plus Jakarta Sans", sans-serif; */
   font-optical-sizing: auto;
   scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "Calibre";
+  src: url("../src/assets/fonts/calibre/TestCalibre-Regular-BF661746edbee52.otf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Calibre";
+  src: url("../src/assets/fonts/calibre/TestCalibre-Semibold-BF661746ed9242e.otf")
+    format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Calibre";
+  src: url("../src/assets/fonts/calibre/TestCalibre-Bold-BF661746ed7c530.otf")
+    format("truetype");
+  font-weight: bold;
+  font-style: normal;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -120,4 +149,10 @@
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 14px 8px !important;
   color: white !important;
+}
+
+.css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+  background-color: #001d3d70 !important;
+  backdrop-filter: blur(10px);
+  border-radius: 16px !important;
 }

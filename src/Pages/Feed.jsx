@@ -5,7 +5,6 @@ import ShareModal from "../components/shareModal";
 import FeedSkeleton from "../components/common/feed-skeleton";
 import { getFeedDetails } from "../services/Feed.service";
 import { leaderBoardData } from "../services/Leaderboards.service";
-import Header from "../components/Header";
 import "../styles/feed.css";
 import FeedCard from "../components/feed-card";
 
@@ -14,6 +13,11 @@ const Feed = () => {
   const [feedData, setFeedData] = useState([]);
   const [topPredictors, setTopPredictors] = useState([{}]);
   const [loading, setLoading] = useState(false);
+  const [openRowIndex, setOpenRowIndex] = useState(null);
+
+  const handleRowClick = (index) => {
+    setOpenRowIndex(openRowIndex === index ? null : index);
+  };
 
   const getFeed = async () => {
     setLoading(true);
@@ -33,15 +37,16 @@ const Feed = () => {
 
   return (
     <div className="feed-section">
-      <Header />
+      {/* <Header /> */}
 
       {loading && <FeedSkeleton />}
 
       {!loading && (
         <div className="feed-container">
+          {/* <h1 className="">Feed </h1> */}
           <div className="feed-part1">
             <div className="recent-predictions">
-              <div className="rp-heading">
+              <div className="font-raleway text-2xl font-[500] text-primary400 py-4">
                 <label>Recent Predictions</label>
               </div>
               {feedData.map((feed, index) => (
@@ -67,6 +72,8 @@ const Feed = () => {
                         prediction={card.prediction}
                         setOpenShare={setOpenShare}
                         status={card.status}
+                        onCardClick={() => handleRowClick(index)}
+                        isOpen={openRowIndex === index}
                       />
                     ))}
                   </div>

@@ -1,28 +1,32 @@
 .trending-card {
   display: flex;
   flex-direction: column;
-  padding: 16px;
+  /* padding: 16px; */
   gap: 12px;
-  background-color: #262626;
+  /* background-color: #3e8df450; */
   margin: 8px 0px;
-  border-radius: 8px;
+  /* border: 2px solid #3e8df470; */
+  border-radius: 12px;
+  font-family: "Poppins", sans-serif;
 }
 .trending-card .trending-card-header {
   display: flex;
   flex-direction: row;
   gap: 2rem;
+  justify-content: space-between;
+  width: 100%;
 }
 .trending-card .trending-card-header p {
-  color: #fff;
-  font-family: Inter;
-  font-size: 16px;
+  color: #003580;
+  /* font-family: Inter; */
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 }
 .trending-card .trending-card-header span {
-  color: #aeaeae;
-  font-family: Inter;
+  color: black;
+  /* font-family: Inter; */
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -33,13 +37,16 @@
   flex-direction: row;
   justify-content: space-between;
   gap: 4rem;
-  color: white;
+  color: #0059c9;
+  /* color: white; */
+  font-weight: 500;
+  line-height: 1.2;
 }
 .trending-card .trending-card-body > h5 {
   font-size: 24px;
 }
 .trending-card-body > img {
-  width: 12%;
+  width: 10%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
   height: 100%;

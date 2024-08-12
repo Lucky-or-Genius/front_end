@@ -1,7 +1,8 @@
 .feed-card {
   padding: 22px;
-  border-radius: 10px;
-  background: #262626;
+  border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #ffffff10;
 }
 .card-header {
   display: flex;
@@ -9,7 +10,7 @@
   align-items: center;
 }
 .card-header > .card-header-btn {
-  color: #4b6cc2;
+  color: white;
   border: none;
   display: flex;
   align-items: center;
@@ -17,70 +18,39 @@
   border-radius: 25px;
   font-size: 16px;
   padding: 8px 22px;
-  background-color: #181818;
+  background-color: #001d3d;
 }
 .card-header-img {
   border-radius: 50%;
-  border: 1px solid #4b6cc2;
+  border: 1px solid #ffffff80;
   padding: 2px;
-  height: 44px;
-  width: 44px;
+  height: 36px;
+  width: 36px;
 }
 .card-header-img > img {
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
   aspect-ratio: 1/1;
   object-fit: cover !important;
   border-radius: 50%;
 }
 .profile-name {
-  padding-left: 10px;
+  padding-left: 6px;
   flex-direction: column;
   display: flex;
   justify-content: center;
 }
 .profile-name span {
   font-size: 14px;
-  color: #aeaeae;
   font-style: normal;
-  font-weight: 400;
   line-height: normal;
 }
 
-.card-status {
-  font-size: 14px;
-  display: flex;
-  padding-top: 12px;
-  align-items: center;
-  font-weight: 400;
-  line-height: normal;
-}
-.card-status p {
-  margin-left: 6px;
-  color: #aeaeae;
-  font-size: 14px;
-}
-.card-dates {
-  display: flex;
-  padding-top: 12px;
-  gap: 15px;
-  color: #fff;
-  font-family: Inter;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-.card-dates span {
-  color: #aeaeae;
-}
 .card-description {
-  color: #aeaeae;
+  color: white;
   padding-top: 12px;
-  font-family: Inter;
-  font-size: 14px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
 }
 .card-image {

@@ -1,94 +1,87 @@
-import React, { useRef } from "react";
-import { useMotionValueEvent, useScroll } from "framer-motion";
-import { motion } from "framer-motion";
-import { cn } from "../../utils/cn";
+import FeatureTitle from "../common/title";
+import {
+  AirdropsCard,
+  WorldRecessionCard,
+  DenialCard,
+  SmarterCard,
+} from "../common/feature";
+// import { AirdropVisual, OtherVisual } from "./sections/visual";
 
-export const StickyScroll = ({ content, contentClassName }) => {
-  const [activeCard, setActiveCard] = React.useState(0);
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
-    // target: ref
-    container: ref,
-    offset: ["start start", "end start"],
-  });
-  const cardLength = content.length;
+const topics = [
+  {
+    title: "Verify lifelong reputations instantly.",
+    id: "airdrops",
+    card: AirdropsCard,
+    subtitle:
+      "  Reputations should be built up slowly and verified quickly. AI is used to track and score all forecasts extracted from any digital medium based on their accuracy.",
+  },
+  {
+    title: "The alpha is in the details.",
+    id: "world-recession",
+    card: WorldRecessionCard,
+    subtitle:
+      "Don’t listen to the weatherman’s sports picks. Our proprietary AI automatically identifies, categorizes and shows you domains of expertise for every forecaster.",
+  },
+  // {
+  //   title: "Or was in denial of it?",
+  //   id: "denial",
+  //   card: DenialCard,
+  // },
+  {
+    title: "Browse all predictions..",
+    subtitle:
+      "Browse all predictions past, present and deleted! Effortlessly compare the opinions of different individuals and find new perspectives based on objective accuracy.",
+    id: "debate-money",
+    card: DenialCard,
+  },
+  // {
+  //   title: "We're not Einsteins, but we know the smarter choice here!",
+  //   id: "smarter-choice",
+  //   card: SmarterCard,
+  //   // visual: OtherVisual,
+  // },
+];
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const cardsBreakpoints = content.map((_, index) => index / cardLength);
-    const closestBreakpointIndex = cardsBreakpoints.reduce(
-      (acc, breakpoint, index) => {
-        const distance = Math.abs(latest - breakpoint);
-        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
-          return index;
-        }
-        return acc;
-      },
-      0
-    );
-    setActiveCard(closestBreakpointIndex);
-  });
+const SecondSection = () => {
+  // const setFullScreenFeature = useTopicStore((state) => state.setFullscreenFeature)
 
-  const backgroundColors = [
-    "var(--slate-900)",
-    "var(--black)",
-    "var(--neutral-900)",
-  ];
-  const linearGradients = [
-    "linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))",
-    "linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))",
-    "linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))",
-  ];
   return (
-    <motion.div
-      animate={{
-        backgroundColor: backgroundColors[activeCard % backgroundColors.length],
-      }}
-      className="h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10"
-      ref={ref}
-    >
-      <div className="div relative flex items-start px-4">
-        <div className="max-w-2xl">
-          {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
-              <motion.h2
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-2xl font-bold text-slate-100"
-              >
-                {item.title}
-              </motion.h2>
-              <motion.p
-                initial={{
-                  opacity: 0,
-                }}
-                animate={{
-                  opacity: activeCard === index ? 1 : 0.3,
-                }}
-                className="text-kg text-slate-300 max-w-sm mt-10"
-              >
-                {item.description}
-              </motion.p>
+    <div className="bg-[#000] hidden md:flex h-100vh">
+      <div className="relative w-full">
+        {/* {topics?.map((topic) => (
+          <topic.visual key={topic.id} id={topic.id} />
+          
+        ))}
+        <button onClick={() => setFullScreenFeature(null)} className={cn('back-to-site-btn fixed bottom-8 right-[calc(50%-67px)] transform  bg-black text-white px-4 py-1.5 rounded-xl font-semibold shadow-lg z-[9999999] flex items-center text-sm hover:bg-black/80 opacity-0 translate-y-[300px]')}><span>Back to site</span><XIcon className='ml-2 h-4 w-4' /></button> */}
+        <div className="mx-auto max-w-[1800px] pl-32 ">
+          <div className=" md:grid grid-cols-3 w-full gap-20 items-start">
+            <div className="w-full py-[10vh] col-span-1 ">
+              <ul className="flex flex-col">
+                {topics?.map((topic) => (
+                  <li key={topic.id}>
+                    <FeatureTitle
+                      id={topic.id}
+                      buttonText={topic.buttonText}
+                      subtitle={topic.subtitle}
+                    >
+                      {topic.title}
+                    </FeatureTitle>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
-          <div className="h-40" />
+            <div className="md:sticky md:top-0 md:w-full h-fit md:h-screen md:flex items-center col-span-2">
+              <div className="fixed right-6 top-6 w-full md:relative h-screen md:w-full [&:not(:has(>_.active-card))]:bg-transparent md:[&:has(>_.active-card)]:bg-transparent">
+                {topics?.map((topic) => (
+                  <topic.card id={topic.id} key={topic.id} />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <motion.div
-        animate={{
-          background: linearGradients[activeCard % linearGradients.length],
-        }}
-        className={cn(
-          "hidden lg:block h-60 w-80 rounded-md bg-white sticky top-10 overflow-hidden",
-          contentClassName
-        )}
-      >
-        {content[activeCard].content ?? null}
-      </motion.div>
-    </motion.div>
+    </div>
   );
 };
+
+export default SecondSection;

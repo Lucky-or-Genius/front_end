@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TbArrowsUpDown } from "react-icons/tb";
 import "../../styles/leaderboard/subheader.css";
-import infoIcon from "../../assests/hover_info6.png";
+import infoIcon from "../../assets/hover_info6.png";
 
 const Subheader = ({
   sortLeaderboardByAccuracy,

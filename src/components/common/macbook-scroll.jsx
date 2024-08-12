@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { cn } from "../../utils/cn";
 import { FaPlay } from "react-icons/fa";
-import logoIcon from "../../assests/logo-icon.svg";
+import logoIcon from "../../assets/logo-icon.svg";
 import { Button } from "./moving-border-button";
+// import newSrc from "../landing2.svg";
 
-export const MacbookScroll = ({ src, showGradient, title, badge }) => {
+export const MacbookScroll = ({ src, showGradient, title }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -13,6 +14,7 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
   });
 
   const [isMobile, setIsMobile] = useState(false);
+  const [currentSrc, setCurrentSrc] = useState(src);
 
   useEffect(() => {
     if (window && window.innerWidth < 768) {
@@ -20,33 +22,41 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
     }
   }, []);
 
-  const scaleX = useTransform(
-    scrollYProgress,
-    [0, 0.3],
-    [1.2, isMobile ? 1 : 1.5]
-  );
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange((latest) => {
+      if (latest >= 0.4) {
+        setCurrentSrc("/images/img-3.png");
+      } else {
+        setCurrentSrc(src);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [scrollYProgress, src]);
+
+  // const scaleX = useTransform(
+  //   scrollYProgress,
+  //   [0, 0.3],
+  //   [, isMobile ? 1.2 : 1.5]
+  // );
   const scaleY = useTransform(
     scrollYProgress,
     [0, 0.3],
-    [isMobile ? 1.55 : 0.6, isMobile ? 1 : 1.5]
+    [, isMobile ? 1.55 : 1.5]
   );
   const translate = useTransform(
     scrollYProgress,
     [0, 1],
-    [isMobile ? -135 : 0, 1500]
+    [isMobile ? 0 : 0, 1800]
   );
-  const rotate = useTransform(
-    scrollYProgress,
-    [0.1, 0.12, 0.3],
-    [isMobile ? -50 : -28, -28, 0]
-  );
+  const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [, -28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <div
       ref={ref}
-      className="scroll-smooth md:h-[200vh] min-h-[100vh] md:max-h-[1360px] flex flex-col items-center py-52 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.8]"
+      className="scroll-smooth  min-h-[100vh] md:min-h-full flex flex-col items-center md:py-40 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.8] 3xl:scale-[1.5]"
     >
       <motion.div
         className="w-full pb-4 flex justify-center"
@@ -57,10 +67,10 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
       >
         <Button
           borderRadius="1.75rem"
-          className="bg-[#0B0B0F] text-white border-neutral-200 dark:border-slate-800 font-semibold"
+          className="bg-[#0B0B0F] text-white border-neutral-200 dark:border-slate-800 font-thin"
         >
-          Watch our video
-          <FaPlay />
+          <FaPlay className="text-[12px]" />
+          Watch the guided tour
         </Button>
       </motion.div>
       <motion.h2
@@ -79,14 +89,13 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
       </motion.h2>
       {/* Lid */}
       <Lid
-        src={src}
-        scaleX={scaleX}
-        scaleY={scaleY}
-        rotate={rotate}
-        translate={translate}
+        imgSrc={"/images/img-3.png"}
+        scaleX={isMobile ? 1.15 : 1.2}
+        scaleY={isMobile ? 1.55 : 0.6}
+        rotate={isMobile ? -50 : -28}
       />
       {/* Base area */}
-      <div className="md:h-[22rem] h-[14rem] w-[22rem] md:w-[32rem] bg-gray-200 dark:bg-[#272729] rounded-2xl overflow-hidden relative -z-10">
+      <div className="md:h-[16rem] h-[14rem] w-[22rem] md:w-[32rem] bg-gray-200 dark:bg-[#272729] rounded-2xl overflow-hidden relative -z-10">
         {/* above keyboard bar */}
         <div className="md:h-10 h-6 w-full relative">
           <div className="absolute inset-x-0 mx-auto w-[80%] h-4 bg-[#050505]" />
@@ -105,15 +114,14 @@ export const MacbookScroll = ({ src, showGradient, title, badge }) => {
         <Trackpad />
         <div className="h-2 w-20 mx-auto inset-x-0 absolute bottom-0 bg-gradient-to-t from-[#272729] to-[#050505] rounded-tr-3xl rounded-tl-3xl" />
         {showGradient && (
-          <div className="h-40 w-full absolute bottom-0 inset-x-0 bg-gradient-to-t dark:from-black from-white via-white dark:via-black to-transparent z-50"></div>
+          <div className="h-40 w-full absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0B0B0F] via-[#0B0B0F] to-transparent z-50"></div>
         )}
-        {badge && <div className="absolute bottom-4 left-4">{badge}</div>}
       </div>
     </div>
   );
 };
 
-export const Lid = ({ scaleX, scaleY, rotate, translate, src }) => {
+export const Lid = ({ scaleX, scaleY, rotate, imgSrc }) => {
   return (
     <div className="relative [perspective:800px]">
       <div
@@ -131,7 +139,13 @@ export const Lid = ({ scaleX, scaleY, rotate, translate, src }) => {
           className="absolute inset-0 bg-[#010101] rounded-lg flex items-center justify-center"
         >
           <span className="text-white w-[24px]">
-            <img alt="" src={logoIcon} width={40} height={40} />
+            <img
+              alt=""
+              src={logoIcon}
+              width={40}
+              height={40}
+              className="w-full h-full"
+            />
           </span>
         </div>
       </div>
@@ -140,18 +154,17 @@ export const Lid = ({ scaleX, scaleY, rotate, translate, src }) => {
           scaleX: scaleX,
           scaleY: scaleY,
           rotateX: rotate,
-          translateY: translate,
+          translateY: 0,
           transformStyle: "preserve-3d",
           transformOrigin: "top",
         }}
         className="md:h-96 h-[10rem] w-[22rem] md:w-[32rem] absolute inset-0 bg-[#010101] rounded-2xl p-2"
       >
-        <div className="absolute inset-0 bg-[#272729] rounded-lg" />
-        <img
-          src={src}
+        {/* <div className="relative inset-0 bg-[#272729] rounded-lg" /> */}
+        <motion.img
+          src={"/images/img1.png"}
           alt="aceternity logo"
-          fill
-          className="object-cover object-left-top absolute rounded-lg inset-0 h-full w-full"
+          className={`object-fit h-full w-full`}
         />
       </motion.div>
     </div>

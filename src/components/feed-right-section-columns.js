@@ -2,24 +2,30 @@ import React from "react";
 import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const FeedRightSectionColumns = ({ rank, name, accuracy, imgUrl, userId }) => {
+const FeedRightSectionColumns = ({
+  rank,
+  name,
+  accuracy,
+  imgUrl,
+  userId,
+  className,
+}) => {
   const navigate = useNavigate();
 
   return (
     <div
-      className="right-columns"
+      className={`${className} right-columns`}
       style={{
         display: "flex",
         alignItems: "center",
         padding: "10px 16px",
-        borderBottom: "3px solid #181818",
       }}
     >
       <div
         className="card-img"
         style={{
           borderRadius: "50%",
-          border: "1px solid #4B6CC2",
+          border: "1px solid #ffffff80",
           padding: "2px",
           height: "48px",
           width: "48px",
@@ -53,20 +59,20 @@ const FeedRightSectionColumns = ({ rank, name, accuracy, imgUrl, userId }) => {
         }}
       >
         <h5
-          className="cursor-pointer text-[#4b6cc2] font-semibold text-base"
+          className="cursor-pointer text-[#ffffff] font-semibold text-base hover:underline"
           onClick={() =>
             navigate("/Leaderboards", {
               state: { id: userId },
             })
           }
         >
-          <span>#{rank}</span> {name}
+          <span className="!text-[#ffffff80]">#{rank}</span> {name}
         </h5>
-        <h6 className="text-xs">
+        <h6 className="text-xs text-[#ffffff80]">
           Accuracy{" "}
           <span
             style={{
-              color: accuracy > 35 ? "#388E3C" : "#FF0000",
+              color: accuracy > 35 ? "#009A7C" : "#ff4242",
             }}
           >
             {Math.floor(accuracy)}%

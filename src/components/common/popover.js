@@ -1,9 +1,7 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 
-export default function BasicPopover({ children }) {
+export default function BasicPopover({ children, trigger }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -19,24 +17,8 @@ export default function BasicPopover({ children }) {
 
   return (
     <div>
-      <div
-        aria-describedby={id}
-        variant="contained"
-        onClick={handleClick}
-        style={{ width: "24px", height: "24px" }}
-      >
-        <img
-          src={"/Filter.png"}
-          alt="fliter"
-          height={24}
-          width={24}
-          style={{
-            padding: "4px",
-            borderRadius: "4px",
-            backgroundColor: "#282828",
-            cursor: "pointer",
-          }}
-        />
+      <div aria-describedby={id} variant="contained" onClick={handleClick}>
+        {trigger}
       </div>
       <Popover
         id={id}
