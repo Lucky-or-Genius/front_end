@@ -15,12 +15,7 @@ const FeatureCard = ({ className, children, id }) => {
           : "pointer-events-none opacity-0"
       )}
     >
-      <div
-        className={cn(
-          "gradient absolute inset-0 origin-bottom-left rounded-3xl",
-          className
-        )}
-      >
+      <div className={cn("absolute inset-0 origin-bottom-left ", className)}>
         {children}
       </div>
       {/* <button onClick={() => setFullScreenFeature(id)} className='show-me-btn absolute bg-black rounded-xl text-white bottom-6 right-6 px-4 py-2 shadow-md'>Show Me</button> */}
@@ -32,42 +27,45 @@ export default FeatureCard;
 
 export const AirdropsCard = ({ id }) => {
   return (
-    <FeatureCard id={id} className="bg-[#f8eddd]">
+    <FeatureCard id={id} className="bg-transparent h-fit">
       <img
-        src={"/images/fixed_leaderboard.png"}
+        src={"/images/l-7.png"}
         alt={`image for ${id}`}
         height={200}
         width={400}
-        className="rounded-2xl object-cover w-full h-full"
+        className="w-full object-fit h-full rounded-lg opacity-[0.8]"
       />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent from-[50%] to-[#000000] to"></div>
     </FeatureCard>
   );
 };
 
 export const WorldRecessionCard = ({ id }) => {
   return (
-    <FeatureCard id={id} className="bg-[#fbebea]">
+    <FeatureCard id={id} className=" relative overflow-hidden">
       <img
-        src={"/images/Profile.jpg"}
+        src={"/images/l-6.png"}
         alt={`image for ${id}`}
         height={200}
         width={400}
-        className=" rounded-2xl w-full h-full"
+        className=" w-full object-fit h-full rounded-lg opacity-[0.8]"
       />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent from-[50%] to-[#000000] to"></div>
     </FeatureCard>
   );
 };
 
 export const DenialCard = ({ id }) => {
   return (
-    <FeatureCard id={id} className="bg-neutral-100">
+    <FeatureCard id={id} className="">
       <img
-        src={"/predictions_landing.png"}
+        src={"/images/l-2.png"}
         alt={`image for ${id}`}
         height={400}
         width={400}
-        className="aspect-square object-cover rounded-2xl w-full h-full"
+        className="w-full object-fit h-fit rounded-lg opacity-[0.8]"
       />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent from-[50%] to-[#000000] to"></div>
     </FeatureCard>
   );
 };

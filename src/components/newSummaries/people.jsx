@@ -85,7 +85,7 @@ const People = ({ peopleData }) => {
                 <span className="text-[#ffffff60] text-lg"> |</span>
                 <div className="text-[#ffffff60] text-xs">
                   <span className="text-primary400">
-                    {Math.round(item?.accuracy_score)} %
+                    {Math.round(item?.accuracy_score)}%
                   </span>{" "}
                   Accuracy
                 </div>

@@ -31,7 +31,7 @@ const Section2first = () => {
         {" "}
         {/* Wrapped in a div */}
         <motion.img
-          src="/predictions_expanded.png"
+          src="/images/img-3.png"
           alt="Leaderboards visual representation"
           className="w-full md:w-2/5 h-auto rounded-lg"
           initial={{ opacity: 0 }}

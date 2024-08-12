@@ -30,7 +30,7 @@ const FeatureTitle = ({ children, id, buttonText, subtitle }) => {
       {subtitle && subtitle !== "" && (
         <p
           className={cn(
-            "text-base py-2",
+            "text-base py-2 w-3/4",
             isInView ? "text-slate-400" : "text-neutral-700/50"
           )}
         >

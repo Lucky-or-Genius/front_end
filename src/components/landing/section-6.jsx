@@ -29,7 +29,7 @@ const Section6 = () => {
       </motion.span>
       <div className="relative mb-8 mt-6 flex w-full justify-center items-center flex-col">
         <motion.img
-          src="/markets2.png"
+          src="/images/graph.svg"
           alt="Leaderboards visual representation"
           className=" w-full md:w-2/5 h-auto rounded-lg"
           initial={{ opacity: 0 }}

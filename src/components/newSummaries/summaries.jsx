@@ -1,28 +1,29 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const Summaries = ({ summariesData }) => {
   const [subSectionIndex, setSubSectionIndex] = useState(0);
+
   return (
-    <div className="w-full h-screen overflow-y-hidden flex gap-6">
-      <div className="w-1/2 overflow-y-auto flex flex-col h-full">
+    <div className="w-full h-[80vh] overflow-y-hidden flex flex-col gap-6 justify-between ">
+      <div className="w-full overflow-y-auto grid grid-cols-2 gap-2 h-[40vh] px-2">
         {summariesData.map((summary, index) => (
           <div
-            className="bg-[#ffffff20] border border-[#ffffff20] hover:border-primary400 transition-all ease-in-out rounded-lg p-4 cursor-pointer mb-4"
-            onClick={() => {
-              setSubSectionIndex(index);
-            }}
+            key={index}
+            className="bg-[#ffffff20] border border-[#ffffff20] hover:border-primary400 transition-all ease-in-out rounded-lg p-4 cursor-pointer flex flex-col h-fit"
+            onClick={() => setSubSectionIndex(index)}
           >
-            <span className="line-clamp-2 w-full font-poppins text-white">
-              {summary?.summary_title}
-            </span>
-            <span className="bg-[#ffffff20] rounded-full px-2 text-white font-poppins">
+            <span className="bg-primary rounded-full px-2 text-white font-poppins w-fit">
               {summary?.time}
+            </span>
+            <span className="line-clamp-2 w-full font-poppins text-white pt-2">
+              {summary?.summary_title}
             </span>
           </div>
         ))}
       </div>
-      <div className="w-1/2 flex flex-col gap-6">
-        <div className="h-[30vh]">
+      <div className="w-full flex gap-2 h-[40vh] px-2 ">
+        <div className="h-[40vh] w-1/2">
           <iframe
             allowFullScreen
             style={{
@@ -30,15 +31,38 @@ const Summaries = ({ summariesData }) => {
               height: "100%",
               objectFit: "cover",
               borderRadius: "8px",
-              height: "100%",
             }}
             alt=""
             src={`https://youtube.com/embed/${summariesData[subSectionIndex]?.youtube_id}?start=${summariesData[subSectionIndex]?.youtube_start_time}`}
           />
         </div>
-        <div className="text-sm bg-[#ffffff20] text-[#ffffff80] font-poppins p-4 rounded-lg h-[20vh] overflow-y-auto">
-          {summariesData[subSectionIndex]?.summary_text}
-        </div>
+        <motion.div
+          key={subSectionIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            transition: {
+              type: "spring",
+              stiffness: 260,
+              damping: 10,
+            },
+          }}
+          exit={{ opacity: 0, y: 20 }}
+          className="text-2xl bg-[#ffffff10] text-[#ffffff] font-poppins p-4 rounded-lg h-[40vh] overflow-y-auto w-1/2 border border-gray-400 flex flex-col"
+        >
+          <div className="flex w-full gap-4 items-center mb-4">
+            <span className="text-white bg-[#ffffff20] w-fit rounded-lg px-2 font-bold font-raleway ">
+              Summary
+            </span>
+            <span className="bg-primary rounded-lg px-3 text-white font-poppins w-fit">
+              {summariesData[subSectionIndex]?.time}
+            </span>
+          </div>
+          <span className="w-full">
+            {summariesData[subSectionIndex]?.summary_text}
+          </span>
+        </motion.div>
       </div>
     </div>
   );

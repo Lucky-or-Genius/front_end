@@ -22,7 +22,7 @@ const NewSummaries = () => {
   }, []);
 
   return (
-    <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10">
+    <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden">
       <div className="w-full flex py-6 justify-center">
         <span className="font-raleway text-3xl text-white font-[600]">
           Summaries

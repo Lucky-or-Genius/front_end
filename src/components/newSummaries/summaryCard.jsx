@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import AnimatedTooltip from "../common/animated-tooltip";
+
 const summaryCard = ({ summary }) => {
   const convertMinsToHrsMins = (minutes) => {
     let h = Math.floor(minutes / 60);
@@ -9,6 +11,17 @@ const summaryCard = ({ summary }) => {
     m = m < 10 ? "0" + m : m;
     return `${h}:${m}:00`; // Assumes no seconds part, so it's always '00'
   };
+
+  console.log(summary);
+
+  const people =
+    summary && summary.full_names && summary.user_image_urls && summary.user_ids
+      ? summary.full_names.split(",").map((name, index) => ({
+          id: summary.user_ids.split(",")[index],
+          name,
+          image: summary.user_image_urls.split(",").reverse()[index],
+        }))
+      : [];
 
   return (
     <Link
@@ -41,6 +54,14 @@ const summaryCard = ({ summary }) => {
             <span className="text-[#ffffff80] font-raleway"> Length: </span>
             {convertMinsToHrsMins(summary.duration)}
           </div>
+          <div className="flex w-fit rounded-full items-center px-2 bg-[#ffffff20] gap-2">
+            <span className="font-raleway text-[#ffffff80] text-sm">
+              Date :
+            </span>
+            <span className="font-poppins text-white ">
+              {summary?.publication_date.toString().slice(0, 10)}
+            </span>
+          </div>
         </div>
       </div>
       <div className="w-1/3 pl-2 flex flex-col justify-around">
@@ -52,13 +73,8 @@ const summaryCard = ({ summary }) => {
             {summary?.number_of_predictions}
           </span>
         </div>
-        <div className="flex flex-col  w-full rounded-lg items-center p-[2px]">
-          <span className="font-raleway text-[#ffffff80] text-sm">
-            Publish Date
-          </span>
-          <span className="font-poppins text-white ">
-            {summary?.publication_date.toString().slice(0, 10)}
-          </span>
+        <div className="flex">
+          <AnimatedTooltip items={people} />
         </div>
       </div>
     </Link>

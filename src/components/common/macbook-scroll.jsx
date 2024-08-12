@@ -162,9 +162,9 @@ export const Lid = ({ scaleX, scaleY, rotate, imgSrc }) => {
       >
         {/* <div className="relative inset-0 bg-[#272729] rounded-lg" /> */}
         <motion.img
-          src={"/images/img-3.png"}
+          src={"/images/img1.png"}
           alt="aceternity logo"
-          className={`object-cover h-full w-full`}
+          className={`object-fit h-full w-full`}
         />
       </motion.div>
     </div>

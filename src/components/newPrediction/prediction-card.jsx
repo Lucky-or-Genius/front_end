@@ -28,7 +28,7 @@ const PredictionCard = ({
 
   return (
     <Link
-      className="feed-card cursor-pointer backdrop-blur-md sm:bg-[#ffffff20] h-full rounded-xl hover:border hover:border-primary400 transition-all ease-in-out shadow-black"
+      className="p-4 w-full font-poppins border border-[#ffffff20] cursor-pointer backdrop-blur-md sm:bg-[#ffffff20] h-full rounded-xl hover:border hover:border-primary400 transition-all ease-in-out shadow-black"
       to={`/dashboard/Predictions/${predictionId}`}
     >
       <div className="card-header h-[20%] gap-2 ">

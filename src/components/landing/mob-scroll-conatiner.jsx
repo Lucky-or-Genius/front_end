@@ -3,17 +3,17 @@ import React from "react";
 const scrollMobile = () => {
   const items = [
     {
-      src: "/images/fixed_leaderboard.png",
+      src: "images/l-6.png",
       heading: "Verify lifelong reputations instantly.",
       text: "Reputations should be built up slowly and verified quickly. AI is used to track and score all forecasts extracted from any digital medium based on their accuracy.",
     },
     {
-      src: "/images/Profile.jpg",
+      src: "/images/l-6.png",
       heading: "The alpha is in the details.",
       text: "Don’t listen to the weatherman’s sports picks. Our proprietary AI automatically identifies, categorizes and shows you domains of expertise for every forecaster.",
     },
     {
-      src: "/predictions_landing.png",
+      src: "/images/l-2.png",
       heading: "Browse all predictions..",
       text: "Browse all predictions past, present and deleted! Effortlessly compare the opinions of different individuals and find new perspectives based on objective accuracy.",
     },
