@@ -20,7 +20,6 @@ const AppContextProvider = ({ children }) => {
     try {
       const res = await userLogin(userInfo);
       localStorage.setItem("accountId", res.data.account_id);
-      window.location.reload();
     } catch (error) {
       console.log("Error", error);
     }
