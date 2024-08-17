@@ -39,7 +39,6 @@ function MyChannels() {
   useEffect(() => {
     channelsData(accountId)
       .then((res) => {
-        console.log(res.data);
         setChannelData([...res.data]);
       })
       .catch((err) => {

@@ -67,9 +67,9 @@ const Index = () => {
   ];
 
   const handleRedirect = () => {
-    // window.location.href = "http://localhost:3000";
+    window.location.href = "http://localhost:3000";
 
-    window.location.href = "https://www.luckyorgenius.com/";
+    // window.location.href = "https://www.luckyorgenius.com/";
   };
   const handleFeedback = () => {
     window.open("https://forms.gle/BMLEm7QYyngN3yXdA", "_blank");
