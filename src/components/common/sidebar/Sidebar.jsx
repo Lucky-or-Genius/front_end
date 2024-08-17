@@ -106,11 +106,10 @@ const Index = () => {
       {!collapsed ? (
         <div className="demo-logo-vertical flex justify-center items-center p-4">
           <img className="logo-icon" alt="" src={logoIcon} />
-          {/* <img className="logo-text" alt="" src={logoText} /> */}
         </div>
       ) : (
         <div className="demo-logo-vertical flex justify-center items-center p-4">
-          <img className="logo-icon" alt="" src={logoIcon} />
+          <img className="logo-icon" alt="" src={"/images/logo_icon.png"} />
         </div>
       )}
       <span
