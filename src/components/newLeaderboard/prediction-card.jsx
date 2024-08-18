@@ -45,8 +45,8 @@ const PredictionCard = ({
               }
             />
           </div>
-          <div className="profile-name">
-            <span className="flex items-center text-[#ffffff80] gap-4">
+          <div className="flex gap-4 items-center">
+            <span className="flex items-center text-[#ffffff80] gap-4 pl-4 ">
               <h5
                 className={"cursor-pointer hover:underline"}
                 onClick={() => navigate(`/dashboard/Leaderboards/${userId}`)}
@@ -65,7 +65,7 @@ const PredictionCard = ({
         <div className="card-description font-raleway truncate-3 line-clamp-3">
           <p>{prediction}</p>
         </div>
-        <div className="flex w-full 2md:items-center text-[#ffffff80] text-[13px] gap-4 pt-4 flex-col 2md:flex-row">
+        <div className="flex w-full 2md:items-center text-[#ffffff80] text-[13px] gap-4 pt-4 flex-col 2md:flex-row  flex-wrap">
           <div className="flex gap-4">
             <p className="flex gap-2 items-center ">
               <FaRegCalendarPlus /> <span>{madeOn}</span>

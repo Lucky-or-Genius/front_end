@@ -7,19 +7,6 @@ import { Layout, Menu } from "antd";
 import logoIcon from "../../../assets/logo.png";
 import { googleLogout } from "@react-oauth/google";
 import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
-// import logoText from ".../../../assets/logo-text.svg";
-//constants
-// import { Paths, SidebarConst, TOKENS } from "utils/constants";
-// import { SetStorage } from "middleware/cache";
-// import { useRecoilState } from "recoil";
-// import { currentUserState } from "middleware/state";
-
-// interface LinkItem {
-//   label: React.ReactNode;
-//   key: string;
-//   icon?: React.ReactNode;
-//   disabled?: boolean;
-// }
 
 const { Sider } = Layout;
 
@@ -29,9 +16,6 @@ const Index = () => {
   const [pathName, setPathName] = useState(location.pathname);
   const [collapsed, setCollapsed] = useState(false);
   const [userData, setUserData] = useState();
-  // const [currentUser, setCurrentUserState] = useRecoilState(currentUserState);
-
-  // const { email, first_name, last_name } = currentUser;
 
   const generalItems = [
     {
@@ -67,16 +51,31 @@ const Index = () => {
   ];
 
   const handleRedirect = () => {
-    // window.location.href = "http://localhost:3000";
+    window.location.href = "http://localhost:3000";
 
-    window.location.href = "https://www.luckyorgenius.com/";
+    // window.location.href = "https://www.luckyorgenius.com/";
   };
-  const handleFeedback = () => {
-    window.open("https://forms.gle/BMLEm7QYyngN3yXdA", "_blank");
-  };
+
   useEffect(() => {
-    setPathName(location.pathname);
+    if (location.pathname) {
+      const matchedPath = location.pathname.includes("/dashboard/Feed")
+        ? "/dashboard/Feed"
+        : location.pathname.includes("/dashboard/LeaderBoards")
+        ? "/dashboard/LeaderBoards"
+        : location.pathname.includes("/dashboard/Summaries")
+        ? "/dashboard/Summaries"
+        : location.pathname.includes("/dashboard/Predictions")
+        ? "/dashboard/Predictions"
+        : location.pathname.includes("/dashboard/MyChannels")
+        ? "/dashboard/MyChannels"
+        : location.pathname.includes("/dashboard/Favourites")
+        ? "/dashboard/Favourites"
+        : location.pathname;
+
+      setPathName(matchedPath);
+    }
   }, [location.pathname]);
+
   useEffect(() => {
     let data = localStorage.getItem("userdata");
     setUserData(JSON.parse(data));
@@ -87,7 +86,7 @@ const Index = () => {
       trigger={
         <div className="mb-4 mx-[4px]">
           {!collapsed ? (
-            <div className="w-full flex pl-6 text-[#ffffff60] items-center h-full text-xl rounded-lg font-raleway gap-2 text-xs py-[10px] hover:bg-[#ffffff20] hover:text-[#ffffff80]">
+            <div className="w-full flex pl-6 text-[#ffffff70] items-center h-full text-xl rounded-lg font-raleway gap-2 text-xs py-[10px] hover:bg-[#ffffff20] hover:text-[#ffffff80]">
               {" "}
               <RiExpandLeftLine /> Collapse
             </div>
@@ -106,11 +105,10 @@ const Index = () => {
       {!collapsed ? (
         <div className="demo-logo-vertical flex justify-center items-center p-4">
           <img className="logo-icon" alt="" src={logoIcon} />
-          {/* <img className="logo-text" alt="" src={logoText} /> */}
         </div>
       ) : (
         <div className="demo-logo-vertical flex justify-center items-center p-4">
-          <img className="logo-icon" alt="" src={logoIcon} />
+          <img className="logo-icon" alt="" src={"/images/logo_icon.png"} />
         </div>
       )}
       <span
@@ -127,11 +125,7 @@ const Index = () => {
         selectedKeys={[pathName]}
         mode="inline"
         onClick={(item) => {
-          if (item.key === "/Feedback") {
-            handleFeedback();
-          } else {
-            navigate(item.key);
-          }
+          navigate(item.key);
         }}
         className="font-raleway text-xs relative"
       >
@@ -147,8 +141,6 @@ const Index = () => {
           onClick={async () => {
             await localStorage.clear();
             googleLogout();
-            window.location.reload();
-            console.log("clear");
             handleRedirect();
           }}
         >

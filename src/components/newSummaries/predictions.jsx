@@ -28,10 +28,10 @@ const Predictions = ({ predictionData }) => {
                   }
                 />
               </div>
-              <div className="profile-name">
+              <div className="flex items-center">
                 <span className="flex items-center text-[#ffffff80] gap-4">
                   <h5
-                    className={"cursor-pointer hover:underline z-[9]"}
+                    className={"cursor-pointer hover:underline z-[9] pl-2"}
                     onClick={(e) => {
                       e.preventDefault();
                       navigate(

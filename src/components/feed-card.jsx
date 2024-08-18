@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Image } from "react-bootstrap";
 import { ImArrowUp, ImArrowDown } from "react-icons/im";
-import { FaPlus } from "react-icons/fa";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { getSinglePrediction } from "../services/Predictions.service";
@@ -16,7 +15,6 @@ import {
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
 import infoIcon from "../assets/hover_info.png";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const FeedCard = ({
   category,
@@ -98,20 +96,23 @@ const FeedCard = ({
       <div className="card-description font-raleway">
         <p>{prediction}</p>
       </div>
-      <div className="flex w-full items-center gap-6 text-[#ffffff80] text-sm pt-4">
-        <span className="bg-[#ffffff10] px-2 rounded-full">#{category}</span>
-
-        <p className="flex gap-2 items-center ">
-          <FaRegCalendarPlus /> <span>{madeOn}</span>
-        </p>
-        <CgArrowLongRightC />
-        <p className="flex gap-2 items-center ">
-          <FaFlagCheckered />{" "}
-          <span>{resolvedOn !== null ? resolvedOn : "Null"}</span>
-        </p>
+      <div className="flex w-full flex-wrap items-start gap-x-6 gap-y-4 text-[#ffffff80] text-sm pt-4">
+        <span className="bg-[#ffffff10] px-2 rounded-full order-1">
+          #{category}
+        </span>
+        <div className="flex gap-4 order-3">
+          <p className="flex gap-2 items-center ">
+            <FaRegCalendarPlus /> <span>{madeOn}</span>
+          </p>
+          <CgArrowLongRightC />
+          <p className="flex gap-2 items-center ">
+            <FaFlagCheckered />{" "}
+            <span>{resolvedOn !== null ? resolvedOn : "Null"}</span>
+          </p>
+        </div>
 
         <span
-          className="font-bold"
+          className="font-bold order-2"
           style={{
             color:
               status === "PENDING"
@@ -168,7 +169,7 @@ const FeedCard = ({
             ""
           ) : (
             <>
-              <div className="grid grid-cols-2 gap-4 pt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
                 <div className="grid grid-cols-1 gap-4">
                   <div className="bg-[#ffffff20] shadow-md rounded-xl grid grid-cols-2 w-full p-4 gap-4 font-poppins">
                     <div className=" text-[#ffffff60]">
@@ -211,7 +212,7 @@ const FeedCard = ({
                       </div>
                     </div>
                   </div>
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                     <div className="flex flex-col  shadow-md">
                       <span className="bg-primary p-4 flex justify-center items-center rounded-t-lg md:rounded-t-xl font-raleway text-sm text-[#ffffff80]">
                         Points{" "}

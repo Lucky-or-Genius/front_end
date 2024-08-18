@@ -10,7 +10,7 @@ const Transcript = ({ transcriptData }) => {
           } w-full  rounded-lg p-4 flex flex-col gap-4`}
           key={index}
         >
-          <div className="flex justify-between w-full items-center">
+          <div className="flex justify-between w-full items-center flex-wrap gap-4">
             <div className="flex gap-2 items-center">
               <img
                 src={item?.image_url}

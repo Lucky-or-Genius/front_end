@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const People = ({ peopleData }) => {
   return (
-    <div className="font-poppins grid grid-cols-3 gap-4">
+    <div className="font-poppins grid grid-cols-1 md:grid-cols-3 gap-4">
       {peopleData.map((item, index) => (
         <div
           className="flex items-center gap-4 justify-between w-full hover:bg-[#ffffff10] rounded-lg p-2 border border-[#ffffff20]"

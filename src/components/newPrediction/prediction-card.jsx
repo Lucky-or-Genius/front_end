@@ -28,7 +28,7 @@ const PredictionCard = ({
 
   return (
     <Link
-      className="p-4 w-full font-poppins border border-[#ffffff20] cursor-pointer backdrop-blur-md sm:bg-[#ffffff20] h-full rounded-xl hover:border hover:border-primary400 transition-all ease-in-out shadow-black"
+      className="p-4 w-full font-poppins border border-[#ffffff20] cursor-pointer backdrop-blur-md bg-[#ffffff20] h-full rounded-xl hover:border hover:border-primary400 transition-all ease-in-out shadow-black"
       to={`/dashboard/Predictions/${predictionId}`}
     >
       <div className="card-header h-[20%] gap-2 ">
@@ -45,20 +45,18 @@ const PredictionCard = ({
               }
             />
           </div>
-          <div className="profile-name">
-            <span className="flex items-center text-[#ffffff80] gap-4">
-              <h5
-                className={"cursor-pointer hover:underline z-[9]"}
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate(`/dashboard/Leaderboards/${userId}`);
-                }}
-              >
-                {user}
-              </h5>
-              <FaCrown />
-            </span>
-          </div>
+          <span className="flex items-center text-[#ffffff80] gap-4 pl-2">
+            <h5
+              className={"cursor-pointer hover:underline z-[9]"}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`/dashboard/Leaderboards/${userId}`);
+              }}
+            >
+              {user}
+            </h5>
+            <FaCrown />
+          </span>
         </div>
         <span className="px-2 bg-[#ffffff10] rounded-full text-[12px] text-center">
           #{category}

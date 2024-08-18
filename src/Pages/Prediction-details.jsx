@@ -64,11 +64,13 @@ const Predictor = () => {
             predictionData[0]?.sources.map((val, index) => {
               return (
                 <div
-                  className="font-poppins text-white text-sm md:text-base"
+                  className="font-poppins text-white text-sm md:text-base w-full"
                   key={index}
                 >
                   {clearData(val).map((point, idx) => (
-                    <li key={idx}>{point}</li>
+                    <li key={idx} className="flex flex-wrap">
+                      {point}
+                    </li>
                   ))}
                 </div>
               );
@@ -83,7 +85,7 @@ const Predictor = () => {
     <div className="bg-primary min-h-screen w-full p-4 2md:p-8 overflow-y-auto h-full relative flex flex-col items-center">
       <div>
         <div
-          className="absolute left-10 top-10 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center cursor-pointer"
+          className="absolute left-4 md:left-10 top-4 md:top-10 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center cursor-pointer"
           onClick={() => navigate(-1)}
         >
           <FaArrowLeftLong /> Back
@@ -92,7 +94,7 @@ const Predictor = () => {
 
       {predictionData?.length > 0 ? (
         <>
-          <div className="flex items-center gap-6 w-full justify-center">
+          <div className="flex flex-col items-center md:flex-row gap-4 md:gap-6 w-full justify-center">
             <img
               src={predictionData[0]?.image_url}
               alt=""
@@ -100,16 +102,14 @@ const Predictor = () => {
               height={100}
               className="w-14 h-14 rounded-full object-cover"
             />
-            <div className="flex flex-col justify-around h-full">
-              <Link
-                className="text-white font-raleway text-3xl"
-                to={`/dashboard/LeaderBoards/${predictionData[0]?.user_id}`}
-              >
-                {predictionData[0]?.first_name +
-                  " " +
-                  predictionData[0]?.last_name}
-              </Link>
-            </div>
+            <Link
+              className="text-white font-raleway text-3xl"
+              to={`/dashboard/LeaderBoards/${predictionData[0]?.user_id}`}
+            >
+              {predictionData[0]?.first_name +
+                " " +
+                predictionData[0]?.last_name}
+            </Link>
           </div>
 
           <div className="w-full md:w-4/5 grid grid-cols-2 md:grid-cols-4 font-raleway gap-4 py-10">
@@ -152,12 +152,10 @@ const Predictor = () => {
           </div>
         </>
       ) : (
-        <div className="flex items-center gap-4 w-full justify-center">
+        <div className="flex items-center gap-4 w-full justify-center flex-col md:flex-row">
           <div className="w-20 h-20 rounded-full bg-[#ffffff30] animate-pulse" />
-          <div className="flex flex-col justify-around h-full gap-2">
-            <span className="w-56 h-8 rounded-full bg-[#ffffff30] animate-pulse" />
-            <span className="w-44 h-6 rounded-full bg-[#ffffff30] animate-pulse" />
-          </div>
+          <span className="w-56 h-8 rounded-full bg-[#ffffff30] animate-pulse" />
+          />
         </div>
       )}
 

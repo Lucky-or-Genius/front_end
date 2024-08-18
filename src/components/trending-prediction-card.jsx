@@ -7,7 +7,7 @@ import "../styles/trending-prediction-card.css";
 
 const trendingPredictionCard = ({ news, imgUrl, category, source, date }) => {
   return (
-    <div className="flex md:flex-row flex-col backdrop-blur-md bg-[#ffffff20] rounded-xl gap-4 font-poppins md:pr-6 my-4 w-full">
+    <div className="flex md:flex-row flex-col backdrop-blur-md bg-[#ffffff10] rounded-xl gap-4 font-poppins md:pr-6 my-4 w-full">
       <div className="rounded-t-xl md:rounded-l-xl flex md:w-1/3 w-full">
         <Image
           src={imgUrl}

@@ -72,7 +72,7 @@ const SummariesDetails = () => {
 
     fetchTranscript();
   }, []);
-  console.log(transcript);
+
   const items = [
     {
       title: "Predictions",
@@ -87,12 +87,18 @@ const SummariesDetails = () => {
   ];
 
   return (
-    <div className="bg-primary min-h-screen w-full px-4 2md:px-20 2md:py-10 overflow-y-hidden h-full relative flex gap-6 justify-center">
+    <div className="bg-primary min-h-screen w-full px-4 2md:px-20 2md:pb-10 overflow-y-auto md:overflow-y-hidden h-full relative flex flex-col">
       <div
-        className="absolute left-2 top-4 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center cursor-pointer"
+        className="absolute left-4 top-8 md:left-20 md:top-10 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center cursor-pointer"
         onClick={() => navigate(-1)}
       >
         <FaArrowLeftLong /> Back
+      </div>
+
+      <div className="w-full flex py-6 justify-center">
+        <span className="font-raleway text-3xl text-white font-[600]">
+          Summary
+        </span>
       </div>
 
       <div className="w-full flex justify-center">
