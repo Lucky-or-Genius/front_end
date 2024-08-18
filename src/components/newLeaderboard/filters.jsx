@@ -5,7 +5,7 @@ import { PiSortDescendingBold } from "react-icons/pi";
 
 const filters = () => {
   return (
-    <div className="flex gap-4 py-4">
+    <div className="flex gap-4 py-4 flex-wrap justify-center">
       <span className="flex items-center gap-2 text-primary400 font-raleway font-[500]">
         Filters{" "}
         <IoOptionsOutline className="border border-primary400 rounded-full p-1 w-6 h-6" />

@@ -52,7 +52,7 @@ const Leader = () => {
       title: "Analytics",
       content: (
         <>
-          <div className="">
+          <div className="pb-2">
             <ChartFilters />
           </div>
           <div className="flex flex-col w-full text-white font-poppins gap-6">
@@ -78,14 +78,14 @@ const Leader = () => {
     <div className="bg-primary min-h-screen w-full p-4 2md:p-8 overflow-y-auto h-full relative">
       <div>
         <div
-          className="absolute left-10 top-10 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center cursor-pointer"
+          className="absolute left-4 top-4 md:left-10 md:top-10 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center cursor-pointer"
           onClick={() => navigate(-1)}
         >
           <FaArrowLeftLong /> Back
         </div>
       </div>
       {userPredictions?.length > 0 ? (
-        <div className="flex items-center gap-6 w-full justify-center">
+        <div className="flex items-center gap-6 w-full md:justify-center justify-center flex-col md:flex-row">
           <img
             src={userPredictions[0]?.image_url}
             alt=""
@@ -93,13 +93,13 @@ const Leader = () => {
             height={100}
             className="w-20 h-20 rounded-full object-cover"
           />
-          <div className="flex flex-col justify-around h-full">
+          <div className="flex flex-col items-center md:items-start justify-around h-full w-full md:w-fit">
             <span className="text-white font-raleway text-3xl">
               {userPredictions[0]?.first_name +
                 " " +
                 userPredictions[0]?.last_name}
             </span>
-            <div className="text-[#ffffff60] font-poppins text-lg">
+            <div className="text-[#ffffff60] font-poppins text-lg text-center md:text-start">
               Area of Accuracy :{" "}
               <span className="text-white">{userPredictions[0]?.category}</span>
               <span className="flex gap-4 items-center">
@@ -125,9 +125,9 @@ const Leader = () => {
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-4 w-full justify-center">
+        <div className="flex md:flex-row flex-col items-center gap-4 w-full justify-center">
           <div className="w-20 h-20 rounded-full bg-[#ffffff30] animate-pulse" />
-          <div className="flex flex-col justify-around h-full gap-2">
+          <div className="flex flex-col justify-around h-full gap-2 items-center md:items-start">
             <span className="w-56 h-6 rounded-full bg-[#ffffff30] animate-pulse" />
             <span className="w-44 h-4 rounded-full bg-[#ffffff30] animate-pulse" />
             <span className="w-20 h-4 rounded-full bg-[#ffffff30] animate-pulse" />
@@ -135,7 +135,7 @@ const Leader = () => {
         </div>
       )}
       <div className="w-full flex justify-center py-12">
-        <div className="w-4/5 grid grid-cols-2 md:grid-cols-4 font-raleway gap-4">
+        <div className="w-full md:w-4/5 grid grid-cols-2 md:grid-cols-4 font-raleway gap-4">
           <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
             <MdPendingActions className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
             <span className="text-[#ffffff60] text-[16px]">

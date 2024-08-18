@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 const Board = ({ data }) => {
   return (
-    <div className="flex w-full justify-center gap-4 h-full font-poppins md:px-8 px-4">
-      <div className="bg-[#ffffff20] flex justify-start min-w-[500px]  rounded-xl p-2 overflow-y-auto h-4/6 flex-col gap-2  items-center">
+    <div className="flex w-full justify-center gap-4 h-full font-poppins md:px-8 px-0">
+      <div className="bg-[#ffffff20] flex justify-start w-full md:min-w-[500px]  rounded-xl p-2 overflow-y-auto h-fit md:h-4/6 flex-col gap-2 items-center">
         {data.map((item, index) => (
           <div
             className="flex items-center gap-4 justify-between w-full hover:bg-[#ffffff10] hover:rounded-lg p-2"

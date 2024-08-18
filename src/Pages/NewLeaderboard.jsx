@@ -25,14 +25,14 @@ const NewLeaderboard = () => {
   }, [accountId]);
 
   return (
-    <div className="bg-primary h-screen w-full overflow-hidden">
+    <div className="bg-primary h-full md:h-screen min-h-screen w-full overflow-y-auto md:overflow-hidden px-4">
       <div className="w-full flex py-6 justify-center">
         <span className="font-raleway text-3xl text-white font-[600]">
           Leaderboard
         </span>
       </div>
       <div className="flex flex-col gap-2 w-full items-center pb-6">
-        <div className="border border-primary400 rounded-full flex px-4 py-2 items-center text-white text-poppins gap-4 w-1/3">
+        <div className="border border-primary400 rounded-full flex px-4 py-2 items-center text-white text-poppins gap-4 w-full md:w-1/3">
           <FiSearch />
           <input
             type="search"

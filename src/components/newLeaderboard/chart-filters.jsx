@@ -5,13 +5,13 @@ import { PiSortDescendingBold } from "react-icons/pi";
 
 const filters = () => {
   return (
-    <div className="flex gap-4 py-4">
+    <div className="flex gap-4 py-4 flex-wrap justify-center md:justify-start">
       <span className="flex items-center gap-2 text-primary400 font-raleway font-[500]">
         Filters{" "}
         <IoOptionsOutline className="border border-primary400 rounded-full p-1 w-6 h-6" />
       </span>
 
-      <div className="gap-2 flex font-raleway">
+      <div className="gap-2 flex font-raleway flex-wrap justify-center md:justify-start">
         <button className="hover:bg-[#ffffff20] rounded-full gap-2 text-white px-4 py-1 flex items-center focus:bg-[#ffffff20] border border-[#ffffff20]">
           All <PiSortDescendingBold />
         </button>
