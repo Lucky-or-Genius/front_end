@@ -45,7 +45,7 @@ const Feed = () => {
         <div className="feed-container">
           {/* <h1 className="">Feed </h1> */}
           <div className="feed-part1">
-            <div className="recent-predictions">
+            <div className="recent-predictions px-4 md:px-0">
               <div className="font-raleway text-2xl font-[500] text-primary400 py-4">
                 <label>Recent Predictions</label>
               </div>

@@ -61,7 +61,7 @@ const App = () => {
 
   return (
     <>
-      <div className="bg-darkPrimary w-full  flex items-center p-4 justify-between">
+      <div className="bg-darkPrimary w-full  flex md:hidden items-center p-4 justify-between">
         <button onClick={() => setOpen(true)}>
           <HiOutlineMenuAlt1 className="w-10 !h-full text-white flex md:hidden bg-primary h-10 p-2 rounded-full" />
         </button>
