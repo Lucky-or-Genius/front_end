@@ -7,19 +7,6 @@ import { Layout, Menu } from "antd";
 import logoIcon from "../../../assets/logo.png";
 import { googleLogout } from "@react-oauth/google";
 import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
-// import logoText from ".../../../assets/logo-text.svg";
-//constants
-// import { Paths, SidebarConst, TOKENS } from "utils/constants";
-// import { SetStorage } from "middleware/cache";
-// import { useRecoilState } from "recoil";
-// import { currentUserState } from "middleware/state";
-
-// interface LinkItem {
-//   label: React.ReactNode;
-//   key: string;
-//   icon?: React.ReactNode;
-//   disabled?: boolean;
-// }
 
 const { Sider } = Layout;
 
@@ -29,9 +16,6 @@ const Index = () => {
   const [pathName, setPathName] = useState(location.pathname);
   const [collapsed, setCollapsed] = useState(false);
   const [userData, setUserData] = useState();
-  // const [currentUser, setCurrentUserState] = useRecoilState(currentUserState);
-
-  // const { email, first_name, last_name } = currentUser;
 
   const generalItems = [
     {
@@ -71,9 +55,7 @@ const Index = () => {
 
     // window.location.href = "https://www.luckyorgenius.com/";
   };
-  const handleFeedback = () => {
-    window.open("https://forms.gle/BMLEm7QYyngN3yXdA", "_blank");
-  };
+
   useEffect(() => {
     setPathName(location.pathname);
   }, [location.pathname]);
@@ -126,11 +108,7 @@ const Index = () => {
         selectedKeys={[pathName]}
         mode="inline"
         onClick={(item) => {
-          if (item.key === "/Feedback") {
-            handleFeedback();
-          } else {
-            navigate(item.key);
-          }
+          navigate(item.key);
         }}
         className="font-raleway text-xs relative"
       >
@@ -146,8 +124,6 @@ const Index = () => {
           onClick={async () => {
             await localStorage.clear();
             googleLogout();
-            window.location.reload();
-            console.log("clear");
             handleRedirect();
           }}
         >
