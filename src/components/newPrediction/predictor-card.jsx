@@ -63,7 +63,7 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
       <div className="card-description font-raleway">
         <p>{predictionData[0]?.prediction}</p>
       </div>
-      <div className="flex w-full gap-4 text-[#ffffff80] text-sm pt-4 flex-col md:flex-row">
+      <div className="flex w-full gap-4 text-[#ffffff80] text-sm pt-4 flex-col md:flex-row flex-wrap">
         <div className="flex gap-6">
           <span className="bg-[#ffffff10] px-2 rounded-full">
             #{predictionData[0]?.category}
@@ -151,7 +151,7 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                 <div className="flex flex-col  shadow-md">
                   <span className="bg-primary p-4 flex justify-center items-center rounded-t-lg md:rounded-t-xl font-raleway text-sm text-[#ffffff80]">
                     Points{" "}

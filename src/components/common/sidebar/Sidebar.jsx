@@ -57,8 +57,25 @@ const Index = () => {
   };
 
   useEffect(() => {
-    setPathName(location.pathname);
+    if (location.pathname) {
+      const matchedPath = location.pathname.includes("/dashboard/Feed")
+        ? "/dashboard/Feed"
+        : location.pathname.includes("/dashboard/LeaderBoards")
+        ? "/dashboard/LeaderBoards"
+        : location.pathname.includes("/dashboard/Summaries")
+        ? "/dashboard/Summaries"
+        : location.pathname.includes("/dashboard/Predictions")
+        ? "/dashboard/Predictions"
+        : location.pathname.includes("/dashboard/MyChannels")
+        ? "/dashboard/MyChannels"
+        : location.pathname.includes("/dashboard/Favourites")
+        ? "/dashboard/Favourites"
+        : location.pathname;
+
+      setPathName(matchedPath);
+    }
   }, [location.pathname]);
+
   useEffect(() => {
     let data = localStorage.getItem("userdata");
     setUserData(JSON.parse(data));
@@ -69,7 +86,7 @@ const Index = () => {
       trigger={
         <div className="mb-4 mx-[4px]">
           {!collapsed ? (
-            <div className="w-full flex pl-6 text-[#ffffff60] items-center h-full text-xl rounded-lg font-raleway gap-2 text-xs py-[10px] hover:bg-[#ffffff20] hover:text-[#ffffff80]">
+            <div className="w-full flex pl-6 text-[#ffffff70] items-center h-full text-xl rounded-lg font-raleway gap-2 text-xs py-[10px] hover:bg-[#ffffff20] hover:text-[#ffffff80]">
               {" "}
               <RiExpandLeftLine /> Collapse
             </div>
