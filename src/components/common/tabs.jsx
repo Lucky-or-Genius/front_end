@@ -13,7 +13,7 @@ const Tabs = ({ items, className, defaultOpen }) => {
 
   return (
     <div className={`flex flex-col h-full ${className} w-full 2md:w-4/5`}>
-      <div className="flex w-full flex-row  gap-4 border-b border-[#ffffff30] font-raleway">
+      <div className="flex w-full flex-row  gap-4 border-b border-[#ffffff30] font-raleway overflow-x-auto tab_subheading">
         {items.map((item, index) => (
           <button
             key={index}

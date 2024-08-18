@@ -156,3 +156,13 @@
   backdrop-filter: blur(10px);
   border-radius: 16px !important;
 }
+
+.tab_subheading::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.tab_subheading {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
