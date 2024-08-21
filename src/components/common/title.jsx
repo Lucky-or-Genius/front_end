@@ -6,7 +6,7 @@ import { useInView } from "framer-motion";
 import { cn } from "../../utils/cn";
 import { useTopicStore } from "../../utils/store";
 
-const FeatureTitle = ({ children, id, buttonText, subtitle }) => {
+const FeatureTitle = ({ children, id, subtitle }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { margin: "-50% 0px -50% 0px" });
   const setInViewTopic = useTopicStore((state) => state.setInViewTopic);
@@ -21,7 +21,7 @@ const FeatureTitle = ({ children, id, buttonText, subtitle }) => {
     <div ref={ref} className="feature-title py-24 flex flex-col gap-4">
       <p
         className={cn(
-          `text-3xl font-bold transition-colors`,
+          `text-3xl font-bold transition-colors font-poppins`,
           isInView ? "text-white" : "text-neutral-700/50 "
         )}
       >
@@ -30,7 +30,7 @@ const FeatureTitle = ({ children, id, buttonText, subtitle }) => {
       {subtitle && subtitle !== "" && (
         <p
           className={cn(
-            "text-base py-2 w-3/4",
+            "text-base py-2 w-3/4 font-raleway",
             isInView ? "text-slate-400" : "text-neutral-700/50"
           )}
         >

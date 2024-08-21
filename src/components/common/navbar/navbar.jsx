@@ -12,13 +12,13 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar font-calibre pt-10 md:pb-4">
+    <nav className="navbar pt-10 md:pb-4 font-raleway ">
       <div className="md:w-2/3 w-full flex justify-between items-center">
         <div className="flex pr-4 ">
           <img className="w-56 h-full" alt="text" src={logoIcon} />
         </div>
 
-        <div className="flex gap-8">
+        <div className="flex gap-8 font-[600]">
           <ul
             className={`navbar-nav ${
               isSideNavOpen ? "open" : ""
@@ -53,17 +53,6 @@ function Navbar() {
                 onClick={toggleSideNav}
               >
                 Contact Us
-              </NavLink>
-            </li>
-            <li className="nav-item flex md:hidden">
-              <NavLink
-                to="/login"
-                className="nav-link px-4 rounded-2xl py-0.5 flex items-center gap-2 group border border-[#4a6edb] !text-white font-[600] hover:shadow-sm transition-all ease-in-out duration-400 hover:shadow-[#4a6edb]"
-                activeClassName="active"
-                onClick={toggleSideNav}
-              >
-                <HiOutlineFingerPrint className="group-hover:text-white text-gray-600 transition-all ease-in-out duration-600" />
-                Login
               </NavLink>
             </li>
           </ul>

@@ -65,7 +65,7 @@ export const DenialCard = ({ id }) => {
         width={400}
         className="w-full object-fit h-fit rounded-lg opacity-[0.8]"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent from-[50%] to-[#000000] to"></div>
+      <div className="absolute inset-0 h-[1000px] bg-gradient-to-r from-transparent from-[50%] to-[#000000]"></div>
     </FeatureCard>
   );
 };

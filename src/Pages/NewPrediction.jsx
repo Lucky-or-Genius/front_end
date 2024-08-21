@@ -1,20 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+
 import PredictionCard from "../components/newPrediction/prediction-card";
 import { getPredictions } from "../services/Predictions.service";
 import Filters from "../components/newPrediction/filters";
-import { motion } from "framer-motion"; // Import framer-motion
+import Pagination from "../components/newPrediction/pagination";
 
 const NewPrediction = () => {
   const [predictions, setPredictions] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const fetchPredictionData = useCallback(async () => {
+    const res = await getPredictions(currentPage);
+    setPredictions(res.data.predictions);
+    setTotalPages(res.data.pagination.totalPages);
+  }, [currentPage]);
 
   useEffect(() => {
-    const fetchPredictionData = async () => {
-      const res = await getPredictions();
-      setPredictions(res.data);
-    };
-
     fetchPredictionData();
-  }, []);
+  }, [fetchPredictionData]);
+
+  const onPageChange = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
     <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10">
@@ -26,7 +37,7 @@ const NewPrediction = () => {
       <div className="pb-6 w-full justify-center flex items-center">
         <Filters />
       </div>
-      <div className="grid grid-cols-1 2md:grid-cols-2 px-2 md:px-6 gap-4 w-full">
+      <div className="grid grid-cols-1 2md:grid-cols-2 px-2 md:px-6 gap-4 w-full pb-4">
         {predictions?.map((prediction, index) => (
           <motion.div
             key={index}
@@ -48,6 +59,13 @@ const NewPrediction = () => {
             />
           </motion.div>
         ))}
+      </div>
+      <div className="">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+        />
       </div>
     </div>
   );

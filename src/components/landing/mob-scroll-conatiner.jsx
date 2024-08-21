@@ -3,7 +3,7 @@ import React from "react";
 const scrollMobile = () => {
   const items = [
     {
-      src: "images/l-6.png",
+      src: "/images/l-7.png",
       heading: "Verify lifelong reputations instantly.",
       text: "Reputations should be built up slowly and verified quickly. AI is used to track and score all forecasts extracted from any digital medium based on their accuracy.",
     },
@@ -19,7 +19,7 @@ const scrollMobile = () => {
     },
   ];
   return (
-    <div className="w-full h-full p-6 bg-[#0B0B0F] flex md:hidden flex-col">
+    <div className="w-full h-full p-6 bg-[#0B0B0F] flex md:hidden flex-col gap-4">
       {items.map((item, index) => (
         <div
           className="flex flex-col bg-black p-4 rounded-lg gap-4"

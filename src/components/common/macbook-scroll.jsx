@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
+import { IoLogIn } from "react-icons/io5";
 import { cn } from "../../utils/cn";
-import { FaPlay } from "react-icons/fa";
 import logoIcon from "../../assets/logo-icon.svg";
 import { Button } from "./moving-border-button";
-// import newSrc from "../landing2.svg";
 
 export const MacbookScroll = ({ src, showGradient, title }) => {
   const ref = useRef(null);
@@ -65,13 +65,15 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
         exit={{ opacity: 0 }}
         transition={{ ease: "easeInOut", duration: 3 }}
       >
-        <Button
-          borderRadius="1.75rem"
-          className="bg-[#0B0B0F] text-white border-neutral-200 dark:border-slate-800 font-thin"
-        >
-          <FaPlay className="text-[12px]" />
-          Watch the guided tour
-        </Button>
+        <Link to="/login">
+          <Button
+            borderRadius="1.75rem"
+            className="bg-[#0B0B0F] text-white font-bold border-neutral-200 dark:border-slate-800 font-raleway"
+          >
+            <IoLogIn className="text-[16px]" />
+            Try Demo
+          </Button>
+        </Link>
       </motion.div>
       <motion.h2
         style={{
@@ -83,9 +85,28 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
         exit={{ opacity: 0 }}
         transition={{ ease: "easeInOut", duration: 3 }}
         viewport={{ once: false }}
-        className="dark:text-white text-neutral-800 text-3xl font-bold mb-20 text-center"
+        className="dark:text-white text-neutral-800 text-3xl font-bold mb-6 text-center font-poppins"
       >
         {title}
+      </motion.h2>
+      <motion.h2
+        style={{
+          translateY: textTransform,
+          opacity: textOpacity,
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ ease: "easeInOut", duration: 3 }}
+        viewport={{ once: false }}
+        className="text-[#9CA3AF] text-sm md:text-base font-normal mb-20 text-center max-w-[720px] font-raleway px-4 "
+      >
+        Lucky or Genius revolutionizes online influence by introducing
+        accountability through AI. Our models identify and extract forecasts
+        from all digitally published content and verify them against real-world
+        events. Objective accuracy scores by subject area allow for instant
+        identification and comparison of domains of expertise of any forecaster
+        to any other.
       </motion.h2>
       {/* Lid */}
       <Lid

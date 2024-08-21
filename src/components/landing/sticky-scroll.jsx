@@ -46,7 +46,7 @@ const SecondSection = () => {
   // const setFullScreenFeature = useTopicStore((state) => state.setFullscreenFeature)
 
   return (
-    <div className="bg-[#000] hidden md:flex h-100vh">
+    <div className="bg-[#000] hidden md:flex h-100vh 3xl:h-fit">
       <div className="relative w-full">
         {/* {topics?.map((topic) => (
           <topic.visual key={topic.id} id={topic.id} />
@@ -70,8 +70,8 @@ const SecondSection = () => {
                 ))}
               </ul>
             </div>
-            <div className="md:sticky md:top-0 md:w-full h-fit md:h-screen md:flex items-center col-span-2">
-              <div className="fixed right-6 top-6 w-full md:relative h-screen md:w-full [&:not(:has(>_.active-card))]:bg-transparent md:[&:has(>_.active-card)]:bg-transparent">
+            <div className="md:sticky md:top-0 md:w-full h-fit md:h-screen 3xl:h-fit md:flex items-center col-span-2">
+              <div className="fixed right-6 top-6 3xl:top-56 w-full md:relative h-screen 3xl:h-fit md:w-full [&:not(:has(>_.active-card))]:bg-transparent md:[&:has(>_.active-card)]:bg-transparent">
                 {topics?.map((topic) => (
                   <topic.card id={topic.id} key={topic.id} />
                 ))}
