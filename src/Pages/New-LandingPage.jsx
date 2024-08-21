@@ -1,20 +1,14 @@
 import React from "react";
 import { MacbookScroll } from "../components/common/macbook-scroll";
-import Section1 from "../components/landing/section-1";
 import Section2 from "../components/landing/section-2";
 import Section2first from "../components/landing/section-2-first";
-import Section3 from "../components/landing/section-3";
-import Section4 from "../components/landing/section-4";
-import Section5 from "../components/landing/section-5";
 import Section6 from "../components/landing/section-6";
-import Section7 from "../components/landing/section-7";
-import Section8 from "../components/landing/section-8";
 import Section9 from "../components/landing/section-9";
 import StickyScroll from "../components/landing/sticky-scroll";
 import ImageContainer from "../components/landing/imageContainer";
 import MobileScroll from "../components/landing/mob-scroll-conatiner";
 import Navbar from "../components/common/navbar/navbar";
-import "../styles/landingpage.css"; // Corrected import path
+import "../styles/landingpage.css";
 
 export default function LandingPage() {
   return (
@@ -32,18 +26,12 @@ export default function LandingPage() {
           showGradient={true}
         />
       </div>
-      {/* <Section1 /> */}
-      <Section2 />
       <Section2first />
+      <Section2 />
       <ImageContainer />
       <Section6 />
-      <Section3 />
-      {/* <Section4 />
-      <Section5 /> */}
-      {/* <Section7 /> */}
       <StickyScroll />
       <MobileScroll />
-      {/* <Section8 /> */}
       <Section9 />
     </div>
   );

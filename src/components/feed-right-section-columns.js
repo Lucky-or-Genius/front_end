@@ -42,11 +42,7 @@ const FeedRightSectionColumns = ({
             objectFit: "cover",
             cursor: "pointer",
           }}
-          onClick={() =>
-            navigate("/Leaderboards", {
-              state: { id: userId },
-            })
-          }
+          onClick={() => navigate(`/dashboard/Leaderboards/${userId}`)}
         />
       </div>
       <div
@@ -60,11 +56,7 @@ const FeedRightSectionColumns = ({
       >
         <h5
           className="cursor-pointer text-[#ffffff] font-semibold text-base hover:underline"
-          onClick={() =>
-            navigate("/Leaderboards", {
-              state: { id: userId },
-            })
-          }
+          onClick={() => navigate(`/dashboard/Leaderboards/${userId}`)}
         >
           <span className="!text-[#ffffff80]">#{rank}</span> {name}
         </h5>

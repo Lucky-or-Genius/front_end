@@ -155,7 +155,6 @@ const Predictor = () => {
         <div className="flex items-center gap-4 w-full justify-center flex-col md:flex-row">
           <div className="w-20 h-20 rounded-full bg-[#ffffff30] animate-pulse" />
           <span className="w-56 h-8 rounded-full bg-[#ffffff30] animate-pulse" />
-          />
         </div>
       )}
 

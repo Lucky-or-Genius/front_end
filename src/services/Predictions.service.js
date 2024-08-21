@@ -1,8 +1,8 @@
 import Axios from "../utils/axios";
 
 //
-export const getPredictions = async () => {
-  return await Axios.get("predictions");
+export const getPredictions = async (page) => {
+  return await Axios.get(`all-predictions?page=${page}&pageSize=14`);
 };
 export const getSortedPrediction = async (category) => {
   return await Axios.get(`predictions?category=${category}`);
