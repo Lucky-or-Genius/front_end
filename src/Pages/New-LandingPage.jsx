@@ -9,6 +9,7 @@ import ImageContainer from "../components/landing/imageContainer";
 import MobileScroll from "../components/landing/mob-scroll-conatiner";
 import Navbar from "../components/common/navbar/navbar";
 import "../styles/landingpage.css";
+import Section3 from "../components/landing/section-3";
 
 export default function LandingPage() {
   return (
@@ -18,8 +19,7 @@ export default function LandingPage() {
         <MacbookScroll
           title={
             <h1 className="md:text-[42px] text-[32px] md:leading-[1] leading-[2rem]">
-              Where influence meets <span className="gradient-text">AI</span>{" "}
-              accountability.
+              <span className="gradient-text">AI</span> Powered Accountability
             </h1>
           }
           src={`/landing_3.png`}
@@ -28,7 +28,8 @@ export default function LandingPage() {
       </div>
       <Section2first />
       <Section2 />
-      <ImageContainer />
+      <Section3 />
+      {/* <ImageContainer /> */}
       <Section6 />
       <StickyScroll />
       <MobileScroll />

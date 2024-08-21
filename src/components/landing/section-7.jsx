@@ -24,7 +24,9 @@ const Section7 = () => {
         transition={{ delay: 0.7, ease: "easeInOut" }}
         viewport={{ once: false }}
       >
-Lucky or Genius tracks content creators 24/7 across multiple media platforms and presents all insights found within, in one user-friendly console.
+        Lucky or Genius tracks content creators 24/7 across multiple media
+        platforms and presents all insights found within, in one user-friendly
+        console.
       </motion.span>
 
       <div className="">

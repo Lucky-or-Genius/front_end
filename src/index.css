@@ -73,8 +73,8 @@ code {
 .ant-menu-light:not(.ant-menu-horizontal)
   .ant-menu-item:not(.ant-menu-item-selected):hover,
 .ant-menu-light .ant-menu-item:hover {
-  color: #ffffff80;
-  background: #ffffff10;
+  color: #ffffff80 !important;
+  background: #ffffff10 !important;
 }
 .ant-menu-item .ant-menu-item-disabled {
   color: var(--gray-300) !important;

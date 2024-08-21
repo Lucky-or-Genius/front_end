@@ -1,5 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  BsDiscord,
+  BsSpotify,
+  BsReddit,
+  BsYoutube,
+  BsTwitterX,
+  BsTelegram,
+} from "react-icons/bs";
 
 const Section2 = () => {
   return (
@@ -10,7 +18,7 @@ const Section2 = () => {
         {" "}
         {/* Adjusted py-16 to py-12 */}
         <motion.h1
-          className="text-white font-bold text-xl md:text-[40px] mt-8 mb-6" // Adjusted mt and mb for even spacing
+          className="text-white font-bold text-xl md:text-[40px] mt-8 mb-6 font-poppins" // Adjusted mt and mb for even spacing
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ ease: "easeInOut" }}
@@ -19,7 +27,7 @@ const Section2 = () => {
           Never miss an actionable insight.
         </motion.h1>
         <motion.span
-          className="text-[#9CA3AF] max-w-[520px] text-sm md:text-base  text-center my-6"
+          className="text-[#9CA3AF] max-w-[520px] text-sm md:text-base font-raleway text-center my-6"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, ease: "easeInOut" }}
@@ -30,43 +38,46 @@ const Section2 = () => {
           alerts when new insights of relevance to you are found.
         </motion.span>
         <motion.div
-          className="max-w-[520px] grid md:grid-cols-4 grid-cols-2 text-white gap-6 text-4xl my-6"
+          className="max-w-[720px] grid grid-cols-6 text-white gap-2 md:gap-6 text-4xl my-6 w-full"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, ease: "easeInOut" }}
           viewport={{ once: false }}
         >
-          <div className="flex items-center space-x-2 justify-center">
+          <div className="flex items-center space-x-2 justify-center text-[#6166dc] w-full">
             {" "}
             {/* Increased spacing */}
-            <img src="twitter.png" alt="Twitter" className="h-5 w-5" />
-            <span className="text-[#6166dc] text-xs md:text-sm font-[500]">
-              Twitter
-            </span>
+            <BsTwitterX />
+            {/* <span className=" text-xs md:text-base font-[500]">Twitter</span> */}
           </div>
-          <div className="flex items-center space-x-2 justify-center">
+          <div className="flex items-center space-x-2 justify-center text-[#6166dc]">
             {" "}
             {/* Increased spacing */}
-            <img src="youtube_logo.png" alt="YouTube" className="h-5 w-5" />
-            <span className="text-[#6166dc] text-xs md:text-sm font-[500]">
-              YouTube
-            </span>
+            <BsYoutube />
+            {/* <span className=" text-xs md:text-base font-[500]">YouTube</span> */}
           </div>
-          <div className="flex items-center space-x-2 justify-center">
+          <div className="flex items-center space-x-2 justify-center text-[#6166dc]">
             {" "}
             {/* Increased spacing */}
-            <img src="reddit.png" alt="Reddit" className="h-5 w-5" />
-            <span className=" text-[#6166dc] text-xs md:text-sm font-[500]">
-              Reddit
-            </span>
+            <BsReddit />
+            {/* <span className="  text-xs md:text-base font-[500]">Reddit</span> */}
           </div>
-          <div className="flex items-center space-x-2 justify-center">
+          <div className="flex items-center space-x-2 justify-center  text-[#6166dc] ">
             {" "}
             {/* Increased spacing */}
-            <img src="spotify.png" alt="Spotify" className="h-5 w-5" />
-            <span className=" text-[#6166dc] text-xs md:text-sm font-[500]">
-              Spotify
-            </span>
+            <BsSpotify />
+            {/* <span className="text-xs md:text-base font-[500]">Spotify</span> */}
+          </div>
+          <div className="flex items-center space-x-2 justify-center text-[#6166dc]">
+            {" "}
+            {/* Increased spacing */}
+            <BsDiscord />
+            {/* <span className="  text-xs md:text-base font-[500]">Discord</span> */}
+          </div>
+          <div className="flex items-center space-x-2 justify-center text-[#6166dc] w-full">
+            {" "}
+            {/* Increased spacing */}
+            <BsTelegram className="" />
           </div>
         </motion.div>
       </div>

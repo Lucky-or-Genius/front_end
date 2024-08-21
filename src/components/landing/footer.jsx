@@ -7,7 +7,7 @@ const footer = () => {
       <div className="text-gray-500 order-2 md:order-1">
         © 2024, Lucky & Genius
       </div>
-      <ul className="flex gap-4 md:gap-6 text-gray-500 md:flex-row flex-col md:order-2 order-1 py-4 md:py-0">
+      <ul className="flex gap-4 md:gap-6 text-gray-500 flex-row md:order-2 order-1 py-4 md:py-0">
         <li className="hover:text-white transition-all ease-in-out">
           <Link href="/"> Home</Link>
         </li>
