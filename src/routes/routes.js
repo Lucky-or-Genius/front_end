@@ -6,7 +6,7 @@ import Predictions from "../Pages/NewPrediction";
 import Markets from "../Pages/Markets";
 import Profiles from "../Pages/Profiles";
 import MyChannels from "../Pages/New-MyChannel";
-import Favourites from "../Pages/Favourites";
+import Favourites from "../Pages/NewFavourites";
 import NewLeaderboard from "../Pages/NewLeaderboard";
 import LeaderPage from "../Pages/Leader";
 import PredictionDetails from "../Pages/Prediction-details";

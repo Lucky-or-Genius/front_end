@@ -7,6 +7,7 @@ import { Layout, Menu } from "antd";
 import logoIcon from "../../../assets/logo.png";
 import { googleLogout } from "@react-oauth/google";
 import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
+import { TbHeartCheck } from "react-icons/tb";
 
 const { Sider } = Layout;
 
@@ -46,14 +47,14 @@ const Index = () => {
     {
       key: "/dashboard/Favourites",
       label: "Favourites",
-      icon: <BsHddStack />,
+      icon: <TbHeartCheck />,
     },
   ];
 
   const handleRedirect = () => {
-    // window.location.href = "http://localhost:3000";
+    window.location.href = "http://localhost:3000";
 
-    window.location.href = "https://www.luckyorgenius.com/";
+    // window.location.href = "https://www.luckyorgenius.com/";
   };
 
   useEffect(() => {

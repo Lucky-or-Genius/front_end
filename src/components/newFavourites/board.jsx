@@ -4,7 +4,20 @@ import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { Popover } from "antd";
 import { Link } from "react-router-dom";
 
-const Board = ({ data }) => {
+import { addRemoveFavourite } from "../../services/Leaderboards.service";
+
+const Board = ({ data, setPredictors }) => {
+  const accountId = localStorage.getItem("accountId");
+
+  const toggleFavourite = async (id) => {
+    const params = {
+      accountId: String(accountId),
+      predictorId: id,
+    };
+    const newData = data.filter((obj) => obj.user_id !== id);
+    setPredictors(newData);
+    addRemoveFavourite(params);
+  };
   return (
     <div className="flex w-full justify-center gap-4 h-full font-poppins md:px-8 px-0">
       <div className="bg-[#ffffff20] flex justify-start min-w-full md:min-w-[500px] rounded-xl p-2 overflow-y-auto h-fit md:h-4/6 flex-col gap-2 items-center">
@@ -14,17 +27,10 @@ const Board = ({ data }) => {
             key={index}
           >
             <div className="flex items-center gap-4 text-base">
-              {item.is_favourite ? (
-                <IoMdHeart
-                  // onClick={() => toggleFavourite(index, val?.user_id)}
-                  className="cursor-pointer text-error  text-xl"
-                />
-              ) : (
-                <IoMdHeartEmpty
-                  // onClick={() => toggleFavourite(index, val?.user_id)}
-                  className="cursor-pointer text-[#ffffff60] text-xl"
-                />
-              )}
+              <IoMdHeart
+                onClick={() => toggleFavourite(item?.user_id)}
+                className="cursor-pointer text-error  text-xl"
+              />
             </div>
             <div className="flex items-center gap-3 w-full">
               <img
