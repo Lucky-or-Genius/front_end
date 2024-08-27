@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import Footer from "./footer";
 import { Link } from "react-router-dom";
+import { IoLogIn } from "react-icons/io5";
+import { Button } from "../common/moving-border-button";
 
 const Section9 = () => {
   return (
@@ -30,10 +32,14 @@ const Section9 = () => {
         <strong>We filter out the noise</strong>, spotlight value and only
         notify you when subjects of relevance to you are mentioned.
       </motion.span>
-      <Link className="z-[9999]" to={"/login"}>
-        <button className="bg-[#1C1C1C] rounded-3xl gradient-text border-white border-[1px] font-raleway font-bold py-[4px] shadow-small shadow-[#ffffff60] font-[500] w-[11rem] px-6 transition-all ease-in-out">
-          Try it free
-        </button>
+      <Link to="/login">
+        <Button
+          borderRadius="1.75rem"
+          className="bg-[#0B0B0F] text-white font-bold border-neutral-200 dark:border-slate-800 font-raleway"
+        >
+          <IoLogIn className="text-[16px]" />
+          Try Demo
+        </Button>
       </Link>
 
       <div className="w-full flex flex-col justify-center relative">

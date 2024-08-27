@@ -49,7 +49,7 @@ const Feed = () => {
               <div className="font-raleway text-2xl font-[500] text-primary400 py-4">
                 <label>Recent Predictions</label>
               </div>
-              {feedData.map((feed, index) => (
+              {feedData?.map((feed, index) => (
                 <div className="" key={index}>
                   <TrendingPredictionCard
                     news={feed.headline}
@@ -57,6 +57,9 @@ const Feed = () => {
                     category={feed.category}
                     date={feed.date}
                     imgUrl={feed.img_url}
+                    sourceIconUrl={feed.source_icon}
+                    titleUrl={feed.article_url}
+                    description={feed.description}
                   />
                   <div className="rp-cards">
                     {feed.matches.map((card, index) => (

@@ -46,15 +46,15 @@ const SecondSection = () => {
   // const setFullScreenFeature = useTopicStore((state) => state.setFullscreenFeature)
 
   return (
-    <div className="bg-[#000] hidden md:flex h-100vh 3xl:h-fit">
+    <div className="bg-[#000] hidden md:flex h-100vh">
       <div className="relative w-full">
         {/* {topics?.map((topic) => (
           <topic.visual key={topic.id} id={topic.id} />
           
         ))}
         <button onClick={() => setFullScreenFeature(null)} className={cn('back-to-site-btn fixed bottom-8 right-[calc(50%-67px)] transform  bg-black text-white px-4 py-1.5 rounded-xl font-semibold shadow-lg z-[9999999] flex items-center text-sm hover:bg-black/80 opacity-0 translate-y-[300px]')}><span>Back to site</span><XIcon className='ml-2 h-4 w-4' /></button> */}
-        <div className="mx-auto max-w-[1800px] pl-32 ">
-          <div className=" md:grid grid-cols-3 w-full gap-20 items-start">
+        <div className="mx-auto w-full pl-32 h-full">
+          <div className=" md:grid grid-cols-3 w-full gap-20 items-center h-full">
             <div className="w-full py-[10vh] col-span-1 ">
               <ul className="flex flex-col">
                 {topics?.map((topic) => (
@@ -70,8 +70,8 @@ const SecondSection = () => {
                 ))}
               </ul>
             </div>
-            <div className="md:sticky md:top-0 md:w-full h-fit md:h-screen 3xl:h-fit md:flex items-center col-span-2">
-              <div className="fixed right-6 top-6 3xl:top-56 w-full md:relative h-screen 3xl:h-fit md:w-full [&:not(:has(>_.active-card))]:bg-transparent md:[&:has(>_.active-card)]:bg-transparent">
+            <div className="md:sticky md:top-6 md:bottom-0 md:w-full h-[95vh] md:flex items-center col-span-2">
+              <div className="fixed right-0 my-auto w-full md:relative h-[95vh] md:w-full [&:not(:has(>_.active-card))]:bg-transparent md:[&:has(>_.active-card)]:bg-transparent">
                 {topics?.map((topic) => (
                   <topic.card id={topic.id} key={topic.id} />
                 ))}

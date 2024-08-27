@@ -34,32 +34,16 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
     return () => unsubscribe();
   }, [scrollYProgress, src]);
 
-  // const scaleX = useTransform(
-  //   scrollYProgress,
-  //   [0, 0.3],
-  //   [, isMobile ? 1.2 : 1.5]
-  // );
-  const scaleY = useTransform(
-    scrollYProgress,
-    [0, 0.3],
-    [, isMobile ? 1.55 : 1.5]
-  );
-  const translate = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [isMobile ? 0 : 0, 1800]
-  );
-  const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [, -28, 0]);
-  const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
+  const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 80]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   return (
     <div
       ref={ref}
-      className="scroll-smooth  min-h-[100vh] md:min-h-full flex flex-col items-center md:py-40 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.8] 3xl:scale-[1.5]"
+      className="scroll-smooth  min-h-[100vh] md:min-h-full flex flex-col items-center md:py-20 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.8] 3xl:scale-[1.5]"
     >
       <motion.div
-        className="w-full pb-4 flex justify-center"
+        className="w-full pb-12 flex justify-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -101,12 +85,9 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
         viewport={{ once: false }}
         className="text-[#9CA3AF] text-sm md:text-base font-normal mb-20 text-center max-w-[720px] font-raleway px-4 "
       >
-        Lucky or Genius revolutionizes online influence by introducing
-        accountability through AI. Our models identify and extract forecasts
-        from all digitally published content and verify them against real-world
-        events. Objective accuracy scores by subject area allow for instant
-        identification and comparison of domains of expertise of any forecaster
-        to any other.
+        Lucky or Genius transforms online influence with AI-driven
+        accountability, verifying forecasts against real-world events and
+        issuing accurate, objective scores enabling instant comparison
       </motion.h2>
       {/* Lid */}
       <Lid

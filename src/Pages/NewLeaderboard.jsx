@@ -14,6 +14,7 @@ import {
 
 const NewLeaderboard = () => {
   const [data, setData] = useState([]);
+  const [scoreData, setScoreData] = useState([]);
   const accountId = localStorage.getItem("accountId");
 
   useEffect(() => {
@@ -21,7 +22,12 @@ const NewLeaderboard = () => {
       const res = await leaderBoardData(accountId);
       setData(res.data);
     };
+    const fetchLeaderboardScoreData = async () => {
+      const res = await sortByScore("score_desc");
+      setScoreData(res.data);
+    };
     fetchLeaderboardData();
+    fetchLeaderboardScoreData();
   }, [accountId]);
 
   return (
@@ -42,7 +48,10 @@ const NewLeaderboard = () => {
         </div>
         <Filters />
       </div>
-      {data.length >= 0 ? <Board data={data} /> : ""}
+      <div className="grid grid-cols-2 w-full">
+        {data.length >= 0 ? <Board data={data} /> : ""}
+        {data.length >= 0 ? <Board data={scoreData} /> : ""}
+      </div>
     </div>
   );
 };

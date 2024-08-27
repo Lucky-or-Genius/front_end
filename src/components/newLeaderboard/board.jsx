@@ -39,7 +39,7 @@ const Board = ({ data }) => {
                   <Popover
                     content={
                       <>
-                        <div className="flex gap-2 pb-2 font-raleway">
+                        <div className="flex gap-2 pb-2 font-raleway ">
                           <img
                             src={item.image_url}
                             alt="profile"
@@ -47,8 +47,8 @@ const Board = ({ data }) => {
                             height={40}
                             className="rounded-full w-10 h-10 object-cover"
                           />
-                          <div className="">
-                            <span className="text-sm">
+                          <div className="font-[600]">
+                            <span className="text-sm ">
                               {item.first_name + " " + item.last_name}
                             </span>
                             <div className="text-gray-400 text-xs">
@@ -57,7 +57,7 @@ const Board = ({ data }) => {
                             </div>
                           </div>
                         </div>
-                        <div className="flex w-full justify-between">
+                        <div className="flex w-full justify-between font-[600]">
                           <div className="flex flex-col w-fit font-raleway items-center">
                             Points
                             <span className="text-gray-400 text-xs">

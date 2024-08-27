@@ -12,7 +12,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar pt-10 md:pb-4 font-raleway ">
+    <nav className="navbar pt-4 md:pb-4 font-raleway sticky top-0 bg-[#00000020] backdrop-blur-sm z-[99999]">
       <div className="md:w-2/3 w-full flex justify-between items-center">
         <div className="flex pr-4 ">
           <img className="w-56 h-full" alt="text" src={logoIcon} />

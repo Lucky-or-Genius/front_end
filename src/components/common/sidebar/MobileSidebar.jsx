@@ -7,6 +7,7 @@ import { FiKey, FiLayout, FiSend, FiLogOut } from "react-icons/fi";
 import { GoStack } from "react-icons/go";
 import { BsHddStack } from "react-icons/bs";
 import { googleLogout } from "@react-oauth/google";
+import { TbHeartCheck } from "react-icons/tb";
 import logo from "../../../assets/logo.png";
 
 const App = () => {
@@ -44,14 +45,14 @@ const App = () => {
     {
       key: "/dashboard/Favourites",
       label: "Favourites",
-      icon: <BsHddStack />,
+      icon: <TbHeartCheck />,
     },
   ];
 
   const handleRedirect = () => {
-    window.location.href = "http://localhost:3000";
+    // window.location.href = "http://localhost:3000";
 
-    // window.location.href = "https://www.luckyorgenius.com/";
+    window.location.href = "https://www.luckyorgenius.com/";
   };
 
   useEffect(() => {
