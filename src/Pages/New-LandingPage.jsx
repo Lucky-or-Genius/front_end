@@ -13,7 +13,7 @@ import Section3 from "../components/landing/section-3";
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col landing font-calibre">
+    <div className="flex flex-col landing font-calibre bg-[#0B0B0F]">
       <Navbar />
       <div className="overflow-hidden bg-[#0B0B0F] w-full">
         <MacbookScroll

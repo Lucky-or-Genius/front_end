@@ -7,7 +7,7 @@ import Navbar from "../components/common/navbar/navbar";
 const Login = () => {
   const { login } = useAppContext();
   return (
-    <>
+    <div className="bg-[#0B0B0F]">
       <Navbar />
       <div className="h-screen bg-[#0B0B0F] w-full flex justify-center py-16">
         <div className="w-full md:w-1/3 flex flex-col md:border-2 md:border-[#181818] p-8 rounded-2xl justify-around max-h-[32rem]">
@@ -41,7 +41,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

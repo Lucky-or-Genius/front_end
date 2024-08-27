@@ -7,6 +7,7 @@ import { FiKey, FiLayout, FiSend, FiLogOut } from "react-icons/fi";
 import { GoStack } from "react-icons/go";
 import { BsHddStack } from "react-icons/bs";
 import { googleLogout } from "@react-oauth/google";
+import { TbHeartCheck } from "react-icons/tb";
 import logo from "../../../assets/logo.png";
 
 const App = () => {
@@ -44,7 +45,7 @@ const App = () => {
     {
       key: "/dashboard/Favourites",
       label: "Favourites",
-      icon: <BsHddStack />,
+      icon: <TbHeartCheck />,
     },
   ];
 
