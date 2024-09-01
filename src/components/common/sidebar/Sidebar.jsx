@@ -101,7 +101,7 @@ const Index = () => {
       collapsible
       collapsed={collapsed}
       onCollapse={(value) => setCollapsed(value)}
-      className="desktop h-screen border-r-2 hidden md:block border-primary !sticky !top-0 !left-0"
+      className="desktop h-screen border-r-2 hidden md:block border-primary !sticky !top-0 !left-0 font-[600]"
     >
       {!collapsed ? (
         <div className="demo-logo-vertical flex justify-center items-center p-4">
@@ -128,7 +128,7 @@ const Index = () => {
         onClick={(item) => {
           navigate(item.key);
         }}
-        className="font-raleway text-xs relative"
+        className="font-raleway text-xs relative font-[600]"
       >
         {generalItems.map((item) => (
           <Menu.Item key={item.key} icon={item.icon} disabled={item.disabled}>
@@ -144,6 +144,7 @@ const Index = () => {
             googleLogout();
             handleRedirect();
           }}
+          className="font-[600]"
         >
           {"Logout"}
         </Menu.Item>
@@ -155,7 +156,7 @@ const Index = () => {
           height={10}
           className={`rounded-full w-8 `}
         />
-        <h4 className={`${!collapsed ? "flex" : "hidden"}`}>
+        <h4 className={`${!collapsed ? "flex" : "hidden"} font-[600]`}>
           {userData?.given_name}
         </h4>
       </div>

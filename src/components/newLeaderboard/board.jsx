@@ -4,37 +4,39 @@ import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { Popover } from "antd";
 import { Link } from "react-router-dom";
 
-const Board = ({ data }) => {
+const Board = ({ data, toggleFavourite }) => {
   return (
     <div className="flex w-full justify-center gap-4 h-full font-poppins md:px-8 px-0">
-      <div className="bg-[#ffffff20] flex justify-start min-w-full md:min-w-[500px] rounded-xl p-2 overflow-y-auto h-fit md:h-4/6 flex-col gap-2 items-center">
-        {data.map((item, index) => (
+      <div className="bg-[#ffffff20] flex justify-start w-full lg:w-4/6 rounded-xl p-2 overflow-y-auto h-fit md:h-4/6 flex-col gap-2 items-center">
+        {data?.map((item, index) => (
           <div
-            className="flex items-center gap-4 justify-between w-full hover:bg-[#ffffff10] hover:rounded-lg p-2"
+            className="flex items-center gap-4 md:justify-between w-full hover:bg-[#ffffff10] hover:rounded-lg p-2 flex-col md:flex-row"
             key={index}
           >
-            <div className="flex items-center gap-4 text-base">
-              {item.is_favourite ? (
-                <IoMdHeart
-                  // onClick={() => toggleFavourite(index, val?.user_id)}
-                  className="cursor-pointer text-error  text-xl"
+            {" "}
+            <div className="flex gap-4 items-center w-full md:w-fit">
+              <div className="">
+                {item?.rank === 1 ? (
+                  <img alt="rank-1" src="/goldmedal-1.svg" className="w-10" />
+                ) : item?.rank === 2 ? (
+                  <img alt="rank-2" src="/goldmedal-2.svg" className="w-10" />
+                ) : item?.rank === 3 ? (
+                  <img alt="rank-3" src="/goldmedal-3.svg" className="w-10" />
+                ) : (
+                  <div className="bg-[#ffffff40] rounded-full h-8 w-8 flex items-center justify-center text-white">
+                    {" "}
+                    {item?.rank}
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center gap-3 w-full">
+                <img
+                  src={item.image_url}
+                  alt="profile"
+                  width={40}
+                  height={40}
+                  className="rounded-full w-10 h-10 object-cover"
                 />
-              ) : (
-                <IoMdHeartEmpty
-                  // onClick={() => toggleFavourite(index, val?.user_id)}
-                  className="cursor-pointer text-[#ffffff60] text-xl"
-                />
-              )}
-            </div>
-            <div className="flex items-center gap-3 w-full">
-              <img
-                src={item.image_url}
-                alt="profile"
-                width={40}
-                height={40}
-                className="rounded-full w-10 h-10 object-cover"
-              />
-              <div className="flex flex-col w-full">
                 <div className="w-fit">
                   <Popover
                     content={
@@ -86,24 +88,37 @@ const Board = ({ data }) => {
                     </Link>
                   </Popover>
                 </div>
-                <div className="flex gap-2 w-full text-[#ffffff60] items-center">
-                  <Link
-                    className="text-[#ffffff60] text-xs"
-                    to={`/dashboard/LeaderBoards/${item.user_id}?defaultOpen=predictions`}
-                  >
-                    <span className="text-primary400">
-                      {item.total_predictions}
-                    </span>{" "}
-                    Predictions
-                  </Link>
-                  <span className="text-[#ffffff60] text-lg"> |</span>
-                  <div className="text-[#ffffff60] text-xs">
-                    <span className="text-primary400">
-                      {Math.round(item.prediction_accuracy)} %
-                    </span>{" "}
-                    Accuracy
-                  </div>
+              </div>
+            </div>
+            <div className="flex gap-4 w-full md:w-fit">
+              <div className="flex gap-2 w-full text-[#ffffff60] items-center">
+                <Link
+                  className="text-white text-xs py-2  gap-2 px-4 rounded-lg bg-[#ffffff20] hover:bg-[#ffffff40] border border-[#ffffff60] flex-col flex items-center"
+                  to={`/dashboard/LeaderBoards/${item.user_id}?defaultOpen=predictions`}
+                >
+                  {" "}
+                  Predictions
+                  <span className="">{item.total_predictions}</span>
+                </Link>
+                <div className="text-[#ffffff60] text-xs gap-2 px-4 border border-[#ffffff60] flex-col flex items-center  py-2 rounded-lg ">
+                  Accuracy
+                  <span className="text-white">
+                    {Math.round(item.prediction_accuracy)} %
+                  </span>
                 </div>
+              </div>
+              <div className="flex items-center gap-4 text-base">
+                {item.is_favourite ? (
+                  <IoMdHeart
+                    onClick={() => toggleFavourite(index, item?.user_id)}
+                    className="cursor-pointer text-error  text-xl"
+                  />
+                ) : (
+                  <IoMdHeartEmpty
+                    onClick={() => toggleFavourite(index, item?.user_id)}
+                    className="cursor-pointer text-[#ffffff60] text-xl"
+                  />
+                )}
               </div>
             </div>
           </div>

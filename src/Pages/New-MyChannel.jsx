@@ -110,14 +110,17 @@ const MyChannel = () => {
                     {channel?.TotalPendingPredictions}
                   </span>
                 </div>
-                <div className="border border-[#ffffff40] rounded-lg flex flex-col items-center p-2">
-                  <span className="text-[#ffffff70] text-sm font-raleway">
+                <Link
+                  className="border border-[#ffffff60] bg-[#ffffff40] hover:scale-105 active:scale-95 transition-all ease-in-out rounded-lg flex flex-col items-center p-2"
+                  to={`/dashboard/MyChannels/sources/${channel.channel_id}`}
+                >
+                  <span className="text-white font-[600] text-sm font-raleway">
                     Summaries
                   </span>
                   <span className="text-white font-poppins text-lg font-[600]">
                     {channel?.Summaries}
                   </span>
-                </div>
+                </Link>
               </div>
               <div className="flex flex-col gap-2 px-3 pb-4">
                 <span className="text-[#ffffff70] font-raleway font-[600]">
