@@ -56,7 +56,7 @@ const trendingPredictionCard = ({
         >
           {news}
         </Link>
-        <p className="text-[#ffffff60] text-base pb-4 px-4 md:px-0">
+        <p className="text-[#ffffff60] text-base pb-4 px-4 md:px-0 line-clamp-2">
           {description}
         </p>
       </div>

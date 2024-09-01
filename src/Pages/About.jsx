@@ -4,7 +4,7 @@ import Navbar from "../components/common/navbar/navbar";
 
 const About = () => {
   return (
-    <>
+    <div className="bg-[#0B0B0F]">
       <Navbar />
       <div className="h-screen bg-[#0B0B0F] flex flex-col gap-8 p-4 md:p-16">
         <div className="flex gap-4 flex-col">
@@ -32,7 +32,7 @@ const About = () => {
           </span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

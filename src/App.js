@@ -1,4 +1,5 @@
 import React from "react";
+import { Toaster } from "react-hot-toast";
 import "./App.css";
 import Login from "./Pages/Login";
 import DashboardLayout from "./Pages/DashboardLayout";
@@ -33,6 +34,7 @@ function App() {
               </Route>
             </Route>
           </Routes>
+          <Toaster />
         </AppContextProvider>
       </Router>
     </div>

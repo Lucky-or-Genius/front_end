@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import { toast } from "react-hot-toast";
 
 import Filters from "../components/newLeaderboard/filters";
 import Board from "../components/newLeaderboard/board";
@@ -14,20 +15,26 @@ import {
 
 const NewLeaderboard = () => {
   const [data, setData] = useState([]);
-  const [scoreData, setScoreData] = useState([]);
   const accountId = localStorage.getItem("accountId");
+
+  const toggleFavourite = (index, id) => {
+    const params = {
+      accountId: String(accountId),
+      predictorId: id,
+    };
+    const newData = [...data];
+    newData[index].is_favourite = !newData[index].is_favourite;
+    toast.success("updated!");
+    addRemoveFavourite(params);
+    setData(newData);
+  };
 
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       const res = await leaderBoardData(accountId);
       setData(res.data);
     };
-    const fetchLeaderboardScoreData = async () => {
-      const res = await sortByScore("score_desc");
-      setScoreData(res.data);
-    };
     fetchLeaderboardData();
-    fetchLeaderboardScoreData();
   }, [accountId]);
 
   return (
@@ -48,10 +55,11 @@ const NewLeaderboard = () => {
         </div>
         <Filters />
       </div>
-      <div className="grid grid-cols-2 w-full">
-        {data.length >= 0 ? <Board data={data} /> : ""}
-        {data.length >= 0 ? <Board data={scoreData} /> : ""}
-      </div>
+      {data?.length >= 0 ? (
+        <Board data={data} toggleFavourite={toggleFavourite} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

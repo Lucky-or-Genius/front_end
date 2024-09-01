@@ -10,6 +10,7 @@ import Favourites from "../Pages/NewFavourites";
 import NewLeaderboard from "../Pages/NewLeaderboard";
 import LeaderPage from "../Pages/Leader";
 import PredictionDetails from "../Pages/Prediction-details";
+import Sources from "../Pages/Sources";
 
 const routes = [
   {
@@ -51,6 +52,10 @@ const routes = [
   {
     path: "/dashboard/MyChannels",
     element: <MyChannels />,
+  },
+  {
+    path: "/dashboard/MyChannels/sources/:id",
+    element: <Sources />,
   },
   {
     path: "/dashboard/Favourites",
