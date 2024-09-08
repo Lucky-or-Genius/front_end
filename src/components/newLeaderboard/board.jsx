@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Board = ({ data, toggleFavourite }) => {
   return (
     <div className="flex w-full justify-center gap-4 h-full font-poppins md:px-8 px-0">
-      <div className="bg-[#ffffff20] flex justify-start w-full lg:w-4/6 rounded-xl p-2 overflow-y-auto h-fit md:h-4/6 flex-col gap-2 items-center">
+      <div className="bg-[#ffffff20] flex justify-start w-full rounded-xl p-2 overflow-y-auto h-fit md:h-4/6 lg:w-5/6 flex-col gap-2 items-center">
         {data?.map((item, index) => (
           <div
             className="flex items-center gap-4 md:justify-between w-full hover:bg-[#ffffff10] hover:rounded-lg p-2 flex-col md:flex-row"
@@ -82,16 +82,29 @@ const Board = ({ data, toggleFavourite }) => {
                   >
                     <Link
                       to={`/dashboard/LeaderBoards/${item.user_id}`}
-                      className="cursor-pointer text-white text-[20px] hover:underline hover:text-primary400"
+                      className="cursor-pointer text-white text-base lg:text-[20px] hover:underline hover:text-primary400"
                     >
                       {item.first_name + " " + item.last_name}
                     </Link>
                   </Popover>
                 </div>
               </div>
+              <div className="md:hidden flex items-center gap-4 text-base">
+                {item.is_favourite ? (
+                  <IoMdHeart
+                    onClick={() => toggleFavourite(index, item?.user_id)}
+                    className="cursor-pointer text-error  text-xl"
+                  />
+                ) : (
+                  <IoMdHeartEmpty
+                    onClick={() => toggleFavourite(index, item?.user_id)}
+                    className="cursor-pointer text-[#ffffff60] text-xl"
+                  />
+                )}
+              </div>
             </div>
             <div className="flex gap-4 w-full md:w-fit">
-              <div className="flex gap-2 w-full text-[#ffffff60] items-center">
+              <div className="grid lg:grid-cols-4 grid-cols-2 gap-2 w-full text-[#ffffff60] items-center">
                 <Link
                   className="text-white text-xs py-2  gap-2 px-4 rounded-lg bg-[#ffffff20] hover:bg-[#ffffff40] border border-[#ffffff60] flex-col flex items-center"
                   to={`/dashboard/LeaderBoards/${item.user_id}?defaultOpen=predictions`}
@@ -106,8 +119,22 @@ const Board = ({ data, toggleFavourite }) => {
                     {Math.round(item.prediction_accuracy)} %
                   </span>
                 </div>
+                <div className="text-[#ffffff60] text-xs gap-2 px-4 border border-[#ffffff60] flex-col flex items-center  py-2 rounded-lg ">
+                  Points
+                  <span className="text-white">
+                    {Math.round(item.total_user_score)}
+                  </span>
+                </div>
+                <div className="text-[#ffffff60] text-xs gap-2 px-4 border border-[#ffffff60] flex-col flex items-center  py-2 rounded-lg ">
+                  Bankroll
+                  <span className="text-white">
+                    {item.bankroll < 0
+                      ? `-$${Math.abs(item.bankroll)}`
+                      : `$${item.bankroll}`}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center gap-4 text-base">
+              <div className="hidden md:flex items-center gap-4 text-base">
                 {item.is_favourite ? (
                   <IoMdHeart
                     onClick={() => toggleFavourite(index, item?.user_id)}

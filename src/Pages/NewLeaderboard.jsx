@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { FiSearch } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 
@@ -16,6 +16,11 @@ import {
 const NewLeaderboard = () => {
   const [data, setData] = useState([]);
   const accountId = localStorage.getItem("accountId");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
   const toggleFavourite = (index, id) => {
     const params = {
@@ -29,13 +34,33 @@ const NewLeaderboard = () => {
     setData(newData);
   };
 
+  const fetchLeaderboardData = useCallback(async () => {
+    try {
+      if (searchQuery === "") {
+        const res = await leaderBoardData(accountId);
+        setData(res.data);
+      } else {
+        const res = await searchTerm(searchQuery);
+        setData(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [accountId, searchQuery]);
+
   useEffect(() => {
-    const fetchLeaderboardData = async () => {
-      const res = await leaderBoardData(accountId);
-      setData(res.data);
-    };
-    fetchLeaderboardData();
-  }, [accountId]);
+    if (searchQuery === "") {
+      fetchLeaderboardData();
+    } else {
+      const handler = setTimeout(() => {
+        fetchLeaderboardData();
+      }, 1000);
+
+      return () => {
+        clearTimeout(handler);
+      };
+    }
+  }, [fetchLeaderboardData, searchQuery]);
 
   return (
     <div className="bg-primary h-full md:h-screen min-h-screen w-full overflow-y-auto md:overflow-hidden px-4">
@@ -51,6 +76,8 @@ const NewLeaderboard = () => {
             type="search"
             className="bg-transparent outline-none font-poppins text-white text-xs w-full"
             placeholder="Search"
+            value={searchQuery}
+            onChange={handleSearchChange}
           />
         </div>
         <Filters />

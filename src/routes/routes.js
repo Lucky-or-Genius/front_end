@@ -61,6 +61,10 @@ const routes = [
     path: "/dashboard/Favourites",
     element: <Favourites />,
   },
+  {
+    path: "/dashboard/Market",
+    element: <Markets />,
+  },
 ];
 
 export default routes;

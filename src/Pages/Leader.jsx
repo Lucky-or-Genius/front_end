@@ -6,11 +6,9 @@ import { IoAnalyticsOutline } from "react-icons/io5";
 import { FaArrowLeftLong, FaXTwitter } from "react-icons/fa6";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 
-import {
-  getProfilesBySubjects,
-  getSortedProfilesBySubjects,
-} from "../services/Profiles.service";
+import { getProfilesBySubjects } from "../services/Profiles.service";
 import { getPredictionSingle } from "../services/Predictions.service";
+import { predictorData } from "../services/Leaderboards.service";
 import Tabs from "../components/common/tabs";
 import BarChart from "../components/newLeaderboard/barChart";
 import PieChart from "../components/newLeaderboard/pieChart";
@@ -19,12 +17,10 @@ import ChartFilters from "../components/newLeaderboard/chart-filters";
 
 const Leader = () => {
   const [userData, setUserData] = useState({});
+  const [predictor, setPredictor] = useState({});
   const [userPredictions, setUserPredictions] = useState({});
   const navigate = useNavigate();
   const id = useParams().id;
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  };
 
   const query = new URLSearchParams(useLocation().search);
   const defaultOpen = query.get("defaultOpen");
@@ -37,6 +33,17 @@ const Leader = () => {
 
     fetchUserData();
   }, [id]);
+
+  // useEffect(() => {
+  //   const fetchPredictorData = async () => {
+  //     const res = await predictorData();
+  //     setPredictor(res.data);
+  //   };
+
+  //   fetchPredictorData();
+  // }, [id]);
+
+  // console.log(predictor);
 
   useEffect(() => {
     const fetchUserPrediction = async () => {

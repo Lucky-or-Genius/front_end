@@ -29,7 +29,7 @@ const App = () => {
     },
     {
       key: "/dashboard/Summaries",
-      label: "Summaries",
+      label: "Sources",
       icon: <FiKey />,
     },
     {
@@ -39,7 +39,7 @@ const App = () => {
     },
     {
       key: "/dashboard/MyChannels",
-      label: "MyChannels",
+      label: "Channels",
       icon: <BsHddStack />,
     },
     {
@@ -50,9 +50,9 @@ const App = () => {
   ];
 
   const handleRedirect = () => {
-    // window.location.href = "http://localhost:3000";
+    window.location.href = "http://localhost:3000";
 
-    window.location.href = "https://www.luckyorgenius.com/";
+    // window.location.href = "https://www.luckyorgenius.com/";
   };
 
   useEffect(() => {
