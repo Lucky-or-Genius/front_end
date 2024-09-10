@@ -42,6 +42,11 @@ const App = () => {
       label: "Channels",
       icon: <BsHddStack />,
     },
+    // {
+    //   key: "/dashboard/Markets",
+    //   label: "Markets",
+    //   icon: <BsHddStack />,
+    // },
     {
       key: "/dashboard/Favourites",
       label: "Favourites",
@@ -50,9 +55,9 @@ const App = () => {
   ];
 
   const handleRedirect = () => {
-    window.location.href = "http://localhost:3000";
+    // window.location.href = "http://localhost:3000";
 
-    // window.location.href = "https://www.luckyorgenius.com/";
+    window.location.href = "https://www.luckyorgenius.com/";
   };
 
   useEffect(() => {

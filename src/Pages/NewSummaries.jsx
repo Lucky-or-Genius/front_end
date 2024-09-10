@@ -3,7 +3,12 @@ import { FiSearch } from "react-icons/fi";
 
 import Filters from "../components/newSummaries/filters";
 import SummaryCard from "../components/newSummaries/summaryCard";
-import { allSummarySources, searchTerm } from "../services/summaries.services";
+import {
+  allSummarySources,
+  searchTerm,
+  sortPublicationDate,
+  sortNumberOfPredictions,
+} from "../services/summaries.services";
 
 const NewSummaries = () => {
   const [summaries, setSummaries] = useState([]);
@@ -11,6 +16,23 @@ const NewSummaries = () => {
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
+  };
+
+  const sortByPublicationDate = async (order) => {
+    try {
+      const res = await sortPublicationDate(order);
+      setSummaries(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const sortByNumberOfPredictions = async (order) => {
+    try {
+      const res = await sortNumberOfPredictions(order);
+      setSummaries(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchSummariesData = useCallback(async () => {
@@ -59,7 +81,10 @@ const NewSummaries = () => {
             onChange={handleSearchChange}
           />
         </div>
-        <Filters />
+        <Filters
+          sortByPublicationDate={sortByPublicationDate}
+          sortByNumberOfPredictions={sortByNumberOfPredictions}
+        />
       </div>
 
       <div className="w-full grid grid-cols-1 md:grid-cols-2 2md:grid-cols-2 md:px-6 gap-4">

@@ -3,7 +3,7 @@ import Board from "./board";
 
 const Predictors = ({ predictors, setPredictors }) => {
   return (
-    <div>
+    <div className="w-full">
       <Board data={predictors} setPredictors={setPredictors} />
     </div>
   );

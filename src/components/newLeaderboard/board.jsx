@@ -105,14 +105,6 @@ const Board = ({ data, toggleFavourite }) => {
             </div>
             <div className="flex gap-4 w-full md:w-fit">
               <div className="grid lg:grid-cols-4 grid-cols-2 gap-2 w-full text-[#ffffff60] items-center">
-                <Link
-                  className="text-white text-xs py-2  gap-2 px-4 rounded-lg bg-[#ffffff20] hover:bg-[#ffffff40] border border-[#ffffff60] flex-col flex items-center"
-                  to={`/dashboard/LeaderBoards/${item.user_id}?defaultOpen=predictions`}
-                >
-                  {" "}
-                  Predictions
-                  <span className="">{item.total_predictions}</span>
-                </Link>
                 <div className="text-[#ffffff60] text-xs gap-2 px-4 border border-[#ffffff60] flex-col flex items-center  py-2 rounded-lg ">
                   Accuracy
                   <span className="text-white">
@@ -133,6 +125,14 @@ const Board = ({ data, toggleFavourite }) => {
                       : `$${item.bankroll}`}
                   </span>
                 </div>
+                <Link
+                  className="text-white text-xs py-2  gap-2 px-4 rounded-lg bg-[#ffffff20] hover:bg-[#ffffff40] border border-[#ffffff60] flex-col flex items-center"
+                  to={`/dashboard/LeaderBoards/${item.user_id}?defaultOpen=predictions`}
+                >
+                  {" "}
+                  Predictions
+                  <span className="">{item.total_predictions}</span>
+                </Link>
               </div>
               <div className="hidden md:flex items-center gap-4 text-base">
                 {item.is_favourite ? (

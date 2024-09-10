@@ -2,7 +2,7 @@ import React from "react";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 
-const HeroCard = ({ channel }) => {
+const HeroCard = ({ channel, toggleFavourite, index }) => {
   const navigate = useNavigate();
 
   const handleSummariesClick = () => {
@@ -51,18 +51,18 @@ const HeroCard = ({ channel }) => {
               className="w-10 h-10 object-cover rounded-full"
             />
             <span className=" font-raleway text-white uppercase text-lg">
-              {channel.ChannelName}
+              {channel?.ChannelName}
             </span>
           </div>
           <div className="">
-            {channel.is_favourite_channel ? (
+            {channel?.is_favourite_channel ? (
               <IoMdHeart
-                // onClick={() => toggleFavourite(index, val?.user_id)}
+                onClick={() => toggleFavourite(index, channel?.channel_id)}
                 className="cursor-pointer text-error  text-2xl"
               />
             ) : (
               <IoMdHeartEmpty
-                // onClick={() => toggleFavourite(index, val?.user_id)}
+                onClick={() => toggleFavourite(index, channel?.channel_id)}
                 className="cursor-pointer text-[#ffffff60] text-2xl"
               />
             )}
@@ -98,7 +98,7 @@ const HeroCard = ({ channel }) => {
             onClick={handleSummariesClick}
           >
             <span className="text-white font-[600] text-sm font-raleway">
-              Summaries
+              Sources
             </span>
             <span className="text-white font-poppins text-lg font-[600]">
               {channel?.Summaries}

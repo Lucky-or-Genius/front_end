@@ -63,7 +63,7 @@ const Favourites = () => {
         </span>
       </div>
       <div className="w-full flex justify-center">
-        <Tabs items={Items} />
+        <Tabs items={Items} className={"!w-full px-4 md:px-6"} />
       </div>
     </div>
   );

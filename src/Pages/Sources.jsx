@@ -52,21 +52,21 @@ const Sources = () => {
       </div>
       <div className="w-full md:w-4/5 grid grid-cols-2 md:grid-cols-4 font-raleway gap-4 py-8">
         <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
-          <MdPendingActions className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
-          <span className="text-[#ffffff60] text-[16px]">
-            Total Predictions
-          </span>
-          <span className="text-[24px] text-white">
-            {channelInfo?.predictions}
-          </span>
-        </div>
-        <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
           <CgShutterstock className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
           <span className="text-[#ffffff60] text-[16px]">
             Prediction Accuracy
           </span>
           <span className="text-[24px] text-white">
             {channelInfo?.accuracy}%
+          </span>
+        </div>
+        <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
+          <MdPendingActions className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
+          <span className="text-[#ffffff60] text-[16px]">
+            Total Predictions
+          </span>
+          <span className="text-[24px] text-white">
+            {channelInfo?.predictions}
           </span>
         </div>
         <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">

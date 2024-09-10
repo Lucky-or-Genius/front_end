@@ -34,6 +34,31 @@ const NewLeaderboard = () => {
     setData(newData);
   };
 
+  const sortLeaderboardByAccuracy = async (order) => {
+    try {
+      const res = await sortByAccuracy(order);
+      setData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const sortLeaderboardByScore = async (order) => {
+    try {
+      const res = await sortByScore(order);
+      setData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const sortLeaderboardByBankroll = async (order) => {
+    try {
+      const res = await sortByBankroll(order);
+      setData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fetchLeaderboardData = useCallback(async () => {
     try {
       if (searchQuery === "") {
@@ -80,7 +105,11 @@ const NewLeaderboard = () => {
             onChange={handleSearchChange}
           />
         </div>
-        <Filters />
+        <Filters
+          sortLeaderboardByAccuracy={sortLeaderboardByAccuracy}
+          sortLeaderboardByScore={sortLeaderboardByScore}
+          sortLeaderboardByBankroll={sortLeaderboardByBankroll}
+        />
       </div>
       {data?.length >= 0 ? (
         <Board data={data} toggleFavourite={toggleFavourite} />

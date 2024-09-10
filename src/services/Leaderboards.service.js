@@ -7,7 +7,7 @@ export const leaderBoardData = async (id) => {
 };
 export const predictorData = async (id) => {
   return await axios.get(
-    `https://user-info-hover-over-api-0d0a8a1fcc65.herokuapp.com/user_info_hover_over?user_id=${"db90ff8c-71f2-4070-9507-b7945b6efbd4"}`
+    `https://user-info-hover-over-api-0d0a8a1fcc65.herokuapp.com/user_info_hover_over?user_id=${id}`
   );
 };
 export const sortByAccuracy = async (order) => {

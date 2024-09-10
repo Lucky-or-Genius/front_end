@@ -21,7 +21,7 @@ const trendingPredictionCard = ({
       <div className="rounded-t-xl md:rounded-l-xl flex md:w-1/3 w-full">
         <Image
           src={imgUrl}
-          className="h-1/2 md:h-full rounded-tr-xl rounded-tl-xl md:rounded-bl-xl md:rounded-tr-none object-cover w-full"
+          className="max-h-[200px] md:h-full rounded-tr-xl rounded-tl-xl md:rounded-bl-xl md:rounded-tr-none object-cover w-full"
         />
       </div>
       <div className="flex flex-col md:w-2/3 pb-4">

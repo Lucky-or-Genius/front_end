@@ -3,7 +3,11 @@ import { MdPendingActions } from "react-icons/md";
 import { CgShutterstock } from "react-icons/cg";
 import { FaChartLine, FaWikipediaW } from "react-icons/fa";
 import { IoAnalyticsOutline } from "react-icons/io5";
-import { FaArrowLeftLong, FaXTwitter } from "react-icons/fa6";
+import {
+  FaArrowLeftLong,
+  FaXTwitter,
+  FaSquareInstagram,
+} from "react-icons/fa6";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 
 import { getProfilesBySubjects } from "../services/Profiles.service";
@@ -34,16 +38,18 @@ const Leader = () => {
     fetchUserData();
   }, [id]);
 
-  // useEffect(() => {
-  //   const fetchPredictorData = async () => {
-  //     const res = await predictorData();
-  //     setPredictor(res.data);
-  //   };
+  useEffect(() => {
+    const fetchPredictorData = async () => {
+      try {
+        const res = await predictorData(id);
+        setPredictor(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  //   fetchPredictorData();
-  // }, [id]);
-
-  // console.log(predictor);
+    fetchPredictorData();
+  }, [id]);
 
   useEffect(() => {
     const fetchUserPrediction = async () => {
@@ -98,35 +104,62 @@ const Leader = () => {
             alt=""
             width={100}
             height={100}
-            className="w-20 h-20 rounded-full object-cover"
+            className="w-32 h-32 rounded-xl object-cover"
           />
-          <div className="flex flex-col items-center md:items-start justify-around h-full w-full md:w-fit">
+          <div className="flex flex-col items-center md:items-start justify-around h-full w-fit gap-2">
             <span className="text-white font-raleway text-3xl">
               {userPredictions[0]?.first_name +
                 " " +
                 userPredictions[0]?.last_name}
             </span>
-            <div className="text-[#ffffff60] font-poppins text-lg text-center md:text-start">
-              Area of Accuracy :{" "}
-              <span className="text-white">{userPredictions[0]?.category}</span>
-              <span className="flex gap-4 items-center">
-                Socials :
+            <div className="text-[#ffffff60] font-poppins text-base text-start gap-2 w-full flex flex-col">
+              {predictor?.primary_alias &&
+                predictor?.primary_alias !==
+                  userPredictions[0]?.first_name +
+                    " " +
+                    userPredictions[0]?.last_name && (
+                  <div className="">
+                    aka:{" "}
+                    <span className="text-white">
+                      "{predictor?.primary_alias}"{" "}
+                    </span>
+                  </div>
+                )}
+              {predictor?.age && (
+                <div className="">
+                  {" "}
+                  Age: <span className="text-white">{predictor?.age}</span>
+                </div>
+              )}
+
+              <span className="flex gap-4 items-start flex-wrap">
+                Socials:
                 <Link
                   // className="bg-primary400 p-[2px] text-primary rounded-md flex justify-center items-center w-5 h-5 cursor-pointer hover:text-black"
                   to={userPredictions[0]?.wikipedia_url}
-                  className="bg-[#ffffff20] px-2 rounded-full text-sm text-primary400 flex gap-2 items-center"
+                  className="bg-[#ffffff20] p-2 rounded-full text-lg text-white flex gap-2 items-center"
                   target="_blank"
                 >
-                  <FaWikipediaW /> Wikipedia
+                  <FaWikipediaW />
                 </Link>
                 <Link
                   // className="bg-primary400 p-[2px] text-primary rounded-md flex justify-center items-center w-5 h-5 cursor-pointer hover:text-black"
                   to={userPredictions[0]?.twitter_handle}
-                  className="bg-[#ffffff20] px-2 rounded-full text-sm text-primary400 flex gap-2 items-center "
+                  className="bg-[#ffffff20] p-2 rounded-full text-lg text-white flex gap-2 items-center "
                   target="_blank"
                 >
-                  <FaXTwitter /> Twitter
+                  <FaXTwitter />
                 </Link>
+                {predictor?.instagram && (
+                  <Link
+                    // className="bg-primary400 p-[2px] text-primary rounded-md flex justify-center items-center w-5 h-5 cursor-pointer hover:text-black"
+                    to={predictor.instagram}
+                    className="bg-[#ffffff20] p-2 rounded-full text-lg text-white flex gap-2 items-center "
+                    target="_blank"
+                  >
+                    <FaSquareInstagram />
+                  </Link>
+                )}
               </span>
             </div>
           </div>
@@ -138,18 +171,40 @@ const Leader = () => {
             <span className="w-56 h-6 rounded-full bg-[#ffffff30] animate-pulse" />
             <span className="w-44 h-4 rounded-full bg-[#ffffff30] animate-pulse" />
             <span className="w-20 h-4 rounded-full bg-[#ffffff30] animate-pulse" />
+            <span className="w-20 h-4 rounded-full bg-[#ffffff30] animate-pulse" />
           </div>
         </div>
       )}
       <div className="w-full flex justify-center py-12">
+        <div className="bg-[#ffffff20] md:w-4/5 rounded-xl p-4 md:p-6 text-white font-raleway md:text-xl gap-4 flex flex-col">
+          <div className="text-[#ffffff60]">
+            {" "}
+            Area of Accuracy:{" "}
+            <span className="text-white">{userPredictions[0]?.category}</span>
+          </div>
+          {predictor?.occupation && (
+            <div className="text-[#ffffff60]">
+              {" "}
+              Occupation:{" "}
+              <span className="text-white">{predictor?.occupation}</span>
+            </div>
+          )}
+          {predictor?.summary && (
+            <div className="text-[#ffffff60]">
+              Summary: <span className="text-white">{predictor?.summary}</span>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="w-full flex justify-center pb-12">
         <div className="w-full md:w-4/5 grid grid-cols-2 md:grid-cols-4 font-raleway gap-4">
           <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
             <MdPendingActions className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
             <span className="text-[#ffffff60] text-[16px]">
-              Pending Predictions
+              Prediction Accuracy
             </span>
             <span className="text-[24px] text-white">
-              {userPredictions[0]?.all_pending_predictions}
+              {userPredictions[0]?.prediction_accuracy}%
             </span>
           </div>
           <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
