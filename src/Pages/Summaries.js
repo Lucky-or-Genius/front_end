@@ -11,7 +11,6 @@ import {
   searchTerm,
 } from "../services/summaries.services";
 import { FaPlus, FaMinus } from "react-icons/fa6";
-import { LuCalendarDays } from "react-icons/lu";
 import CircularProgress from "@mui/material/CircularProgress";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -20,9 +19,6 @@ import SummariesSubheader from "../components/summaries/subheader";
 import Header from "../components/summaries/Header";
 import Skeleton from "../components/common/skeleton";
 
-const myComponentStyle = {
-  fontFamily: "Roboto, sans-serif", // Use the font name specified in Google Fonts
-};
 function Summaries() {
   const navigate = useNavigate();
 

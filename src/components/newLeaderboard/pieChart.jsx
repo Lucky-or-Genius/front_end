@@ -29,24 +29,20 @@ const PieChart = () => {
           label: {
             show: false,
             position: "center",
+            color: "white",
           },
           emphasis: {
             label: {
               show: true,
               fontSize: 40,
               fontWeight: "bold",
+              color: "white",
             },
           },
           labelLine: {
             show: false,
           },
-          data: [
-            { value: 1048, name: "Search Engine" },
-            { value: 735, name: "Direct" },
-            { value: 580, name: "Email" },
-            { value: 484, name: "Union Ads" },
-            { value: 300, name: "Video Ads" },
-          ],
+          data: [{ value: 1, name: "Youtube" }],
         },
       ],
     };

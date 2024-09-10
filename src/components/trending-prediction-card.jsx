@@ -21,10 +21,10 @@ const trendingPredictionCard = ({
       <div className="rounded-t-xl md:rounded-l-xl flex md:w-1/3 w-full">
         <Image
           src={imgUrl}
-          className="h-1/2 md:h-full rounded-tr-xl rounded-tl-xl md:rounded-bl-xl md:rounded-tr-none object-cover w-full"
+          className="max-h-[200px] md:h-full rounded-tr-xl rounded-tl-xl md:rounded-bl-xl md:rounded-tr-none object-cover w-full"
         />
       </div>
-      <div className="flex flex-col md:w-2/3">
+      <div className="flex flex-col md:w-2/3 pb-4">
         <div className="flex w-full justify-between py-4 md:pt-4 md:px-0 px-4 flex-wrap gap-2">
           <Link
             className="flex gap-2 items-center"
@@ -56,7 +56,7 @@ const trendingPredictionCard = ({
         >
           {news}
         </Link>
-        <p className="text-[#ffffff60] text-base pb-4 px-4 md:px-0 line-clamp-2">
+        <p className="text-[#ffffff60] text-base  px-4 md:px-0 line-clamp-2 ">
           {description}
         </p>
       </div>

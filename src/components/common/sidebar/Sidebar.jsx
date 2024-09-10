@@ -31,7 +31,7 @@ const Index = () => {
     },
     {
       key: "/dashboard/Summaries",
-      label: "Summaries",
+      label: "Sources",
       icon: <FiKey />,
     },
     {
@@ -41,9 +41,14 @@ const Index = () => {
     },
     {
       key: "/dashboard/MyChannels",
-      label: "MyChannels",
+      label: "Channels",
       icon: <BsHddStack />,
     },
+    // {
+    //   key: "/dashboard/Markets",
+    //   label: "Markets",
+    //   icon: <BsHddStack />,
+    // },
     {
       key: "/dashboard/Favourites",
       label: "Favourites",
