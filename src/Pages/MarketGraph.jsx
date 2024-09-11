@@ -33,9 +33,9 @@ const MarketGraph = () => {
             alt=""
             width={100}
             height={100}
-            className="w-14 h-14 rounded-full object-cover"
+            className="w-16 h-16 rounded-full object-cover"
           />
-          <div className="text-white font-raleway text-3xl">
+          <div className="text-white font-raleway text-3xl max-w-[700px]">
             {marketData?.metadata?.event_title}
           </div>
         </div>

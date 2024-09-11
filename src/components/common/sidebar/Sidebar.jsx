@@ -74,6 +74,8 @@ const Index = () => {
         ? "/dashboard/Predictions"
         : location.pathname.includes("/dashboard/MyChannels")
         ? "/dashboard/MyChannels"
+        : location.pathname.includes("/dashboard/Markets")
+        ? "/dashboard/Markets"
         : location.pathname.includes("/dashboard/Favourites")
         ? "/dashboard/Favourites"
         : location.pathname;
