@@ -81,6 +81,7 @@ module.exports = {
         errorLight: "#ffbcbc81",
         black: "#1d1d1d",
         white: "#ffffff",
+        success: "#27AE60",
       },
     },
   },
