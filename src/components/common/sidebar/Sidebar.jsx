@@ -6,6 +6,7 @@ import { BsHddStack } from "react-icons/bs";
 import { Layout, Menu } from "antd";
 import logoIcon from "../../../assets/logo.png";
 import { googleLogout } from "@react-oauth/google";
+import { MdOutlineInsights } from "react-icons/md";
 import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
 import { TbHeartCheck } from "react-icons/tb";
 
@@ -47,7 +48,7 @@ const Index = () => {
     {
       key: "/dashboard/Markets",
       label: "Markets",
-      icon: <BsHddStack />,
+      icon: <MdOutlineInsights />,
     },
     {
       key: "/dashboard/Favourites",
@@ -57,9 +58,9 @@ const Index = () => {
   ];
 
   const handleRedirect = () => {
-    // window.location.href = "http://localhost:3000";
+    window.location.href = "http://localhost:3000";
 
-    window.location.href = "https://www.luckyorgenius.com/";
+    // window.location.href = "https://www.luckyorgenius.com/";
   };
 
   useEffect(() => {

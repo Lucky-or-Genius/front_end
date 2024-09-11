@@ -10,7 +10,10 @@ import {
 } from "react-icons/fa6";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 
-import { getProfilesBySubjects } from "../services/Profiles.service";
+import {
+  getProfilesBySubjects,
+  getSortedProfilesBySubjects,
+} from "../services/Profiles.service";
 import { getPredictionSingle } from "../services/Predictions.service";
 import { predictorData } from "../services/Leaderboards.service";
 import Tabs from "../components/common/tabs";
@@ -28,6 +31,17 @@ const Leader = () => {
 
   const query = new URLSearchParams(useLocation().search);
   const defaultOpen = query.get("defaultOpen");
+
+  const getSortedUserSubject = async (value) => {
+    getSortedProfilesBySubjects(id, value)
+      .then((res) => {
+        if (res.data.message === "No data found for the given userId") return;
+        setUserData(res.data);
+      })
+      .catch((err) => {
+        console.log("err::::", err);
+      });
+  };
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -66,7 +80,7 @@ const Leader = () => {
       content: (
         <>
           <div className="pb-2">
-            <ChartFilters />
+            <ChartFilters getSortedUserSubject={getSortedUserSubject} />
           </div>
           <div className="flex flex-col w-full text-white font-poppins gap-6">
             <span className="flex items-center gap-2 text-[#ffffff80] font-raleway font-[500] text-xl ">
