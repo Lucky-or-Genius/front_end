@@ -3,7 +3,9 @@ import Feed from "../Pages/Feed";
 import Summaries from "../Pages/NewSummaries";
 import SummariesDetails from "../Pages/SummariesDetails";
 import Predictions from "../Pages/NewPrediction";
-import Markets from "../Pages/Markets";
+import Markets from "../Pages/NewMarkets";
+import MarketsGraph from "../Pages/MarketGraph";
+import OldMarkets from "../Pages/Markets";
 import Profiles from "../Pages/Profiles";
 import MyChannels from "../Pages/New-MyChannel";
 import Favourites from "../Pages/NewFavourites";
@@ -42,9 +44,18 @@ const routes = [
     element: <PredictionDetails />,
   },
   {
+    path: "/dashboard/Markets/:params",
+    element: <MarketsGraph />,
+  },
+  {
     path: "/dashboard/Markets",
     element: <Markets />,
   },
+  {
+    path: "/dashboard/OldMarkets",
+    element: <OldMarkets />,
+  },
+
   {
     path: "/dashboard/Profiles",
     element: <Profiles />,

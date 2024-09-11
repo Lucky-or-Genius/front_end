@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { CgShutterstock } from "react-icons/cg";
 import { FaChartLine } from "react-icons/fa";

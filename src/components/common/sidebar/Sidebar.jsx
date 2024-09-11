@@ -44,11 +44,11 @@ const Index = () => {
       label: "Channels",
       icon: <BsHddStack />,
     },
-    // {
-    //   key: "/dashboard/Markets",
-    //   label: "Markets",
-    //   icon: <BsHddStack />,
-    // },
+    {
+      key: "/dashboard/Markets",
+      label: "Markets",
+      icon: <BsHddStack />,
+    },
     {
       key: "/dashboard/Favourites",
       label: "Favourites",
@@ -74,6 +74,8 @@ const Index = () => {
         ? "/dashboard/Predictions"
         : location.pathname.includes("/dashboard/MyChannels")
         ? "/dashboard/MyChannels"
+        : location.pathname.includes("/dashboard/Markets")
+        ? "/dashboard/Markets"
         : location.pathname.includes("/dashboard/Favourites")
         ? "/dashboard/Favourites"
         : location.pathname;
