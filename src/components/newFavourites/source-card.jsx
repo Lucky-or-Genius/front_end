@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { IoMdHeart } from "react-icons/io";
 
 import AnimatedTooltip from "../common/animated-tooltip";
 
-const summaryCard = ({ summary, toggleFavourite, index }) => {
+const summaryCard = ({ source, toggleFavourite }) => {
   const convertMinsToHrsMins = (minutes) => {
     let h = Math.floor(minutes / 60);
     let m = minutes % 60;
@@ -14,53 +14,42 @@ const summaryCard = ({ summary, toggleFavourite, index }) => {
   };
 
   const people =
-    summary && summary.full_names && summary.user_image_urls && summary.user_ids
-      ? summary.full_names.split(",").map((name, index) => ({
-          id: summary.user_ids.split(",")[index],
+    source && source.full_names && source.user_image_urls && source.user_ids
+      ? source.full_names.split(",").map((name, index) => ({
+          id: source.user_ids.split(",")[index],
           name,
-          image: summary.user_image_urls.split(",").reverse()[index],
+          image: source.user_image_urls.split(",").reverse()[index],
         }))
       : [];
 
   return (
     <Link
       className="p-4 border-primary cursor-pointer flex md:flex-row flex-col backdrop-blur-md bg-[#ffffff20] h-full rounded-xl border hover:border-primary400 transition-all ease-in-out shadow-black"
-      to={`/dashboard/Summaries/${summary?.source_id}`}
+      to={`/dashboard/Summaries/${source?.source_id}`}
     >
       <div className="w-full md:w-2/3 md:pr-2 border-b-2 md:border-b-0 md:border-r-2 border-[#ffffff20] pb-4 md:pb-0 ">
         <div className="flex gap-2 items-center">
           <img
             alt=""
-            src={summary?.channel_image_url || "/youtube.svg"}
+            src={source?.channel_image_url || "/youtube.svg"}
             className="w-16 h-16 rounded-lg"
           />
           <div className="flex flex-col gap-2">
             <div className="flex w-full justify-between">
               <span className="text-[#ffffff60] font-raleway text-sm">
-                {summary?.channel_name}
+                {source?.channel_name}
               </span>
-
-              {summary.is_favourite ? (
-                <IoMdHeart
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFavourite(index, summary?.source_id);
-                  }}
-                  className="cursor-pointer text-error  text-xl active:scale-95 transition-all hover:scale-105"
-                />
-              ) : (
-                <IoMdHeartEmpty
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleFavourite(index, summary?.source_id);
-                  }}
-                  className="cursor-pointer text-[#ffffff60] text-xl active:scale-95 transition-all hover:scale-105"
-                />
-              )}
+              <IoMdHeart
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFavourite(source?.source_id);
+                }}
+                className="cursor-pointer text-error  text-xl active:scale-95 transition-all hover:scale-105"
+              />
             </div>
 
             <span className="text-primary400 font-poppins line-clamp-2">
-              {summary?.source_title}
+              {source?.source_title}
             </span>
           </div>
         </div>
@@ -68,18 +57,18 @@ const summaryCard = ({ summary, toggleFavourite, index }) => {
         <div className="w-full flex pt-4 gap-2 flex-wrap">
           <div className="bg-[#ffffff20] rounded-full px-2 text-white font-poppins">
             <span className="text-[#ffffff80] font-raleway"> Views: </span>
-            {Math.round(summary?.views / 1000000)}M
+            {Math.round(source?.views / 1000000)}M
           </div>
           <div className="bg-[#ffffff20] rounded-full px-2 text-white font-poppins">
             <span className="text-[#ffffff80] font-raleway"> Length: </span>
-            {convertMinsToHrsMins(summary.duration)}
+            {convertMinsToHrsMins(source.duration)}
           </div>
           <div className="flex w-fit rounded-full items-center px-2 bg-[#ffffff20] gap-2">
             <span className="font-raleway text-[#ffffff80] text-sm">
               Date :
             </span>
             <span className="font-poppins text-white ">
-              {summary?.publication_date.toString().slice(0, 10)}
+              {source?.publication_date.toString().slice(0, 10)}
             </span>
           </div>
         </div>
@@ -90,7 +79,7 @@ const summaryCard = ({ summary, toggleFavourite, index }) => {
             Predictions
           </span>
           <span className="font-poppins text-white ">
-            {summary?.number_of_predictions}
+            {source?.number_of_predictions}
           </span>
         </div>
         <div className="flex pr-4 md:pr-0">

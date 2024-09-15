@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import { toast } from "react-hot-toast";
 
 import Filters from "../components/newSummaries/filters";
 import SummaryCard from "../components/newSummaries/summaryCard";
@@ -8,11 +9,13 @@ import {
   searchTerm,
   sortPublicationDate,
   sortNumberOfPredictions,
+  addRemoveFavourite,
 } from "../services/summaries.services";
 
 const NewSummaries = () => {
   const [summaries, setSummaries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const accountId = localStorage.getItem("accountId");
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -35,10 +38,22 @@ const NewSummaries = () => {
     }
   };
 
+  const toggleFavourite = (index, id) => {
+    const params = {
+      accountId: String(accountId),
+      sourceId: id,
+    };
+    const newData = [...summaries];
+    newData[index].is_favourite = !newData[index].is_favourite;
+    toast.success("updated!");
+    addRemoveFavourite(params);
+    setSummaries(newData);
+  };
+
   const fetchSummariesData = useCallback(async () => {
     try {
       if (searchQuery === "") {
-        const response = await allSummarySources();
+        const response = await allSummarySources(accountId);
         setSummaries(response.data);
       } else {
         const response = await searchTerm(searchQuery);
@@ -47,7 +62,7 @@ const NewSummaries = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [searchQuery]);
+  }, [accountId, searchQuery]);
 
   useEffect(() => {
     if (searchQuery === "") {
@@ -87,9 +102,14 @@ const NewSummaries = () => {
         />
       </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 2md:grid-cols-2 md:px-6 gap-4">
+      <div className="w-full grid grid-cols-1 md:grid-cols-2 md:px-6 gap-4">
         {summaries.map((summary, index) => (
-          <SummaryCard key={index} summary={summary} />
+          <SummaryCard
+            key={index}
+            summary={summary}
+            toggleFavourite={toggleFavourite}
+            index={index}
+          />
         ))}
       </div>
     </div>

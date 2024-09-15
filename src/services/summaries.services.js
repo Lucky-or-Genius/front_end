@@ -1,7 +1,7 @@
 import Axios from "../utils/axios";
 
-export const allSummarySources = async () => {
-  return await Axios.get("all-sources");
+export const allSummarySources = async (id) => {
+  return await Axios.get(`all-sources?accountId=${id}`);
 };
 export const summarySourceById = async (id) => {
   return await Axios.get(`all-sources?sourceId=${id}`);
@@ -32,4 +32,8 @@ export const getFullTranscript = async (id) => {
 
 export const searchTerm = async (item) => {
   return await Axios.get(`all-sources?searchTerm=${item}`);
+};
+export const addRemoveFavourite = async (params) => {
+  const res = await Axios.post("toggle-favorite-source", params);
+  return res.data;
 };

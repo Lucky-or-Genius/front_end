@@ -50,7 +50,7 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
               alt="img"
               className="w-10 h-10 object-cover rounded-full"
             />
-            <span className=" font-raleway text-white uppercase text-lg">
+            <span className=" font-raleway text-white uppercase text-lg active:scale-95 transition-all hover:scale-105">
               {channel?.ChannelName}
             </span>
           </div>
@@ -63,7 +63,7 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
             ) : (
               <IoMdHeartEmpty
                 onClick={() => toggleFavourite(index, channel?.channel_id)}
-                className="cursor-pointer text-[#ffffff60] text-2xl"
+                className="cursor-pointer text-[#ffffff60] text-2xl active:scale-95 transition-all hover:scale-105"
               />
             )}
           </div>
