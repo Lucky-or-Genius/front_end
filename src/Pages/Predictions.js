@@ -91,13 +91,11 @@ const Predictions = () => {
         console.log("err::::::", err);
       });
   };
-
   const onClickDescription = (index) => {
     const arr = [...data];
     arr[index].predictionActive = !arr[index].predictionActive;
     setData([...arr]);
   };
-
   const handleSummaries = () => {
     if (summariesRead === "6") {
       setSummariesRead("1000");
@@ -153,8 +151,6 @@ const Predictions = () => {
       return interpolateColor(score, neutralColor, "#B32A2A"); // Interpolate between grey and red
     }
   };
-
-  // const items =
 
   return (
     <div className="predictions">

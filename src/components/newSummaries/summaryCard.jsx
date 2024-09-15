@@ -1,16 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
 import AnimatedTooltip from "../common/animated-tooltip";
 
-const summaryCard = ({ summary, toggleFavourite, index }) => {
+const SummaryCard = ({ summary, toggleFavourite, index }) => {
+  const navigate = useNavigate();
   const convertMinsToHrsMins = (minutes) => {
     let h = Math.floor(minutes / 60);
     let m = minutes % 60;
     h = h < 10 ? "0" + h : h;
     m = m < 10 ? "0" + m : m;
     return `${h}:${m}:00`; // Assumes no seconds part, so it's always '00'
+  };
+
+  const handleNameClick = (
+    e,
+    channelId,
+    imageUrl,
+    channelName,
+    predictions,
+    accuracy,
+    pending,
+    summaries
+  ) => {
+    e.preventDefault();
+
+    const channelInfo = JSON.stringify({
+      imageUrl: imageUrl,
+      channelName: channelName,
+      predictions: predictions,
+      accuracy: accuracy,
+      pending: pending,
+      summaries: summaries,
+    });
+
+    localStorage.setItem("channelInfo", channelInfo);
+
+    navigate(`/dashboard/MyChannels/sources/${channelId}`);
   };
 
   const people =
@@ -40,13 +67,27 @@ const summaryCard = ({ summary, toggleFavourite, index }) => {
           />
           <div className="flex flex-col gap-2">
             <div className="flex w-full justify-between gap-2">
-              <div className="flex gap-2 items-center">
+              <div
+                className="flex gap-2 items-center"
+                onClick={(e) =>
+                  handleNameClick(
+                    e,
+                    summary?.channel_id,
+                    summary?.channel_logo || "/youtube.svg",
+                    summary?.channel_name,
+                    summary?.Predictions,
+                    summary?.PredictionAccuracyPercent,
+                    summary?.TotalPendingPredictions,
+                    summary?.Summaries
+                  )
+                }
+              >
                 <img
                   alt=""
                   src={summary?.channel_logo || "/youtube.svg"}
                   className="w-6 h-6 rounded-full object-cover"
                 />
-                <span className="text-[#ffffff60] font-raleway text-sm">
+                <span className="text-[#ffffff60] font-raleway text-sm hover:underline transition-all">
                   {summary?.channel_name}
                 </span>
               </div>
@@ -112,4 +153,4 @@ const summaryCard = ({ summary, toggleFavourite, index }) => {
   );
 };
 
-export default summaryCard;
+export default SummaryCard;

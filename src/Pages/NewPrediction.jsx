@@ -2,7 +2,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 
 import PredictionCard from "../components/newPrediction/prediction-card";
-import { getPredictions } from "../services/Predictions.service";
+import {
+  getPredictions,
+  getSortedPrediction,
+  getSortedCategory,
+} from "../services/Predictions.service";
 import Filters from "../components/newPrediction/filters";
 import Pagination from "../components/newPrediction/pagination";
 
@@ -10,6 +14,26 @@ const NewPrediction = () => {
   const [predictions, setPredictions] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+
+  const fetchSortedPrediction = async (prediction) => {
+    await getSortedPrediction(prediction)
+      .then((res) => {
+        setPredictions(res.data);
+      })
+      .catch((err) => {
+        console.log("err::::::", err);
+      });
+  };
+
+  const fetchSortedCategory = async (category) => {
+    await getSortedCategory(category)
+      .then((res) => {
+        setPredictions(res.data);
+      })
+      .catch((err) => {
+        console.log("err::::::", err);
+      });
+  };
 
   const fetchPredictionData = useCallback(async () => {
     const res = await getPredictions(currentPage);
@@ -35,7 +59,11 @@ const NewPrediction = () => {
         </span>
       </div>
       <div className="pb-6 w-full justify-center flex items-center">
-        <Filters />
+        <Filters
+          fetchSortedPrediction={fetchSortedPrediction}
+          fetchSortedCategory={fetchSortedCategory}
+          fetchPredictionData={fetchPredictionData}
+        />
       </div>
       <div className="grid grid-cols-1 2md:grid-cols-2 px-2 md:px-6 gap-4 w-full pb-4">
         {predictions?.map((prediction, index) => (

@@ -1,8 +1,8 @@
 import React from "react";
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { IoMdHeart } from "react-icons/io";
+import { useNavigate, Link } from "react-router-dom";
 
-const HeroCard = ({ channel, toggleFavourite, index }) => {
+const ChannelCard = ({ channel, index, toggleFavourite }) => {
   const navigate = useNavigate();
 
   const handleSummariesClick = () => {
@@ -23,9 +23,11 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
     localStorage.setItem("channelInfo", channelInfo);
     navigate(`/dashboard/MyChannels/sources/${channel.channel_id}`);
   };
-
   return (
-    <div className="bg-[#ffffff10] rounded-xl flex flex-col justify-between">
+    <div
+      className="bg-[#ffffff10] rounded-xl flex flex-col justify-between"
+      key={index}
+    >
       <div className="">
         <div className="">
           <img
@@ -37,7 +39,6 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
                 : "https://i.ibb.co/Ry3bymp/youtube.png"
             }
             sizes="50"
-            quality="100"
             alt="img"
             className="w-full h-32 object-cover rounded-t-xl"
           />
@@ -53,26 +54,18 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
                   : "https://i.ibb.co/Ry3bymp/youtube.png"
               }
               sizes="50"
-              quality="100"
               alt="img"
               className="w-10 h-10 object-cover rounded-full"
             />
-            <span className=" font-raleway text-white uppercase text-lg active:scale-95 transition-all hover:scale-105">
-              {channel?.ChannelName}
+            <span className=" font-raleway text-white uppercase text-lg">
+              {channel.ChannelName}
             </span>
           </div>
           <div className="">
-            {channel?.is_favourite_channel ? (
-              <IoMdHeart
-                onClick={() => toggleFavourite(index, channel?.channel_id)}
-                className="cursor-pointer text-error  text-2xl"
-              />
-            ) : (
-              <IoMdHeartEmpty
-                onClick={() => toggleFavourite(index, channel?.channel_id)}
-                className="cursor-pointer text-[#ffffff60] text-2xl active:scale-95 transition-all hover:scale-105"
-              />
-            )}
+            <IoMdHeart
+              onClick={() => toggleFavourite(channel?.channel_id)}
+              className="cursor-pointer text-error  text-2xl"
+            />
           </div>
         </div>
         <div className="grid grid-cols-2 px-3 pb-4 pt-2 gap-4">
@@ -105,7 +98,7 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
             onClick={handleSummariesClick}
           >
             <span className="text-white font-[600] text-sm font-raleway">
-              Sources
+              Summaries
             </span>
             <span className="text-white font-poppins text-lg font-[600]">
               {channel?.Summaries}
@@ -155,4 +148,4 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
   );
 };
 
-export default HeroCard;
+export default ChannelCard;

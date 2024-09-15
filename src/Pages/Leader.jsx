@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { MdPendingActions } from "react-icons/md";
 import { CgShutterstock } from "react-icons/cg";
 import { FaChartLine, FaWikipediaW } from "react-icons/fa";
@@ -14,7 +14,10 @@ import {
   getProfilesBySubjects,
   getSortedProfilesBySubjects,
 } from "../services/Profiles.service";
-import { getPredictionSingle } from "../services/Predictions.service";
+import {
+  getPredictionSingle,
+  getSortedPrediction,
+} from "../services/Predictions.service";
 import { predictorData } from "../services/Leaderboards.service";
 import Tabs from "../components/common/tabs";
 import BarChart from "../components/newLeaderboard/barChart";
@@ -26,11 +29,22 @@ const Leader = () => {
   const [userData, setUserData] = useState({});
   const [predictor, setPredictor] = useState({});
   const [userPredictions, setUserPredictions] = useState({});
+  const [category, setCategory] = useState();
+  const [predictionType, setPredictionType] = useState();
   const navigate = useNavigate();
   const id = useParams().id;
 
   const query = new URLSearchParams(useLocation().search);
   const defaultOpen = query.get("defaultOpen");
+
+  const fetchUserPrediction = useCallback(async () => {
+    try {
+      const res = await getPredictionSingle(id, category, predictionType);
+      setUserPredictions(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   const getSortedUserSubject = async (value) => {
     getSortedProfilesBySubjects(id, value)
@@ -66,13 +80,8 @@ const Leader = () => {
   }, [id]);
 
   useEffect(() => {
-    const fetchUserPrediction = async () => {
-      const res = await getPredictionSingle(id);
-      setUserPredictions(res.data);
-    };
-
     fetchUserPrediction();
-  }, [id]);
+  }, [fetchUserPrediction]);
 
   const items = [
     {

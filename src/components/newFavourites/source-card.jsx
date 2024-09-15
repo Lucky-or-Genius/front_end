@@ -1,16 +1,18 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoMdHeart } from "react-icons/io";
 
 import AnimatedTooltip from "../common/animated-tooltip";
 
-const summaryCard = ({ source, toggleFavourite }) => {
+const SourceCard = ({ source, toggleFavourite }) => {
+  const navigate = useNavigate();
+
   const convertMinsToHrsMins = (minutes) => {
     let h = Math.floor(minutes / 60);
     let m = minutes % 60;
     h = h < 10 ? "0" + h : h;
     m = m < 10 ? "0" + m : m;
-    return `${h}:${m}:00`; // Assumes no seconds part, so it's always '00'
+    return `${h}:${m}:00`;
   };
 
   const people =
@@ -21,6 +23,30 @@ const summaryCard = ({ source, toggleFavourite }) => {
           image: source.user_image_urls.split(",").reverse()[index],
         }))
       : [];
+  const handleNameClick = (
+    e,
+    channelId,
+    imageUrl,
+    channelName,
+    predictions,
+    accuracy,
+    pending,
+    summaries
+  ) => {
+    e.preventDefault();
+    const channelInfo = JSON.stringify({
+      imageUrl: imageUrl,
+      channelName: channelName,
+      predictions: predictions,
+      accuracy: accuracy,
+      pending: pending,
+      summaries: summaries,
+    });
+
+    localStorage.setItem("channelInfo", channelInfo);
+
+    navigate(`/dashboard/MyChannels/sources/${channelId}`);
+  };
 
   return (
     <Link
@@ -40,13 +66,27 @@ const summaryCard = ({ source, toggleFavourite }) => {
           />
           <div className="flex flex-col gap-2">
             <div className="flex w-full justify-between">
-              <div className="flex gap-2 items-center">
+              <div
+                className="flex gap-2 items-center"
+                onClick={(e) =>
+                  handleNameClick(
+                    e,
+                    source?.channel_id,
+                    source?.channel_logo || "/youtube.svg",
+                    source?.channel_name,
+                    source?.Predictions,
+                    source?.PredictionAccuracyPercent,
+                    source?.TotalPendingPredictions,
+                    source?.Summaries
+                  )
+                }
+              >
                 <img
                   alt="logo"
                   src={source?.channel_logo || "/youtube.svg"}
                   className="w-6 h-6 rounded-full object-cover"
                 />
-                <span className="text-[#ffffff60] font-raleway text-sm">
+                <span className="text-[#ffffff60] font-raleway text-sm hover:underline transition-all">
                   {source?.channel_name}
                 </span>
               </div>
@@ -101,4 +141,4 @@ const summaryCard = ({ source, toggleFavourite }) => {
   );
 };
 
-export default summaryCard;
+export default SourceCard;
