@@ -8,7 +8,9 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
   const handleSummariesClick = () => {
     const channelInfo = JSON.stringify({
       imageUrl:
-        channel?.ChannelImageUrl !== null
+        channel?.ChannelLogo !== null
+          ? channel?.ChannelLogo
+          : channel?.ChannelImageUrl !== null
           ? channel?.ChannelImageUrl
           : "https://i.ibb.co/Ry3bymp/youtube.png",
       channelName: channel?.ChannelName,
@@ -27,7 +29,9 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
         <div className="">
           <img
             src={
-              channel?.ChannelImageUrl !== null
+              channel?.ChannelBanner !== null
+                ? channel?.ChannelBanner
+                : channel?.ChannelImageUrl !== null
                 ? channel?.ChannelImageUrl
                 : "https://i.ibb.co/Ry3bymp/youtube.png"
             }
@@ -41,7 +45,9 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
           <div className="flex gap-4 items-center">
             <img
               src={
-                channel?.ChannelImageUrl !== null
+                channel?.ChannelLogo !== null
+                  ? channel?.ChannelLogo
+                  : channel?.ChannelImageUrl !== null
                   ? channel?.ChannelImageUrl
                   : "https://i.ibb.co/Ry3bymp/youtube.png"
               }

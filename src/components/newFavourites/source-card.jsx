@@ -30,15 +30,26 @@ const summaryCard = ({ source, toggleFavourite }) => {
       <div className="w-full md:w-2/3 md:pr-2 border-b-2 md:border-b-0 md:border-r-2 border-[#ffffff20] pb-4 md:pb-0 ">
         <div className="flex gap-2 items-center">
           <img
-            alt=""
-            src={source?.channel_image_url || "/youtube.svg"}
+            alt="thumbnail"
+            src={
+              source?.source_thumbnail ||
+              source?.channel_image_url ||
+              "/youtube.svg"
+            }
             className="w-16 h-16 rounded-lg"
           />
           <div className="flex flex-col gap-2">
             <div className="flex w-full justify-between">
-              <span className="text-[#ffffff60] font-raleway text-sm">
-                {source?.channel_name}
-              </span>
+              <div className="flex gap-2 items-center">
+                <img
+                  alt="logo"
+                  src={source?.channel_logo || "/youtube.svg"}
+                  className="w-6 h-6 rounded-full object-cover"
+                />
+                <span className="text-[#ffffff60] font-raleway text-sm">
+                  {source?.channel_name}
+                </span>
+              </div>
               <IoMdHeart
                 onClick={(e) => {
                   e.preventDefault();

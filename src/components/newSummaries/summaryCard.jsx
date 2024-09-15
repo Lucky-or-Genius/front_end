@@ -31,14 +31,25 @@ const summaryCard = ({ summary, toggleFavourite, index }) => {
         <div className="flex gap-2 items-center">
           <img
             alt=""
-            src={summary?.channel_image_url || "/youtube.svg"}
-            className="w-16 h-16 rounded-lg"
+            src={
+              summary?.source_thumbnail ||
+              summary?.channel_image_url ||
+              "/youtube.svg"
+            }
+            className="w-16 h-16 rounded-lg object-cover"
           />
           <div className="flex flex-col gap-2">
-            <div className="flex w-full justify-between">
-              <span className="text-[#ffffff60] font-raleway text-sm">
-                {summary?.channel_name}
-              </span>
+            <div className="flex w-full justify-between gap-2">
+              <div className="flex gap-2 items-center">
+                <img
+                  alt=""
+                  src={summary?.channel_logo || "/youtube.svg"}
+                  className="w-6 h-6 rounded-full object-cover"
+                />
+                <span className="text-[#ffffff60] font-raleway text-sm">
+                  {summary?.channel_name}
+                </span>
+              </div>
 
               {summary.is_favourite ? (
                 <IoMdHeart
