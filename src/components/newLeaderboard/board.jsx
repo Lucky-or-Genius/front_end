@@ -138,12 +138,12 @@ const Board = ({ data, toggleFavourite }) => {
                 {item.is_favourite ? (
                   <IoMdHeart
                     onClick={() => toggleFavourite(index, item?.user_id)}
-                    className="cursor-pointer text-error  text-xl"
+                    className="cursor-pointer text-error  text-xl active:scale-95 transition-all hover:scale-105"
                   />
                 ) : (
                   <IoMdHeartEmpty
                     onClick={() => toggleFavourite(index, item?.user_id)}
-                    className="cursor-pointer text-[#ffffff60] text-xl"
+                    className="cursor-pointer text-[#ffffff60] text-xl active:scale-95 transition-all hover:scale-105"
                   />
                 )}
               </div>

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Drawer, Menu, Space } from "antd";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { FiKey, FiLayout, FiSend, FiLogOut } from "react-icons/fi";
+import { MdOutlineInsights } from "react-icons/md";
 import { GoStack } from "react-icons/go";
 import { BsHddStack } from "react-icons/bs";
 import { googleLogout } from "@react-oauth/google";
@@ -45,7 +46,7 @@ const App = () => {
     {
       key: "/dashboard/Markets",
       label: "Markets",
-      icon: <BsHddStack />,
+      icon: <MdOutlineInsights />,
     },
     {
       key: "/dashboard/Favourites",

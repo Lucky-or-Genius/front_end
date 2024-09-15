@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { Image } from "react-bootstrap";
-import { getSinglePrediction } from "../../services/Predictions.service";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
 import { FaRegCalendarPlus, FaYoutube } from "react-icons/fa6";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
-import infoIcon from "../../assets/hover_info.png";
 
 const PredictionCard = ({
   category,

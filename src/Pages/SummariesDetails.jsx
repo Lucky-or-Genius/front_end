@@ -6,8 +6,6 @@ import { FaChartLine } from "react-icons/fa";
 import { MdPendingActions } from "react-icons/md";
 
 import {
-  allSummarySources,
-  summarySourceById,
   getSummaryPeople,
   getFullTranscript,
   getSummaryPrediction,
@@ -111,7 +109,11 @@ const SummariesDetails = () => {
         <div className="w-full flex flex-col items-center">
           <div className="flex flex-col items-center md:flex-row gap-4 md:gap-6 w-full justify-center py-6 ">
             <img
-              src={sourceSummary?.channel_image_url}
+              src={
+                sourceSummary?.channel_logo
+                  ? sourceSummary?.channel_logo
+                  : sourceSummary?.channel_image_url
+              }
               alt=""
               width={100}
               height={100}

@@ -8,6 +8,7 @@ import Select from "@mui/material/Select";
 export default function BasicSelect({ setStatus, status, values }) {
   const handleChange = (event) => {
     setStatus(event.target.value);
+    console.log(event.target.value);
   };
 
   return (
