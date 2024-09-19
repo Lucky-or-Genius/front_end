@@ -45,7 +45,7 @@ const Chart = ({ data }) => {
         },
         splitLine: {
           lineStyle: {
-            color: "#ccc",
+            color: "#cccccc20",
           },
         },
       },
@@ -55,12 +55,6 @@ const Chart = ({ data }) => {
           type: "line",
           smooth: true,
           data: flattenedValues,
-          areaStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-              { offset: 0, color: "#14c8d4" },
-              { offset: 1, color: "#43eec6" },
-            ]),
-          },
           lineStyle: {
             color: "#14c8d4",
             width: 2,

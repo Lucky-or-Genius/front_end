@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
 import { FaRegCalendarPlus, FaYoutube } from "react-icons/fa6";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { IoMdHeart } from "react-icons/io";
 
 const PredictionCard = ({
   category,
@@ -17,9 +17,7 @@ const PredictionCard = ({
   status,
   userId,
   predictionId,
-  favourite,
   toggleFavourite,
-  index,
 }) => {
   const navigate = useNavigate();
 
@@ -82,24 +80,16 @@ const PredictionCard = ({
               </span>
 
               <span
-                className="font-bold rounded-full px-2"
+                className="font-bold"
                 style={{
                   color:
                     status === "PENDING"
                       ? "#c2964b"
                       : status === "TRUE"
                       ? "#23B678"
-                      : status === "PARTIALLY TRUE"
-                      ? "#388E3C"
+                        ? "#388E3C"
+                        : status === "PENDING"
                       : "#E72E2E",
-                  backgroundColor:
-                    status === "PENDING"
-                      ? "#c2964b30"
-                      : status === "TRUE"
-                      ? "#23B67830"
-                      : status === "PARTIALLY TRUE"
-                      ? "#388E3C30"
-                      : "#E72E2E30",
                 }}
               >
                 # {status}
@@ -108,23 +98,10 @@ const PredictionCard = ({
           </div>
 
           <div className="">
-            {favourite ? (
-              <IoMdHeart
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggleFavourite(index, predictionId);
-                }}
-                className="cursor-pointer text-error text-xl active:scale-95 transition-all hover:scale-105"
-              />
-            ) : (
-              <IoMdHeartEmpty
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggleFavourite(index, predictionId);
-                }}
-                className="cursor-pointer text-[#ffffff60] text-xl active:scale-95 transition-all hover:scale-105"
-              />
-            )}
+            <IoMdHeart
+              onClick={() => toggleFavourite(predictionId)}
+              className="cursor-pointer text-error  text-2xl"
+            />
           </div>
         </div>
       </div>

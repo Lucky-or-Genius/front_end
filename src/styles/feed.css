@@ -31,12 +31,7 @@ a {
   width: 75%;
   overflow-y: auto;
 }
-.feed-part2 {
-  width: 25%;
-  overflow-y: auto;
-  padding: 0px 20px;
-  height: 100%;
-}
+
 .recent-predictions {
 }
 .rp-heading {

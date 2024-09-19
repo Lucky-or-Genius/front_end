@@ -44,7 +44,7 @@ const Leader = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [category, id, predictionType]);
 
   const getSortedUserSubject = async (value) => {
     getSortedProfilesBySubjects(id, value)
@@ -106,7 +106,14 @@ const Leader = () => {
     },
     {
       title: "Predictions",
-      content: <PredictionSection userPredictions={userPredictions} />,
+      content: (
+        <PredictionSection
+          setUserPredictions={setUserPredictions}
+          userPredictions={userPredictions}
+          setPredictionType={setPredictionType}
+          setCategory={setCategory}
+        />
+      ),
     },
   ];
 
@@ -260,7 +267,7 @@ const Leader = () => {
       </div>
       <div className="w-full flex justify-center py-4">
         {userData?.length > 0 && (
-          <Tabs items={items} defaultOpen={defaultOpen} />
+          <Tabs items={items} defaultOpen={defaultOpen} className={"!w-full"} />
         )}
       </div>
     </div>

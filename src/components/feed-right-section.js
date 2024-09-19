@@ -7,12 +7,11 @@ const feedrightSection = ({ topPredictorsData }) => {
     <div
       className="right-section"
       style={{
-        width: "30%",
         overflowY: "auto",
         height: "100%",
         width: "100%",
         borderRadius: "10px",
-        // padding: "0 16px 0 0",
+        padding: "0 16px",
         display: "flex",
         flexDirection: "column",
       }}

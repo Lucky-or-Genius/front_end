@@ -7,6 +7,7 @@ import { getSinglePrediction } from "../services/Predictions.service";
 import "../styles/feedCard.css";
 import { useNavigate } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import {
   FaRegCalendarPlus,
   FaYoutube,
@@ -26,13 +27,15 @@ const FeedCard = ({
   status,
   userId,
   predictionId,
-  setOpenShare,
   onCardClick,
   isOpen,
+  favourite,
+  index1,
+  index2,
+  toggleFavourite,
 }) => {
   const navigate = useNavigate();
 
-  const [openProof, setOpenProof] = useState(false);
   const [val, setVal] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -87,20 +90,41 @@ const FeedCard = ({
             </span>
           </div>
         </div>
-        <div className="flex gap-2 ">
-          <span className="bg-[#ffffff10] px-2 py-1 rounded-full flex gap-2 items-center text-xs text-[#ffffff80]">
-            Source : <FaYoutube />
-          </span>
+        <div className="flex gap-2 items-center">
+          <div className="flex gap-2 ">
+            <span className="bg-[#ffffff10] px-2 py-1 rounded-full flex gap-2 items-center text-center text-xs text-[#ffffff80]">
+              #{category}
+            </span>
+          </div>
+
+          <div className="">
+            {favourite ? (
+              <IoMdHeart
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFavourite(index1, index2, predictionId);
+                }}
+                className="cursor-pointer text-error text-xl active:scale-95 transition-all hover:scale-105"
+              />
+            ) : (
+              <IoMdHeartEmpty
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFavourite(index1, index2, predictionId);
+                }}
+                className="cursor-pointer text-[#ffffff60] text-xl active:scale-95 transition-all hover:scale-105"
+              />
+            )}
+          </div>
         </div>
       </div>
+
       <div className="card-description font-raleway">
         <p>{prediction}</p>
       </div>
+
       <div className="flex w-full flex-wrap items-start gap-x-6 gap-y-4 text-[#ffffff80] text-sm pt-4">
-        <span className="bg-[#ffffff10] px-2 rounded-full order-1">
-          #{category}
-        </span>
-        <div className="flex gap-4 order-3">
+        <div className="flex gap-4 order-1">
           <p className="flex gap-2 items-center ">
             <FaRegCalendarPlus /> <span>{madeOn}</span>
           </p>
@@ -111,8 +135,12 @@ const FeedCard = ({
           </p>
         </div>
 
+        <span className="bg-[#ffffff10] px-2 rounded-full order-2 flex gap-2 items-center">
+          Source : <FaYoutube />
+        </span>
+
         <span
-          className="font-bold order-2"
+          className="font-bold order-3 rounded-full px-2"
           style={{
             color:
               status === "PENDING"
@@ -122,6 +150,14 @@ const FeedCard = ({
                 : status === "PARTIALLY TRUE"
                 ? "#388E3C"
                 : "#E72E2E",
+            backgroundColor:
+              status === "PENDING"
+                ? "#c2964b30"
+                : status === "TRUE"
+                ? "#23B67830"
+                : status === "PARTIALLY TRUE"
+                ? "#388E3C30"
+                : "#E72E2E30",
           }}
         >
           # {status}
@@ -159,7 +195,7 @@ const FeedCard = ({
               cursor: "pointer",
               color: "#00000040",
             }}
-            onClick={() => setOpenShare(true)}
+            // onClick={() => setOpenShare(true)}
           />
         </div>
       </div>

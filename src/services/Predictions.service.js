@@ -1,8 +1,10 @@
 import Axios from "../utils/axios";
 
 //
-export const getPredictions = async (page) => {
-  return await Axios.get(`all-predictions?page=${page}&pageSize=14`);
+export const getPredictions = async (page, accountId) => {
+  return await Axios.get(
+    `all-predictions?accountId=${accountId}&page=${page}&pageSize=14`
+  );
 };
 export const getSortedPrediction = async (category) => {
   return await Axios.get(`predictions?category=${category}`);
@@ -28,4 +30,9 @@ export const getPredictionSingle = async (id, category, prediction) => {
 };
 export const getSinglePrediction = async (id) => {
   return await Axios.get(`predictions?predictionId=${id}`);
+};
+
+export const addRemoveFavourite = async (params) => {
+  const res = await Axios.post("toggle-favorite-prediction", params);
+  return res.data;
 };

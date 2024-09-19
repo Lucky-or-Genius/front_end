@@ -4,15 +4,18 @@ import Tabs from "../components/common/tabs";
 import Channels from "../components/newFavourites/channels";
 import Predictors from "../components/newFavourites/predictors";
 import Sources from "../components/newFavourites/sources";
+import Predictions from "../components/newFavourites/predictions";
 import { leaderBoardData } from "../services/Leaderboards.service";
 import { channelsData } from "../services/channels.service";
 import { allSummarySources } from "../services/summaries.services";
+import { getPredictions } from "../services/Predictions.service";
 
 const Favourites = () => {
   const accountId = localStorage.getItem("accountId");
   const [predictors, setPredictors] = useState([]);
   const [channels, setChannels] = useState([]);
   const [sources, setSources] = useState([]);
+  const [predictions, setPredictions] = useState([]);
 
   const getPredictors = useCallback(async () => {
     try {
@@ -55,10 +58,25 @@ const Favourites = () => {
     }
   }, [accountId]);
 
+  const getPredictions = useCallback(async () => {
+    try {
+      const res = await accountId;
+
+      const filteredData = [...res.data].filter(
+        (obj) => obj.is_favourite === true
+      );
+
+      setSources(filteredData);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [accountId]);
+
   useEffect(() => {
     getPredictors();
     getChannels();
     getSources();
+    getPredictions();
   }, []);
 
   const Items = [
@@ -75,6 +93,15 @@ const Favourites = () => {
     {
       title: "Sources",
       content: <Sources sources={sources} setSources={setSources} />,
+    },
+    {
+      title: "Predictions",
+      content: (
+        <Predictions
+          predictions={predictions}
+          setPredictions={setPredictions}
+        />
+      ),
     },
   ];
 
