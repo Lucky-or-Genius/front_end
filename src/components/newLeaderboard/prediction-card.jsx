@@ -5,6 +5,7 @@ import { FaCrown } from "react-icons/fa";
 import { FaRegCalendarPlus, FaYoutube } from "react-icons/fa6";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
+import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
 const PredictionCard = ({
   category,
@@ -16,13 +17,11 @@ const PredictionCard = ({
   status,
   userId,
   predictionId,
-  setOpenShare,
-  isOpen,
+  favourite,
+  toggleFavourite,
+  index,
 }) => {
   const navigate = useNavigate();
-
-  const [val, setVal] = useState({});
-  const [loading, setLoading] = useState(false);
 
   return (
     <Link
@@ -55,8 +54,8 @@ const PredictionCard = ({
             </span>
           </div>
         </div>
-        <span className="px-2 bg-[#ffffff10] rounded-full text-[12px] text-center flex gap-2 items-center">
-          Source : <FaYoutube />
+        <span className="px-2 bg-[#ffffff10] rounded-full text-[#ffffff80] text-[12px] text-center">
+          #{category}
         </span>
       </div>
       <div className="flex flex-col justify-between h-[80%] pt-2">
@@ -64,36 +63,69 @@ const PredictionCard = ({
           <p>{prediction}</p>
         </div>
         <div className="flex w-full 2md:items-center text-[#ffffff80] text-[13px] gap-4 pt-4 flex-col 2md:flex-row  flex-wrap">
-          <div className="flex gap-4">
-            <p className="flex gap-2 items-center ">
-              <FaRegCalendarPlus /> <span>{madeOn}</span>
-            </p>
-            <CgArrowLongRightC />
-            <p className="flex gap-2 items-center ">
-              <FaFlagCheckered />{" "}
-              <span>{resolvedOn !== null ? resolvedOn : "Null"}</span>
-            </p>
-          </div>
-          <div className="flex gap-4">
-            <div className="bg-[#ffffff10] px-2 rounded-full flex gap-2 items-center overflow-hidden text-ellipsis whitespace-nowrap clamp-line-1 md:max-w-24">
-              #{category}
+          <div className="flex w-full 2md:items-center text-[#ffffff80] text-[13px] gap-4 pt-4 justify-between">
+            <div className="flex gap-4 flex-col 2md:flex-row">
+              <div className="flex gap-4">
+                <p className="flex gap-2 items-center ">
+                  <FaRegCalendarPlus /> <span>{madeOn}</span>
+                </p>
+                <CgArrowLongRightC />
+                <p className="flex gap-2 items-center ">
+                  <FaFlagCheckered />{" "}
+                  <span>{resolvedOn !== null ? resolvedOn : "Null"}</span>
+                </p>
+              </div>
+
+              <div className="flex gap-4">
+                <span className="bg-[#ffffff10] px-2 w-fit rounded-full flex gap-2 items-center">
+                  Source : <FaYoutube />
+                </span>
+
+                <span
+                  className="font-bold rounded-full px-2"
+                  style={{
+                    color:
+                      status === "PENDING"
+                        ? "#c2964b"
+                        : status === "TRUE"
+                        ? "#23B678"
+                        : status === "PARTIALLY TRUE"
+                        ? "#388E3C"
+                        : "#E72E2E",
+                    backgroundColor:
+                      status === "PENDING"
+                        ? "#c2964b30"
+                        : status === "TRUE"
+                        ? "#23B67830"
+                        : status === "PARTIALLY TRUE"
+                        ? "#388E3C30"
+                        : "#E72E2E30",
+                  }}
+                >
+                  # {status}
+                </span>
+              </div>
             </div>
 
-            <span
-              className="font-bold flex gap-2"
-              style={{
-                color:
-                  status === "PENDING"
-                    ? "#c2964b"
-                    : status === "TRUE"
-                    ? "#23B678"
-                      ? "#388E3C"
-                      : status === "PENDING"
-                    : "#E72E2E",
-              }}
-            >
-              # {status}
-            </span>
+            <div className="">
+              {favourite ? (
+                <IoMdHeart
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleFavourite(index, predictionId);
+                  }}
+                  className="cursor-pointer text-error text-xl active:scale-95 transition-all hover:scale-105"
+                />
+              ) : (
+                <IoMdHeartEmpty
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toggleFavourite(index, predictionId);
+                  }}
+                  className="cursor-pointer text-[#ffffff60] text-xl active:scale-95 transition-all hover:scale-105"
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -1,9 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { toast } from "react-hot-toast";
+import { LuPlus } from "react-icons/lu";
 
 import Filters from "../components/newSummaries/filters";
 import SummaryCard from "../components/newSummaries/summaryCard";
+import AddSourceModal from "../components/newSummaries/addSourceModal";
 import {
   allSummarySources,
   searchTerm,
@@ -15,6 +17,8 @@ import {
 const NewSummaries = () => {
   const [summaries, setSummaries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showModal, setShowModal] = useState(false);
+
   const accountId = localStorage.getItem("accountId");
 
   const handleSearchChange = (event) => {
@@ -80,11 +84,20 @@ const NewSummaries = () => {
 
   return (
     <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0">
-      <div className="w-full flex py-6 justify-center">
+      <div className="w-full flex py-6 justify-center flex-col md:flex-row gap-4 items-center">
         <span className="font-raleway text-3xl text-white font-[600]">
           Sources
         </span>
+        <div className="md:absolute right-10 top-6">
+          <button
+            className="text-[#ffffff60] font-raleway flex gap-2 items-center font-[600] px-4 py-2 rounded-lg hover:bg-[#ffffff20] active:bg-[#ffffff40] hover:text-white transition-all ease-in-out border border-[#ffffff20]"
+            onClick={() => setShowModal(true)}
+          >
+            <LuPlus className="text-lg" /> Add Source
+          </button>
+        </div>
       </div>
+
       <div className="flex flex-col gap-2 w-full items-center pb-6">
         <div className="border border-primary400 rounded-full flex px-4 py-2 items-center text-white text-poppins gap-4 w-full md:w-1/3">
           <FiSearch />
@@ -112,6 +125,7 @@ const NewSummaries = () => {
           />
         ))}
       </div>
+      {showModal && <AddSourceModal setShowModal={setShowModal} />}
     </div>
   );
 };

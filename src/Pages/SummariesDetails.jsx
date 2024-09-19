@@ -165,12 +165,6 @@ const SummariesDetails = () => {
         ""
       )}
 
-      {/* <div className="w-full flex py-6 justify-center">
-        <span className="font-raleway text-3xl text-white font-[600]">
-          Summary
-        </span>
-      </div> */}
-
       <div className="w-full flex justify-center">
         <Tabs items={items} className={"!w-full"} />
       </div>

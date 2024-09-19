@@ -7,6 +7,7 @@ import { CgShutterstock } from "react-icons/cg";
 import { FaChartLine } from "react-icons/fa";
 import { MdPendingActions } from "react-icons/md";
 import Tabs from "../components/common/tabs";
+// import { transformApiResponse } from "../utils/convertToResponse";
 
 const Predictor = () => {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ const Predictor = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       const res = await getSinglePrediction(id);
+
       setPredictionData(res.data);
     };
 
@@ -167,9 +169,16 @@ const Predictor = () => {
           />
         )}
       </div>
+
       <div className="w-full flex justify-center pb-4">
         {predictionData?.length > 0 && <Tabs items={items} />}
       </div>
+
+      {/* <div className="">
+        <StructuredDataRenderer
+          data={transformApiResponse(predictionData[0]?.structured_results)}
+        />
+      </div> */}
     </div>
   );
 };

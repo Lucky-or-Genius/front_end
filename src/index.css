@@ -86,3 +86,8 @@ code {
 .ant-drawer .ant-drawer-body {
   background: var(--primary-color) !important;
 }
+.css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+  background-color: #001d3d70 !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 16px !important;
+}

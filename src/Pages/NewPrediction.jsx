@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
 
 import PredictionCard from "../components/newPrediction/prediction-card";
 import {
   getPredictions,
   getSortedPrediction,
   getSortedCategory,
+  addRemoveFavourite,
 } from "../services/Predictions.service";
 import Filters from "../components/newPrediction/filters";
 import Pagination from "../components/newPrediction/pagination";
@@ -14,6 +16,7 @@ const NewPrediction = () => {
   const [predictions, setPredictions] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const accountId = localStorage.getItem("accountId");
 
   const fetchSortedPrediction = async (prediction) => {
     await getSortedPrediction(prediction)
@@ -36,10 +39,22 @@ const NewPrediction = () => {
   };
 
   const fetchPredictionData = useCallback(async () => {
-    const res = await getPredictions(currentPage);
+    const res = await getPredictions(currentPage, accountId);
     setPredictions(res.data.predictions);
     setTotalPages(res.data.pagination.totalPages);
   }, [currentPage]);
+
+  const toggleFavourite = (index, id) => {
+    const params = {
+      accountId: String(accountId),
+      predictionId: id,
+    };
+    const newData = [...predictions];
+    newData[index].is_favourite = !newData[index].is_favourite;
+    toast.success("updated!");
+    addRemoveFavourite(params);
+    setPredictions(newData);
+  };
 
   useEffect(() => {
     fetchPredictionData();
@@ -84,6 +99,9 @@ const NewPrediction = () => {
               status={prediction.prediction_validation}
               predictionId={prediction.prediction_id}
               userId={prediction.user_id}
+              favourite={prediction.is_favourite}
+              toggleFavourite={toggleFavourite}
+              index={index}
             />
           </motion.div>
         ))}

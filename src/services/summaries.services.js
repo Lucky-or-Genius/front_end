@@ -37,3 +37,7 @@ export const addRemoveFavourite = async (params) => {
   const res = await Axios.post("toggle-favorite-source", params);
   return res.data;
 };
+export const addSource = async (params) => {
+  const res = await Axios.post("add_url_source", params);
+  return res;
+};

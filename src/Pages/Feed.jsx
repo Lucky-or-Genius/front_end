@@ -1,28 +1,41 @@
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 import TrendingPredictionCard from "../components/trending-prediction-card";
 import FeedRightSection from "../components/feed-right-section";
-import ShareModal from "../components/shareModal";
 import FeedSkeleton from "../components/common/feed-skeleton";
 import { getFeedDetails } from "../services/Feed.service";
 import { leaderBoardData } from "../services/Leaderboards.service";
+import { addRemoveFavourite } from "../services/Predictions.service";
 import "../styles/feed.css";
 import FeedCard from "../components/feed-card";
 
 const Feed = () => {
-  const [openShare, setOpenShare] = useState(false);
   const [feedData, setFeedData] = useState([]);
   const [topPredictors, setTopPredictors] = useState([{}]);
   const [loading, setLoading] = useState(false);
   const [openRowIndex, setOpenRowIndex] = useState(null);
+  const accountId = localStorage.getItem("accountId");
 
   const handleRowClick = (index) => {
     setOpenRowIndex(openRowIndex === index ? null : index);
+  };
+  const toggleFavourite = (index1, index2, id) => {
+    const params = {
+      accountId: String(accountId),
+      predictionId: id,
+    };
+    const newData = [...feedData];
+    newData[index1].matches[index2].is_favourite =
+      !newData[index1].matches[index2].is_favourite;
+    toast.success("updated!");
+    addRemoveFavourite(params);
+    setFeedData(newData);
   };
 
   const getFeed = async () => {
     setLoading(true);
     try {
-      const response1 = await getFeedDetails();
+      const response1 = await getFeedDetails(accountId);
       const response2 = await leaderBoardData();
       setFeedData(response1.data);
       setTopPredictors(response2.data);
@@ -49,8 +62,8 @@ const Feed = () => {
               <div className="font-raleway text-2xl font-[500] text-primary400 py-4">
                 <label>Recent Predictions</label>
               </div>
-              {feedData?.map((feed, index) => (
-                <div className="" key={index}>
+              {feedData?.map((feed, index1) => (
+                <div className="" key={index1}>
                   <TrendingPredictionCard
                     news={feed.headline}
                     source={feed.source}
@@ -62,7 +75,7 @@ const Feed = () => {
                     description={feed.description}
                   />
                   <div className="rp-cards">
-                    {feed.matches.map((card, index) => (
+                    {feed.matches.map((card, index2) => (
                       <FeedCard
                         category={card.category}
                         userId={card.user_id}
@@ -71,12 +84,15 @@ const Feed = () => {
                         resolvedOn={card.fixed_date}
                         imgUrl={card.image_url}
                         predictionId={card.prediction_id}
-                        key={index}
+                        key={index2}
                         prediction={card.prediction}
-                        setOpenShare={setOpenShare}
                         status={card.status}
-                        onCardClick={() => handleRowClick(index)}
-                        isOpen={openRowIndex === index}
+                        onCardClick={() => handleRowClick(index2)}
+                        isOpen={openRowIndex === index2}
+                        index1={index1}
+                        index2={index2}
+                        toggleFavourite={toggleFavourite}
+                        favourite={card.is_favourite}
                       />
                     ))}
                   </div>
@@ -84,13 +100,11 @@ const Feed = () => {
               ))}
             </div>
           </div>
-          <div className="feed-part2">
+          <div className=" overflow-y  w-[25%]">
             <FeedRightSection topPredictorsData={topPredictors} />
           </div>
         </div>
       )}
-
-      <ShareModal showModal={openShare} setShowModal={setOpenShare} />
     </div>
   );
 };
