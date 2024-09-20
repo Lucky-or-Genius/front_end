@@ -100,7 +100,7 @@ const Feed = () => {
               ))}
             </div>
           </div>
-          <div className=" overflow-y  w-[25%]">
+          <div className=" overflow-y  w-[25%] md:flex hidden">
             <FeedRightSection topPredictorsData={topPredictors} />
           </div>
         </div>
