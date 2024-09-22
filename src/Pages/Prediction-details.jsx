@@ -1,27 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { getSinglePrediction } from "../services/Predictions.service";
-import PredictorCard from "../components/newPrediction/predictor-card";
+import { FaArrowLeftLong } from "react-icons/fa6";
 import { CgShutterstock } from "react-icons/cg";
 import { FaChartLine } from "react-icons/fa";
 import { MdPendingActions } from "react-icons/md";
-import Tabs from "../components/common/tabs";
-// import { transformApiResponse } from "../utils/convertToResponse";
+
+import { getSinglePrediction } from "../services/Predictions.service";
+import PredictorCard from "../components/newPrediction/predictor-card";
+import { transformApiResponse } from "../utils/convertToResponse";
+import Evidences from "../components/newPrediction/evidences";
 
 const Predictor = () => {
   const navigate = useNavigate();
   const id = useParams().id;
-  const [predictionData, setPredictionData] = useState();
+  const [predictionData, setPredictionData] = useState([]);
   const [openRow, setOpenRow] = useState(true);
-
-  const clearData = (rawData) => {
-    if (typeof rawData === "string") {
-      const cleanData = rawData.replace(/\\n/g, "\n").replace(/^\["|"\]$/g, "");
-      return cleanData.split("\n").filter((line) => line.trim() !== "");
-    }
-    return [];
-  };
 
   const handleClick = () => {
     setOpenRow(!openRow);
@@ -36,52 +29,6 @@ const Predictor = () => {
 
     fetchUserData();
   }, [id]);
-
-  const items = [
-    {
-      content: (
-        <div className="font-poppins text-white text-sm md:text-base">
-          {predictionData?.length > 0 && predictionData[0]?.justification}
-        </div>
-      ),
-      title: "Justification",
-    },
-    {
-      content: (
-        <div className="font-poppins text-white text-sm md:text-base">
-          {predictionData?.length > 0 &&
-            clearData(predictionData[0]?.summaries).map((point, idx) => (
-              <li key={idx} style={{ marginBottom: "10px" }}>
-                {point}
-              </li>
-            ))}
-        </div>
-      ),
-      title: "Summaries",
-    },
-    {
-      content: (
-        <div>
-          {predictionData?.length > 0 &&
-            predictionData[0]?.sources.map((val, index) => {
-              return (
-                <div
-                  className="font-poppins text-white text-sm md:text-base w-full"
-                  key={index}
-                >
-                  {clearData(val).map((point, idx) => (
-                    <li key={idx} className="flex flex-wrap">
-                      {point}
-                    </li>
-                  ))}
-                </div>
-              );
-            })}
-        </div>
-      ),
-      title: "Sources",
-    },
-  ];
 
   return (
     <div className="bg-primary min-h-screen w-full p-4 2md:p-8 overflow-y-auto h-full relative flex flex-col items-center">
@@ -170,15 +117,15 @@ const Predictor = () => {
         )}
       </div>
 
-      <div className="w-full flex justify-center pb-4">
-        {predictionData?.length > 0 && <Tabs items={items} />}
-      </div>
-
-      {/* <div className="">
-        <StructuredDataRenderer
-          data={transformApiResponse(predictionData[0]?.structured_results)}
+      <div className="flex w-full gap-12 py-12 items-center flex-col">
+        <span className="text-white font-raleway text-3xl">Evidences</span>
+        <Evidences
+          data={
+            predictionData?.length > 0 &&
+            transformApiResponse(predictionData[0]?.structured_results)
+          }
         />
-      </div> */}
+      </div>
     </div>
   );
 };
