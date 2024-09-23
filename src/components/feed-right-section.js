@@ -20,7 +20,7 @@ const feedrightSection = ({ topPredictorsData }) => {
         <h4>Top Predictors</h4>
       </div>
       <div className="backdrop-blur-md bg-[#ffffff20] flex flex-col rounded-xl font-poppins">
-        {topPredictorsData.map((predictor, index) => (
+        {topPredictorsData.slice(0, 10).map((predictor, index) => (
           <FeedRightSectionColumns
             key={index}
             rank={index + 1}

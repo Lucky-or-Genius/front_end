@@ -84,13 +84,13 @@ const NewSummaries = () => {
 
   return (
     <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0">
-      <div className="w-full flex py-6 justify-center flex-col md:flex-row gap-4 items-center">
+      <div className="w-full flex py-6 justify-center flex-col md:flex-row gap-4 items-center relative">
         <span className="font-raleway text-3xl text-white font-[600]">
           Sources
         </span>
         <div className="md:absolute right-10 top-6">
           <button
-            className="text-[#ffffff60] font-raleway flex gap-2 items-center font-[600] px-4 py-2 rounded-lg hover:bg-[#ffffff20] active:bg-[#ffffff40] hover:text-white transition-all ease-in-out border border-[#ffffff20]"
+            className="text-primary400  font-raleway flex gap-2 items-center font-[600] px-4 py-2 rounded-lg hover:bg-[#ffffff20] active:bg-[#ffffff40] hover:text-white transition-all ease-in-out border border-primary400"
             onClick={() => setShowModal(true)}
           >
             <LuPlus className="text-lg" /> Add Source

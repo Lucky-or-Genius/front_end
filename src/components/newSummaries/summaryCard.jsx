@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
 import AnimatedTooltip from "../common/animated-tooltip";
+import { formatNumber } from "../../utils/helpers";
 
 const SummaryCard = ({ summary, toggleFavourite, index }) => {
   const navigate = useNavigate();
@@ -120,7 +121,7 @@ const SummaryCard = ({ summary, toggleFavourite, index }) => {
         <div className="w-full flex pt-4 gap-2 flex-wrap">
           <div className="bg-[#ffffff20] rounded-full px-2 text-white font-poppins">
             <span className="text-[#ffffff80] font-raleway"> Views: </span>
-            {Math.round(summary?.views / 1000000)}M
+            {formatNumber(summary.views)}
           </div>
           <div className="bg-[#ffffff20] rounded-full px-2 text-white font-poppins">
             <span className="text-[#ffffff80] font-raleway"> Length: </span>

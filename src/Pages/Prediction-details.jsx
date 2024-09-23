@@ -107,7 +107,7 @@ const Predictor = () => {
         </div>
       )}
 
-      <div className="py-8 w-full flex justify-center items-center">
+      <div className=" pb-4 pt-8 w-full flex justify-center items-center">
         {predictionData?.length > 0 && (
           <PredictorCard
             predictionData={predictionData}
@@ -117,8 +117,47 @@ const Predictor = () => {
         )}
       </div>
 
-      <div className="flex w-full gap-12 py-12 items-center flex-col">
-        <span className="text-white font-raleway text-3xl">Evidences</span>
+      <div className="bg-[#ffffff20] p-4 md:p-6 rounded-lg md:w-4/5 w-full flex flex-col gap-3">
+        <span className="text-white font-semibold font-raleway text-xl md:text-2xl">
+          Prediction Synopsis
+        </span>
+
+        <div className="text-[#ffffff80] text-lg font-raleway font-semibold">
+          The Prediction Status is{" "}
+          {
+            <span
+              className="font-bold rounded-full px-2"
+              style={{
+                color:
+                  predictionData[0]?.prediction_validation === "PENDING"
+                    ? "#c2964b"
+                    : predictionData[0]?.prediction_validation === "TRUE"
+                    ? "#23B678"
+                    : predictionData[0]?.prediction_validation ===
+                      "PARTIALLY TRUE"
+                    ? "#388E3C"
+                    : "#E72E2E",
+                backgroundColor:
+                  predictionData[0]?.prediction_validation === "PENDING"
+                    ? "#c2964b30"
+                    : predictionData[0]?.prediction_validation === "TRUE"
+                    ? "#23B67830"
+                    : predictionData[0]?.prediction_validation ===
+                      "PARTIALLY TRUE"
+                    ? "#388E3C30"
+                    : "#E72E2E30",
+              }}
+            >
+              # {predictionData[0]?.prediction_validation}
+            </span>
+          }
+        </div>
+        <p className=" font-poppins text-lg text-[#ffffff80]">
+          {predictionData[0]?.justification}
+        </p>
+      </div>
+
+      <div className="flex w-full gap-12 py-6 items-center flex-col">
         <Evidences
           data={
             predictionData?.length > 0 &&

@@ -87,7 +87,7 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
             Source : <FaYoutube />
           </span>
           <span
-            className="font-bold"
+            className="font-bold px-2 rounded-full"
             style={{
               color:
                 predictionData[0]?.prediction_validation === "PENDING"
@@ -98,6 +98,15 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
                     "PARTIALLY TRUE"
                   ? "#388E3C"
                   : "#E72E2E",
+              backgroundColor:
+                predictionData[0]?.prediction_validation === "PENDING"
+                  ? "#c2964b30"
+                  : predictionData[0]?.prediction_validation === "TRUE"
+                  ? "#23B67830"
+                  : predictionData[0]?.prediction_validation ===
+                    "PARTIALLY TRUE"
+                  ? "#388E3C30"
+                  : "#E72E2E30",
             }}
           >
             # {predictionData[0]?.prediction_validation}

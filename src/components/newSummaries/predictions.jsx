@@ -46,7 +46,7 @@ const Predictions = ({ predictionData }) => {
                   </span>
                 </div>
               </div>
-              <span className="px-2 bg-[#ffffff10] rounded-full text-[12px] text-center">
+              <span className="px-2 bg-[#ffffff10] rounded-full text-[12px] text-center text-[#ffffff80]">
                 #{prediction?.category}
               </span>
             </div>
@@ -76,7 +76,7 @@ const Predictions = ({ predictionData }) => {
                   </span>
 
                   <span
-                    className="font-bold"
+                    className="font-bold px-2 rounded-full"
                     style={{
                       color:
                         prediction?.prediction_validation === "PENDING"
@@ -86,6 +86,14 @@ const Predictions = ({ predictionData }) => {
                             ? "#388E3C"
                             : prediction?.prediction_validation === "PENDING"
                           : "#E72E2E",
+                      backgroundColor:
+                        prediction?.prediction_validation === "PENDING"
+                          ? "#c2964b30"
+                          : prediction?.prediction_validation === "TRUE"
+                          ? "#23B67830"
+                            ? "#388E3C30"
+                            : prediction?.prediction_validation === "PENDING"
+                          : "#E72E2E30",
                     }}
                   >
                     # {prediction?.prediction_validation}

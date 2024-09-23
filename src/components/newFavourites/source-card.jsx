@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoMdHeart } from "react-icons/io";
 
 import AnimatedTooltip from "../common/animated-tooltip";
+import { formatNumber } from "../../utils/helpers";
 
 const SourceCard = ({ source, toggleFavourite }) => {
   const navigate = useNavigate();
@@ -108,7 +109,7 @@ const SourceCard = ({ source, toggleFavourite }) => {
         <div className="w-full flex pt-4 gap-2 flex-wrap">
           <div className="bg-[#ffffff20] rounded-full px-2 text-white font-poppins">
             <span className="text-[#ffffff80] font-raleway"> Views: </span>
-            {Math.round(source?.views / 1000000)}M
+            {formatNumber(source.views)}
           </div>
           <div className="bg-[#ffffff20] rounded-full px-2 text-white font-poppins">
             <span className="text-[#ffffff80] font-raleway"> Length: </span>

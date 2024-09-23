@@ -14,25 +14,26 @@ import {
   getProfilesBySubjects,
   getSortedProfilesBySubjects,
 } from "../services/Profiles.service";
-import {
-  getPredictionSingle,
-  getSortedPrediction,
-} from "../services/Predictions.service";
+import { getPredictionSingle } from "../services/Predictions.service";
+import { allPredictorSummarySources } from "../services/summaries.services";
 import { predictorData } from "../services/Leaderboards.service";
 import Tabs from "../components/common/tabs";
 import BarChart from "../components/newLeaderboard/barChart";
 import PieChart from "../components/newLeaderboard/pieChart";
 import PredictionSection from "../components/newLeaderboard/prediction-section";
+import SourceSection from "../components/newLeaderboard/source-section";
 import ChartFilters from "../components/newLeaderboard/chart-filters";
 
 const Leader = () => {
   const [userData, setUserData] = useState({});
   const [predictor, setPredictor] = useState({});
   const [userPredictions, setUserPredictions] = useState({});
+  const [summaries, setSummaries] = useState();
   const [category, setCategory] = useState();
   const [predictionType, setPredictionType] = useState();
   const navigate = useNavigate();
   const id = useParams().id;
+  const accountId = localStorage.getItem("accountId");
 
   const query = new URLSearchParams(useLocation().search);
   const defaultOpen = query.get("defaultOpen");
@@ -45,6 +46,16 @@ const Leader = () => {
       console.log(error);
     }
   }, [category, id, predictionType]);
+
+  const fetchUserSources = useCallback(async () => {
+    try {
+      const res = await allPredictorSummarySources(accountId, id);
+      console.log("res.data", res.data);
+      setSummaries(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [accountId, id]);
 
   const getSortedUserSubject = async (value) => {
     getSortedProfilesBySubjects(id, value)
@@ -83,6 +94,10 @@ const Leader = () => {
     fetchUserPrediction();
   }, [fetchUserPrediction]);
 
+  useEffect(() => {
+    fetchUserSources();
+  }, [fetchUserSources]);
+
   const items = [
     {
       title: "Analytics",
@@ -113,6 +128,12 @@ const Leader = () => {
           setPredictionType={setPredictionType}
           setCategory={setCategory}
         />
+      ),
+    },
+    {
+      title: "Sources",
+      content: (
+        <SourceSection setSummaries={setSummaries} summaries={summaries} />
       ),
     },
   ];
