@@ -43,7 +43,7 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
           />
         </div>
         <div className="flex gap-4 items-center justify-between p-3">
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center p-2 bg-[#ffffff20] font-semibold rounded-md">
             <img
               src={
                 channel?.ChannelLogo !== null
@@ -57,7 +57,7 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
               alt="img"
               className="w-10 h-10 object-cover rounded-full"
             />
-            <span className=" font-raleway text-white uppercase text-lg active:scale-95 transition-all hover:scale-105">
+            <span className=" font-raleway text-white uppercase text-lg">
               {channel?.ChannelName}
             </span>
           </div>

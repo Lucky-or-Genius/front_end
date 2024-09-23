@@ -10,7 +10,7 @@ const Accordion = ({ isOpen, Heading, children }) => {
   const toggleAccordion = () => setOpen((prev) => !prev);
 
   return (
-    <div className="w-full 2md:w-4/5 mx-auto backdrop-blur-md border border-[#ffffff20] p-4 md:p-6 bg-[#ffffff20] rounded-xl hover:border-primary400 transition-all ease-in-out shadow-black">
+    <div className="w-full 2md:w-4/5 mx-auto backdrop-blur-md border-b border-[#ffffff20] py-4 md:py-6 hover:border-primary400 transition-all ease-in-out shadow-black">
       <button
         className="w-full flex items-center justify-between  text-lg font-semibold"
         onClick={toggleAccordion}
