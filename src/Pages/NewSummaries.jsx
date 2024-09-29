@@ -6,6 +6,7 @@ import { LuPlus } from "react-icons/lu";
 import Filters from "../components/newSummaries/filters";
 import SummaryCard from "../components/newSummaries/summaryCard";
 import AddSourceModal from "../components/newSummaries/addSourceModal";
+import Notification from "../components/newSummaries/notification";
 import {
   allSummarySources,
   searchTerm,
@@ -18,6 +19,8 @@ const NewSummaries = () => {
   const [summaries, setSummaries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [url, setUrl] = useState("");
+  const [showNotification, setShowNotification] = useState(false);
 
   const accountId = localStorage.getItem("accountId");
 
@@ -83,7 +86,7 @@ const NewSummaries = () => {
   }, [fetchSummariesData, searchQuery]);
 
   return (
-    <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0">
+    <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0 relative">
       <div className="w-full flex py-6 justify-center flex-col md:flex-row gap-4 items-center relative">
         <span className="font-raleway text-3xl text-white font-[600]">
           Sources
@@ -125,7 +128,17 @@ const NewSummaries = () => {
           />
         ))}
       </div>
-      {showModal && <AddSourceModal setShowModal={setShowModal} />}
+      {showModal && (
+        <AddSourceModal
+          setShowModal={setShowModal}
+          setUrl={setUrl}
+          url={url}
+          setNotification={setShowNotification}
+        />
+      )}
+      {showNotification && (
+        <Notification url={url} setShowNotification={setShowNotification} />
+      )}
     </div>
   );
 };

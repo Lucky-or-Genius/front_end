@@ -3,8 +3,9 @@ import React from "react";
 import { addRemoveFavourite } from "../../services/Predictions.service";
 import PredictionCard from "./prediction-card";
 
-const Channels = ({ predictions, setPredictions }) => {
+const Predictions = ({ predictions, setPredictions }) => {
   const accountId = localStorage.getItem("accountId");
+  // console.log(predictions);
 
   const toggleFavourite = (id) => {
     const params = {
@@ -20,6 +21,7 @@ const Channels = ({ predictions, setPredictions }) => {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-6 w-full">
       {predictions?.map((prediction, index) => (
         <PredictionCard
+          key={index}
           user={`${prediction.first_name} ${" "} ${prediction.last_name}`}
           imgUrl={prediction.image_url}
           prediction={prediction.prediction}
@@ -36,4 +38,4 @@ const Channels = ({ predictions, setPredictions }) => {
   );
 };
 
-export default Channels;
+export default Predictions;

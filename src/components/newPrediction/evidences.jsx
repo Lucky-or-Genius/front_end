@@ -45,7 +45,7 @@ const Evidences = ({ data }) => {
                     <span className="text-[#ffffff80] md:text-lg font-semibold font-raleway">
                       Sources:
                     </span>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-wrap">
                       {summary.source_ids?.map((sourceId, idx) => {
                         const source = item.sources[sourceId];
                         return (
@@ -55,7 +55,7 @@ const Evidences = ({ data }) => {
                               href={source?.url}
                               target="_blank"
                               rel="noreferrer"
-                              className="bg-[#ffffff20] text-primary400 px-2 py-1 rounded-md font-poppins text-sm"
+                              className="bg-[#ffffff20] text-primary400 px-2 py-1 rounded-md font-poppins text-sm line-clamp-3 "
                               key={idx}
                             >
                               {source?.title}

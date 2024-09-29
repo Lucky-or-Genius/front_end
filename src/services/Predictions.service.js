@@ -6,6 +6,10 @@ export const getPredictions = async (page, accountId) => {
     `all-predictions?accountId=${accountId}&page=${page}&pageSize=14`
   );
 };
+
+export const getPredictionsByUserId = async (id) => {
+  return await Axios.get(`predictions?accountId=${id}`);
+};
 export const getSortedPrediction = async (category) => {
   return await Axios.get(`predictions?category=${category}`);
 };

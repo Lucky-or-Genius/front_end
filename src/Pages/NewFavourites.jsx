@@ -8,7 +8,10 @@ import Predictions from "../components/newFavourites/predictions";
 import { leaderBoardData } from "../services/Leaderboards.service";
 import { channelsData } from "../services/channels.service";
 import { allSummarySources } from "../services/summaries.services";
-import { getPredictions } from "../services/Predictions.service";
+import {
+  getPredictionsByUserId,
+  getPredictions,
+} from "../services/Predictions.service";
 
 const Favourites = () => {
   const accountId = localStorage.getItem("accountId");
@@ -58,15 +61,17 @@ const Favourites = () => {
     }
   }, [accountId]);
 
-  const getPredictions = useCallback(async () => {
+  const GetPredictions = useCallback(async () => {
     try {
-      const res = await accountId;
+      const res = await getPredictionsByUserId(accountId);
 
-      const filteredData = [...res.data].filter(
-        (obj) => obj.is_favourite === true
-      );
+      console.log(res.data);
 
-      setSources(filteredData);
+      // const filteredData = [...res.data].filter(
+      //   (obj) => obj.is_favourite === true
+      // );
+
+      // setPredictions(filteredData);
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +81,7 @@ const Favourites = () => {
     getPredictors();
     getChannels();
     getSources();
-    getPredictions();
+    GetPredictions();
   }, []);
 
   const Items = [
