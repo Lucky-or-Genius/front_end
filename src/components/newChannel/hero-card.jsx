@@ -42,8 +42,8 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
             className="w-full h-32 object-cover rounded-t-xl"
           />
         </div>
-        <div className="flex gap-4 items-center justify-between p-3">
-          <div className="flex gap-4 items-center p-2 bg-[#ffffff20] font-semibold rounded-md">
+        <div className="flex gap-4 items-center justify-between p-3 bg-[#ffffff20] rounded-md mt-2 mx-2">
+          <div className="flex gap-4 items-center font-semibold ">
             <img
               src={
                 channel?.ChannelLogo !== null
