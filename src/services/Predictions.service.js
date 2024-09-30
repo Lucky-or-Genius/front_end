@@ -6,6 +6,9 @@ export const getPredictions = async (page, accountId) => {
     `all-predictions?accountId=${accountId}&page=${page}&pageSize=14`
   );
 };
+export const getPredictionsUser = async (accountId) => {
+  return await Axios.get(`all-predictions?accountId=${accountId}`);
+};
 
 export const getPredictionsByUserId = async (id) => {
   return await Axios.get(`predictions?accountId=${id}`);

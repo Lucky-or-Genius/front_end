@@ -50,7 +50,6 @@ const Leader = () => {
   const fetchUserSources = useCallback(async () => {
     try {
       const res = await allPredictorSummarySources(accountId, id);
-      console.log("res.data", res.data);
       setSummaries(res.data);
     } catch (error) {
       console.log(error);
@@ -60,7 +59,7 @@ const Leader = () => {
   const getSortedUserSubject = async (value) => {
     getSortedProfilesBySubjects(id, value)
       .then((res) => {
-        if (res.data.message === "No data found for the given userId") return;
+        // if (res.data.message === "No data found for the given userId") return;
         setUserData(res.data);
       })
       .catch((err) => {
@@ -287,9 +286,9 @@ const Leader = () => {
         </div>
       </div>
       <div className="w-full flex justify-center py-4">
-        {userData?.length > 0 && (
-          <Tabs items={items} defaultOpen={defaultOpen} className={"!w-full"} />
-        )}
+        {/* {userData?.length > 0 && ( */}
+        <Tabs items={items} defaultOpen={defaultOpen} className={"!w-full"} />
+        {/* )} */}
       </div>
     </div>
   );
