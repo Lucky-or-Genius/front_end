@@ -1,21 +1,12 @@
+// components/newLeaderboard/barChart.jsx
 import React, { useEffect } from "react";
 import * as echarts from "echarts";
 
 const BarChart = ({ data }) => {
-  // Default categories with zero counts
-  const defaultCategories = [
-    ["Economy", 0],
-    ["Finance", 0],
-    ["Politics", 0],
-    ["Sci & Tech", 0],
-    ["Social & Health", 0],
-    ["Other", 0],
-  ];
-
-  const categories =
-    data && data.message !== "No data found for the given userId"
-      ? data.categories.map((category) => [category.Category, category.count])
-      : defaultCategories;
+  const categories = data?.categories.map((category) => [
+    category.Category,
+    category.count,
+  ]);
 
   useEffect(() => {
     var chartDom = document.getElementById("main");
@@ -79,11 +70,6 @@ const BarChart = ({ data }) => {
     };
 
     option && myChart.setOption(option);
-
-    // Cleanup function
-    return () => {
-      myChart.dispose();
-    };
   }, [categories]);
 
   return (

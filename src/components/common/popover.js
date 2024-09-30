@@ -1,7 +1,7 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
 
-export default function BasicPopover({ children, trigger, className }) {
+export default function BasicPopover({ children, trigger }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -29,7 +29,6 @@ export default function BasicPopover({ children, trigger, className }) {
           vertical: "bottom",
           horizontal: "center",
         }}
-        className={`custom-popper custom-popper`}
       >
         {children}
       </Popover>

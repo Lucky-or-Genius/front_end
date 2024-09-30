@@ -51,7 +51,7 @@ const trendingPredictionCard = ({
         </div>
         <Link
           to={titleUrl}
-          className="text-white font-raleway md:px-0 mb-2 px-4 line-clamp-2"
+          className="text-white font-raleway md:px-0 pb-4 px-4"
           target="_blank"
         >
           {news}

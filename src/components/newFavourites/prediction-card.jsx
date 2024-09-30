@@ -80,7 +80,7 @@ const PredictionCard = ({
               </span>
 
               <span
-                className="font-bold px-2 rounded-full"
+                className="font-bold"
                 style={{
                   color:
                     status === "PENDING"
@@ -90,14 +90,6 @@ const PredictionCard = ({
                         ? "#388E3C"
                         : status === "PENDING"
                       : "#E72E2E",
-                  backgroundColor:
-                    status === "PENDING"
-                      ? "#c2964b30"
-                      : status === "TRUE"
-                      ? "#23B67830"
-                        ? "#388E3C30"
-                        : status === "PENDING"
-                      : "#E72E2E30",
                 }}
               >
                 # {status}
@@ -107,10 +99,7 @@ const PredictionCard = ({
 
           <div className="">
             <IoMdHeart
-              onClick={(e) => {
-                e.preventDefault();
-                toggleFavourite(predictionId);
-              }}
+              onClick={() => toggleFavourite(predictionId)}
               className="cursor-pointer text-error  text-2xl"
             />
           </div>
