@@ -1,15 +1,18 @@
-import React, { useState, useRef } from "react";
+import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 import Modal from "../common/modal";
 import useOutsideClick from "../../hooks/useOutsideClick";
 import { addSource } from "../../services/summaries.services";
+import { isValidYouTubeUrl } from "../../utils/helpers";
 
 const AddSourceModal = ({ setShowModal, setUrl, url, setNotification }) => {
   const modalRef = useRef(null);
+  const [error, setError] = useState("");
 
   const handleInput = (e) => {
     setUrl(e.target.value);
+    setError("");
   };
 
   useOutsideClick({
@@ -19,7 +22,12 @@ const AddSourceModal = ({ setShowModal, setUrl, url, setNotification }) => {
 
   const handleAddSource = async () => {
     if (url === "") {
-      toast.error("Please enter a URL");
+      setError("Please enter a URL");
+      return;
+    }
+
+    if (!isValidYouTubeUrl(url)) {
+      setError("Please enter a valid YouTube URL");
       return;
     }
 
@@ -37,13 +45,14 @@ const AddSourceModal = ({ setShowModal, setUrl, url, setNotification }) => {
       }
     } catch (error) {
       console.log(error);
+      toast.error("Error in adding source");
     }
   };
 
   return (
     <Modal>
       <div
-        className="bg-[#ffffff40] max-w-[500px] md:w-full w-[300px] p-4 rounded-lg flex flex-col gap-4"
+        className="bg-primary/80 border border-white max-w-[500px] md:w-full w-[300px] p-4 rounded-lg flex flex-col gap-4"
         ref={modalRef}
       >
         <span className="font-raleway text-white font-semibold text-xl">
@@ -52,17 +61,20 @@ const AddSourceModal = ({ setShowModal, setUrl, url, setNotification }) => {
 
         <input
           type="text"
-          placeholder="Enter URL"
+          placeholder="Enter YouTube URL"
           value={url}
           onChange={handleInput}
-          className="w-full outline-none placeholder:text-primary/70 bg-transparent border border-primary rounded-lg px-4 py-2 text-base font-poppins"
+          className="w-full text-primary400 outline-none placeholder:text-[#ffffff80] bg-transparent border border-[#ffffff80] rounded-lg px-4 py-2 text-base font-poppins"
         />
+        {error && (
+          <span className="text-red-500 text-sm font-poppins">{error}</span>
+        )}
         <div className="w-full flex justify-end">
           <button
             onClick={handleAddSource}
-            className="border border-primary px-4 py font-semibold active:scale-95 rounded-md text-sm md:text-base hover:bg-primary hover:text-white transition-all ease-in-out font-raleway"
+            className="border border-white px-4 py-2 font-semibold active:scale-95 rounded-md text-sm md:text-base bg-[#203955] text-white transition-all ease-in-out font-raleway"
           >
-            Add
+            ADD SOURCE
           </button>
         </div>
       </div>

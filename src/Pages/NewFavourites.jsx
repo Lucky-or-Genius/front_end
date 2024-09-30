@@ -9,8 +9,8 @@ import { leaderBoardData } from "../services/Leaderboards.service";
 import { channelsData } from "../services/channels.service";
 import { allSummarySources } from "../services/summaries.services";
 import {
-  getPredictionsByUserId,
-  getPredictions,
+  // getPredictionsByUserId,
+  getPredictionsUser,
 } from "../services/Predictions.service";
 
 const Favourites = () => {
@@ -63,15 +63,13 @@ const Favourites = () => {
 
   const GetPredictions = useCallback(async () => {
     try {
-      const res = await getPredictionsByUserId(accountId);
+      const res = await getPredictionsUser(accountId);
 
-      console.log(res.data);
+      const filteredData = [...res.data?.predictions].filter(
+        (obj) => obj.is_favourite === true
+      );
 
-      // const filteredData = [...res.data].filter(
-      //   (obj) => obj.is_favourite === true
-      // );
-
-      // setPredictions(filteredData);
+      setPredictions(filteredData);
     } catch (error) {
       console.log(error);
     }

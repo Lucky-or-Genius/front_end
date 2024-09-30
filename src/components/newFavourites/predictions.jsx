@@ -10,9 +10,9 @@ const Predictions = ({ predictions, setPredictions }) => {
   const toggleFavourite = (id) => {
     const params = {
       accountId: String(accountId),
-      channelId: id,
+      predictionId: id,
     };
-    const newData = predictions.filter((obj) => obj.channel_id !== id);
+    const newData = predictions.filter((obj) => obj.prediction_id !== id);
     setPredictions(newData);
     addRemoveFavourite(params);
   };
