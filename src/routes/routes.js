@@ -5,8 +5,6 @@ import SummariesDetails from "../Pages/SummariesDetails";
 import Predictions from "../Pages/NewPrediction";
 import Markets from "../Pages/NewMarkets";
 import MarketsGraph from "../Pages/MarketGraph";
-import OldMarkets from "../Pages/Markets";
-import Profiles from "../Pages/Profiles";
 import MyChannels from "../Pages/New-MyChannel";
 import Favourites from "../Pages/NewFavourites";
 import NewLeaderboard from "../Pages/NewLeaderboard";
@@ -50,15 +48,6 @@ const routes = [
   {
     path: "/dashboard/Markets",
     element: <Markets />,
-  },
-  {
-    path: "/dashboard/OldMarkets",
-    element: <OldMarkets />,
-  },
-
-  {
-    path: "/dashboard/Profiles",
-    element: <Profiles />,
   },
   {
     path: "/dashboard/MyChannels",

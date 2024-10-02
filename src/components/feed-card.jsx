@@ -375,7 +375,8 @@ text-sm text-[#ffffff80"
                 <div className="row-section-2">
                   <iframe
                     className="w-full h-[20vh] md:h-full rounded-lg md:rounded-xl object-cover"
-                    alt=""
+                    alt="yt-video"
+                    title="yt-video"
                     src={`https://www.youtube.com/embed/${val[0]?.youtube_id}?start=${val[0]?.youtube_start_time}`}
                   />
 
