@@ -9,7 +9,7 @@ export const getProfilesBySubjects = async (id) => {
 };
 export const getSortedProfilesBySubjects = async (id, value) => {
   return await Axios.get(
-    `profiles-categories?userId=${id}&&predictionValidation=${value}`
+    `profiles-categories?userId=${id}&predictionValidation=${value}`
   );
 };
 

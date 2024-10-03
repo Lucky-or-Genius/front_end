@@ -8,6 +8,7 @@ const Filters = ({ getSortedUserSubject }) => {
 
   const handleStatusClick = async (item, index) => {
     if (item === "PARTIALLY TRUE") item = "PARTIALLY%20TRUE";
+    if (item === "ALL") item = "";
     setActive(index);
     try {
       await getSortedUserSubject(item);
