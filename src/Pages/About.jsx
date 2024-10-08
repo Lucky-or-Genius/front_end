@@ -8,9 +8,12 @@ const About = () => {
       <Navbar />
       <div className="min-h-screen bg-[#0B0B0F] flex flex-col gap-8 p-4 md:p-16">
         <div className="flex gap-4 flex-col items-center">
-          <h2 className="text-white text-xl md:text-3xl font-raleway font-semibold">
+          <h2 className="text-white text-3xl font-raleway font-semibold">
             What we do
           </h2>
+          <span className="text-xl font-raleway text-primary400">
+            We’re changing the game by keeping the score.
+          </span>
           <span className="text-[#ffffff80] text-center font-poppins">
             Lucky or Genius is an AI-powered platform that tracks and processes
             digital content across the web and issues accountability profiles
@@ -43,9 +46,12 @@ const About = () => {
           </span>
         </div>
         <div className="flex gap-4 flex-col items-center pt-8">
-          <h2 className="text-white text-xl md:text-3xl font-raleway font-semibold">
+          <h2 className="text-white text-3xl font-raleway font-semibold">
             Why we do it
           </h2>
+          <span className="text-xl font-raleway text-primary400">
+            Our mission is to empower seekers and purveyors of wisdom.
+          </span>
           <span className="text-[#ffffff80] text-center font-poppins">
             In today’s world, the sheer volume of daily generated content makes
             it difficult to distinguish genuine insights from the prevailing
@@ -79,7 +85,7 @@ const About = () => {
           </span>
         </div>
         <div className="flex gap-4 flex-col items-center pt-8">
-          <h2 className="text-white text-xl md:text-3xl font-raleway font-semibold">
+          <h2 className="text-white text-3xl font-raleway font-semibold">
             Our Vision
           </h2>
           <span className="text-[#ffffff80] text-center font-poppins">
