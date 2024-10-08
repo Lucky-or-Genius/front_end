@@ -4,7 +4,7 @@ import { FiPlus } from "react-icons/fi";
 
 import { cn } from "../../utils/cn";
 
-const Accordion = ({ isOpen, Heading, children }) => {
+const Accordion = ({ isOpen, Heading, children, className }) => {
   const [open, setOpen] = useState(isOpen || false);
 
   const toggleAccordion = () => setOpen((prev) => !prev);
@@ -38,7 +38,7 @@ const Accordion = ({ isOpen, Heading, children }) => {
           }
         )}
       >
-        <div>{children}</div>
+        <div className={`${className}`}>{children}</div>
       </div>
     </div>
   );
