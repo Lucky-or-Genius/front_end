@@ -7,7 +7,7 @@ const Evidences = ({ data }) => {
       {Object.entries(data).map(([key, item]) => (
         <Accordion Heading={item.title} key={key}>
           <div className="flex gap-4 flex-col">
-            <div className="bg-[#ffffff30] p-4 rounded-md gap-2 flex flex-col">
+            <div className="bg-primary p-4 rounded-md gap-2 flex flex-col">
               <span className="text-[#ffffff80] md:text-xl font-semibold font-raleway ">
                 Summary
               </span>

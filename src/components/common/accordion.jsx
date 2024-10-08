@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import { FiPlus } from "react-icons/fi";
 
 import { cn } from "../../utils/cn";
 
@@ -10,20 +10,23 @@ const Accordion = ({ isOpen, Heading, children }) => {
   const toggleAccordion = () => setOpen((prev) => !prev);
 
   return (
-    <div className="w-full 2md:w-4/5 mx-auto backdrop-blur-md border-b border-[#ffffff20] py-4 md:py-6 hover:border-primary400 transition-all ease-in-out shadow-black">
+    <div className="w-full w-full mx-auto backdrop-blur-md border-b border-[#ffffff20] py-2 md:py-4 hover:border-primary400 transition-all ease-in-out shadow-black">
       <button
-        className="w-full flex items-center justify-between  text-lg font-semibold"
+        className="w-full flex items-center justify-between font-semibold"
         onClick={toggleAccordion}
       >
-        <span className="text-start text-white font-raleway text-lg md:text-2xl">
+        <span className="text-start text-primary400 font-raleway text-base md:text-xl">
           {Heading}
         </span>
         <span
-          className={cn("rotate-0 transition-all text-white", {
-            "rotate-180": open,
-          })}
+          className={cn(
+            "rotate-0 transition-all text-primary400 font-semibold text-lg md:text-2xl",
+            {
+              "rotate-45": open,
+            }
+          )}
         >
-          <FaChevronDown />
+          <FiPlus />
         </span>
       </button>
       <div

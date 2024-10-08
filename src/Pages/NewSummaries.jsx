@@ -14,6 +14,7 @@ import {
   sortNumberOfPredictions,
   addRemoveFavourite,
 } from "../services/summaries.services";
+import Skeleton from "../components/newSummaries/skeleton";
 
 const NewSummaries = () => {
   const [summaries, setSummaries] = useState([]);
@@ -118,16 +119,21 @@ const NewSummaries = () => {
         />
       </div>
 
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 md:px-6 gap-4">
-        {summaries.map((summary, index) => (
-          <SummaryCard
-            key={index}
-            summary={summary}
-            toggleFavourite={toggleFavourite}
-            index={index}
-          />
-        ))}
-      </div>
+      {summaries.length > 0 ? (
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 md:px-6 gap-4">
+          {summaries.map((summary, index) => (
+            <SummaryCard
+              key={index}
+              summary={summary}
+              toggleFavourite={toggleFavourite}
+              index={index}
+            />
+          ))}
+        </div>
+      ) : (
+        <Skeleton />
+      )}
+
       {showModal && (
         <AddSourceModal
           setShowModal={setShowModal}

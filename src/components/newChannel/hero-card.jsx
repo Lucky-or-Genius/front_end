@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 const HeroCard = ({ channel, toggleFavourite, index }) => {
   const navigate = useNavigate();
 
-  const handleSummariesClick = () => {
+  const handleSummariesClick = (e) => {
+    e.preventDefault();
     const channelInfo = JSON.stringify({
       imageUrl:
         channel?.ChannelLogo !== null
@@ -25,7 +26,10 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
   };
 
   return (
-    <div className="bg-[#ffffff10] rounded-xl flex flex-col justify-between">
+    <div
+      className="bg-[#ffffff10] rounded-xl flex flex-col justify-between cursor-pointer border border-transparent hover:border-primary400"
+      onClick={(e) => handleSummariesClick(e)}
+    >
       <div className="">
         <div className="">
           <img
@@ -61,16 +65,24 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
               {channel?.ChannelName}
             </span>
           </div>
-          <div className="">
+          <div className="z-[9999]" onClick={(e) => e.stopPropagation()}>
             {channel?.is_favourite_channel ? (
               <IoMdHeart
-                onClick={() => toggleFavourite(index, channel?.channel_id)}
-                className="cursor-pointer text-error  text-2xl"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleFavourite(index, channel?.channel_id);
+                }}
+                className="cursor-pointer text-error  text-2xl z-[9]"
               />
             ) : (
               <IoMdHeartEmpty
-                onClick={() => toggleFavourite(index, channel?.channel_id)}
-                className="cursor-pointer text-[#ffffff60] text-2xl active:scale-95 transition-all hover:scale-105"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  toggleFavourite(index, channel?.channel_id);
+                }}
+                className="cursor-pointer text-[#ffffff60] text-2xl active:scale-95 transition-all hover:scale-105 z-[9]"
               />
             )}
           </div>
@@ -102,7 +114,7 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
           </div>
           <div
             className="border border-[#ffffff60] bg-[#ffffff40] cursor-pointer hover:scale-105 active:scale-95 transition-all ease-in-out rounded-lg flex flex-col items-center p-2"
-            onClick={handleSummariesClick}
+            onClick={(e) => handleSummariesClick(e)}
           >
             <span className="text-white font-[600] text-sm font-raleway">
               Sources
@@ -130,6 +142,9 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
                 <Link
                   className="font-poppins text-white "
                   to={`/dashboard/LeaderBoards/${item.user_id}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
                 >
                   {item.name}
                 </Link>

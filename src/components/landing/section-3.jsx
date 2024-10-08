@@ -48,7 +48,7 @@ const Section3 = () => {
 
       <div className="w-full flex justify-center relative z-10">
         <motion.img
-          src="/images/keyboard.png"
+          src="/images/keyboard.jpg"
           alt="Pipeline Diagram"
           className="w-2/3 md:w-[850px] h-auto"
           initial={{ opacity: 0 }}

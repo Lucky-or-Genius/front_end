@@ -52,7 +52,7 @@ const Predictor = () => {
               className="w-14 h-14 rounded-full object-cover"
             />
             <Link
-              className="text-white font-raleway text-3xl"
+              className="text-white font-raleway text-3xl font-semibold"
               to={`/dashboard/LeaderBoards/${predictionData[0]?.user_id}`}
             >
               {predictionData[0]?.first_name +
@@ -107,7 +107,7 @@ const Predictor = () => {
         </div>
       )}
 
-      <div className=" pb-4 pt-8 w-full flex justify-center items-center">
+      <div className=" pb-6 pt-8 w-full flex justify-center items-center">
         {predictionData?.length > 0 && (
           <PredictorCard
             predictionData={predictionData}
@@ -117,7 +117,7 @@ const Predictor = () => {
         )}
       </div>
 
-      <div className="bg-[#ffffff20] p-4 md:p-6 rounded-lg md:w-4/5 w-full flex flex-col gap-3">
+      <div className="bg-[#ffffff20] p-4 md:p-6 rounded-lg 2md:w-4/5 w-full flex flex-col gap-3">
         <span className="text-white font-semibold font-raleway text-xl md:text-2xl">
           Prediction Synopsis
         </span>
@@ -156,15 +156,24 @@ const Predictor = () => {
           {predictionData[0]?.justification}
         </p>
       </div>
+      {predictionData[0]?.structured_results !== null ? (
+        <div className="bg-[#ffffff20] p-4 md:p-6 rounded-lg 2md:w-4/5 w-full flex flex-col gap-3 mt-6">
+          <span className="text-white font-semibold font-raleway text-xl md:text-2xl">
+            Sources & Justification
+          </span>
 
-      <div className="flex w-full gap-12 py-6 items-center flex-col">
-        <Evidences
-          data={
-            predictionData?.length > 0 &&
-            transformApiResponse(predictionData[0]?.structured_results)
-          }
-        />
-      </div>
+          <div className="flex w-full gap-6 py-4 items-center flex-col">
+            <Evidences
+              data={
+                predictionData?.length > 0 &&
+                transformApiResponse(predictionData[0]?.structured_results)
+              }
+            />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

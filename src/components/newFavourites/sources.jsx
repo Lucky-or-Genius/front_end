@@ -2,6 +2,7 @@ import React from "react";
 import SourceCard from "./source-card";
 
 import { addRemoveFavourite } from "../../services/summaries.services";
+import Skeleton from "../newSummaries/skeleton";
 
 const sources = ({ sources, setSources }) => {
   const accountId = localStorage.getItem("accountId");
@@ -18,14 +19,18 @@ const sources = ({ sources, setSources }) => {
 
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 md:px-6 gap-4">
-      {sources?.map((source, index) => (
-        <SourceCard
-          key={index}
-          source={source}
-          toggleFavourite={toggleFavourite}
-          index={index}
-        />
-      ))}
+      {sources.length > 0 ? (
+        sources?.map((source, index) => (
+          <SourceCard
+            key={index}
+            source={source}
+            toggleFavourite={toggleFavourite}
+            index={index}
+          />
+        ))
+      ) : (
+        <Skeleton />
+      )}
     </div>
   );
 };
