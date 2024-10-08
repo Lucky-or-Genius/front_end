@@ -37,6 +37,17 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <NavLink
+                exact
+                to="/faq"
+                className="nav-link"
+                activeClassName="active"
+                onClick={toggleSideNav}
+              >
+                FAQ
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
                 to="/about"
                 className="nav-link"
                 activeClassName="active"

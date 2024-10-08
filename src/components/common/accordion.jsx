@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { FaChevronDown } from "react-icons/fa";
+import { FiPlus } from "react-icons/fi";
 
 import { cn } from "../../utils/cn";
 
@@ -19,11 +19,14 @@ const Accordion = ({ isOpen, Heading, children }) => {
           {Heading}
         </span>
         <span
-          className={cn("rotate-0 transition-all text-white", {
-            "rotate-180": open,
-          })}
+          className={cn(
+            "rotate-0 transition-all text-white font-semibold text-xl md:text-3xl",
+            {
+              "rotate-45": open,
+            }
+          )}
         >
-          <FaChevronDown />
+          <FiPlus />
         </span>
       </button>
       <div

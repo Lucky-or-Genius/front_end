@@ -11,9 +11,10 @@ import {
 } from "../services/Predictions.service";
 import Filters from "../components/newPrediction/filters";
 import Pagination from "../components/newPrediction/pagination";
+import Skeleton from "../components/newPrediction/skeleton";
 
 const NewPrediction = () => {
-  const [predictions, setPredictions] = useState();
+  const [predictions, setPredictions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const accountId = localStorage.getItem("accountId");
@@ -80,32 +81,38 @@ const NewPrediction = () => {
           fetchPredictionData={fetchPredictionData}
         />
       </div>
-      <div className="grid grid-cols-1 2md:grid-cols-2 px-2 md:px-6 gap-4 w-full pb-4">
-        {predictions?.map((prediction, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="w-full h-full flex "
-          >
-            <PredictionCard
-              user={`${prediction.first_name} ${" "} ${prediction.last_name}`}
-              imgUrl={prediction.image_url}
-              prediction={prediction.prediction}
-              madeOn={prediction.publish_date}
-              resolvedOn={prediction.fixed_date}
-              category={prediction.category}
-              status={prediction.prediction_validation}
-              predictionId={prediction.prediction_id}
-              userId={prediction.user_id}
-              favourite={prediction.is_favourite}
-              toggleFavourite={toggleFavourite}
-              index={index}
-            />
-          </motion.div>
-        ))}
-      </div>
+
+      {predictions?.length > 0 ? (
+        <div className="grid grid-cols-1 2md:grid-cols-2 px-2 md:px-6 gap-4 w-full pb-4">
+          {predictions?.map((prediction, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="w-full h-full flex "
+            >
+              <PredictionCard
+                user={`${prediction.first_name} ${" "} ${prediction.last_name}`}
+                imgUrl={prediction.image_url}
+                prediction={prediction.prediction}
+                madeOn={prediction.publish_date}
+                resolvedOn={prediction.fixed_date}
+                category={prediction.category}
+                status={prediction.prediction_validation}
+                predictionId={prediction.prediction_id}
+                userId={prediction.user_id}
+                favourite={prediction.is_favourite}
+                toggleFavourite={toggleFavourite}
+                index={index}
+              />
+            </motion.div>
+          ))}
+        </div>
+      ) : (
+        <Skeleton />
+      )}
+
       <div className="">
         <Pagination
           currentPage={currentPage}

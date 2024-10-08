@@ -52,7 +52,7 @@ const Predictor = () => {
               className="w-14 h-14 rounded-full object-cover"
             />
             <Link
-              className="text-white font-raleway text-3xl"
+              className="text-white font-raleway text-3xl font-semibold"
               to={`/dashboard/LeaderBoards/${predictionData[0]?.user_id}`}
             >
               {predictionData[0]?.first_name +
@@ -156,6 +156,10 @@ const Predictor = () => {
           {predictionData[0]?.justification}
         </p>
       </div>
+
+      <span className="mt-8 text-white font-raleway text-3xl font-semibold border border-white rounded-md px-8 py-2 bg-[#ffffff10]">
+        Sources & Justification
+      </span>
 
       <div className="flex w-full gap-12 py-6 items-center flex-col">
         <Evidences

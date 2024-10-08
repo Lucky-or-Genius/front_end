@@ -25,7 +25,10 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
   };
 
   return (
-    <div className="bg-[#ffffff10] rounded-xl flex flex-col justify-between">
+    <div
+      className="bg-[#ffffff10] rounded-xl flex flex-col justify-between cursor-pointer border border-transparent hover:border-primary400"
+      onClick={handleSummariesClick}
+    >
       <div className="">
         <div className="">
           <img
@@ -64,12 +67,18 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
           <div className="">
             {channel?.is_favourite_channel ? (
               <IoMdHeart
-                onClick={() => toggleFavourite(index, channel?.channel_id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFavourite(index, channel?.channel_id);
+                }}
                 className="cursor-pointer text-error  text-2xl"
               />
             ) : (
               <IoMdHeartEmpty
-                onClick={() => toggleFavourite(index, channel?.channel_id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  toggleFavourite(index, channel?.channel_id);
+                }}
                 className="cursor-pointer text-[#ffffff60] text-2xl active:scale-95 transition-all hover:scale-105"
               />
             )}
