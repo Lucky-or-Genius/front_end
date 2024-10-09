@@ -14,7 +14,7 @@ const About = () => {
           <span className="text-xl font-raleway text-primary400">
             We’re changing the game by keeping the score.
           </span>
-          <span className="text-[#ffffff80] text-center font-poppins">
+          <span className="text-[#ffffff80] font-poppins">
             Lucky or Genius is an AI-powered platform that tracks and processes
             digital content across the web and issues accountability profiles
             for anyone making predictions. Whether they are individual
@@ -52,7 +52,7 @@ const About = () => {
           <span className="text-xl font-raleway text-primary400">
             Our mission is to empower seekers and purveyors of wisdom.
           </span>
-          <span className="text-[#ffffff80] text-center font-poppins">
+          <span className="text-[#ffffff80] font-poppins">
             In today’s world, the sheer volume of daily generated content makes
             it difficult to distinguish genuine insights from the prevailing
             noise. With the rise of AI-generated content, it's never been more
@@ -88,7 +88,7 @@ const About = () => {
           <h2 className="text-white text-3xl font-raleway font-semibold">
             Our Vision
           </h2>
-          <span className="text-[#ffffff80] text-center font-poppins">
+          <span className="text-[#ffffff80] font-poppins">
             At Lucky or Genius, we envision a world where reputations earned
             over lifetimes are instantly verifiable. In an era where information
             is generated faster than we can consume, we believe the key to
