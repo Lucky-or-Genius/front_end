@@ -45,7 +45,7 @@ const Chart = ({ data }) => {
         },
         splitLine: {
           lineStyle: {
-            color: "#cccccc20",
+            color: "#cccccc00",
           },
         },
       },
@@ -59,13 +59,14 @@ const Chart = ({ data }) => {
             color: "#14c8d4",
             width: 2,
           },
-          symbol: "circle",
-          symbolSize: 8,
-          itemStyle: {
-            color: "#14c8d4",
-            borderColor: "#fff",
-            borderWidth: 2,
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: "#14c8d480" },
+              { offset: 1, color: "rgba(0, 255, 0, 0)" },
+            ]),
           },
+          symbol: "none", // Hide the dots
+          symbolSize: 0, // Set symbol size to 0
         },
       ],
     };
