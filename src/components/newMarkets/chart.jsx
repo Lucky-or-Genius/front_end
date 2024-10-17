@@ -82,7 +82,27 @@ const Chart = ({ data }) => {
     };
   }, [data]);
 
-  return <div id="chart" style={{ width: "100%", height: "400px" }} />;
+  return (
+    <div className="relative">
+      {" "}
+      <div id="chart" style={{ width: "100%", height: "400px" }} className="" />
+      <img
+        src="/images/ava-1.svg"
+        alt="avatar"
+        className="h-12 md:h-16 w-12 md:w-16 absolute bottom-72 left-[12rem] md:left-[46rem]"
+      />
+      <img
+        src="/images/ava-2.svg"
+        alt="avatar"
+        className="h-12 md:h-16 w-12 md:w-16 absolute bottom-56 left-[8rem] md:left-[30rem]"
+      />
+      <img
+        src="/images/ava-3.svg"
+        alt="avatar"
+        className="h-12 md:h-16 w-12 md:w-16 absolute bottom-40 left-[5rem] md:left-[26rem]"
+      />
+    </div>
+  );
 };
 
 export default Chart;
