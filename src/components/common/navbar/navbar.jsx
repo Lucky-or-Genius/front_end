@@ -18,7 +18,7 @@ function Navbar() {
           <img className="w-56 h-full" alt="text" src={logoIcon} />
         </div>
 
-        <div className="flex gap-8 font-[600]">
+        <div className="flex gap-8 font-[600] items-center">
           <ul
             className={`navbar-nav ${
               isSideNavOpen ? "open" : ""
@@ -75,13 +75,14 @@ function Navbar() {
             <span className="navbar-toggle-icon"></span>
           </button>
           <NavLink
-            to="/login"
-            className="nav-link hidden px-4 rounded-2xl 3xl:text-xl py-0.5 md:flex items-center gap-2 group border border-[#4a6edb] !text-white font-[600] hover:shadow-sm transition-all ease-in-out duration-400 hover:shadow-[#4a6edb]"
+            // to="/login"
+            to="/dashboard/Feed"
+            className="nav-link hidden px-4 rounded-2xl 3xl:text-xl active:scale-95 py-2 md:flex items-center gap-2 group border border-[#4a6edb] !text-white font-[600] hover:shadow-sm transition-all ease-in-out duration-400 hover:shadow-[#4a6edb]"
             activeClassName="active"
             onClick={toggleSideNav}
           >
             <HiOutlineFingerPrint className="group-hover:text-white text-gray-600 transition-all ease-in-out duration-600" />
-            Login
+            Get Started
           </NavLink>
         </div>
       </div>

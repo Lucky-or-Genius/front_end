@@ -1,10 +1,21 @@
 import Axios from "../utils/axios";
 
 export const allSummarySources = async (id) => {
-  return await Axios.get(`all-sources?accountId=${id}`);
+  if (id) return await Axios.get(`all-sources?accountId=${id}`);
+  else
+    return await Axios.get(
+      `all-sources?accountId=003d45e5-b3a2-40c0-8e76-59ef89f6a519`
+    );
 };
 export const allPredictorSummarySources = async (accountId, userId) => {
-  return await Axios.get(`all-sources?accountId=${accountId}&userId=${userId}`);
+  if (accountId)
+    return await Axios.get(
+      `all-sources?accountId=${accountId}&userId=${userId}`
+    );
+  else
+    return await Axios.get(
+      `all-sources?accountId=003d45e5-b3a2-40c0-8e76-59ef89f6a519&userId=${userId}`
+    );
 };
 export const summarySourceById = async (id) => {
   return await Axios.get(`all-sources?sourceId=${id}`);

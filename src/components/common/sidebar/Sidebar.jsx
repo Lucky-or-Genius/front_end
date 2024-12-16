@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FiKey, FiLayout, FiSend, FiLogOut } from "react-icons/fi";
+import { FiKey, FiLayout, FiSend, FiLogOut, FiLogIn } from "react-icons/fi";
 import { GoStack } from "react-icons/go";
 import { BsHddStack } from "react-icons/bs";
 import { Layout, Menu } from "antd";
@@ -58,9 +58,9 @@ const Index = () => {
   ];
 
   const handleRedirect = () => {
-    // window.location.href = "http://localhost:3000";
+    window.location.href = "http://localhost:3000";
 
-    window.location.href = "https://www.luckyorgenius.com/";
+    // window.location.href = "https://www.luckyorgenius.com/";
   };
 
   useEffect(() => {
@@ -144,30 +144,50 @@ const Index = () => {
           </Menu.Item>
         ))}
 
-        <Menu.Item
-          key="/"
-          icon={<FiLogOut />}
-          onClick={async () => {
-            await localStorage.clear();
-            googleLogout();
-            handleRedirect();
-          }}
-          className="font-[600]"
-        >
-          {"Logout"}
-        </Menu.Item>
+        {userData ? (
+          <Menu.Item
+            key="/"
+            icon={<FiLogOut />}
+            onClick={async () => {
+              await localStorage.clear();
+              googleLogout();
+              handleRedirect();
+            }}
+            className="font-[600]"
+          >
+            {"Logout"}
+          </Menu.Item>
+        ) : (
+          <Menu.Item
+            // key="/"
+            icon={<FiLogIn />}
+            // onClick={async () => {
+            //   await localStorage.clear();
+            //   googleLogout();
+            //   handleRedirect();
+            // }}
+            className="font-[600]"
+          >
+            {"LogIn"}
+          </Menu.Item>
+        )}
       </Menu>
-      <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12  py-4 text-white rounded-lg">
-        <img
-          src={userData?.picture}
-          width={10}
-          height={10}
-          className={`rounded-full w-8 `}
-        />
-        <h4 className={`${!collapsed ? "flex" : "hidden"} font-[600]`}>
-          {userData?.given_name}
-        </h4>
-      </div>
+      {userData ? (
+        <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12  py-4 text-white rounded-lg">
+          <img
+            src={userData?.picture}
+            width={10}
+            height={10}
+            alt="profile"
+            className={`rounded-full w-8 `}
+          />
+          <h4 className={`${!collapsed ? "flex" : "hidden"} font-[600]`}>
+            {userData?.given_name}
+          </h4>
+        </div>
+      ) : (
+        ""
+      )}
     </Sider>
   );
 };

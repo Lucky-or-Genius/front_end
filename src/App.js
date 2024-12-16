@@ -24,17 +24,17 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
 
-            <Route element={<ProtectedRoutes />}>
-              <Route element={<DashboardLayout />} path="/dashboard">
-                {routes.map((route, index) => (
-                  <Route
-                    key={`route-item-${index}`}
-                    path={route.path}
-                    element={route.element}
-                  />
-                ))}
-              </Route>
+            {/* <Route element={<ProtectedRoutes />}> */}
+            <Route element={<DashboardLayout />} path="/dashboard">
+              {routes.map((route, index) => (
+                <Route
+                  key={`route-item-${index}`}
+                  path={route.path}
+                  element={route.element}
+                />
+              ))}
             </Route>
+            {/* </Route> */}
           </Routes>
           <Toaster />
         </AppContextProvider>

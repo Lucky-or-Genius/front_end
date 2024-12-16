@@ -3,7 +3,12 @@ import Axios from "../utils/axios";
 
 //
 export const leaderBoardData = async (id) => {
-  return await Axios.get(`prediction-leaderboard?accountId=${id}`);
+  if (id) {
+    return await Axios.get(`prediction-leaderboard?accountId=${id}`);
+  } else
+    return await Axios.get(
+      `prediction-leaderboard?accountId=003d45e5-b3a2-40c0-8e76-59ef89f6a519`
+    );
 };
 export const predictorData = async (id) => {
   return await axios.get(

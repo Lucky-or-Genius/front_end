@@ -56,9 +56,9 @@ const App = () => {
   ];
 
   const handleRedirect = () => {
-    // window.location.href = "http://localhost:3000";
+    window.location.href = "http://localhost:3000";
 
-    window.location.href = "https://www.luckyorgenius.com/";
+    // window.location.href = "https://www.luckyorgenius.com/";
   };
 
   useEffect(() => {
@@ -113,15 +113,20 @@ const App = () => {
             Logout
           </Menu.Item>
         </Menu>
-        <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12  py-4 text-white rounded-lg">
-          <img
-            src={userData?.picture}
-            width={10}
-            height={10}
-            className={`rounded-full w-8 `}
-          />
-          <h4>{userData?.given_name}</h4>
-        </div>
+        {userData ? (
+          <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12  py-4 text-white rounded-lg">
+            <img
+              src={userData?.picture}
+              width={10}
+              height={10}
+              className={`rounded-full w-8 `}
+              alt="profile"
+            />
+            <h4>{userData?.given_name}</h4>
+          </div>
+        ) : (
+          "Log In"
+        )}
       </Drawer>
     </>
   );
