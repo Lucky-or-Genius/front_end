@@ -1,6 +1,7 @@
 import React from "react";
 
 import { addRemoveFavourite } from "../../services/Predictions.service";
+import toast from "react-hot-toast";
 import PredictionCard from "./prediction-card";
 
 const Predictions = ({ predictions, setPredictions }) => {
@@ -8,6 +9,10 @@ const Predictions = ({ predictions, setPredictions }) => {
   // console.log(predictions);
 
   const toggleFavourite = (id) => {
+    if (accountId === null) {
+      toast.error("Login to add favourite");
+      return;
+    }
     const params = {
       accountId: String(accountId),
       predictionId: id,

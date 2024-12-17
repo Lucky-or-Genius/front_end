@@ -32,15 +32,17 @@ const Section9 = () => {
         <strong>We filter out the noise</strong>, spotlight value and only
         notify you when subjects of relevance to you are mentioned.
       </motion.span>
-      <Link to="/login">
-        <Button
-          borderRadius="1.75rem"
-          className="bg-[#0B0B0F] text-white font-bold border-neutral-200 dark:border-slate-800 font-raleway"
-        >
-          <IoLogIn className="text-[16px]" />
-          Try Demo
-        </Button>
-      </Link>
+      <div className="w-full flex justify-center">
+        <Link to="/dashboard/Feed" className="w-full md:w-fit">
+          <Button
+            borderRadius="1.2rem"
+            className="text-white font-bold border-neutral-200 dark:border-slate-800"
+          >
+            <IoLogIn className="text-lg" />
+            Try Free Demo
+          </Button>
+        </Link>
+      </div>
 
       <div className="w-full flex flex-col justify-center relative">
         <motion.img

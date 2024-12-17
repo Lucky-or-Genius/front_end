@@ -49,13 +49,16 @@ export const MacbookScroll = ({ src, showGradient, title }) => {
         exit={{ opacity: 0 }}
         transition={{ ease: "easeInOut", duration: 3 }}
       >
-        <Link to="/login">
+        <Link
+          to="/dashboard/Feed"
+          className="w-full md:w-fit flex justify-center"
+        >
           <Button
-            borderRadius="1.75rem"
-            className="bg-[#0B0B0F] text-white font-bold border-neutral-200 dark:border-slate-800 font-raleway"
+            borderRadius="1.2rem"
+            className=" text-white font-bold border-neutral-200 dark:border-slate-800"
           >
-            <IoLogIn className="text-[16px]" />
-            Try Demo
+            <IoLogIn className="text-lg" />
+            Try Free Demo
           </Button>
         </Link>
       </motion.div>

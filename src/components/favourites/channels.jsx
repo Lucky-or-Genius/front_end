@@ -11,6 +11,7 @@ import "../../styles/mychannels.css";
 import AddChannelModal from "../../components/addChannelModal";
 import ChannelSubHeader from "../../components/channels/subheader";
 import Skeleton from "../common/skeleton";
+import toast from "react-hot-toast";
 
 function MyChannels() {
   const [channelData, setChannelData] = useState([]);
@@ -20,6 +21,10 @@ function MyChannels() {
   const accountId = localStorage.getItem("accountId");
 
   const toggleFavourite = (id) => {
+    if (accountId === null) {
+      toast.error("Login to add favourite");
+      return;
+    }
     const params = {
       accountId: String(accountId),
       channelId: id,

@@ -10,7 +10,7 @@ import { useRef } from "react";
 import { cn } from "../../utils/cn";
 
 export function Button({
-  borderRadius = "1.75rem",
+  borderRadius = "4px",
   children,
   as: Component = "button",
   containerClassName,
@@ -22,7 +22,7 @@ export function Button({
   return (
     <Component
       className={cn(
-        "bg-transparent relative text-[14px] h-8 w-[12rem] p-[1px] overflow-hidden font-calibre ",
+        "bg-[#0B0B0F] relative text-lg h-14 w-full  md:w-[16rem] p-[1px] overflow-hidden font-raleway  transition-all ease-in-out hover:scale-105 active:scale-95",
         containerClassName
       )}
       style={{
@@ -46,7 +46,7 @@ export function Button({
 
       <div
         className={cn(
-          "relative bg-slate-900/[0.9] border border-slate-700 backdrop-blur-xl text-white gap-4 flex items-center justify-center w-full h-full text-[13px] antialiased",
+          "relative bg-[#ffffff10] border border-slate-700 backdrop-blur-xl text-white gap-4 flex items-center justify-center w-full h-full text-lg antialiased",
           className
         )}
         style={{

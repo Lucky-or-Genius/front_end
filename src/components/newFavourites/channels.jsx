@@ -2,11 +2,16 @@ import React from "react";
 
 import { addRemoveFavourite } from "../../services/channels.service";
 import ChannelCard from "./channel-card";
+import toast from "react-hot-toast";
 
 const Channels = ({ channels, setChannels }) => {
   const accountId = localStorage.getItem("accountId");
 
   const toggleFavourite = (id) => {
+    if (accountId === null) {
+      toast.error("Login to add favourite");
+      return;
+    }
     const params = {
       accountId: String(accountId),
       channelId: id,

@@ -6,7 +6,12 @@ import { addRemoveFavourite } from "../../services/summaries.services";
 
 const Sources = ({ summaries, setSummaries }) => {
   const accountId = localStorage.getItem("accountId");
+
   const toggleFavourite = (index, id) => {
+    if (accountId === null) {
+      toast.error("Login to add favourite");
+      return;
+    }
     const params = {
       accountId: String(accountId),
       sourceId: id,

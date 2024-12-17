@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ScrollContainer from "./container-scroll";
+import { Link } from "react-router-dom";
+import { Button } from "../common/moving-border-button";
+import { IoLogIn } from "react-icons/io5";
 
 const Section6 = () => {
   return (
@@ -82,6 +84,26 @@ const Section6 = () => {
           }
         `}</style>
       </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ delay: 0.4, ease: "easeInOut" }}
+        viewport={{ once: false }}
+        className="w-full flex justify-center"
+      >
+        <Link
+          to="/dashboard/Feed"
+          className="w-full md:w-fit flex justify-center "
+        >
+          <Button
+            borderRadius="1.2rem"
+            className="text-white font-bold  border-neutral-200 dark:border-slate-800"
+          >
+            <IoLogIn className="text-lg" />
+            Try Free Demo
+          </Button>
+        </Link>
+      </motion.div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import React from "react";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { Popover } from "antd";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { addRemoveFavourite } from "../../services/Leaderboards.service";
 import Skeleton from "../newLeaderboard/skeleton";
@@ -11,6 +12,10 @@ const Board = ({ data, setPredictors }) => {
   const accountId = localStorage.getItem("accountId");
 
   const toggleFavourite = async (id) => {
+    if (accountId === null) {
+      toast.error("Login to add favourite");
+      return;
+    }
     const params = {
       accountId: String(accountId),
       predictorId: id,
