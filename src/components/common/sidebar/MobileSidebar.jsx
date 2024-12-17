@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-
 import { useLocation, useNavigate } from "react-router-dom";
 import { Drawer, Menu, Space } from "antd";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import { FiKey, FiLayout, FiSend, FiLogOut } from "react-icons/fi";
+import { FiKey, FiLayout, FiSend, FiLogOut, FiLogIn } from "react-icons/fi";
 import { MdOutlineInsights } from "react-icons/md";
 import { GoStack } from "react-icons/go";
 import { BsHddStack } from "react-icons/bs";
 import { googleLogout } from "@react-oauth/google";
 import { TbHeartCheck } from "react-icons/tb";
+
+import { useAppContext } from "../../../utils/appContext";
 import logo from "../../../assets/logo.png";
 
 const App = () => {
@@ -16,6 +17,8 @@ const App = () => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const [userData, setUserData] = useState();
+  const [loading, setLoading] = useState(false); // State to track login process
+  const { login } = useAppContext();
 
   const generalItems = [
     {
@@ -56,7 +59,9 @@ const App = () => {
   ];
 
   const handleRedirect = () => {
-    window.location.href = "http://localhost:3000";
+    if (!loading) {
+      window.location.href = "http://localhost:3000";
+    }
 
     // window.location.href = "https://www.luckyorgenius.com/";
   };
@@ -68,7 +73,7 @@ const App = () => {
 
   return (
     <>
-      <div className="bg-darkPrimary w-full  flex md:hidden items-center p-4 justify-between">
+      <div className="bg-darkPrimary w-full flex md:hidden items-center p-4 justify-between">
         <button onClick={() => setOpen(true)}>
           <HiOutlineMenuAlt1 className="w-10 !h-full text-white flex md:hidden bg-primary h-10 p-2 rounded-full" />
         </button>
@@ -101,20 +106,36 @@ const App = () => {
             </Menu.Item>
           ))}
 
-          <Menu.Item
-            key="/"
-            icon={<FiLogOut />}
-            onClick={async () => {
-              await localStorage.clear();
-              googleLogout();
-              handleRedirect();
-            }}
-          >
-            Logout
-          </Menu.Item>
+          {userData ? (
+            <Menu.Item
+              key="logout"
+              icon={<FiLogOut />}
+              onClick={async (e) => {
+                e.stopPropagation(); // Stop default menu behavior
+                await localStorage.clear();
+                googleLogout();
+                handleRedirect();
+              }}
+              className="font-[600]"
+            >
+              {"Logout"}
+            </Menu.Item>
+          ) : (
+            <Menu.Item
+              onClick={async (e) => {
+                e.stopPropagation(); // Stop default menu behavior
+                setLoading(true);
+                await login();
+                setLoading(false);
+              }}
+              className="font-[600]"
+            >
+              <FiLogIn /> LogIn
+            </Menu.Item>
+          )}
         </Menu>
         {userData ? (
-          <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12  py-4 text-white rounded-lg">
+          <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12 py-4 text-white rounded-lg">
             <img
               src={userData?.picture}
               width={10}
@@ -125,7 +146,7 @@ const App = () => {
             <h4>{userData?.given_name}</h4>
           </div>
         ) : (
-          "Log In"
+          ""
         )}
       </Drawer>
     </>

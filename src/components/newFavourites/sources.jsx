@@ -1,5 +1,6 @@
 import React from "react";
 import SourceCard from "./source-card";
+import toast from "react-hot-toast";
 
 import { addRemoveFavourite } from "../../services/summaries.services";
 import Skeleton from "../newSummaries/skeleton";
@@ -8,6 +9,10 @@ const sources = ({ sources, setSources }) => {
   const accountId = localStorage.getItem("accountId");
 
   const toggleFavourite = (id) => {
+    if (accountId === null) {
+      toast.error("Login to add favourite");
+      return;
+    }
     const params = {
       accountId: String(accountId),
       sourceId: id,

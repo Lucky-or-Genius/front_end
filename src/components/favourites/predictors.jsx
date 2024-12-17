@@ -18,6 +18,7 @@ import {
   sortByBankroll,
   addRemoveFavourite,
 } from "../../services/Leaderboards.service";
+import toast from "react-hot-toast";
 import { getSortedProfilesBySubjects } from "../../services/Profiles.service";
 import { useLocation } from "react-router-dom";
 import Skeleton from "../common/skeleton";
@@ -33,6 +34,10 @@ const LeaderBoards = () => {
   const accountId = localStorage.getItem("accountId");
 
   const toggleFavourite = async (id) => {
+    if (accountId === null) {
+      toast.error("Login to add favourite");
+      return;
+    }
     const params = {
       accountId: String(accountId),
       predictorId: id,

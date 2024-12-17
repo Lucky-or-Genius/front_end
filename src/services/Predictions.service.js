@@ -2,7 +2,7 @@ import Axios from "../utils/axios";
 
 //
 export const getPredictions = async (page, accountId) => {
-  if (accountId)
+  if (accountId !== null)
     return await Axios.get(
       `all-predictions?accountId=${accountId}&page=${page}&pageSize=14`
     );
@@ -12,7 +12,7 @@ export const getPredictions = async (page, accountId) => {
     );
 };
 export const getPredictionsUser = async (accountId) => {
-  if (accountId)
+  if (accountId !== null)
     return await Axios.get(`all-predictions?accountId=${accountId}`);
   else
     return await Axios.get(
@@ -21,7 +21,7 @@ export const getPredictionsUser = async (accountId) => {
 };
 
 export const getPredictionsByUserId = async (id) => {
-  if (id) return await Axios.get(`predictions?accountId=${id}`);
+  if (id !== null) return await Axios.get(`predictions?accountId=${id}`);
   else
     return await Axios.get(
       `predictions?accountId=003d45e5-b3a2-40c0-8e76-59ef89f6a519`

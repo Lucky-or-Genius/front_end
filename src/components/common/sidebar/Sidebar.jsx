@@ -9,6 +9,7 @@ import { googleLogout } from "@react-oauth/google";
 import { MdOutlineInsights } from "react-icons/md";
 import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
 import { TbHeartCheck } from "react-icons/tb";
+import { useAppContext } from "../../../utils/appContext";
 
 const { Sider } = Layout;
 
@@ -18,6 +19,7 @@ const Index = () => {
   const [pathName, setPathName] = useState(location.pathname);
   const [collapsed, setCollapsed] = useState(false);
   const [userData, setUserData] = useState();
+  const { login } = useAppContext();
 
   const generalItems = [
     {
@@ -146,7 +148,7 @@ const Index = () => {
 
         {userData ? (
           <Menu.Item
-            key="/"
+            key="logout"
             icon={<FiLogOut />}
             onClick={async () => {
               await localStorage.clear();
@@ -159,19 +161,18 @@ const Index = () => {
           </Menu.Item>
         ) : (
           <Menu.Item
-            // key="/"
+            key="login"
             icon={<FiLogIn />}
-            // onClick={async () => {
-            //   await localStorage.clear();
-            //   googleLogout();
-            //   handleRedirect();
-            // }}
+            onClick={() => {
+              login();
+            }}
             className="font-[600]"
           >
             {"LogIn"}
           </Menu.Item>
         )}
       </Menu>
+
       {userData ? (
         <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12  py-4 text-white rounded-lg">
           <img

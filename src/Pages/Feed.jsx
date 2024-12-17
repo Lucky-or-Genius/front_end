@@ -14,7 +14,8 @@ const Feed = () => {
   const [topPredictors, setTopPredictors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [openRowIndex, setOpenRowIndex] = useState(null);
-  const accountId = useMemo(() => localStorage.getItem("accountId"), []);
+  const accountId = localStorage.getItem("accountId");
+  console.log(accountId);
 
   const handleRowClick = useCallback((index) => {
     setOpenRowIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -22,6 +23,10 @@ const Feed = () => {
 
   const toggleFavourite = useCallback(
     (index1, index2, id) => {
+      if (accountId === null) {
+        toast.error("Login to add favourite");
+        return;
+      }
       const params = {
         accountId: String(accountId),
         predictionId: id,

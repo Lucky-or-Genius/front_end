@@ -37,7 +37,6 @@ const AppContextProvider = ({ children }) => {
       })
         .then((response) => response.json())
         .then((userInfo) => {
-          navigate("/dashboard/Feed");
           localStorage.setItem("userdata", JSON.stringify(userInfo));
 
           const params = {
@@ -46,6 +45,7 @@ const AppContextProvider = ({ children }) => {
           };
 
           userCheckOrCreation(params);
+          navigate("/dashboard/Feed");
         })
         .catch((error) => {
           console.error("Error fetching user information:", error);
