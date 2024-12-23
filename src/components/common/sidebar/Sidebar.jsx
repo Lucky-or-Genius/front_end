@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+
 import { useLocation, useNavigate } from "react-router-dom";
 import { FiKey, FiLayout, FiSend, FiLogOut, FiLogIn } from "react-icons/fi";
 import { GoStack } from "react-icons/go";
 import { BsHddStack } from "react-icons/bs";
 import { Layout, Menu } from "antd";
 import logoIcon from "../../../assets/logo.png";
-import { googleLogout } from "@react-oauth/google";
 import { MdOutlineInsights } from "react-icons/md";
 import { RiExpandRightLine, RiExpandLeftLine } from "react-icons/ri";
 import { TbHeartCheck } from "react-icons/tb";
+
 import { useAppContext } from "../../../utils/appContext";
 
 const { Sider } = Layout;
@@ -18,8 +19,8 @@ const Index = () => {
   const location = useLocation();
   const [pathName, setPathName] = useState(location.pathname);
   const [collapsed, setCollapsed] = useState(false);
-  const [userData, setUserData] = useState();
-  const { login } = useAppContext();
+  // const [userData, setUserData] = useState();
+  const { login, user, logout } = useAppContext();
 
   const generalItems = [
     {
@@ -59,12 +60,6 @@ const Index = () => {
     },
   ];
 
-  const handleRedirect = () => {
-    // window.location.href = "http://localhost:3000";
-
-    window.location.href = "https://www.luckyorgenius.com/";
-  };
-
   useEffect(() => {
     if (location.pathname) {
       const matchedPath = location.pathname.includes("/dashboard/Feed")
@@ -86,11 +81,6 @@ const Index = () => {
       setPathName(matchedPath);
     }
   }, [location.pathname]);
-
-  useEffect(() => {
-    let data = localStorage.getItem("userdata");
-    setUserData(JSON.parse(data));
-  }, []);
 
   return (
     <Sider
@@ -146,44 +136,48 @@ const Index = () => {
           </Menu.Item>
         ))}
 
-        {userData ? (
+        {user ? (
           <Menu.Item
-            key="logout"
+            key="/"
             icon={<FiLogOut />}
-            onClick={async () => {
-              await localStorage.clear();
-              googleLogout();
-              handleRedirect();
-            }}
+            onClick={() => logout()}
             className="font-[600]"
           >
             {"Logout"}
           </Menu.Item>
         ) : (
-          <Menu.Item
-            key="login"
-            icon={<FiLogIn />}
-            onClick={() => {
-              login();
-            }}
-            className="font-[600]"
-          >
-            {"LogIn"}
-          </Menu.Item>
+          <div className="px-[4px]">
+            <div
+              onClick={() => {
+                login();
+              }}
+              className={`${
+                !collapsed ? "" : "text-lg"
+              } font-[600] px-6 py-3 gap-3 rounded-lg cursor-pointer flex items-center text-[#ffffff70] hover:bg-[#ffffff10]`}
+            >
+              {!collapsed ? (
+                <>
+                  <FiLogIn /> LogIn
+                </>
+              ) : (
+                <FiLogIn />
+              )}
+            </div>
+          </div>
         )}
       </Menu>
 
-      {userData ? (
+      {user ? (
         <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12  py-4 text-white rounded-lg">
           <img
-            src={userData?.picture}
+            src={user?.picture}
             width={10}
             height={10}
             alt="profile"
             className={`rounded-full w-8 `}
           />
           <h4 className={`${!collapsed ? "flex" : "hidden"} font-[600]`}>
-            {userData?.given_name}
+            {user?.given_name}
           </h4>
         </div>
       ) : (
