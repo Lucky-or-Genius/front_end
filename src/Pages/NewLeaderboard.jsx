@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
+
 import { FiSearch } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 
@@ -12,21 +13,35 @@ import {
   searchTerm,
   sortByBankroll,
 } from "../services/Leaderboards.service";
+import { useAppContext } from "../utils/appContext";
 
 const NewLeaderboard = () => {
   const [data, setData] = useState([]);
-  const accountId = localStorage.getItem("accountId");
+  const { user, login } = useAppContext();
+
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  const toggleFavourite = (index, id) => {
-    if (accountId === null) {
-      toast.error("Login to add favourite");
+  const toggleFavourite = async (index, id) => {
+    try {
+      if (!user) {
+        await login();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login process interrupted. Please try again.");
       return;
     }
+
+    const accountId = user?.accountId;
+
+    if (!accountId) {
+      return;
+    }
+
     const params = {
       accountId: String(accountId),
       predictorId: id,
@@ -34,8 +49,8 @@ const NewLeaderboard = () => {
     const newData = [...data];
     newData[index].is_favourite = !newData[index].is_favourite;
     toast.success("updated!");
-    addRemoveFavourite(params);
     setData(newData);
+    await addRemoveFavourite(params);
   };
 
   const sortLeaderboardByAccuracy = async (order) => {
@@ -66,7 +81,7 @@ const NewLeaderboard = () => {
   const fetchLeaderboardData = useCallback(async () => {
     try {
       if (searchQuery === "") {
-        const res = await leaderBoardData(accountId);
+        const res = await leaderBoardData(user?.accountId);
         setData(res.data);
       } else {
         const res = await searchTerm(searchQuery);
@@ -75,7 +90,7 @@ const NewLeaderboard = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [accountId, searchQuery]);
+  }, [searchQuery, user]);
 
   useEffect(() => {
     if (searchQuery === "") {

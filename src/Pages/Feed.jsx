@@ -27,10 +27,6 @@ const Feed = () => {
       try {
         if (!user) {
           await login();
-          if (!user) {
-            toast.error("Login failed. Please try again.");
-            return;
-          }
         }
       } catch (error) {
         console.error("Error during login:", error);
@@ -41,9 +37,6 @@ const Feed = () => {
       const accountId = user?.accountId;
 
       if (!accountId) {
-        toast.error(
-          "Unable to retrieve account information. Please try again."
-        );
         return;
       }
 

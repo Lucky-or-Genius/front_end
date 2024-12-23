@@ -3,13 +3,25 @@ import { toast } from "react-hot-toast";
 
 import SummaryCard from "../newSummaries/summaryCard";
 import { addRemoveFavourite } from "../../services/summaries.services";
+import { useAppContext } from "../../utils/appContext";
 
 const Sources = ({ summaries, setSummaries }) => {
-  const accountId = localStorage.getItem("accountId");
+  const { user, login } = useAppContext();
 
-  const toggleFavourite = (index, id) => {
-    if (accountId === null) {
-      toast.error("Login to add favourite");
+  const toggleFavourite = async (index, id) => {
+    try {
+      if (!user) {
+        await login();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login process interrupted. Please try again.");
+      return;
+    }
+
+    const accountId = user?.accountId;
+
+    if (!accountId) {
       return;
     }
     const params = {

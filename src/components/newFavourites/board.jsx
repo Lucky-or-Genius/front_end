@@ -1,19 +1,31 @@
 import React from "react";
 
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { IoMdHeart } from "react-icons/io";
 import { Popover } from "antd";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import { addRemoveFavourite } from "../../services/Leaderboards.service";
 import Skeleton from "../newLeaderboard/skeleton";
+import { useAppContext } from "../../utils/appContext";
 
 const Board = ({ data, setPredictors }) => {
-  const accountId = localStorage.getItem("accountId");
+  const { user, login } = useAppContext();
 
   const toggleFavourite = async (id) => {
-    if (accountId === null) {
-      toast.error("Login to add favourite");
+    try {
+      if (!user) {
+        await login();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login process interrupted. Please try again.");
+      return;
+    }
+
+    const accountId = user?.accountId;
+
+    if (!accountId) {
       return;
     }
     const params = {

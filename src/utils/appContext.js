@@ -61,9 +61,11 @@ const AppContextProvider = ({ children }) => {
           given_name: userInfo.given_name,
         });
 
-        navigate("/dashboard/Feed");
+        // navigate("/dashboard/Feed");
+        return Promise.resolve(); // Indicate login completion
       } catch (error) {
         console.error("Error during login:", error);
+        return Promise.reject(error); // Indicate login failure
       }
     },
   });

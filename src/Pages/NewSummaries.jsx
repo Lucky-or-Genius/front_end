@@ -15,15 +15,15 @@ import {
   addRemoveFavourite,
 } from "../services/summaries.services";
 import Skeleton from "../components/newSummaries/skeleton";
+import { useAppContext } from "../utils/appContext";
 
 const NewSummaries = () => {
+  const { user, login } = useAppContext();
   const [summaries, setSummaries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [url, setUrl] = useState("");
   const [showNotification, setShowNotification] = useState(false);
-
-  const accountId = localStorage.getItem("accountId");
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -46,9 +46,20 @@ const NewSummaries = () => {
     }
   };
 
-  const toggleFavourite = (index, id) => {
-    if (accountId === null) {
-      toast.error("Login to add favourite");
+  const toggleFavourite = async (index, id) => {
+    try {
+      if (!user) {
+        await login();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login process interrupted. Please try again.");
+      return;
+    }
+
+    const accountId = user?.accountId;
+
+    if (!accountId) {
       return;
     }
     const params = {
@@ -65,7 +76,7 @@ const NewSummaries = () => {
   const fetchSummariesData = useCallback(async () => {
     try {
       if (searchQuery === "") {
-        const response = await allSummarySources(accountId);
+        const response = await allSummarySources(user?.accountId);
         setSummaries(response.data);
       } else {
         const response = await searchTerm(searchQuery);
@@ -74,7 +85,7 @@ const NewSummaries = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [accountId, searchQuery]);
+  }, [searchQuery, user]);
 
   useEffect(() => {
     if (searchQuery === "") {
@@ -90,6 +101,19 @@ const NewSummaries = () => {
     }
   }, [fetchSummariesData, searchQuery]);
 
+  const handleAddSources = async () => {
+    try {
+      if (!user) {
+        await login(); // Wait for login to complete
+      } else {
+        setShowModal(true); // Set modal only after login is successful
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login process interrupted. Please try again.");
+    }
+  };
+
   return (
     <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0 relative">
       <div className="w-full flex py-6 justify-center flex-col md:flex-row gap-4 items-center relative">
@@ -99,7 +123,7 @@ const NewSummaries = () => {
         <div className="md:absolute right-10 top-6">
           <button
             className="text-primary400  font-raleway flex gap-2 items-center font-[600] px-4 py-2 rounded-lg hover:bg-[#ffffff20] active:bg-[#ffffff40] hover:text-white transition-all ease-in-out border border-primary400"
-            onClick={() => setShowModal(true)}
+            onClick={() => handleAddSources()}
           >
             <LuPlus className="text-lg" /> Add Source
           </button>
