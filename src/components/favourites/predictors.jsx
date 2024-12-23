@@ -22,8 +22,10 @@ import toast from "react-hot-toast";
 import { getSortedProfilesBySubjects } from "../../services/Profiles.service";
 import { useLocation } from "react-router-dom";
 import Skeleton from "../common/skeleton";
+import { useAppContext } from "../../utils/appContext";
 
 const LeaderBoards = () => {
+  const { user, login } = useAppContext();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -31,11 +33,21 @@ const LeaderBoards = () => {
   const [profilesData, setProfilesData] = useState([]);
   const [subjectData, setSubjectData] = useState([]);
   const [loader, setLoader] = useState(false);
-  const accountId = localStorage.getItem("accountId");
 
   const toggleFavourite = async (id) => {
-    if (accountId === null) {
-      toast.error("Login to add favourite");
+    try {
+      if (!user) {
+        await login();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login process interrupted. Please try again.");
+      return;
+    }
+
+    const accountId = user?.accountId;
+
+    if (!accountId) {
       return;
     }
     const params = {
@@ -47,29 +59,28 @@ const LeaderBoards = () => {
     addRemoveFavourite(params);
   };
 
-  const getLeaderBoardData = async () => {
-    await leaderBoardData(accountId)
-      .then((res) => {
-        setLoader(true);
-        const filteredData = [...res.data]
-          .filter((obj) => obj.is_favourite === true)
-          .map((obj) => ({ ...obj, Active: false }));
-        setData(filteredData);
-
-        if (location?.state?.id !== undefined) {
-          setData(
-            filteredData.filter((obj) => obj.user_id === location?.state?.id)
-          );
-        }
-      })
-      .catch((err) => {
-        console.log("err::::::", err);
-      });
-  };
-
   useEffect(() => {
+    const getLeaderBoardData = async () => {
+      await leaderBoardData(user?.accountId)
+        .then((res) => {
+          setLoader(true);
+          const filteredData = [...res.data]
+            .filter((obj) => obj.is_favourite === true)
+            .map((obj) => ({ ...obj, Active: false }));
+          setData(filteredData);
+
+          if (location?.state?.id !== undefined) {
+            setData(
+              filteredData.filter((obj) => obj.user_id === location?.state?.id)
+            );
+          }
+        })
+        .catch((err) => {
+          console.log("err::::::", err);
+        });
+    };
     getLeaderBoardData();
-  }, []);
+  }, [location?.state?.id, user?.accountId]);
 
   const sortLeaderboardByAccuracy = async (order) => {
     try {

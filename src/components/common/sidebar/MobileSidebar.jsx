@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
 import { useLocation, useNavigate } from "react-router-dom";
 import { Drawer, Menu, Space } from "antd";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
@@ -6,7 +7,6 @@ import { FiKey, FiLayout, FiSend, FiLogOut, FiLogIn } from "react-icons/fi";
 import { MdOutlineInsights } from "react-icons/md";
 import { GoStack } from "react-icons/go";
 import { BsHddStack } from "react-icons/bs";
-import { googleLogout } from "@react-oauth/google";
 import { TbHeartCheck } from "react-icons/tb";
 
 import { useAppContext } from "../../../utils/appContext";
@@ -14,11 +14,11 @@ import logo from "../../../assets/logo.png";
 
 const App = () => {
   const navigate = useNavigate();
+  const { login, user, logout } = useAppContext();
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
-  const [userData, setUserData] = useState();
-  const [loading, setLoading] = useState(false); // State to track login process
-  const { login } = useAppContext();
+
+  const [loading, setLoading] = useState(false);
 
   const generalItems = [
     {
@@ -58,19 +58,6 @@ const App = () => {
     },
   ];
 
-  const handleRedirect = () => {
-    // if (!loading) {
-    //   window.location.href = "http://localhost:3000";
-    // }
-
-    window.location.href = "https://www.luckyorgenius.com/";
-  };
-
-  useEffect(() => {
-    let data = localStorage.getItem("userdata");
-    setUserData(JSON.parse(data));
-  }, []);
-
   return (
     <>
       <div className="bg-darkPrimary w-full flex md:hidden items-center p-4 justify-between">
@@ -106,44 +93,36 @@ const App = () => {
             </Menu.Item>
           ))}
 
-          {userData ? (
+          {user ? (
             <Menu.Item
-              key="logout"
+              key="/"
               icon={<FiLogOut />}
-              onClick={async (e) => {
-                e.stopPropagation(); // Stop default menu behavior
-                await localStorage.clear();
-                googleLogout();
-                handleRedirect();
-              }}
+              onClick={() => logout()}
               className="font-[600]"
             >
               {"Logout"}
             </Menu.Item>
           ) : (
-            <Menu.Item
-              onClick={async (e) => {
-                e.stopPropagation(); // Stop default menu behavior
-                setLoading(true);
-                await login();
-                setLoading(false);
+            <div
+              onClick={() => {
+                login();
               }}
-              className="font-[600]"
+              className="font-[600] flex items-center gap-3 text-[#ffffff70] px-7 py-3 focus:bg-[#ffffff10]"
             >
               <FiLogIn /> LogIn
-            </Menu.Item>
+            </div>
           )}
         </Menu>
-        {userData ? (
+        {user ? (
           <div className="flex font-raleway text-xs px-7 w-full gap-2 items-center absolute bottom-12 py-4 text-white rounded-lg">
             <img
-              src={userData?.picture}
+              src={user?.picture}
               width={10}
               height={10}
               className={`rounded-full w-8 `}
               alt="profile"
             />
-            <h4>{userData?.given_name}</h4>
+            <h4>{user?.given_name}</h4>
           </div>
         ) : (
           ""

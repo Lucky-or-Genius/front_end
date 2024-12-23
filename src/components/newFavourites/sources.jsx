@@ -4,13 +4,25 @@ import toast from "react-hot-toast";
 
 import { addRemoveFavourite } from "../../services/summaries.services";
 import Skeleton from "../newSummaries/skeleton";
+import { useAppContext } from "../../utils/appContext";
 
-const sources = ({ sources, setSources }) => {
-  const accountId = localStorage.getItem("accountId");
+const Sources = ({ sources, setSources }) => {
+  const { user, login } = useAppContext();
 
-  const toggleFavourite = (id) => {
-    if (accountId === null) {
-      toast.error("Login to add favourite");
+  const toggleFavourite = async (id) => {
+    try {
+      if (!user) {
+        await login();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login process interrupted. Please try again.");
+      return;
+    }
+
+    const accountId = user?.accountId;
+
+    if (!accountId) {
       return;
     }
     const params = {
@@ -40,4 +52,4 @@ const sources = ({ sources, setSources }) => {
   );
 };
 
-export default sources;
+export default Sources;

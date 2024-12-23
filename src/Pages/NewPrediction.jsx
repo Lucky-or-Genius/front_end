@@ -12,12 +12,13 @@ import {
 import Filters from "../components/newPrediction/filters";
 import Pagination from "../components/newPrediction/pagination";
 import Skeleton from "../components/newPrediction/skeleton";
+import { useAppContext } from "../utils/appContext";
 
 const NewPrediction = () => {
+  const { user, login } = useAppContext();
   const [predictions, setPredictions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const accountId = localStorage.getItem("accountId");
 
   const fetchSortedPrediction = async (prediction) => {
     await getSortedPrediction(prediction)
@@ -40,14 +41,25 @@ const NewPrediction = () => {
   };
 
   const fetchPredictionData = useCallback(async () => {
-    const res = await getPredictions(currentPage, accountId);
+    const res = await getPredictions(currentPage, user?.accountId);
     setPredictions(res.data.predictions);
     setTotalPages(res.data.pagination.totalPages);
-  }, [currentPage]);
+  }, [currentPage, user]);
 
-  const toggleFavourite = (index, id) => {
-    if (accountId === null) {
-      toast.error("Login to add favourite");
+  const toggleFavourite = async (index, id) => {
+    try {
+      if (!user) {
+        await login();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login process interrupted. Please try again.");
+      return;
+    }
+
+    const accountId = user?.accountId;
+
+    if (!accountId) {
       return;
     }
     const params = {

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+
 import { Image } from "react-bootstrap";
 import { ImArrowUp, ImArrowDown } from "react-icons/im";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { getSinglePrediction } from "../services/Predictions.service";
-import "../styles/feedCard.css";
 import { useNavigate } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
@@ -15,7 +14,10 @@ import {
 } from "react-icons/fa6";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
+
 import infoIcon from "../assets/hover_info.png";
+import { getSinglePrediction } from "../services/Predictions.service";
+import "../styles/feedCard.css";
 
 const FeedCard = ({
   category,

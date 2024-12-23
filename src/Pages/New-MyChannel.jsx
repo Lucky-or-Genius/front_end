@@ -4,14 +4,26 @@ import toast from "react-hot-toast";
 import { channelsData, addRemoveFavourite } from "../services/channels.service";
 import HeroCard from "../components/newChannel/hero-card";
 import Skeleton from "../components/newChannel/skeleton";
+import { useAppContext } from "../utils/appContext";
 
 const MyChannel = () => {
-  const accountId = localStorage.getItem("accountId");
+  const { user, login } = useAppContext();
   const [channels, setChannels] = useState();
 
-  const toggleFavourite = (index, id) => {
-    if (accountId === null) {
-      toast.error("Login to add favourite");
+  const toggleFavourite = async (index, id) => {
+    try {
+      if (!user) {
+        await login();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Login process interrupted. Please try again.");
+      return;
+    }
+
+    const accountId = user?.accountId;
+
+    if (!accountId) {
       return;
     }
     const params = {
@@ -25,18 +37,17 @@ const MyChannel = () => {
     setChannels(newData);
   };
 
-  const fetchChannels = useCallback(async () => {
-    try {
-      const response = await channelsData(accountId);
-      setChannels(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [accountId]);
-
   useEffect(() => {
+    const fetchChannels = async () => {
+      try {
+        const response = await channelsData(user?.accountId);
+        setChannels(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchChannels();
-  }, [fetchChannels]);
+  }, [user]);
 
   return (
     <div className="bg-primary min-h-screen h-full overflow-y-auto pb-8 flex flex-col items-center w-full">
