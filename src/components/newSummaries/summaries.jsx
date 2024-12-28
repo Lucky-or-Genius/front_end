@@ -6,22 +6,24 @@ const Summaries = ({ summariesData }) => {
 
   return (
     <div className="w-full h-full md:h-[70dvh] overflow-y-hidden flex flex-col gap-6 justify-between ">
-      <div className="w-full overflow-y-auto grid grid-col-1 md:grid-cols-2 gap-2 h-[35dvh] px-2 content-stretch">
-        {summariesData.map((summary, index) => (
-          <div
-            key={index}
-            className="bg-[#ffffff20] border border-[#ffffff20] hover:border-primary400 transition-all ease-in-out rounded-lg p-4 cursor-pointer flex flex-col"
-            onClick={() => setSubSectionIndex(index)}
-          >
-            <span className="bg-primary rounded-full px-2 text-white font-poppins w-fit">
-              {summary?.time}
-            </span>
-            <span className="line-clamp-2 w-full font-poppins text-white pt-2">
-              {summary?.summary_title}
-            </span>
-          </div>
-        ))}
-      </div>
+      {summariesData.length > 1 && (
+        <div className="w-full overflow-y-auto grid grid-col-1 md:grid-cols-2 gap-2 h-[35dvh] px-2 content-stretch">
+          {summariesData.map((summary, index) => (
+            <div
+              key={index}
+              className="bg-[#ffffff20] border border-[#ffffff20] hover:border-primary400 transition-all ease-in-out rounded-lg p-4 cursor-pointer flex flex-col"
+              onClick={() => setSubSectionIndex(index)}
+            >
+              <span className="bg-primary rounded-full px-2 text-white font-poppins w-fit">
+                {summary?.time}
+              </span>
+              <span className="line-clamp-2 w-full font-poppins text-white pt-2">
+                {summary?.summary_title}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="w-full flex gap-2 h-full md:h-[35dvh] flex-col md:flex-row px-2 ">
         <div className="h-[35dvh] w-full md:w-1/2">
           <iframe
@@ -32,7 +34,8 @@ const Summaries = ({ summariesData }) => {
               objectFit: "cover",
               borderRadius: "8px",
             }}
-            alt=""
+            title="Yt"
+            alt="YT"
             src={`https://youtube.com/embed/${summariesData[subSectionIndex]?.youtube_id}?start=${summariesData[subSectionIndex]?.youtube_start_time}`}
           />
         </div>

@@ -13,16 +13,16 @@ const Tabs = ({ items, className, defaultOpen }) => {
 
   return (
     <div className={`flex flex-col h-full ${className} w-full 2md:w-4/5`}>
-      <div className="flex w-full flex-row  gap-4 border-b border-[#ffffff30] font-raleway overflow-x-auto tab_subheading">
+      <div className="flex w-full flex-row min-h-14 bg-[#ffffff20] pt-2 px-2 rounded-xl font-raleway overflow-x-auto tab_subheading">
         {items.map((item, index) => (
           <button
             key={index}
             ref={index === 0 ? firstBtnRef : null}
             onClick={() => setSelectedTab(index)}
-            className={`text-sm py-3 px-3.5 border-b-2 hover:border-[#ffffff60] border-transparent transition-all ease-in-out hover:text-[#ffffff80] ${
+            className={`text-sm pt-3 pb-4 min-h-12 px-3.5 transition-all font-semibold rounded-t-lg rounded-x-lg duration-300 ease-in-out hover:text-[#ffffff80] ${
               selectedTab === index
-                ? " !border-white text-white hover:text-white"
-                : "text-[#ffffff60]"
+                ? " text-white hover:text-white bg-primary"
+                : "text-[#ffffff80] hover:bg-[#ffffff10]"
             }`}
           >
             {item.title}

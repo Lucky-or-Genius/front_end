@@ -117,8 +117,6 @@ const Feed = () => {
                 key={index2}
                 prediction={card.prediction}
                 status={card.status}
-                onCardClick={() => handleRowClick(index2)}
-                isOpen={openRowIndex === index2}
                 index1={index1}
                 index2={index2}
                 toggleFavourite={toggleFavourite}
@@ -128,7 +126,7 @@ const Feed = () => {
           </div>
         </div>
       )),
-    [feedData, handleRowClick, openRowIndex, toggleFavourite]
+    [feedData, toggleFavourite]
   );
 
   if (loading)

@@ -109,11 +109,14 @@ const Leader = () => {
             <span className="flex items-center gap-2 text-[#ffffff80] font-raleway font-[500] text-xl ">
               Predictions by Category
             </span>
-            <BarChart data={userData[0]} />
+            <BarChart
+              data={userData[0]}
+              isVisible={defaultOpen === "Analytics"}
+            />
             <span className="flex items-center gap-2 text-[#ffffff80] font-raleway font-[500] text-xl ">
-              Predictions by Plaform
+              Predictions by Platform
             </span>
-            <PieChart />{" "}
+            <PieChart isVisible={defaultOpen === "Analytics"} />
           </div>
         </>
       ),
