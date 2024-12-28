@@ -1,5 +1,4 @@
 import React from "react";
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { Popover } from "antd";
 import { Link } from "react-router-dom";
 
@@ -14,7 +13,7 @@ const People = ({ peopleData }) => {
           <div className="flex items-center gap-3 w-full">
             <img
               src={item?.image_url}
-              alt="image"
+              alt="profile"
               width={40}
               height={40}
               className="rounded-full w-10 h-10 object-cover"
@@ -27,8 +26,7 @@ const People = ({ peopleData }) => {
                       <div className="flex gap-2 pb-2 font-raleway">
                         <img
                           src={item?.image_url}
-                          alt="image"
-                          className=""
+                          alt="profile"
                           width={40}
                           height={40}
                           className="rounded-full w-10 h-10 object-cover"

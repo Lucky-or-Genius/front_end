@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 
-const BarChart = ({ data }) => {
-  // Default categories with zero counts
+const BarChart = ({ data, isVisible }) => {
+  const chartRef = useRef(null);
+  const containerRef = useRef(null);
+
   const defaultCategories = [
     ["Economy", 0],
     ["Finance", 0],
@@ -18,77 +20,95 @@ const BarChart = ({ data }) => {
       : defaultCategories;
 
   useEffect(() => {
-    var chartDom = document.getElementById("main");
-    var myChart = echarts.init(chartDom);
-    var option;
+    const initChart = () => {
+      if (!containerRef.current) return;
 
-    option = {
-      tooltip: {
-        textStyle: {
-          fontFamily: "Raleway, sans-serif",
-        },
-      },
-      dataset: {
-        source: [["Category", "Count"], ...categories],
-      },
-      xAxis: {
-        type: "category",
-        axisLabel: {
+      const myChart = echarts.init(containerRef.current);
+      chartRef.current = myChart;
+
+      const option = {
+        tooltip: {
           textStyle: {
             fontFamily: "Raleway, sans-serif",
-            color: "white",
           },
         },
-        splitLine: {
-          show: false,
+        dataset: {
+          source: [["Category", "Count"], ...categories],
         },
-      },
-      yAxis: {
-        axisLabel: {
-          textStyle: {
-            fontFamily: "Raleway, sans-serif",
-            color: "white",
-          },
-        },
-        splitLine: {
-          show: false,
-        },
-      },
-      series: [
-        {
-          type: "bar",
-          itemStyle: {
-            color: function (params) {
-              // Define your color palette here
-              const colorPalette = [
-                "#5470C6",
-                "#91CC75",
-                "#EE6666",
-                "#FAC858",
-                "#73C0DE",
-                "#3BA272",
-                "#FC8452",
-                "#9A60B4",
-                "#EA7CCC",
-              ];
-              return colorPalette[params.dataIndex % colorPalette.length];
+        xAxis: {
+          type: "category",
+          axisLabel: {
+            textStyle: {
+              fontFamily: "Raleway, sans-serif",
+              color: "white",
             },
           },
+          splitLine: {
+            show: false,
+          },
         },
-      ],
+        yAxis: {
+          axisLabel: {
+            textStyle: {
+              fontFamily: "Raleway, sans-serif",
+              color: "white",
+            },
+          },
+          splitLine: {
+            show: false,
+          },
+        },
+        series: [
+          {
+            type: "bar",
+            itemStyle: {
+              color: function (params) {
+                const colorPalette = [
+                  "#5470C6",
+                  "#91CC75",
+                  "#EE6666",
+                  "#FAC858",
+                  "#73C0DE",
+                  "#3BA272",
+                  "#FC8452",
+                  "#9A60B4",
+                  "#EA7CCC",
+                ];
+                return colorPalette[params.dataIndex % colorPalette.length];
+              },
+            },
+          },
+        ],
+      };
+
+      myChart.setOption(option);
+
+      const handleResize = () => {
+        if (myChart) {
+          myChart.resize();
+        }
+      };
+
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        myChart.dispose();
+      };
     };
 
-    option && myChart.setOption(option);
-
-    // Cleanup function
-    return () => {
-      myChart.dispose();
-    };
+    initChart();
   }, [categories]);
+
+  useEffect(() => {
+    if (isVisible && chartRef.current) {
+      chartRef.current.resize(); // Resize the chart when the tab becomes visible
+    }
+  }, [isVisible]);
 
   return (
     <div
-      id="main"
+      ref={containerRef}
       style={{ width: "100%", height: "400px" }}
       className="font-raleway"
     ></div>

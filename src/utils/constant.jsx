@@ -218,3 +218,229 @@ export const Faqs = [
       "Please use the feedback button at the bottom of every prediction card to let us know if you think we may have made an error in any part of the process including scoring, interpretation, validation, assignment to speaker or anything else that seems off.",
   },
 ];
+
+export const TermsOfService = [
+  {
+    section: "1. Acceptance of Terms",
+    content:
+      'By accessing or using the website located at www.luckyorgenius.com (the \u201cSite\u201d), you agree to be bound by these Terms of Service (the "Terms"), as well as our Privacy Policy, which is incorporated herein by reference. These Terms apply to all users, including those located in the European Union, European Free Trade Association (EFTA) States, and the United Kingdom. If you do not agree to these Terms, you must immediately cease using the Site. Lucky or Genius reserves the right to modify these Terms at any time, and such modifications will be effective immediately upon posting. Continued use of the Site following the posting of any changes will constitute your acceptance of those changes.',
+  },
+  {
+    section: "2. Nature of Service",
+    content:
+      'Lucky or Genius provides information, analyses, and data regarding predictions made by third parties, processed using proprietary AI algorithms (the "Services"). The Services are intended for educational and entertainment purposes only. Lucky or Genius is not a gambling platform, nor do we facilitate gambling or offer financial advice. We do not guarantee the accuracy or completeness of the data provided, and the content should not be construed as professional financial, legal, or other advice.',
+  },
+  {
+    section: "3. Use of the Site and Services",
+    content:
+      "By using the Site, you agree that you will not use it for any unlawful purposes or in a manner that could damage, disable, overburden, or impair the Site or Services. You are responsible for any actions taken based on the information presented and should not rely on the Services for critical decision-making. We reserve the right to restrict or terminate your access to the Site at our discretion, without notice, for any conduct that we deem to be inappropriate, unlawful, or in violation of these Terms.",
+  },
+  {
+    section: "4. Disclaimers and Limitation of Liability",
+    subsections: [
+      {
+        title: "Informational Purpose Only",
+        content:
+          "The information and data presented on this Site are provided 'as-is' and without warranties of any kind. We disclaim all warranties, whether express or implied, including, but not limited to, the implied warranties of merchantability, fitness for a particular purpose, and non-infringement. Lucky or Genius makes no representations regarding the accuracy, reliability, completeness, or timeliness of the information available on the Site.",
+      },
+      {
+        title: "Liability for Data Use",
+        content:
+          "We shall not be liable for any actions or outcomes resulting from the use of the data, content, or information provided through the Site. You agree that you use the Site and Services at your own risk, and we are not responsible for any financial or other losses that may occur as a result of reliance on the information available on the Site. The Site does not constitute professional advice, and users are solely responsible for their use of the Services.",
+      },
+      {
+        title: "Limitation of Liability",
+        content:
+          "To the fullest extent permitted by applicable law, in no event shall Lucky or Genius, its affiliates, directors, officers, employees, or agents be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses, resulting from: (i) your access to or use of or inability to access or use the Site; (ii) any conduct or content of any third party on the Site, including without limitation any defamatory, offensive, or illegal conduct of other users or third parties; (iii) any content obtained from the Site; and (iv) unauthorized access, use, or alteration of your transmissions or content. In jurisdictions where limitations of liability are not permitted by law, the limitations in this Section will apply to the fullest extent permitted by law.",
+      },
+    ],
+  },
+  {
+    section: "5. Device and Social Media Account Responsibility",
+    content:
+      "We are not liable for any damage to your computer system, mobile device, or other technology that may occur as a result of using the Site. Additionally, Lucky or Genius disclaims all liability for any disruption, suspension, or deletion of social media accounts that may occur as a result of interaction with our Services. Any interactions you have on social media platforms are governed by those platforms\u2019 terms and conditions.",
+  },
+  {
+    section: "6. Intellectual Property Rights",
+    content:
+      "All content, trademarks, and other intellectual property on this Site are owned by Lucky or Genius or its licensors. You may not reproduce, modify, distribute, or otherwise use any of the materials on the Site without prior written consent.",
+  },
+  {
+    section: "7. Indemnification",
+    content:
+      "You agree to indemnify and hold harmless Lucky or Genius, its affiliates, directors, officers, employees, and agents from any and all claims, damages, losses, liabilities, and expenses (including reasonable attorneys' fees) arising out of or in any way related to your use of the Site, violation of these Terms, or any conduct in connection with your use of the Site.",
+  },
+  {
+    section: "8. Governing Law and Dispute Resolution",
+    content:
+      "If you are a resident of the European Union, EFTA States, or the United Kingdom, these Terms are governed by and construed in accordance with the laws of the country in which you are domiciled. You may bring legal proceedings in the courts of your country of domicile. For all other users, these Terms will be governed by and construed in accordance with the laws of Delaware. Any disputes arising under these Terms will be subject to the exclusive jurisdiction of the courts in Delaware, USA.",
+  },
+  {
+    section: "9. Amendments",
+    content:
+      "We may revise these Terms at any time without notice by posting an updated version on the Site. Your continued use of the Site after any such updates constitutes your acceptance of the new Terms.",
+  },
+  {
+    section: "10. Contact Information",
+    content:
+      "For any questions about these Terms, please contact us at: Email: alek@luckyorgenius.com",
+  },
+];
+
+export const PrivacyPolicy = [
+  {
+    section: "1. Introduction",
+    content:
+      "Welcome to Lucky or Genius! Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you visit our website or use our services. We encourage you to read this policy carefully and contact us if you have any questions.",
+  },
+  {
+    section: "2. Information We Collect",
+    content: "We collect different types of information, including:",
+    subsections: [
+      {
+        title: "Identity Data",
+        content: "First name, last name, username, or similar identifiers.",
+      },
+      {
+        title: "Contact Data",
+        content: "Email address, phone number.",
+      },
+      {
+        title: "Technical Data",
+        content:
+          "IP address, browser type and version, operating system, platform, and other similar technologies.",
+      },
+      {
+        title: "Usage Data",
+        content:
+          "Information about your interaction with our website, products, and services.",
+      },
+      {
+        title: "Marketing and Communications Data",
+        content:
+          "Your preferences for receiving marketing and your communication preferences.",
+      },
+    ],
+  },
+  {
+    section: "3. How We Collect Your Data",
+    content:
+      "We use various methods to collect data from and about you, including:",
+    subsections: [
+      {
+        title: "Direct Interactions",
+        content:
+          "You may provide data by filling in forms, participating in competitions, or contacting us via email or phone.",
+      },
+      {
+        title: "Automated Technologies",
+        content:
+          "We may automatically collect Technical Data as you interact with our site through the use of cookies, pixel tags, and other tracking technologies.",
+      },
+      {
+        title: "Third Parties or Publicly Available Sources",
+        content:
+          "We may collect information about you from third parties (e.g., social media sites or business partners).",
+      },
+    ],
+  },
+  {
+    section: "4. How We Use Your Data",
+    content: "We use your personal data to:",
+    subsections: [
+      { content: "Register you as a customer." },
+      {
+        content:
+          "Provide and manage services (e.g., sweepstakes, contests, and events).",
+      },
+      { content: "Send updates and marketing communications." },
+      {
+        content:
+          "Analyze the performance of our website and improve user experience.",
+      },
+      {
+        content:
+          "Protect against fraud, unauthorized access, and other security threats.",
+      },
+    ],
+  },
+  {
+    section: "5. Sharing Your Information",
+    content: "We may share your personal information:",
+    subsections: [
+      {
+        title: "With service providers",
+        content:
+          "For purposes of delivering our services and conducting our business operations.",
+      },
+      {
+        title: "For legal reasons",
+        content:
+          "To comply with legal obligations, respond to government authorities, or protect our legal rights.",
+      },
+      {
+        title: "With your consent",
+        content:
+          "Where you have provided consent for sharing your personal information for specific reasons.",
+      },
+    ],
+  },
+  {
+    section: "6. Your Privacy Choices",
+    content: "Depending on your location, you may have the following rights:",
+    subsections: [
+      {
+        content:
+          "Access: Request details about the personal data we hold about you.",
+      },
+      { content: "Correction: Have inaccurate or incomplete data corrected." },
+      {
+        content:
+          "Deletion: Request deletion of your data under certain circumstances.",
+      },
+      {
+        content:
+          "Objection or Restriction: Object to or request restriction of processing.",
+      },
+      {
+        content:
+          "Data Portability: Receive an electronic copy of your personal data.",
+      },
+    ],
+  },
+  {
+    section: "7. Data Security",
+    content:
+      "We implement robust security measures to protect your data. However, no method of transmission over the Internet or electronic storage is 100% secure. We strive to use commercially acceptable means to protect your personal data but cannot guarantee absolute security.",
+  },
+  {
+    section: "8. Cookies and Tracking Technologies",
+    content:
+      "We use cookies, pixel tags, and other tracking technologies to collect and store information when you visit our website. These help us understand how you use our website and improve your experience. You can manage cookie preferences through your browser settings.",
+  },
+  {
+    section: "9. International Transfers",
+    content:
+      "Your personal data may be transferred and processed in countries outside your home country. These countries may not have the same data protection laws, but we ensure that adequate safeguards are in place.",
+  },
+  {
+    section: "10. Data Retention",
+    content:
+      "We retain your personal data only as long as necessary to fulfill the purposes for which it was collected or as required by law.",
+  },
+  {
+    section: "11. Children’s Privacy",
+    content:
+      "Our services are not intended for individuals under the age of 13. We do not knowingly collect personal data from children. If you believe we have inadvertently collected such information, please contact us so we can take the appropriate steps.",
+  },
+  {
+    section: "12. Changes to This Privacy Policy",
+    content:
+      "We may update this Privacy Policy from time to time. We will notify you of any changes by updating the \u201cEffective Date\u201d at the top of this policy. Please review this policy periodically to stay informed about how we are protecting your information.",
+  },
+  {
+    section: "13. Contact Us",
+    content:
+      "If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at: Email: alek@luckyorgenius.com",
+  },
+];

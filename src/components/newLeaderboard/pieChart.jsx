@@ -1,56 +1,85 @@
-// components/newLeaderboard/pieChart.jsx
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 
-const PieChart = () => {
-  useEffect(() => {
-    var chartDom = document.getElementById("pie-chart");
-    var myChart = echarts.init(chartDom);
-    var option;
+const PieChart = ({ isVisible }) => {
+  const chartRef = useRef(null);
+  const containerRef = useRef(null);
 
-    option = {
-      tooltip: {
-        trigger: "item",
-      },
-      legend: {
-        top: "5%",
-        left: "center",
-      },
-      series: [
-        {
-          name: "Access From",
-          type: "pie",
-          radius: ["40%", "70%"],
-          avoidLabelOverlap: false,
-          padAngle: 5,
-          itemStyle: {
-            borderRadius: 10,
-          },
-          label: {
-            show: false,
-            position: "center",
+  useEffect(() => {
+    const initChart = () => {
+      if (!containerRef.current) return;
+
+      const myChart = echarts.init(containerRef.current);
+      chartRef.current = myChart;
+
+      const option = {
+        tooltip: {
+          trigger: "item",
+        },
+        legend: {
+          top: "5%",
+          left: "center",
+          textStyle: {
             color: "white",
           },
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: 40,
-              fontWeight: "bold",
-              color: "white",
-            },
-          },
-          labelLine: {
-            show: false,
-          },
-          data: [{ value: 1, name: "Youtube" }],
         },
-      ],
+        series: [
+          {
+            name: "Access From",
+            type: "pie",
+            radius: ["40%", "70%"],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 10,
+            },
+            label: {
+              show: false,
+              position: "center",
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 40,
+                fontWeight: "bold",
+                color: "white",
+              },
+            },
+            labelLine: {
+              show: false,
+            },
+            data: [{ value: 1, name: "Youtube" }],
+          },
+        ],
+      };
+
+      myChart.setOption(option);
+
+      const handleResize = () => {
+        if (myChart) {
+          myChart.resize();
+        }
+      };
+
+      window.addEventListener("resize", handleResize);
+
+      return () => {
+        window.removeEventListener("resize", handleResize);
+        myChart.dispose();
+      };
     };
 
-    option && myChart.setOption(option);
+    initChart();
   }, []);
 
-  return <div id="pie-chart" style={{ width: "100%", height: "400px" }}></div>;
+  useEffect(() => {
+    if (isVisible && chartRef.current) {
+      chartRef.current.resize(); // Resize the chart when the tab becomes visible
+    }
+  }, [isVisible]);
+
+  return (
+    <div ref={containerRef} style={{ width: "100%", height: "400px" }}></div>
+  );
 };
 
 export default PieChart;
