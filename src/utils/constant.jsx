@@ -1,3 +1,5 @@
+import { FaXTwitter, FaYoutube } from "react-icons/fa6";
+
 export const Faqs = [
   {
     title: "What classifies as a prediction? ",
@@ -443,4 +445,9 @@ export const PrivacyPolicy = [
     content:
       "If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at: Email: alek@luckyorgenius.com",
   },
+];
+
+export const SocialMediaLinks = [
+  { icon: <FaXTwitter />, link: "https://x.com/luckyorgenius" },
+  { icon: <FaYoutube />, link: "https://www.youtube.com/@LuckyorGenius" },
 ];

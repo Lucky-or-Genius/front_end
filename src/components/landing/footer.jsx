@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 import logoIcon from "../../assets/logo.png";
+import { SocialMediaLinks } from "../../utils/constant";
 
 const Footer = () => {
   const location = useLocation();
+
   const GeneralLinks = [
     { src: "/", name: "Home" },
     { src: "/about", name: "About" },
@@ -37,17 +39,30 @@ const Footer = () => {
   return (
     <div className="bg-[#000000] w-full flex items-center flex-col justify-center pt-10 px-4 pb-12">
       <div className="max-w-5xl items-center md:items-start flex flex-col md:flex-row justify-between w-full pb-6 gap-6">
-        <Link className="" to={"/"}>
-          <img
-            className="w-56"
-            alt="logo"
-            src={logoIcon}
-            width={100}
-            height={80}
-          />
-        </Link>
+        <div className="flex flex-col gap-4 justify-center items-center md:items-start">
+          <Link className="" to={"/"}>
+            <img
+              className="w-56"
+              alt="logo"
+              src={logoIcon}
+              width={100}
+              height={80}
+            />
+          </Link>
+          <div className="flex gap-4">
+            {SocialMediaLinks.map((item, i) => (
+              <Link
+                to={item.link}
+                target="_blank"
+                className="w-8 h-8 p-[4px] rounded-full bg-[#ffffff60] flex justify-center items-center hover:scale-110 transition-all ease-in-out focus:scale-90"
+              >
+                {item.icon}
+              </Link>
+            ))}
+          </div>
+        </div>
 
-        <div className="px-4">
+        <div className="px-4 font-raleway">
           <div className="grid grid-cols-3 gap-4">
             {headings.map((item, i) => (
               <span className="text-white font-raleway font-semibold" key={i}>
