@@ -5,7 +5,7 @@ import Section2first from "../components/landing/section-2-first";
 import Section6 from "../components/landing/section-6";
 import Section9 from "../components/landing/section-9";
 import StickyScroll from "../components/landing/sticky-scroll";
-import ImageContainer from "../components/landing/imageContainer";
+import Footer from "../components/landing/footer";
 import MobileScroll from "../components/landing/mob-scroll-conatiner";
 import Navbar from "../components/common/navbar/navbar";
 import "../styles/landingpage.css";
@@ -34,6 +34,8 @@ export default function LandingPage() {
       <StickyScroll />
       <MobileScroll />
       <Section9 />
+
+      <Footer />
     </div>
   );
 }

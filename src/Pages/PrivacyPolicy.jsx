@@ -2,7 +2,7 @@ import React from "react";
 
 import Navbar from "../components/common/navbar/navbar";
 import { PrivacyPolicy } from "../utils/constant";
-
+import Footer from "../components/landing/footer";
 const Privacy = () => {
   return (
     <div className="bg-[#0B0B0F] flex flex-col w-full">
@@ -41,6 +41,7 @@ const Privacy = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

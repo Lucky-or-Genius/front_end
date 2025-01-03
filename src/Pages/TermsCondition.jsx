@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../components/common/navbar/navbar";
 import { TermsOfService } from "../utils/constant";
+import Footer from "../components/landing/footer";
 
 const About = () => {
   return (
@@ -42,6 +43,7 @@ const About = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
