@@ -1,13 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Footer from "./footer";
 import { Link } from "react-router-dom";
 import { IoLogIn } from "react-icons/io5";
+
 import { Button } from "../common/moving-border-button";
 
 const Section9 = () => {
   return (
-    <div className="w-full h-screen flex bg-[#000000] justify-center px-4 items-center md:px-20 gap-6 flex flex-col relative">
+    <div className="w-full h-[80vh] md:h-screen flex bg-[#000000] justify-center px-4 items-center md:px-20 gap-6 flex flex-col relative md:pt-48">
       <div
         className="absolute top-[3%] left-[10%] w-[80%] h-[80%] pointer-events-none bg-radial-pattern bg-left-center bg-8x8 opacity-80 mask-image-radial-fade"
         style={{ maskImage: "radial-gradient(rgb(0, 0, 0), transparent 50%)" }}
@@ -55,7 +55,6 @@ const Section9 = () => {
           viewport={{ once: false }}
         />
       </div>
-      <Footer />
     </div>
   );
 };
