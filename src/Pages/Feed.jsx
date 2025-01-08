@@ -14,6 +14,7 @@ import FeedCard from "../components/feed-card";
 const Feed = () => {
   const { user, login } = useAppContext();
   const [feedData, setFeedData] = useState([]);
+  const [offset, setOffset] = useState(1);
   const [topPredictors, setTopPredictors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [openRowIndex, setOpenRowIndex] = useState(null);
@@ -71,9 +72,8 @@ const Feed = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        // Make only one API call to fetch both feed details and leaderboard data
         const [feedResponse, leaderboardResponse] = await Promise.all([
-          getFeedDetails(user?.accountId),
+          getFeedDetails(user?.accountId, offset),
           leaderBoardData(user?.accountId),
         ]);
 
@@ -88,7 +88,7 @@ const Feed = () => {
     };
 
     fetchData(); // Trigger data fetch only when the user is available
-  }, [user?.accountId]);
+  }, [offset, user?.accountId]);
 
   const renderFeedItems = useMemo(
     () =>
