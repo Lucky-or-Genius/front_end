@@ -1,10 +1,19 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import toast from "react-hot-toast";
 
 import { useAppContext } from "../utils/appContext";
 import TrendingPredictionCard from "../components/trending-prediction-card";
 import FeedRightSection from "../components/feed-right-section";
-import FeedSkeleton from "../components/common/feed-skeleton";
+import {
+  FeedSkeleton,
+  LeaderboardSkeleton,
+} from "../components/common/feed-skeleton";
 import { getFeedDetails } from "../services/Feed.service";
 import { leaderBoardData } from "../services/Leaderboards.service";
 import { addRemoveFavourite } from "../services/Predictions.service";
@@ -14,13 +23,12 @@ import FeedCard from "../components/feed-card";
 const Feed = () => {
   const { user, login } = useAppContext();
   const [feedData, setFeedData] = useState([]);
+  const [offset, setOffset] = useState(1);
   const [topPredictors, setTopPredictors] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [openRowIndex, setOpenRowIndex] = useState(null);
-
-  const handleRowClick = useCallback((index) => {
-    setOpenRowIndex((prevIndex) => (prevIndex === index ? null : index));
-  }, []);
+  const [leaderboardLoading, setLeaderboardLoading] = useState(false);
+  const [feedLoading, setFeedLoading] = useState(true); // Load feed data only once
+  const [isFetching, setIsFetching] = useState(false);
+  const observerRef = useRef(null);
 
   const toggleFavourite = useCallback(
     async (index1, index2, id) => {
@@ -68,27 +76,71 @@ const Feed = () => {
   );
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
+    const fetchFeedData = async () => {
       try {
-        // Make only one API call to fetch both feed details and leaderboard data
-        const [feedResponse, leaderboardResponse] = await Promise.all([
-          getFeedDetails(user?.accountId),
-          leaderBoardData(user?.accountId),
-        ]);
-
-        setFeedData(feedResponse.data);
-        setTopPredictors(leaderboardResponse.data);
+        const feedResponse = await getFeedDetails(user?.accountId, offset);
+        setFeedData((prevData) => [...prevData, ...feedResponse.data]);
       } catch (error) {
         console.error("Error fetching feed data:", error);
         toast.error("Failed to load feed data");
       } finally {
-        setLoading(false);
+        setFeedLoading(false);
+        setIsFetching(false);
       }
     };
 
-    fetchData(); // Trigger data fetch only when the user is available
+    if (feedLoading) {
+      fetchFeedData();
+    } else if (offset > 1 && isFetching) {
+      fetchFeedData();
+    }
+  }, [offset, user?.accountId, feedLoading, isFetching]);
+
+  useEffect(() => {
+    const fetchLeaderBoardData = async () => {
+      setLeaderboardLoading(true);
+      try {
+        const leaderboardResponse = await leaderBoardData(user?.accountId);
+        setTopPredictors(leaderboardResponse.data);
+      } catch (error) {
+        console.error("Error fetching leaderboard data:", error);
+        toast.error("Failed to load leaderboard data");
+      } finally {
+        setLeaderboardLoading(false);
+      }
+    };
+
+    fetchLeaderBoardData();
   }, [user?.accountId]);
+
+  const handleObserver = useCallback(
+    (entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting && !isFetching) {
+        setIsFetching(true);
+        setOffset((prevOffset) => prevOffset + 1);
+      }
+    },
+    [isFetching]
+  );
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleObserver, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3, // Trigger at 30% of the viewport
+    });
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [handleObserver]);
 
   const renderFeedItems = useMemo(
     () =>
@@ -129,26 +181,29 @@ const Feed = () => {
     [feedData, toggleFavourite]
   );
 
-  if (loading)
-    return (
-      <div className="bg-primary min-h-screen">
-        <FeedSkeleton />
-      </div>
-    );
-
   return (
     <div className="feed-section">
       <div className="w-full h-full overflow-y-hidden flex flex-row">
         <div className="feed-part1">
-          <div className="px-4 md:px-0">
-            <h2 className="font-raleway text-2xl font-[500] text-primary400 py-4">
-              Recent Predictions
-            </h2>
-            {renderFeedItems}
-          </div>
+          {feedLoading ? (
+            <FeedSkeleton />
+          ) : (
+            <div className="px-4 md:px-0">
+              <h2 className="font-raleway text-2xl font-[500] text-primary400 py-4">
+                Recent Predictions
+              </h2>
+              {renderFeedItems}
+              <div ref={observerRef} className="observer-element"></div>
+            </div>
+          )}
         </div>
+
         <div className="overflow-y w-[25%] md:flex hidden pb-6">
-          <FeedRightSection topPredictorsData={topPredictors} />
+          {leaderboardLoading ? (
+            <LeaderboardSkeleton />
+          ) : (
+            <FeedRightSection topPredictorsData={topPredictors} />
+          )}
         </div>
       </div>
     </div>

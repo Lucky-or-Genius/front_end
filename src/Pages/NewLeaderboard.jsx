@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 
 import Filters from "../components/newLeaderboard/filters";
 import Board from "../components/newLeaderboard/board";
+import MobileLeaderBoard from "../components/newLeaderboard/mobileLeaderboard";
 import {
   leaderBoardData,
   sortByAccuracy,
@@ -14,10 +15,12 @@ import {
   sortByBankroll,
 } from "../services/Leaderboards.service";
 import { useAppContext } from "../utils/appContext";
+import useIsMobile from "../hooks/useIsMobile";
 
 const NewLeaderboard = () => {
   const [data, setData] = useState([]);
   const { user, login } = useAppContext();
+  const isMobile = useIsMobile();
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -131,7 +134,11 @@ const NewLeaderboard = () => {
         />
       </div>
       {data?.length >= 0 ? (
-        <Board data={data} toggleFavourite={toggleFavourite} />
+        isMobile ? (
+          <MobileLeaderBoard data={data} toggleFavourite={toggleFavourite} />
+        ) : (
+          <Board data={data} toggleFavourite={toggleFavourite} />
+        )
       ) : (
         ""
       )}

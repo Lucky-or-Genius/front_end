@@ -11,9 +11,9 @@ const Board = ({ data, toggleFavourite }) => {
     "Rank",
     "Name",
     "Accuracy",
+    "Predictions",
     "Points",
     "Bankroll",
-    "Predictions",
     "Favourite",
   ];
 
@@ -21,11 +21,15 @@ const Board = ({ data, toggleFavourite }) => {
     <div className="flex w-full justify-start lg:justify-center gap-4 h-full md:px-6 overflow-y-hidden">
       <div className="min-w-[850px] overflow-x-auto w-full md:h-4/6 lg:w-5/6 rounded-2xl bg-[#ffffff10] overflow-y-hidden h-full p-4 relative">
         {/* Table Headings */}
-        <div className="grid grid-cols-8 border-b pb-4 gap-4 border-gray-500 w-full px-3 sticky top-0 z-30">
+        <div className="grid grid-cols-15 border-b pb-4 gap-4 border-gray-500 w-full px-3 sticky top-0 z-30">
           {Headings.map((item, i) => (
             <span
               className={`${
-                item === "Name" ? "col-span-2" : "col-span-1"
+                item === "Name"
+                  ? "col-span-4 text-start"
+                  : item === "Rank"
+                  ? "col-span-1 text-start"
+                  : "col-span-2 text-center"
               } w-full text-gray-400 font-raleway font-semibold`}
               key={i}
             >
@@ -43,9 +47,9 @@ const Board = ({ data, toggleFavourite }) => {
                 key={index}
                 className={`${
                   index % 2 === 1 ? "bg-[#ffffff05]" : ""
-                } grid grid-cols-8 w-full py-4 px-2 gap-4 rounded-xl hover:bg-[#ffffff10] transition-all ease-in-out font-poppins cursor-pointer hover:scale-[1.005]`}
+                } grid grid-cols-15 w-full py-4 px-2 gap-4 rounded-xl hover:bg-[#ffffff10] transition-all ease-in-out font-poppins cursor-pointer hover:scale-[1.005]`}
               >
-                <div className="">
+                <div className=" col-span-1">
                   {item?.rank === 1 ? (
                     <img alt="rank-1" src="/goldmedal-1.svg" className="w-6" />
                   ) : item?.rank === 2 ? (
@@ -56,15 +60,15 @@ const Board = ({ data, toggleFavourite }) => {
                     <div className="px-2 text-white">{item?.rank}</div>
                   )}
                 </div>
-                <div className="col-span-2 flex items-center gap-2">
+                <div className="col-span-4 flex items-center gap-2">
                   <img
                     src={item.image_url}
                     alt="profile"
                     width={40}
                     height={40}
-                    className="rounded-full w-6 h-6 object-cover"
+                    className="rounded-full w-7 h-7 object-cover"
                   />
-                  <div className="w-fit truncate ">
+                  <div className="w-fit truncate">
                     <Link
                       to={`/dashboard/LeaderBoards/${item.user_id}`}
                       className="text-white hover:underline hover:text-primary400 "
@@ -73,19 +77,11 @@ const Board = ({ data, toggleFavourite }) => {
                     </Link>
                   </div>
                 </div>
-                <div className="text-white">
+                <div className="text-white text-center col-span-2">
                   {Math.round(item.prediction_accuracy)} %
                 </div>
-                <div className="text-white">
-                  {Math.round(item.total_user_score)}
-                </div>
-                <div className="text-white">
-                  {item.bankroll < 0
-                    ? `-$${Math.abs(item.bankroll)}`
-                    : `$${item.bankroll}`}
-                </div>
                 <div
-                  className="text-white hover:text-primary400"
+                  className="text-white hover:text-primary400 text-center col-span-2"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -96,7 +92,16 @@ const Board = ({ data, toggleFavourite }) => {
                 >
                   {item.total_predictions}
                 </div>
-                <div className="">
+                <div className="text-white text-center col-span-2">
+                  {Math.round(item.total_user_score)}
+                </div>
+                <div className="text-white text-center col-span-2">
+                  {item.bankroll < 0
+                    ? `-$${Math.abs(item.bankroll)}`
+                    : `$${item.bankroll}`}
+                </div>
+
+                <div className="flex w-full items-center justify-center col-span-2">
                   {item.is_favourite ? (
                     <IoMdHeart
                       onClick={(e) => {
@@ -104,7 +109,7 @@ const Board = ({ data, toggleFavourite }) => {
                         e.stopPropagation();
                         toggleFavourite(index, item?.user_id);
                       }}
-                      className="cursor-pointer text-error  text-xl active:scale-95 transition-all hover:scale-105"
+                      className="cursor-pointer text-error text-center text-xl active:scale-95 transition-all hover:scale-105"
                     />
                   ) : (
                     <IoMdHeartEmpty
@@ -113,7 +118,7 @@ const Board = ({ data, toggleFavourite }) => {
                         e.stopPropagation();
                         toggleFavourite(index, item?.user_id);
                       }}
-                      className="cursor-pointer text-[#ffffff60] text-xl active:scale-95 transition-all hover:scale-105"
+                      className="cursor-pointer text-[#ffffff60] text-xl text-center active:scale-95 transition-all hover:scale-105"
                     />
                   )}
                 </div>

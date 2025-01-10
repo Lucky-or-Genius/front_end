@@ -83,6 +83,9 @@ module.exports = {
         white: "#ffffff",
         success: "#27AE60",
       },
+      gridTemplateColumns: {
+        15: "repeat(15, minmax(0, 1fr))",
+      },
     },
   },
   plugins: [
