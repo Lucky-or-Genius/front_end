@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { createRoot } from "react-dom/client";
 import DocumentMeta from "react-document-meta";
+import { toPng } from "dom-to-image-more";
 import { MdPendingActions } from "react-icons/md";
 import { CgShutterstock } from "react-icons/cg";
 import { FaChartLine, FaWikipediaW } from "react-icons/fa";
@@ -11,6 +13,7 @@ import {
 } from "react-icons/fa6";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 
+import MetaImage from "../components/newLeaderboard/meta-image";
 import {
   getProfilesBySubjects,
   getSortedProfilesBySubjects,
@@ -169,9 +172,71 @@ const Leader = () => {
     },
   ];
 
-  /**
-   * Build meta tags
-   */
+  const [metaImage, setMetaImage] = useState("");
+
+  useEffect(() => {
+    const generateMetaImage = async () => {
+      const dummyContainer = document.createElement("div");
+      dummyContainer.style.position = "absolute";
+      dummyContainer.style.top = "-9999px";
+      dummyContainer.style.left = "-9999px";
+      document.body.appendChild(dummyContainer);
+
+      try {
+        // Use createRoot to render the component
+        const root = createRoot(dummyContainer);
+        root.render(
+          <MetaImage
+            predictor={userPredictions}
+            occupation={predictor?.occupation}
+          />
+        );
+
+        // Wait for the render to complete before generating the image
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
+        // Generate the image using dom-to-image-more
+        const base64Url = await toPng(dummyContainer, {
+          cacheBust: true,
+          filter: (node) => {
+            return (
+              node.tagName !== "LINK" ||
+              !node.href.includes("fonts.googleapis.com")
+            );
+          },
+        });
+        // Convert the base64 data URL to a Blob
+        const byteString = atob(base64Url.split(",")[1]);
+        const mimeString = base64Url.split(",")[0].split(":")[1].split(";")[0];
+        const buffer = new ArrayBuffer(byteString.length);
+        const uintArray = new Uint8Array(buffer);
+
+        for (let i = 0; i < byteString.length; i++) {
+          uintArray[i] = byteString.charCodeAt(i);
+        }
+
+        const blob = new Blob([buffer], { type: mimeString });
+
+        // Create a Blob URL
+        const objectUrl = URL.createObjectURL(blob);
+        setMetaImage(objectUrl);
+      } catch (error) {
+        console.error("Failed to generate meta image:", error);
+      } finally {
+        // Clean up the dummy container
+        document.body.removeChild(dummyContainer);
+      }
+    };
+
+    generateMetaImage();
+  }, [predictor, userPredictions]);
+
+  useEffect(() => {
+    return () => {
+      if (metaImage) URL.revokeObjectURL(metaImage);
+    };
+  }, [metaImage]);
+
   const hasPredictions =
     Array.isArray(userPredictions) && userPredictions.length > 0;
 
@@ -181,16 +246,14 @@ const Leader = () => {
       }`.trim()
     : "LuckyOrGenius";
 
-  // Summary and accuracy
   const userSummary = predictor?.summary || "Check out this predictor's stats!";
   const userPredictionAccuracy = hasPredictions
     ? `${userPredictions[0]?.prediction_accuracy}%`
     : "50%";
 
-  // Plain text for social meta
   const shareDescription = `Summary: ${userSummary}\n\nPrediction Accuracy: ${userPredictionAccuracy}`;
 
-  // Meta config
+  // Meta tags
   const meta = {
     title: `${userName} | LuckyOrGenius`,
     description: shareDescription,
@@ -203,14 +266,14 @@ const Leader = () => {
         // Twitter
         "twitter:card": "summary_large_image",
         "twitter:title": userName || "LuckyOrGenius",
-        "twitter:description": shareDescription, // must be plain text
-        "twitter:image": hasPredictions ? userPredictions[0]?.image_url : "",
+        "twitter:description": shareDescription,
+        "twitter:image": metaImage, // Set the dynamically generated image
       },
       property: {
         "og:title": userName || "LuckyOrGenius",
-        "og:description": shareDescription, // must be plain text
+        "og:description": shareDescription,
         "og:url": `https://luckyorgenius.com${shareableURL}`,
-        "og:image": hasPredictions ? userPredictions[0]?.image_url : "",
+        "og:image": metaImage, // Set the dynamically generated image
       },
     },
   };
@@ -218,7 +281,6 @@ const Leader = () => {
   return (
     <DocumentMeta {...meta}>
       <div className="bg-primary min-h-screen w-full p-4 2md:p-8 overflow-y-auto h-full relative">
-        {/* Back Button */}
         <div>
           <div
             className="absolute left-4 top-4 md:left-10 md:top-10 text-[#ffffff60] hover:text-white transition-all ease-in-out font-raleway flex gap-2 items-center cursor-pointer"
@@ -381,7 +443,6 @@ const Leader = () => {
             </div>
           </div>
         </div>
-
         {/* Tabs */}
         <div className="w-full flex justify-center py-4">
           <Tabs items={items} defaultOpen={defaultOpen} className="!w-full" />

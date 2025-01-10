@@ -28,6 +28,7 @@
     "chartjs-plugin-annotation": "^3.0.1",
     "chartjs-plugin-datalabels": "^2.2.0",
     "clsx": "^2.1.0",
+    "dom-to-image-more": "^3.5.0",
     "echarts": "^5.5.1",
     "faker": "^6.6.5",
     "framer-motion": "^11.1.7",

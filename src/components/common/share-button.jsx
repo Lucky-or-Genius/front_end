@@ -8,6 +8,9 @@ import {
   LinkedinIcon,
   WhatsappShareButton,
   WhatsappIcon,
+  TelegramShareButton,
+  TelegramIcon,
+  XIcon,
 } from "react-share";
 import { LuShare, LuX, LuCopy } from "react-icons/lu";
 
@@ -64,7 +67,7 @@ const ShareLinkModal = ({ url }) => {
         <Modal>
           <div
             className="bg-primary/80 border border-white max-w-[400px] md:w-full relative w-[300px] p-4 rounded-lg flex flex-col gap-4"
-            onClick={(e) => e.stopPropagation()} // Prevent modal close on inner content click
+            onClick={(e) => e.stopPropagation()}
           >
             {/* CLOSE BUTTON */}
             <button
@@ -74,7 +77,7 @@ const ShareLinkModal = ({ url }) => {
               <LuX />
             </button>
 
-            <h2 className="text-xl font-semibold mb-2 text-white">
+            <h2 className="text-xl font-semibold mb-2 text-white font-poppins">
               Share the Profile!
             </h2>
 
@@ -84,7 +87,7 @@ const ShareLinkModal = ({ url }) => {
                 url={url}
                 className="hover:scale-105 active:scale-95 transition-all ease-in-out"
               >
-                <TwitterIcon size={48} round />
+                <XIcon size={48} round />
               </TwitterShareButton>
 
               <FacebookShareButton
@@ -94,12 +97,12 @@ const ShareLinkModal = ({ url }) => {
                 <FacebookIcon size={48} round />
               </FacebookShareButton>
 
-              <LinkedinShareButton
+              <TelegramShareButton
                 url={url}
                 className="hover:scale-105 active:scale-95 transition-all ease-in-out"
               >
-                <LinkedinIcon size={48} round />
-              </LinkedinShareButton>
+                <TelegramIcon size={48} round />
+              </TelegramShareButton>
 
               <WhatsappShareButton
                 url={url}

@@ -1,9 +1,9 @@
 import React from "react";
 
-const FeedSkeleton = () => {
+export const FeedSkeleton = () => {
   return (
     <div className="flex relative h-full w-full pr-4">
-      <div className="w-full md:w-2/3 p-4 flex flex-col gap-4">
+      <div className="w-full p-4 flex flex-col gap-4">
         <div className="md:w-1/3 w-2/3 md:h-10 h-6 bg-[#ffffff20] animate-pulse rounded-lg mb-4"></div>
         <div className="w-full h-36 bg-[#ffffff20] animate-pulse rounded-lg flex gap-4">
           <div className="w-1/3 bg-[#ffffff20] animate-pulse h-full rounded-l-lg"></div>
@@ -33,8 +33,14 @@ const FeedSkeleton = () => {
           <div className="w-2/3 bg-[#ffffff20] animate-pulse h-6 rounded-full"></div>
         </div>
       </div>
-      <div className="w-1/3 md:flex flex-col gap-4 hidden p-4">
-        <div className="w-2/3 h-10 bg-[#ffffff20] animate-pulse rounded-lg "></div>
+    </div>
+  );
+};
+export const LeaderboardSkeleton = () => {
+  return (
+    <div className="flex relative h-full w-full ">
+      <div className="md:flex flex-col gap-4 hidden p-4">
+        <div className="w-full h-10 bg-[#ffffff20] animate-pulse rounded-lg "></div>
         <div className="flex flex-col gap-1 mt-4">
           <div className="w-full h-16 bg-[#ffffff20] animate-pulse rounded-lg p-4">
             <div className="flex gap-2 items-center">
@@ -59,5 +65,3 @@ const FeedSkeleton = () => {
     </div>
   );
 };
-
-export default FeedSkeleton;
