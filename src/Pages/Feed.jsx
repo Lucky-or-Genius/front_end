@@ -22,12 +22,16 @@ import FeedCard from "../components/feed-card";
 
 const Feed = () => {
   const { user, login } = useAppContext();
+
   const [feedData, setFeedData] = useState([]);
   const [offset, setOffset] = useState(1);
   const [topPredictors, setTopPredictors] = useState([]);
   const [leaderboardLoading, setLeaderboardLoading] = useState(false);
-  const [feedLoading, setFeedLoading] = useState(true); // Load feed data only once
+
+  // For loading states
+  const [feedLoading, setFeedLoading] = useState(true); // Only for the very first load
   const [isFetching, setIsFetching] = useState(false);
+
   const observerRef = useRef(null);
 
   const toggleFavourite = useCallback(
@@ -43,10 +47,7 @@ const Feed = () => {
       }
 
       const accountId = user?.accountId;
-
-      if (!accountId) {
-        return;
-      }
+      if (!accountId) return;
 
       const params = {
         accountId: String(accountId),
@@ -66,6 +67,7 @@ const Feed = () => {
         toast.error("Failed to update favorite status. Please try again.");
         console.error("Error in toggleFavourite:", error);
 
+        // Revert UI if error
         const revertedData = [...feedData];
         revertedData[index1].matches[index2].is_favourite =
           !revertedData[index1].matches[index2].is_favourite;
@@ -75,7 +77,15 @@ const Feed = () => {
     [user, login, feedData]
   );
 
+  /**
+   * Fetch feed data whenever offset changes AND isFetching is true.
+   * - On the very first load, we rely on feedLoading to show the skeleton.
+   * - For subsequent loads, we rely on isFetching being set to true via the observer.
+   */
   useEffect(() => {
+    // If we're not currently in a fetching state, do nothing
+    if (!isFetching && offset !== 1) return;
+
     const fetchFeedData = async () => {
       try {
         const feedResponse = await getFeedDetails(user?.accountId, offset);
@@ -84,18 +94,28 @@ const Feed = () => {
         console.error("Error fetching feed data:", error);
         toast.error("Failed to load feed data");
       } finally {
-        setFeedLoading(false);
+        setFeedLoading(false); // Only matters on first load
         setIsFetching(false);
       }
     };
 
-    if (feedLoading) {
-      fetchFeedData();
-    } else if (offset > 1 && isFetching) {
-      fetchFeedData();
-    }
-  }, [offset, user?.accountId, feedLoading, isFetching]);
+    fetchFeedData();
+  }, [offset, user?.accountId, isFetching]);
 
+  /**
+   * Trigger the first load (offset=1) as soon as component mounts.
+   * We set `isFetching` to true so that the effect above can run.
+   */
+  useEffect(() => {
+    // Only run on mount if feedData is empty
+    if (!feedData.length) {
+      setIsFetching(true);
+    }
+  }, [feedData.length]);
+
+  /**
+   * Fetch leaderboard data once on mount (or if user changes).
+   */
   useEffect(() => {
     const fetchLeaderBoardData = async () => {
       setLeaderboardLoading(true);
@@ -113,6 +133,10 @@ const Feed = () => {
     fetchLeaderBoardData();
   }, [user?.accountId]);
 
+  /**
+   * Intersection Observer callback:
+   * - Increments offset by 1 if the target is 30% visible, and we are not already fetching.
+   */
   const handleObserver = useCallback(
     (entries) => {
       const [entry] = entries;
@@ -124,6 +148,9 @@ const Feed = () => {
     [isFetching]
   );
 
+  /**
+   * Set up the Intersection Observer on the ref.
+   */
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver, {
       root: null,
@@ -131,14 +158,10 @@ const Feed = () => {
       threshold: 0.3, // Trigger at 30% of the viewport
     });
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
+    if (observerRef.current) observer.observe(observerRef.current);
 
     return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
-      }
+      if (observerRef.current) observer.unobserve(observerRef.current);
     };
   }, [handleObserver]);
 
@@ -193,7 +216,8 @@ const Feed = () => {
                 Recent Predictions
               </h2>
               {renderFeedItems}
-              <div ref={observerRef} className="observer-element"></div>
+              {/* Observer element goes after feed items */}
+              <div ref={observerRef} className="observer-element" />
             </div>
           )}
         </div>
