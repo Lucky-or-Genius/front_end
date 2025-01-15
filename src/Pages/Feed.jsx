@@ -24,16 +24,22 @@ const Feed = () => {
   const { user, login } = useAppContext();
 
   const [feedData, setFeedData] = useState([]);
-  const [offset, setOffset] = useState(1);
+  const [offset, setOffset] = useState(0);
   const [topPredictors, setTopPredictors] = useState([]);
   const [leaderboardLoading, setLeaderboardLoading] = useState(false);
 
-  // For loading states
-  const [feedLoading, setFeedLoading] = useState(true); // Only for the very first load
+  // Controls the skeleton for the very first load
+  const [feedLoading, setFeedLoading] = useState(true);
+
+  // Controls whether we should fetch the next set of items
   const [isFetching, setIsFetching] = useState(false);
 
+  // This ref points to our sentinel element
   const observerRef = useRef(null);
 
+  /**
+   * Toggle Favourite
+   */
   const toggleFavourite = useCallback(
     async (index1, index2, id) => {
       try {
@@ -55,12 +61,13 @@ const Feed = () => {
       };
 
       try {
+        // Update local feedData
         const newData = [...feedData];
         newData[index1].matches[index2].is_favourite =
           !newData[index1].matches[index2].is_favourite;
-
         setFeedData(newData);
 
+        // Call API
         await addRemoveFavourite(params);
         toast.success("Updated favorite status!");
       } catch (error) {
@@ -78,23 +85,21 @@ const Feed = () => {
   );
 
   /**
-   * Fetch feed data whenever offset changes AND isFetching is true.
-   * - On the very first load, we rely on feedLoading to show the skeleton.
-   * - For subsequent loads, we rely on isFetching being set to true via the observer.
+   * Fetch feed data when isFetching = true.
    */
   useEffect(() => {
-    // If we're not currently in a fetching state, do nothing
-    if (!isFetching && offset !== 1) return;
+    if (!isFetching) return;
 
     const fetchFeedData = async () => {
       try {
         const feedResponse = await getFeedDetails(user?.accountId, offset);
+        // Concatenate new data
         setFeedData((prevData) => [...prevData, ...feedResponse.data]);
       } catch (error) {
         console.error("Error fetching feed data:", error);
         toast.error("Failed to load feed data");
       } finally {
-        setFeedLoading(false); // Only matters on first load
+        setFeedLoading(false);
         setIsFetching(false);
       }
     };
@@ -103,15 +108,50 @@ const Feed = () => {
   }, [offset, user?.accountId, isFetching]);
 
   /**
-   * Trigger the first load (offset=1) as soon as component mounts.
-   * We set `isFetching` to true so that the effect above can run.
+   * On first mount, trigger initial fetch if no data present
    */
   useEffect(() => {
-    // Only run on mount if feedData is empty
-    if (!feedData.length) {
+    if (feedData.length === 0) {
       setIsFetching(true);
     }
   }, [feedData.length]);
+
+  /**
+   * Intersection Observer callback:
+   * - Increments offset by 1 if sentinel is 70% visible,
+   *   and we're not already fetching.
+   */
+  const handleObserver = useCallback(
+    (entries) => {
+      const [entry] = entries;
+      if (entry.isIntersecting && !isFetching) {
+        setIsFetching(true);
+        setOffset((prevOffset) => prevOffset + 1);
+      }
+    },
+    [isFetching]
+  );
+
+  /**
+   * Observe the sentinel element (observerRef).
+   */
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleObserver, {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.7,
+    });
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [handleObserver]);
 
   /**
    * Fetch leaderboard data once on mount (or if user changes).
@@ -134,37 +174,8 @@ const Feed = () => {
   }, [user?.accountId]);
 
   /**
-   * Intersection Observer callback:
-   * - Increments offset by 1 if the target is 30% visible, and we are not already fetching.
+   * Render feed items
    */
-  const handleObserver = useCallback(
-    (entries) => {
-      const [entry] = entries;
-      if (entry.isIntersecting && !isFetching) {
-        setIsFetching(true);
-        setOffset((prevOffset) => prevOffset + 1);
-      }
-    },
-    [isFetching]
-  );
-
-  /**
-   * Set up the Intersection Observer on the ref.
-   */
-  useEffect(() => {
-    const observer = new IntersectionObserver(handleObserver, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3, // Trigger at 30% of the viewport
-    });
-
-    if (observerRef.current) observer.observe(observerRef.current);
-
-    return () => {
-      if (observerRef.current) observer.unobserve(observerRef.current);
-    };
-  }, [handleObserver]);
-
   const renderFeedItems = useMemo(
     () =>
       feedData.map((feed, index1) => (
@@ -206,7 +217,8 @@ const Feed = () => {
 
   return (
     <div className="feed-section">
-      <div className="w-full h-full overflow-y-hidden flex flex-row">
+      <div className="w-full h-full overflow-y-hidden flex flex-row min-h-screen">
+        {/* Left section / main feed */}
         <div className="feed-part1">
           {feedLoading ? (
             <FeedSkeleton />
@@ -216,12 +228,27 @@ const Feed = () => {
                 Recent Predictions
               </h2>
               {renderFeedItems}
-              {/* Observer element goes after feed items */}
-              <div ref={observerRef} className="observer-element" />
+
+              {/* Shimmer loader for "Loading more data" when scrolling */}
+              {!feedLoading && isFetching && feedData.length > 0 && (
+                <div className="flex flex-col items-center justify-center my-4">
+                  <p className="text-gray-500 mt-2 font-semibold md:text-lg font-raleway transition-all ease-in-out animate-pulse">
+                    Loading more data...
+                  </p>
+                </div>
+              )}
+
+              {/* Intersection Observer Sentinel */}
+              <div
+                ref={observerRef}
+                className="observer-element h-1 w-full"
+                style={{ background: "transparent" }}
+              />
             </div>
           )}
         </div>
 
+        {/* Right section / leaderboard */}
         <div className="overflow-y w-[25%] md:flex hidden pb-6">
           {leaderboardLoading ? (
             <LeaderboardSkeleton />
