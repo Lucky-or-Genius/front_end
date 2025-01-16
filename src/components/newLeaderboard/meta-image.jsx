@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 
 import CompanyLogo from "../../assets/logo.png";
 
-const PredictionImage = ({ predictor, occupation }) => {
+const PredictionImage = ({ predictor }) => {
   const imageRef = useRef();
 
   return (
@@ -28,7 +28,7 @@ const PredictionImage = ({ predictor, occupation }) => {
                 "Predictor"}
             </span>
             <span className="text-sm text-gray-500 ">
-              {occupation || "N/A"}
+              {predictor[0]?.occupation || "N/A"}
             </span>
           </div>
         </div>
