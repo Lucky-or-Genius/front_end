@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { createRoot } from "react-dom/client";
 import DocumentMeta from "react-document-meta";
-import { toPng } from "dom-to-image-more";
-import { MdPendingActions } from "react-icons/md";
-import { CgShutterstock } from "react-icons/cg";
-import { FaChartLine, FaWikipediaW } from "react-icons/fa";
-import { IoAnalyticsOutline } from "react-icons/io5";
+import { FaWikipediaW } from "react-icons/fa";
 import {
   FaArrowLeftLong,
   FaXTwitter,
@@ -31,7 +27,6 @@ import CircularProgress from "../components/common/circular-progress";
 
 const Leader = () => {
   const [userData, setUserData] = useState({});
-  const [predictor, setPredictor] = useState({});
   const [userPredictions, setUserPredictions] = useState({});
   const [summaries, setSummaries] = useState();
   const [category, setCategory] = useState();
@@ -156,66 +151,6 @@ const Leader = () => {
     },
   ];
 
-  const [metaImage, setMetaImage] = useState("");
-
-  useEffect(() => {
-    const generateMetaImage = async () => {
-      const dummyContainer = document.createElement("div");
-      dummyContainer.style.position = "absolute";
-      dummyContainer.style.top = "-9999px";
-      dummyContainer.style.left = "-9999px";
-      document.body.appendChild(dummyContainer);
-
-      try {
-        // Use createRoot to render the component
-        const root = createRoot(dummyContainer);
-        root.render(<MetaImage predictor={userPredictions} />);
-
-        // Wait for the render to complete before generating the image
-        await new Promise((resolve) => setTimeout(resolve, 100));
-
-        // Generate the image using dom-to-image-more
-        const base64Url = await toPng(dummyContainer, {
-          cacheBust: true,
-          filter: (node) => {
-            return (
-              node.tagName !== "LINK" ||
-              !node.href.includes("fonts.googleapis.com")
-            );
-          },
-        });
-        // Convert the base64 data URL to a Blob
-        const byteString = atob(base64Url.split(",")[1]);
-        const mimeString = base64Url.split(",")[0].split(":")[1].split(";")[0];
-        const buffer = new ArrayBuffer(byteString.length);
-        const uintArray = new Uint8Array(buffer);
-
-        for (let i = 0; i < byteString.length; i++) {
-          uintArray[i] = byteString.charCodeAt(i);
-        }
-
-        const blob = new Blob([buffer], { type: mimeString });
-
-        // Create a Blob URL
-        const objectUrl = URL.createObjectURL(blob);
-        setMetaImage(objectUrl);
-      } catch (error) {
-        console.error("Failed to generate meta image:", error);
-      } finally {
-        // Clean up the dummy container
-        document.body.removeChild(dummyContainer);
-      }
-    };
-
-    generateMetaImage();
-  }, [predictor, userPredictions]);
-
-  useEffect(() => {
-    return () => {
-      if (metaImage) URL.revokeObjectURL(metaImage);
-    };
-  }, [metaImage]);
-
   const hasPredictions =
     Array.isArray(userPredictions) && userPredictions.length > 0;
 
@@ -245,13 +180,11 @@ const Leader = () => {
         "twitter:card": "summary_large_image",
         "twitter:title": userName || "LuckyOrGenius",
         "twitter:description": shareDescription,
-        "twitter:image": metaImage, // Set the dynamically generated image
       },
       property: {
         "og:title": userName || "LuckyOrGenius",
         "og:description": shareDescription,
         "og:url": `https://luckyorgenius.com${shareableURL}`,
-        "og:image": metaImage, // Set the dynamically generated image
       },
     },
   };
