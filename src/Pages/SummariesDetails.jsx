@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router-dom";
 import { CgShutterstock } from "react-icons/cg";
@@ -34,55 +34,28 @@ const SummariesDetails = () => {
     return `${h}:${m}:00`; // Assumes no seconds part, so it's always '00'
   };
 
-  useEffect(() => {
-    const fetchSummaries = async () => {
-      try {
-        const response = await getSummarySummaries(id);
-        setSummaries(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const fetchAllData = useCallback(() => {
+    Promise.all([
+      getSummarySummaries(id),
+      getSummaryPrediction(id),
+      getSummaryPeople(id),
+      getFullTranscript(id)
+    ])
+      .then(([summariesRes, predictionsRes, peopleRes, transcriptRes]) => {
+        setSummaries(summariesRes.data);
+        setPrediction(predictionsRes.data.predictions);
+        setSourceSummary(predictionsRes.data.sourceSummary);
+        setPeople(peopleRes.data);
+        setTranscript(transcriptRes.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, [id]);
 
-    fetchSummaries();
-  }, []);
   useEffect(() => {
-    const fetchPredictions = async () => {
-      try {
-        const response = await getSummaryPrediction(id);
-        setPrediction(response.data.predictions);
-        setSourceSummary(response.data.sourceSummary);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchPredictions();
-  }, []);
-  useEffect(() => {
-    const fetchPeople = async () => {
-      try {
-        const response = await getSummaryPeople(id);
-        setPeople(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchPeople();
-  }, []);
-  useEffect(() => {
-    const fetchTranscript = async () => {
-      try {
-        const response = await getFullTranscript(id);
-        setTranscript(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchTranscript();
-  }, []);
+    fetchAllData();
+  }, [fetchAllData]);
 
   const items = [
     {

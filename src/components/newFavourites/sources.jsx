@@ -26,7 +26,6 @@ const Sources = ({ sources, setSources }) => {
       return;
     }
     const params = {
-      accountId: String(accountId),
       sourceId: id,
     };
     const newData = sources.filter((obj) => obj.source_id !== id);

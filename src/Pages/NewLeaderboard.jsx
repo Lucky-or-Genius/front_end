@@ -8,11 +8,9 @@ import Board from "../components/newLeaderboard/board";
 import MobileLeaderBoard from "../components/newLeaderboard/mobileLeaderboard";
 import {
   leaderBoardData,
-  sortByAccuracy,
-  sortByScore,
+  sortLeaderboard,
   addRemoveFavourite,
   searchTerm,
-  sortByBankroll,
 } from "../services/Leaderboards.service";
 import { useAppContext } from "../utils/appContext";
 import useIsMobile from "../hooks/useIsMobile";
@@ -58,23 +56,25 @@ const NewLeaderboard = () => {
 
   const sortLeaderboardByAccuracy = async (order) => {
     try {
-      const res = await sortByAccuracy(order);
+      const res = await sortLeaderboard(`${order}`);
       setData(res.data);
     } catch (error) {
       console.log(error);
     }
   };
+
   const sortLeaderboardByScore = async (order) => {
     try {
-      const res = await sortByScore(order);
+      const res = await sortLeaderboard(`${order}`);
       setData(res.data);
     } catch (error) {
       console.log(error);
     }
   };
+
   const sortLeaderboardByBankroll = async (order) => {
     try {
-      const res = await sortByBankroll(order);
+      const res = await sortLeaderboard(`${order}`);
       setData(res.data);
     } catch (error) {
       console.log(error);
@@ -84,7 +84,7 @@ const NewLeaderboard = () => {
   const fetchLeaderboardData = useCallback(async () => {
     try {
       if (searchQuery === "") {
-        const res = await leaderBoardData(user?.accountId);
+        const res = await leaderBoardData();
         setData(res.data);
       } else {
         const res = await searchTerm(searchQuery);
@@ -93,20 +93,16 @@ const NewLeaderboard = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [searchQuery, user]);
+  }, [searchQuery]);
 
   useEffect(() => {
-    if (searchQuery === "") {
+    const handler = setTimeout(() => {
       fetchLeaderboardData();
-    } else {
-      const handler = setTimeout(() => {
-        fetchLeaderboardData();
-      }, 1000);
+    }, searchQuery ? 1000 : 0);
 
-      return () => {
-        clearTimeout(handler);
-      };
-    }
+    return () => {
+      clearTimeout(handler);
+    };
   }, [fetchLeaderboardData, searchQuery]);
 
   return (

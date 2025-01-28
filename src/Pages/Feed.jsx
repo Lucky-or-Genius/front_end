@@ -92,7 +92,7 @@ const Feed = () => {
 
     const fetchFeedData = async () => {
       try {
-        const feedResponse = await getFeedDetails(user?.accountId, offset);
+        const feedResponse = await getFeedDetails(offset);
         // Concatenate new data
         setFeedData((prevData) => [...prevData, ...feedResponse.data]);
       } catch (error) {

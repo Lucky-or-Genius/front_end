@@ -3,11 +3,7 @@ import ChannelAxios from "../utils/channel-axios";
 
 //
 export const channelsData = async (id) => {
-  if (id) return await Axios.get(`channel_data?accountId=${id}`);
-  else
-    return await Axios.get(
-      `channel_data?accountId=003d45e5-b3a2-40c0-8e76-59ef89f6a519`
-    );
+  return await Axios.get(`channel_data`);
 };
 export const channelsSourceData = async (id) => {
   return await Axios.get(`all-sources?channelId=${id}`);

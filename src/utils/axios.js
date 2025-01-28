@@ -1,38 +1,36 @@
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: "https://fierce-plateau-07706-389d9b27b69c.herokuapp.com/",
+const Axios = axios.create({
+  baseURL: process.env.REACT_APP_API_URL,
+  timeout: 30000,
 });
 
-// instance.defaults.headers.common["Content-Type"] = "application/json";
-// instance.defaults.headers.common["Content-Type"] = "multipart/form-data";
-// instance.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
-
-instance.interceptors.request.use(
-  (request) => {
-    // const token = localStorage.getItem("token");
-    // if (
-    //   token &&
-    //   request?.url !==
-    //     "http://restcountries.eu/rest/v2/all?fields=name;flag;callingCodes;"
-    // ) {
-    //   request.headers.common["Authorization"] = "Bearer " + token;
-    // }
-
-    return request;
-  },
-  (error) => {
-    return Promise.reject(error);
+// Get account ID from local storage or use demo account
+const getAccountId = () => {
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user?.accountId || '003d45e5-b3a2-40c0-8e76-59ef89f6a519';
+  } catch {
+    return '003d45e5-b3a2-40c0-8e76-59ef89f6a519';
   }
-);
+};
 
-instance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    return Promise.reject(error);
+// Request interceptor to add accountId
+Axios.interceptors.request.use((request) => {
+  // Only add accountId for GET requests
+  if (request.method === 'get') {
+    // Create or update params object
+    const params = new URLSearchParams(request.params);
+    
+    // Only add accountId if not already present
+    if (!params.has('accountId')) {
+      params.append('accountId', getAccountId());
+    }
+    
+    request.params = params;
   }
-);
+  
+  return request;
+});
 
-export default instance;
+export default Axios;
