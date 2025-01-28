@@ -14,10 +14,10 @@ const Filters = ({
   const [bankrollOrder, setBankrollOrder] = useState("bankroll_desc");
 
   const handleAccuracySort = () => {
-    const newOrder = accuracyOrder === "desc" ? "accuracy_asc" : "desc";
+    const newOrder = accuracyOrder === "accuracy_desc" ? "accuracy_asc" : "accuracy_desc";
     setAccuracyOrder(newOrder);
     sortLeaderboardByAccuracy(newOrder);
-    toast.success(newOrder === "desc" ? "High to Low" : "Low to High");
+    toast.success(newOrder === "accuracy_desc" ? "High to Low" : "Low to High");
   };
   const handleScoreSort = () => {
     const newOrder = scoreOrder === "score_desc" ? "score_asc" : "score_desc";
