@@ -88,18 +88,14 @@ const NewSummaries = () => {
   }, [searchQuery, user]);
 
   useEffect(() => {
-    if (searchQuery === "") {
+    const handler = setTimeout(() => {
       fetchSummariesData();
-    } else {
-      const handler = setTimeout(() => {
-        fetchSummariesData();
-      }, 1000);
+    }, searchQuery ? 1000 : 0);
 
-      return () => {
-        clearTimeout(handler);
-      };
-    }
-  }, [fetchSummariesData, searchQuery]);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [fetchSummariesData]);
 
   const handleAddSources = async () => {
     try {

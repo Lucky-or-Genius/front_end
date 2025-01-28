@@ -30,8 +30,14 @@ Axios.interceptors.request.use((config) => {
     config.params = params;
   }
   
-  // Log the full URL being requested (for debugging)
-  console.log('Making request to:', `${config.baseURL}${config.url}`, 'with params:', config.params);
+  // Debug logging only in development
+  if (process.env.NODE_ENV === 'development') {
+    console.log('API Request:', {
+      url: `${config.baseURL}${config.url}`,
+      method: config.method,
+      params: config.params
+    });
+  }
   
   return config;
 });

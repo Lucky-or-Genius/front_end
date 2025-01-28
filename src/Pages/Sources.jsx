@@ -15,18 +15,18 @@ const Sources = () => {
 
   const channelInfo = JSON.parse(localStorage.getItem("channelInfo"));
 
-  const getAllSources = useCallback(async () => {
+  const fetchSources = useCallback(async () => {
     try {
-      const response = await channelsSourceData(id);
-      setSources(response.data);
+      const res = await channelsSourceData(id);
+      setSources(res.data);
     } catch (error) {
       console.log(error);
     }
   }, [id]);
 
   useEffect(() => {
-    getAllSources();
-  }, []);
+    fetchSources();
+  }, [fetchSources]);
 
   return (
     <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0 flex flex-col items-center">
