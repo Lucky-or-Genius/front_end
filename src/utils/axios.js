@@ -16,30 +16,21 @@ const getAccountId = () => {
 };
 
 // Request interceptor to add accountId
-Axios.interceptors.request.use((config) => {
+Axios.interceptors.request.use((request) => {
   // Only add accountId for GET requests
-  if (config.method === 'get') {
+  if (request.method === 'get') {
     // Create or update params object
-    const params = new URLSearchParams(config.params);
+    const params = new URLSearchParams(request.params);
     
     // Only add accountId if not already present
     if (!params.has('accountId')) {
       params.append('accountId', getAccountId());
     }
     
-    config.params = params;
+    request.params = params;
   }
   
-  // Debug logging only in development
-  if (process.env.NODE_ENV === 'development') {
-    console.log('API Request:', {
-      url: `${config.baseURL}${config.url}`,
-      method: config.method,
-      params: config.params
-    });
-  }
-  
-  return config;
+  return request;
 });
 
 export default Axios;
