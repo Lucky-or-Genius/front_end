@@ -76,6 +76,7 @@ const BarChart = ({ data, isVisible }) => {
                 ];
                 return colorPalette[params.dataIndex % colorPalette.length];
               },
+              borderRadius: [12, 12, 0, 0],
             },
           },
         ],

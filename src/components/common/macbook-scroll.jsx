@@ -3,7 +3,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { IoLogIn } from "react-icons/io5";
 import { cn } from "../../utils/cn";
-import logoIcon from "../../assets/logo-icon.svg";
 import { Button } from "./moving-border-button";
 
 export const MacbookScroll = ({ src, showGradient, title }) => {
@@ -136,24 +135,7 @@ export const Lid = ({ scaleX, scaleY, rotate, imgSrc }) => {
           transformStyle: "preserve-3d",
         }}
         className="md:h-[12rem] h-[10rem] w-[22rem] md:w-[32rem] bg-[#010101] rounded-2xl p-2 relative"
-      >
-        <div
-          style={{
-            boxShadow: "0px 2px 0px 2px var(--neutral-900) inset",
-          }}
-          className="absolute inset-0 bg-[#010101] rounded-lg flex items-center justify-center"
-        >
-          <span className="text-white w-[24px]">
-            <img
-              alt=""
-              src={logoIcon}
-              width={40}
-              height={40}
-              className="w-full h-full"
-            />
-          </span>
-        </div>
-      </div>
+      ></div>
       <motion.div
         style={{
           scaleX: scaleX,
