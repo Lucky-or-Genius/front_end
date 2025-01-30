@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { FiKey, FiLayout, FiSend, FiLogOut, FiLogIn } from "react-icons/fi";
 import { GoStack } from "react-icons/go";
 import { BsHddStack } from "react-icons/bs";
@@ -104,13 +104,19 @@ const Index = () => {
       className="desktop h-screen border-r-2 hidden md:block border-primary !sticky !top-0 !left-0 font-[600]"
     >
       {!collapsed ? (
-        <div className="demo-logo-vertical flex justify-center items-center p-4">
+        <Link
+          className="demo-logo-vertical flex justify-center items-center p-4"
+          to={"/"}
+        >
           <img className="logo-icon" alt="" src={logoIcon} />
-        </div>
+        </Link>
       ) : (
-        <div className="demo-logo-vertical flex justify-center items-center p-4">
+        <Link
+          className="demo-logo-vertical flex justify-center items-center p-4"
+          to={"/"}
+        >
           <img className="logo-icon" alt="" src={"/images/logo_icon.png"} />
-        </div>
+        </Link>
       )}
       <span
         className={

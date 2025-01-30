@@ -18,8 +18,6 @@ const App = () => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
 
-  const [loading, setLoading] = useState(false);
-
   const generalItems = [
     {
       key: "/dashboard/Feed",
