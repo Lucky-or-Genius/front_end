@@ -2,6 +2,8 @@ import React from "react";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 
+import HoverDetails from "../common/hover-details";
+
 const HeroCard = ({ channel, toggleFavourite, index }) => {
   const navigate = useNavigate();
 
@@ -146,7 +148,7 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
                     e.stopPropagation();
                   }}
                 >
-                  {item.name}
+                  <HoverDetails id={item.user_id} />
                 </Link>
               </div>
             ))}

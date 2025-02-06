@@ -1,12 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { preconnect } from "react-dom";
 
 const CircularProgress = ({
   percentage,
   size = 80,
   strokeWidth = 36,
   isLoading,
+  className,
 }) => {
   // Calculate circle parameters
   const radius = (size - strokeWidth) / 2;
@@ -70,7 +70,7 @@ const CircularProgress = ({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="#ffffff20"
+          stroke="#00000030"
           strokeWidth={strokeWidth}
         />
 
@@ -80,7 +80,7 @@ const CircularProgress = ({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke={isLoading ? "#ffffff10" : "#7394FF"}
+          stroke={isLoading ? "#ffffff10" : "#7894FF"}
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeDasharray={circumference}
@@ -98,10 +98,18 @@ const CircularProgress = ({
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          <span className="text-3xl font-bold text-primary400 font-poppins group-hover:scale-110 transition-all ease-in-out">
+          <span
+            className={`${
+              className ? className : "text-3xl"
+            } font-bold text-primary400 font-poppins group-hover:scale-110 transition-all ease-in-out`}
+          >
             {percentage}%
           </span>
-          <span className="text-lg font-semibold text-primary400 font-poppins">
+          <span
+            className={`${
+              className ? className : "text-2xl"
+            } font-semibold text-primary400 font-poppins`}
+          >
             Accuracy
           </span>
         </motion.div>

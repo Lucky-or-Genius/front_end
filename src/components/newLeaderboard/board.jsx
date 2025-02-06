@@ -3,6 +3,7 @@ import React from "react";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 
+import HoverDetails from "../common/hover-details";
 import Skeleton from "./skeleton";
 
 const Board = ({ data, toggleFavourite }) => {
@@ -50,11 +51,11 @@ const Board = ({ data, toggleFavourite }) => {
                 } grid grid-cols-15 w-full py-4 px-2 gap-4 rounded-xl hover:bg-[#ffffff10] transition-all ease-in-out font-poppins cursor-pointer hover:scale-[1.005]`}
               >
                 <div className=" col-span-1">
-                  {item?.rank === 1 ? (
+                  {item?.rank === "1" ? (
                     <img alt="rank-1" src="/goldmedal-1.svg" className="w-6" />
-                  ) : item?.rank === 2 ? (
+                  ) : item?.rank === "2" ? (
                     <img alt="rank-2" src="/goldmedal-2.svg" className="w-6" />
-                  ) : item?.rank === 3 ? (
+                  ) : item?.rank === "3" ? (
                     <img alt="rank-3" src="/goldmedal-3.svg" className="w-6" />
                   ) : (
                     <div className="px-2 text-white">{item?.rank}</div>
@@ -73,7 +74,7 @@ const Board = ({ data, toggleFavourite }) => {
                       to={`/dashboard/LeaderBoards/${item.user_id}`}
                       className="text-white hover:underline hover:text-primary400 "
                     >
-                      {item.first_name + " " + item.last_name}
+                      <HoverDetails id={item.user_id} />
                     </Link>
                   </div>
                 </div>
