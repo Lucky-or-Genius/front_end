@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
@@ -6,6 +6,8 @@ import { FaRegCalendarPlus, FaYoutube } from "react-icons/fa6";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+
+import HoverDetails from "../common/hover-details";
 
 const PredictionCard = ({
   category,
@@ -50,7 +52,7 @@ const PredictionCard = ({
                 navigate(`/dashboard/Leaderboards/${userId}`);
               }}
             >
-              {user}
+              <HoverDetails id={userId} />
             </h5>
             <FaCrown />
           </span>

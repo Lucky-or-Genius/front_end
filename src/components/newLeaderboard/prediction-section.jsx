@@ -1,5 +1,8 @@
 import React from "react";
+
 import toast from "react-hot-toast";
+import { TbReload } from "react-icons/tb";
+
 import PredictionCard from "./prediction-card";
 import Filters from "./prediction-filters";
 import { addRemoveFavourite } from "../../services/Predictions.service";
@@ -10,6 +13,7 @@ const Section = ({
   userPredictions,
   setCategory,
   setPredictionType,
+  setCurrentPage,
 }) => {
   const { user, login } = useAppContext();
 
@@ -47,6 +51,7 @@ const Section = ({
           <Filters
             setCategory={setCategory}
             setPredictionType={setPredictionType}
+            setCurrentPage={setCurrentPage}
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
@@ -70,7 +75,28 @@ const Section = ({
       </>
     );
   } else {
-    <div className="">No predictions</div>;
+    return (
+      <div className="w-full flex-col flex justify-center items-center gap-4 py-6">
+        <img
+          src="/images/noResultFound.svg"
+          alt="noResultFound"
+          className="w-30 h-30"
+        />
+
+        <div className="">
+          <button
+            onClick={() => {
+              setCategory("");
+              setPredictionType("");
+              setCurrentPage(1);
+            }}
+            className="px-6 font-poppins py-1 h-12 md:text-lg rounded-lg border-white border text-white flex gap-2 items-center transtion-all active:scale-95 transition-all ease-in-out"
+          >
+            <TbReload /> Reset
+          </button>
+        </div>
+      </div>
+    );
   }
 };
 

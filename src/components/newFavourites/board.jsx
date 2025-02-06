@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { addRemoveFavourite } from "../../services/Leaderboards.service";
 import Skeleton from "../newLeaderboard/skeleton";
 import { useAppContext } from "../../utils/appContext";
+import HoverDetails from "../common/hover-details";
 
 const Board = ({ data, setPredictors }) => {
   const { user, login } = useAppContext();
@@ -102,7 +103,7 @@ const Board = ({ data, setPredictors }) => {
                       to={`/dashboard/LeaderBoards/${item.user_id}`}
                       className="text-white hover:underline hover:text-primary400 "
                     >
-                      {item.first_name + " " + item.last_name}
+                      <HoverDetails id={item.user_id} />
                     </Link>
                   </div>
                 </div>

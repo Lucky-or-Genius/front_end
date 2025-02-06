@@ -3,6 +3,10 @@ import Axios from "../utils/axios";
 export const getAllProfiles = async () => {
   return await Axios.get(`prediction-leaderboard`);
 };
+export const getUserDetails = async (id) => {
+  return await Axios.get(`/user-aggregates/${id}
+`);
+};
 
 export const getProfilesBySubjects = async (id) => {
   return await Axios.get(`profiles-categories?userId=${id}`);

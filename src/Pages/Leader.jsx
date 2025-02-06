@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { createRoot } from "react-dom/client";
 import DocumentMeta from "react-document-meta";
 import { FaWikipediaW } from "react-icons/fa";
 import {
@@ -9,13 +8,14 @@ import {
 } from "react-icons/fa6";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 
-import MetaImage from "../components/newLeaderboard/meta-image";
+import Pagination from "../components/newPrediction/pagination";
 import {
   getProfilesBySubjects,
   getSortedProfilesBySubjects,
 } from "../services/Profiles.service";
 import { getPredictionSingle } from "../services/Predictions.service";
 import { allPredictorSummarySources } from "../services/summaries.services";
+import { getUserDetails } from "../services/Profiles.service";
 import Tabs from "../components/common/tabs";
 import BarChart from "../components/newLeaderboard/barChart";
 import PieChart from "../components/newLeaderboard/pieChart";
@@ -27,6 +27,7 @@ import CircularProgress from "../components/common/circular-progress";
 
 const Leader = () => {
   const [userData, setUserData] = useState({});
+  const [userInfo, setUserInfo] = useState({});
   const [userPredictions, setUserPredictions] = useState({});
   const [summaries, setSummaries] = useState();
   const [category, setCategory] = useState();
@@ -38,18 +39,35 @@ const Leader = () => {
   const query = new URLSearchParams(useLocation().search);
   const defaultOpen = query.get("defaultOpen");
   const shareableURL = useLocation().pathname;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const fetchUserInfo = useCallback(async () => {
+    try {
+      const res = await getUserDetails(id);
+      setUserInfo(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id]);
 
   /**
    * Fetch user prediction
    */
   const fetchUserPrediction = useCallback(async () => {
     try {
-      const res = await getPredictionSingle(id, category, predictionType);
-      setUserPredictions(res.data);
+      const res = await getPredictionSingle(
+        id,
+        currentPage,
+        category,
+        predictionType
+      );
+      setUserPredictions(res.data.predictions);
+      setTotalPages(res.data.pagination.totalPages);
     } catch (error) {
       console.log(error);
     }
-  }, [category, id, predictionType]);
+  }, [category, id, predictionType, currentPage]);
 
   /**
    * Fetch user sources
@@ -97,6 +115,9 @@ const Leader = () => {
   useEffect(() => {
     fetchUserPrediction();
   }, [fetchUserPrediction]);
+  useEffect(() => {
+    fetchUserInfo();
+  }, [fetchUserInfo]);
 
   /**
    * Fetch user sources upon changes
@@ -104,6 +125,12 @@ const Leader = () => {
   useEffect(() => {
     fetchUserSources();
   }, [fetchUserSources]);
+
+  const onPageChange = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   /**
    * Tabs items
@@ -135,12 +162,23 @@ const Leader = () => {
     {
       title: "Predictions",
       content: (
-        <PredictionSection
-          setUserPredictions={setUserPredictions}
-          userPredictions={userPredictions}
-          setPredictionType={setPredictionType}
-          setCategory={setCategory}
-        />
+        <>
+          <PredictionSection
+            setUserPredictions={setUserPredictions}
+            userPredictions={userPredictions}
+            setPredictionType={setPredictionType}
+            setCategory={setCategory}
+            setCurrentPage={setCurrentPage}
+          />
+
+          <div className="">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={onPageChange}
+            />
+          </div>
+        </>
       ),
     },
     {
@@ -151,17 +189,12 @@ const Leader = () => {
     },
   ];
 
-  const hasPredictions =
-    Array.isArray(userPredictions) && userPredictions.length > 0;
-
-  const userName = hasPredictions
-    ? `${userPredictions[0]?.first_name || ""} ${
-        userPredictions[0]?.last_name || ""
-      }`.trim()
+  const userName = userInfo
+    ? `${userInfo?.first_name || ""} ${userInfo?.last_name || ""}`.trim()
     : "LuckyOrGenius";
 
-  const userPredictionAccuracy = hasPredictions
-    ? `${userPredictions[0]?.prediction_accuracy}%`
+  const userPredictionAccuracy = userInfo
+    ? `${userInfo?.prediction_accuracy}%`
     : "50%";
 
   const shareDescription = `Prediction Accuracy: ${userPredictionAccuracy}`;
@@ -263,10 +296,10 @@ const Leader = () => {
         </div>
 
         {/* Header Section (User Info) */}
-        {hasPredictions ? (
+        {userInfo ? (
           <div className="flex items-center gap-6 w-full md:justify-center justify-center flex-col md:flex-row">
             <img
-              src={userPredictions[0]?.image_url}
+              src={userInfo?.image_url}
               alt=""
               width={100}
               height={100}
@@ -278,48 +311,45 @@ const Leader = () => {
                 {userName}
               </span>
               <div className="text-[#ffffff60] font-poppins text-base text-start gap-2 w-full flex flex-col">
-                {userPredictions[0]?.alias &&
-                  userPredictions[0]?.alias !== userName && (
+                {userInfo?.primary_alias &&
+                  userInfo?.primary_alias !== userName && (
                     <div>
                       aka:{" "}
                       <span className="text-white">
-                        "{userPredictions[0]?.alias}"
+                        "{userInfo?.primary_alias}"
                       </span>
                     </div>
                   )}
 
-                {userPredictions[0]?.age && (
+                {userInfo?.age && (
                   <div>
-                    Age:{" "}
-                    <span className="text-white">
-                      {userPredictions[0]?.age}
-                    </span>
+                    Age: <span className="text-white">{userInfo?.age}</span>
                   </div>
                 )}
 
                 <span className="flex gap-4 items-start flex-wrap">
                   Socials:
-                  {userPredictions[0]?.wikipedia_url && (
+                  {userInfo?.wikipedia_url && (
                     <Link
-                      to={userPredictions[0]?.wikipedia_url}
+                      to={userInfo?.wikipedia_url}
                       className="bg-[#ffffff20] p-2 rounded-full text-lg text-white flex gap-2 items-center"
                       target="_blank"
                     >
                       <FaWikipediaW />
                     </Link>
                   )}
-                  {userPredictions[0]?.twitter_handle && (
+                  {userInfo?.twitter_handle && (
                     <Link
-                      to={userPredictions[0]?.twitter_handle}
+                      to={userInfo?.twitter_handle}
                       className="bg-[#ffffff20] p-2 rounded-full text-lg text-white flex gap-2 items-center "
                       target="_blank"
                     >
                       <FaXTwitter />
                     </Link>
                   )}
-                  {userPredictions[0]?.instagram && (
+                  {userInfo?.instagram && (
                     <Link
-                      to={userPredictions[0].instagram}
+                      to={userInfo.instagram}
                       className="bg-[#ffffff20] p-2 rounded-full text-lg text-white flex gap-2 items-center "
                       target="_blank"
                     >
@@ -345,28 +375,21 @@ const Leader = () => {
         {/* Summary Section */}
         <div className="w-full flex justify-center py-12">
           <div className="bg-[#ffffff20] md:w-4/5 rounded-xl p-4 md:p-6 text-white font-raleway md:text-xl gap-4 flex flex-col">
-            {hasPredictions && userPredictions[0]?.category && (
+            {userInfo?.area_of_accuracy && (
               <div className="text-[#ffffff60]">
                 Area of Accuracy:{" "}
-                <span className="text-white">
-                  {userPredictions[0]?.category}
-                </span>
+                <span className="text-white">{userInfo.area_of_accuracy}</span>
               </div>
             )}
-            {userPredictions[0]?.occupation && (
+            {userInfo?.occupation && (
               <div className="text-[#ffffff60]">
                 Occupation:{" "}
-                <span className="text-white">
-                  {userPredictions[0]?.occupation}
-                </span>
+                <span className="text-white">{userInfo?.occupation}</span>
               </div>
             )}
-            {userPredictions[0]?.summary && (
+            {userInfo?.summary && (
               <div className="text-[#ffffff60]">
-                Summary:{" "}
-                <span className="text-white">
-                  {userPredictions[0]?.summary}
-                </span>
+                Summary: <span className="text-white">{userInfo?.summary}</span>
               </div>
             )}
           </div>
@@ -382,28 +405,26 @@ const Leader = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 w-full pt-8 gap-6 md:gap-4">
               <div className="flex justify-center w-full h-full items-center">
                 <CircularProgress
-                  percentage={userPredictions[0]?.prediction_accuracy}
+                  percentage={Math.round(userInfo?.prediction_accuracy * 100)}
                   size={250}
-                  isLoading={
-                    userPredictions[0]?.prediction_accuracy ? false : true
-                  }
+                  isLoading={userInfo?.prediction_accuracy ? false : true}
                 />
               </div>
-              {hasPredictions ? (
+              {userInfo ? (
                 <div className="flex flex-col gap-3">
                   <ProgressCard
-                    totalPredictions={userPredictions[0]?.all_predictions}
-                    value={userPredictions[0]?.total_true}
+                    totalPredictions={userInfo?.total_predictions_count}
+                    value={userInfo?.true_predictions_count}
                     status={"True"}
                   />
                   <ProgressCard
-                    totalPredictions={userPredictions[0]?.all_predictions}
-                    value={userPredictions[0]?.total_false}
+                    totalPredictions={userInfo?.total_predictions_count}
+                    value={userInfo?.false_predictions_count}
                     status={"False"}
                   />
                   <ProgressCard
-                    totalPredictions={userPredictions[0]?.all_predictions}
-                    value={userPredictions[0]?.total_pending}
+                    totalPredictions={userInfo?.total_predictions_count}
+                    value={userInfo?.pending_predictions_count}
                     status={"Pending"}
                   />
                 </div>

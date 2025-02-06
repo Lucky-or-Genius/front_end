@@ -35,7 +35,7 @@ const FilterPopper = ({ triggerLabel, triggerIcon, children }) => (
   </Popper>
 );
 
-const Filters = ({ setCategory, setPredictionType }) => {
+const Filters = ({ setCategory, setPredictionType, setCurrentPage }) => {
   const [activeStatus, setActiveStatus] = useState("");
   const [activeTopic, setActiveTopic] = useState("");
 
@@ -51,21 +51,25 @@ const Filters = ({ setCategory, setPredictionType }) => {
 
   const handleStatusClick = (status) => {
     setPredictionType(status);
+    setCurrentPage(1);
     setActiveStatus(status);
   };
 
   const handleTopicClick = (topic) => {
     setCategory(topic);
+    setCurrentPage(1);
     setActiveTopic(topic);
   };
 
   const resetStatus = () => {
     setPredictionType();
+    setCurrentPage(1);
     setActiveStatus("");
   };
 
   const resetTopic = () => {
     setCategory();
+    setCurrentPage(1);
     setActiveTopic("");
   };
 
