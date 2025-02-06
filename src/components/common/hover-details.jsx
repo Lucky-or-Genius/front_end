@@ -25,17 +25,11 @@ const HoverDetails = ({ id }) => {
 
     return (
       <div
-        className={`${className} w-full ${
-          status === "True"
-            ? "bg-green-200"
-            : status === "False"
-            ? "bg-red-200"
-            : "bg-yellow-200"
-        } rounded-xl relative overflow-hidden px-2 py-1 hover:scale-[1.005] hover:shadow-lg transition-all ease-in-out`}
+        className={`${className} w-full bg-[#00000030] rounded-xl relative overflow-hidden px-2 py-1 hover:scale-[1.005] hover:shadow-lg transition-all ease-in-out`}
       >
         {/* Content */}
         <div className="relative z-10">
-          <div className="text-gray-400 font-raleway font-semibold text-xs">
+          <div className="text-gray-300 font-raleway font-semibold text-[10px]">
             {status} Predictions
           </div>
 
@@ -78,7 +72,7 @@ const HoverDetails = ({ id }) => {
       <Popover
         content={
           <>
-            <div className="flex gap-2 pb-2 font-raleway justify-center w-full">
+            <div className="flex gap-2 pb-2 items-center font-raleway justify-start w-full">
               <img
                 src={data?.image_url}
                 alt="profile"
@@ -86,16 +80,16 @@ const HoverDetails = ({ id }) => {
                 height={40}
                 className="rounded-full w-14 h-14 object-cover"
               />
-              <div className="font-[600]">
-                <span className="text-lg">
+              <div className=" flex font-[600] flex-col gap-1">
+                <span className="text-xl text-white">
                   {data?.first_name + " " + data?.last_name}
                 </span>
-                <div className="text-gray-400 text-xs">
-                  {data?.total_predictions_count} Predictions
-                </div>
+                <span className="text-gray-300 text-xs font-raleway">
+                  {data?.occupation}
+                </span>
               </div>
             </div>
-            <div className="h-fit w-full flex justify-center gap-4 items-center">
+            <div className="h-fit w-full flex justify-center gap-4 pt-2 items-center">
               <CircularProgress
                 percentage={Math.round(data?.prediction_accuracy * 100)}
                 size={120}
@@ -115,22 +109,16 @@ const HoverDetails = ({ id }) => {
                 />
               </div>
             </div>
-            <div className="flex w-full flex-col gap-2 justify-between font-[600] pt-3 max-w-[300px]">
-              <div className="gap-1 text-gray-400 flex w-fit text-xs font-raleway">
-                Occupation :
-                <span className="text-black">{data?.occupation}</span>
-              </div>
-              <div className="gap-1 text-gray-400 flex text-xs font-raleway">
-                <span className="shrink-0 whitespace-nowrap">Summary :</span>
-                <span className="text-black truncate-3 line-clamp-3">
-                  {data?.summary}
-                </span>
-              </div>
-            </div>
           </>
         }
         title=""
         trigger="hover"
+        overlayInnerStyle={{
+          backgroundColor: "#ffffff20",
+          borderRadius: "10px",
+          backdropFilter: "blur(12px)",
+          maxWidth: "300px",
+        }}
       >
         {data ? data?.first_name + " " + data?.last_name : ""}
       </Popover>

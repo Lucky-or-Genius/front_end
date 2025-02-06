@@ -9,6 +9,7 @@ import { FaRegCalendarPlus, FaYoutube } from "react-icons/fa6";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
 import infoIcon from "../../assets/hover_info.png";
+import HoverDetails from "../common/hover-details";
 
 const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
                   )
                 }
               >
-                {predictionData[0]?.first_name} {predictionData[0]?.last_name}
+                <HoverDetails id={predictionData[0]?.user_id} />
               </h5>
               <FaCrown />
             </span>

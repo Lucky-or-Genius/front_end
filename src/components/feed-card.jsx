@@ -11,6 +11,7 @@ import { FaRegCalendarPlus, FaYoutube } from "react-icons/fa6";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
 import "../styles/feedCard.css";
+import HoverDetails from "./common/hover-details";
 
 const FeedCard = ({
   category,
@@ -63,7 +64,7 @@ const FeedCard = ({
                 className={"cursor-pointer hover:underline"}
                 onClick={() => navigate(`/dashboard/Leaderboards/${userId}`)}
               >
-                {user}
+                <HoverDetails id={userId} />
               </h5>
               <FaCrown />
             </span>

@@ -2,6 +2,8 @@ import React from "react";
 import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+import HoverDetails from "./common/hover-details";
+
 const FeedRightSectionColumns = ({
   rank,
   name,
@@ -55,10 +57,11 @@ const FeedRightSectionColumns = ({
         }}
       >
         <h5
-          className="cursor-pointer text-[#ffffff] font-semibold text-base hover:underline"
+          className="cursor-pointer flex gap-1 items-end text-[#ffffff] font-semibold text-base hover:underline"
           onClick={() => navigate(`/dashboard/Leaderboards/${userId}`)}
         >
-          <span className="!text-[#ffffff80]">#{rank}</span> {name}
+          <span className="!text-[#ffffff80]">#{rank}</span>
+          <HoverDetails id={userId} />
         </h5>
         <h6 className="text-xs text-[#ffffff80]">
           Accuracy{" "}
