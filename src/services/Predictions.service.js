@@ -11,11 +11,15 @@ export const getPredictionsUser = async (accountId) => {
 export const getPredictionsByUserId = async (id) => {
   if (id !== null) return await Axios.get(`predictions?accountId=${id}`);
 };
-export const getSortedPrediction = async (category) => {
-  return await Axios.get(`predictions?category=${category}`);
+export const getSortedPrediction = async (page, category) => {
+  return await Axios.get(
+    `all-predictions?page=${page}&pageSize=14&category=${category}`
+  );
 };
-export const getSortedCategory = async (prediction) => {
-  return await Axios.get(`predictions?predictionValidation=${prediction}`);
+export const getSortedCategory = async (page, prediction) => {
+  return await Axios.get(
+    `all-predictions?page=${page}&pageSize=14&predictionValidation=${prediction}`
+  );
 };
 
 export const getPredictionSingle = async (id, page, category, prediction) => {
