@@ -21,9 +21,10 @@ const NewPrediction = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   const fetchSortedPrediction = async (prediction) => {
-    await getSortedPrediction(prediction)
+    await getSortedPrediction(currentPage, prediction)
       .then((res) => {
-        setPredictions(res.data);
+        setPredictions(res.data.predictions);
+        setTotalPages(res.data.pagination.totalPages);
       })
       .catch((err) => {
         console.log("err::::::", err);
@@ -31,9 +32,10 @@ const NewPrediction = () => {
   };
 
   const fetchSortedCategory = async (category) => {
-    await getSortedCategory(category)
+    await getPredictions(currentPage, category)
       .then((res) => {
-        setPredictions(res.data);
+        setPredictions(res.data.predictions);
+        setTotalPages(res.data.pagination.totalPages);
       })
       .catch((err) => {
         console.log("err::::::", err);
