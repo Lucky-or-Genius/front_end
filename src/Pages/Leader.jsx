@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa6";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 
-import Pagination from "../components/newPrediction/pagination";
+import Pagination from "../components/common/pagination";
 import {
   getProfilesBySubjects,
   getSortedProfilesBySubjects,
@@ -20,7 +20,7 @@ import Tabs from "../components/common/tabs";
 import BarChart from "../components/newLeaderboard/barChart";
 import PieChart from "../components/newLeaderboard/pieChart";
 import ShareLinkModal from "../components/common/share-button";
-import PredictionSection from "../components/newLeaderboard/prediction-section";
+import PredictionSection from "../components/common/prediction-section";
 import SourceSection from "../components/newLeaderboard/source-section";
 import ChartFilters from "../components/newLeaderboard/chart-filters";
 import CircularProgress from "../components/common/circular-progress";
@@ -164,7 +164,7 @@ const Leader = () => {
       content: (
         <>
           <PredictionSection
-            setUserPredictions={setUserPredictions}
+            setPredictions={setUserPredictions}
             userPredictions={userPredictions}
             setPredictionType={setPredictionType}
             setCategory={setCategory}

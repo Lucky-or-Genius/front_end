@@ -3,8 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Content } from "antd/es/layout/layout";
 import { Layout } from "antd";
 
-import DesktopSidebar from "../components/common/sidebar/Sidebar";
-import MobileSidebar from "../components/common/sidebar/MobileSidebar";
+import { DesktopSidebar, MobileSidebar } from "../components/common";
 
 const DashboardLayout = () => {
   return (

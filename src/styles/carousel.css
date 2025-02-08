@@ -1,8 +1,0 @@
-/* Custom CSS */
-.carousel-indicators li {
-  background-color: #7d7d7d; /* Inactive indicator color */
-}
-
-.carousel-indicators .active {
-  background-color: #baff2a; /* Active indicator color */
-}

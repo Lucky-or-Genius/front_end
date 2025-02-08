@@ -1,8 +1,9 @@
 import React from "react";
+
 import { Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-import HoverDetails from "./common/hover-details";
+import { HoverDetails } from "../common";
 
 const FeedRightSectionColumns = ({
   rank,

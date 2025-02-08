@@ -6,25 +6,46 @@ import { FaChartLine } from "react-icons/fa";
 import { MdPendingActions } from "react-icons/md";
 
 import {
+  getSummaryPrediction,
   getSummaryPeople,
   getFullTranscript,
-  getSummaryPrediction,
   getSummarySummaries,
 } from "../services/summaries.services";
+import { getSourcePredictions } from "../services/Predictions.service";
 import Tabs from "../components/common/tabs";
 import Summaries from "../components/newSummaries/summaries";
-import Predictions from "../components/newSummaries/predictions";
+import PredictionSection from "../components/common/prediction-section";
 import People from "../components/newSummaries/people";
 import Transcript from "../components/newSummaries/transcript";
+import Pagination from "../components/common/pagination";
 
 const SummariesDetails = () => {
   const navigate = useNavigate();
   const id = useParams().id;
   const [people, setPeople] = useState([]);
   const [transcript, setTranscript] = useState([]);
-  const [prediction, setPrediction] = useState([]);
+  const [predictions, setPredictions] = useState([]);
   const [summaries, setSummaries] = useState([]);
   const [sourceSummary, setSourceSummary] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [category, setCategory] = useState();
+  const [predictionType, setPredictionType] = useState();
+
+  const fetchSourcePredictions = useCallback(async () => {
+    try {
+      const res = await getSourcePredictions(
+        id,
+        currentPage,
+        category,
+        predictionType
+      );
+      setPredictions(res.data.predictions);
+      setTotalPages(res.data.pagination.totalPages);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [id, category, predictionType, currentPage]);
 
   const convertMinsToHrsMins = (minutes) => {
     let h = Math.floor(minutes / 60);
@@ -39,19 +60,28 @@ const SummariesDetails = () => {
       getSummarySummaries(id),
       getSummaryPrediction(id),
       getSummaryPeople(id),
-      getFullTranscript(id)
+      getFullTranscript(id),
     ])
       .then(([summariesRes, predictionsRes, peopleRes, transcriptRes]) => {
         setSummaries(summariesRes.data);
-        setPrediction(predictionsRes.data.predictions);
         setSourceSummary(predictionsRes.data.sourceSummary);
         setPeople(peopleRes.data);
         setTranscript(transcriptRes.data);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       });
   }, [id]);
+
+  useEffect(() => {
+    fetchSourcePredictions();
+  }, [fetchSourcePredictions]);
+
+  const onPageChange = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   useEffect(() => {
     fetchAllData();
@@ -60,7 +90,23 @@ const SummariesDetails = () => {
   const items = [
     {
       title: "Predictions",
-      content: <Predictions predictionData={prediction} />,
+      content: (
+        <>
+          {" "}
+          <PredictionSection
+            setPredictions={setPredictions}
+            userPredictions={predictions}
+            setPredictionType={setPredictionType}
+            setCategory={setCategory}
+            setCurrentPage={setCurrentPage}
+          />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={onPageChange}
+          />
+        </>
+      ),
     },
     { title: "Summaries", content: <Summaries summariesData={summaries} /> },
     { title: "People", content: <People peopleData={people} /> },

@@ -4,12 +4,12 @@ import toast from "react-hot-toast";
 import { TbReload } from "react-icons/tb";
 
 import PredictionCard from "./prediction-card";
-import Filters from "./prediction-filters";
+import PredictionFilters from "./prediction-filters";
 import { addRemoveFavourite } from "../../services/Predictions.service";
 import { useAppContext } from "../../utils/appContext";
 
 const Section = ({
-  setUserPredictions,
+  setPredictions,
   userPredictions,
   setCategory,
   setPredictionType,
@@ -41,14 +41,14 @@ const Section = ({
     newData[index].is_favourite = !newData[index].is_favourite;
     toast.success("updated!");
     addRemoveFavourite(params);
-    setUserPredictions(newData);
+    setPredictions(newData);
   };
 
   if (userPredictions?.length > 0) {
     return (
       <>
         <div className=" w-full flex items-start pb-6">
-          <Filters
+          <PredictionFilters
             setCategory={setCategory}
             setPredictionType={setPredictionType}
             setCurrentPage={setCurrentPage}
@@ -58,8 +58,8 @@ const Section = ({
           {userPredictions?.map((item, index) => (
             <PredictionCard
               key={index}
-              user={`${item.first_name} ${" "} ${item.last_name}`}
               imgUrl={item.image_url}
+              userId={item.user_id}
               prediction={item.prediction}
               madeOn={item.publish_date}
               resolvedOn={item.fixed_date}
