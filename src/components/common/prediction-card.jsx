@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { FaCrown } from "react-icons/fa";
@@ -7,13 +7,14 @@ import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
+import HoverDetails from "./hover-details";
+
 const PredictionCard = ({
   category,
   resolvedOn,
   imgUrl,
   prediction,
   madeOn,
-  user,
   status,
   userId,
   predictionId,
@@ -25,16 +26,16 @@ const PredictionCard = ({
 
   return (
     <Link
-      className="feed-card cursor-pointer backdrop-blur-md sm:bg-[#ffffff20] h-full rounded-xl hover:border hover:border-primary400 transition-all ease-in-out shadow-black"
+      className="flex flex-col p-4 gap-2 cursor-pointer  font-poppins backdrop-blur-md bg-[#ffffff20] rounded-xl border border-[#ffffff10] hover:border-primary400 transition-all ease-in-out shadow-black"
       to={`/dashboard/Predictions/${predictionId}`}
     >
-      <div className="card-header h-[20%] gap-2 ">
+      <div className="flex gap-2 justify-between w-full items-center">
         <div className="flex">
-          <div className="card-header-img">
+          <div className="w-10 p-0.5 border border-gray-300 flex items-center justify-center h-10 rounded-full">
             <Image
               src={imgUrl}
               alt="N/A"
-              className="cursor-pointer"
+              className="cursor-pointer rounded-full w-full h-full object-cover"
               onClick={() =>
                 navigate("/Leaderboards", {
                   state: { id: userId },
@@ -48,18 +49,18 @@ const PredictionCard = ({
                 className={"cursor-pointer hover:underline"}
                 onClick={() => navigate(`/dashboard/Leaderboards/${userId}`)}
               >
-                {user}
+                <HoverDetails id={userId} />
               </h5>
               <FaCrown />
             </span>
           </div>
         </div>
-        <span className="px-2 bg-[#ffffff10] rounded-full text-[#ffffff80] text-[12px] text-center">
+        <span className="bg-[#ffffff10] px-2 py-1 rounded-full flex gap-2 items-center text-center text-xs text-[#ffffff80]">
           #{category}
         </span>
       </div>
       <div className="flex flex-col justify-between h-[80%] pt-2">
-        <div className="card-description font-raleway truncate-3 line-clamp-3">
+        <div className="text-white font-raleway truncate-3 line-clamp-3">
           <p>{prediction}</p>
         </div>
         <div className="flex w-full 2md:items-center text-[#ffffff80] text-[13px] gap-4 pt-4 flex-col 2md:flex-row  flex-wrap">

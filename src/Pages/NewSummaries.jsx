@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import { LuPlus } from "react-icons/lu";
@@ -88,9 +88,12 @@ const NewSummaries = () => {
   }, [searchQuery, user]);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      fetchSummariesData();
-    }, searchQuery ? 1000 : 0);
+    const handler = setTimeout(
+      () => {
+        fetchSummariesData();
+      },
+      searchQuery ? 1000 : 0
+    );
 
     return () => {
       clearTimeout(handler);

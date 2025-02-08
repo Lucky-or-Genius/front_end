@@ -8,10 +8,7 @@ import Predictions from "../components/newFavourites/predictions";
 import { leaderBoardData } from "../services/Leaderboards.service";
 import { channelsData } from "../services/channels.service";
 import { allSummarySources } from "../services/summaries.services";
-import {
-  // getPredictionsByUserId,
-  getPredictionsUser,
-} from "../services/Predictions.service";
+import { getPredictionsUser } from "../services/Predictions.service";
 
 const Favourites = () => {
   const accountId = localStorage.getItem("accountId");

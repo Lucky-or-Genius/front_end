@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoOptionsOutline, IoReloadOutline } from "react-icons/io5";
 import { MdOutlinePhotoFilter, MdOutlineTopic } from "react-icons/md";
-import Popper from "../common/popover";
+import Popper from "./popover";
 
 const FilterButton = ({ buttonName, isActive, onClick }) => (
   <button
@@ -35,11 +35,7 @@ const FilterPopper = ({ triggerLabel, triggerIcon, children }) => (
   </Popper>
 );
 
-const Filters = ({
-  fetchSortedCategory,
-  fetchSortedPrediction,
-  fetchPredictionData,
-}) => {
+const Filters = ({ setCategory, setPredictionType, setCurrentPage }) => {
   const [activeStatus, setActiveStatus] = useState("");
   const [activeTopic, setActiveTopic] = useState("");
 
@@ -54,23 +50,27 @@ const Filters = ({
   ];
 
   const handleStatusClick = (status) => {
+    setPredictionType(status);
+    setCurrentPage(1);
     setActiveStatus(status);
-    fetchSortedCategory(status);
   };
 
   const handleTopicClick = (topic) => {
+    setCategory(topic);
+    setCurrentPage(1);
     setActiveTopic(topic);
-    fetchSortedPrediction(topic);
   };
 
   const resetStatus = () => {
+    setPredictionType();
+    setCurrentPage(1);
     setActiveStatus("");
-    fetchPredictionData();
   };
 
   const resetTopic = () => {
+    setCategory();
+    setCurrentPage(1);
     setActiveTopic("");
-    fetchPredictionData();
   };
 
   return (

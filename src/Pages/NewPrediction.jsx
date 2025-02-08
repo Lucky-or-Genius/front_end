@@ -2,15 +2,13 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
 
-import PredictionCard from "../components/newPrediction/prediction-card";
+import { PredictionCard } from "../components/common";
 import {
   getPredictions,
-  getSortedPrediction,
-  getSortedCategory,
   addRemoveFavourite,
 } from "../services/Predictions.service";
-import Filters from "../components/newPrediction/filters";
-import Pagination from "../components/newPrediction/pagination";
+import PredictionFilters from "../components/common/prediction-filters";
+import Pagination from "../components/common/pagination";
 import Skeleton from "../components/newPrediction/skeleton";
 import { useAppContext } from "../utils/appContext";
 
@@ -19,34 +17,18 @@ const NewPrediction = () => {
   const [predictions, setPredictions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [category, setCategory] = useState();
+  const [predictionType, setPredictionType] = useState();
 
-  const fetchSortedPrediction = async (prediction) => {
-    await getSortedPrediction(currentPage, prediction)
-      .then((res) => {
-        setPredictions(res.data.predictions);
-        setTotalPages(res.data.pagination.totalPages);
-      })
-      .catch((err) => {
-        console.log("err::::::", err);
-      });
-  };
-
-  const fetchSortedCategory = async (category) => {
-    await getPredictions(currentPage, category)
-      .then((res) => {
-        setPredictions(res.data.predictions);
-        setTotalPages(res.data.pagination.totalPages);
-      })
-      .catch((err) => {
-        console.log("err::::::", err);
-      });
-  };
-
-  const fetchPredictionData = useCallback(async () => {
-    const res = await getPredictions(currentPage, user?.accountId);
-    setPredictions(res.data.predictions);
-    setTotalPages(res.data.pagination.totalPages);
-  }, [currentPage, user]);
+  const fetchPredictions = useCallback(async () => {
+    try {
+      const res = await getPredictions(currentPage, category, predictionType);
+      setPredictions(res.data.predictions);
+      setTotalPages(res.data.pagination.totalPages);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [category, predictionType, currentPage]);
 
   const toggleFavourite = async (index, id) => {
     try {
@@ -76,8 +58,8 @@ const NewPrediction = () => {
   };
 
   useEffect(() => {
-    fetchPredictionData();
-  }, [fetchPredictionData]);
+    fetchPredictions();
+  }, [fetchPredictions]);
 
   const onPageChange = (page) => {
     if (page > 0 && page <= totalPages) {
@@ -93,10 +75,10 @@ const NewPrediction = () => {
         </span>
       </div>
       <div className="pb-6 w-full justify-center flex items-center">
-        <Filters
-          fetchSortedPrediction={fetchSortedPrediction}
-          fetchSortedCategory={fetchSortedCategory}
-          fetchPredictionData={fetchPredictionData}
+        <PredictionFilters
+          setCategory={setCategory}
+          setPredictionType={setPredictionType}
+          setCurrentPage={setCurrentPage}
         />
       </div>
 

@@ -1,25 +1,25 @@
 import Axios from "../utils/axios";
 
-//
-export const getPredictions = async (page) => {
-  return await Axios.get(`all-predictions?page=${page}&pageSize=14`);
-};
-export const getPredictionsUser = async (accountId) => {
-  return await Axios.get(`all-predictions`);
+export const getPredictions = async (page, category, prediction) => {
+  if (category !== undefined && prediction !== undefined) {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=14&category=${category}&predictionValidation=${prediction}`
+    );
+  } else if (category !== undefined) {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=14&category=${category}`
+    );
+  } else if (prediction !== undefined) {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=14&predictionValidation=${prediction}`
+    );
+  } else {
+    return await Axios.get(`all-predictions?page=${page}&pageSize=14`);
+  }
 };
 
-export const getPredictionsByUserId = async (id) => {
-  if (id !== null) return await Axios.get(`predictions?accountId=${id}`);
-};
-export const getSortedPrediction = async (page, category) => {
-  return await Axios.get(
-    `all-predictions?page=${page}&pageSize=14&category=${category}`
-  );
-};
-export const getSortedCategory = async (page, prediction) => {
-  return await Axios.get(
-    `all-predictions?page=${page}&pageSize=14&predictionValidation=${prediction}`
-  );
+export const getPredictionsUser = async (accountId) => {
+  return await Axios.get(`all-predictions`);
 };
 
 export const getPredictionSingle = async (id, page, category, prediction) => {
@@ -41,6 +41,26 @@ export const getPredictionSingle = async (id, page, category, prediction) => {
     );
   }
 };
+export const getSourcePredictions = async (id, page, category, prediction) => {
+  if (category !== undefined && prediction !== undefined) {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=8&sourceId=${id}&category=${category}&predictionValidation=${prediction}`
+    );
+  } else if (category !== undefined) {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=8&sourceId=${id}&category=${category}`
+    );
+  } else if (prediction !== undefined) {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=8&sourceId=${id}&predictionValidation=${prediction}`
+    );
+  } else {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=8&sourceId=${id}`
+    );
+  }
+};
+
 export const getSinglePrediction = async (id) => {
   return await Axios.get(`predictions?predictionId=${id}`);
 };

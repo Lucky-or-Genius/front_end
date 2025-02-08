@@ -8,17 +8,20 @@ import React, {
 import toast from "react-hot-toast";
 
 import { useAppContext } from "../utils/appContext";
-import TrendingPredictionCard from "../components/trending-prediction-card";
-import FeedRightSection from "../components/feed-right-section";
+import "../styles/feed.css";
+import {
+  FeedCard,
+  FeedRightSection,
+  TrendingPredictionCard,
+} from "../components/feed";
 import {
   FeedSkeleton,
   LeaderboardSkeleton,
-} from "../components/common/feed-skeleton";
+} from "../components/feed/feed-skeleton";
+
 import { getFeedDetails } from "../services/Feed.service";
 import { leaderBoardData } from "../services/Leaderboards.service";
 import { addRemoveFavourite } from "../services/Predictions.service";
-import "../styles/feed.css";
-import FeedCard from "../components/feed-card";
 
 const Feed = () => {
   const { user, login } = useAppContext();
@@ -195,7 +198,6 @@ const Feed = () => {
               <FeedCard
                 category={card.category}
                 userId={card.user_id}
-                user={card.user}
                 madeOn={card.publish_date}
                 resolvedOn={card.fixed_date}
                 imgUrl={card.image_url}

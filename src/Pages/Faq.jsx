@@ -2,7 +2,7 @@ import React from "react";
 
 import Navbar from "../components/common/navbar/navbar";
 import { Faqs } from "../utils/constant";
-import Accordion from "../components/common/accordion";
+import { Accordion } from "../components/common";
 import Footer from "../components/landing/footer";
 
 const FAQ = () => {

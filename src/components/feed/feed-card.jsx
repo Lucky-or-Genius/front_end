@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { Image } from "react-bootstrap";
 import { ImArrowUp, ImArrowDown } from "react-icons/im";
@@ -10,8 +10,8 @@ import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { FaRegCalendarPlus, FaYoutube } from "react-icons/fa6";
 import { CgArrowLongRightC } from "react-icons/cg";
 import { FaFlagCheckered } from "react-icons/fa";
-import "../styles/feedCard.css";
-import HoverDetails from "./common/hover-details";
+
+import { HoverDetails } from "../common";
 
 const FeedCard = ({
   category,
@@ -19,7 +19,6 @@ const FeedCard = ({
   imgUrl,
   prediction,
   madeOn,
-  user,
   status,
   userId,
   predictionId,
@@ -32,25 +31,19 @@ const FeedCard = ({
 
   return (
     <div
-      className="feed-card cursor-pointer backdrop-blur-md sm:bg-[#ffffff20] rounded-xl hover:border hover:border-primary400 transition-all ease-in-out shadow-black"
+      className="flex flex-col p-4 md:p-6 gap-2 cursor-pointer  font-poppins backdrop-blur-md bg-[#ffffff20] rounded-xl border border-[#ffffff10] hover:border-primary400 transition-all ease-in-out shadow-black"
       onClick={(e) => {
         e.preventDefault();
         navigate(`/dashboard/Predictions/${predictionId}`);
       }}
     >
-      <div className="card-header">
-        <div
-          className=""
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <div className="card-header-img">
+      <div className="flex gap-4 justify-between w-full">
+        <div className="flex gap-2">
+          <div className="w-10 p-0.5 border border-gray-300 flex items-center justify-center h-10 rounded-full">
             <Image
               src={imgUrl}
               alt="N/A"
-              className="cursor-pointer"
+              className="cursor-pointer rounded-full w-full h-full object-cover"
               onClick={() =>
                 navigate("/Leaderboards", {
                   state: { id: userId },
@@ -58,17 +51,15 @@ const FeedCard = ({
               }
             />
           </div>
-          <div className="profile-name">
-            <span className="flex items-center text-[#ffffff80] gap-4">
-              <h5
-                className={"cursor-pointer hover:underline"}
-                onClick={() => navigate(`/dashboard/Leaderboards/${userId}`)}
-              >
-                <HoverDetails id={userId} />
-              </h5>
-              <FaCrown />
-            </span>
-          </div>
+          <span className="flex items-center text-sm  text-[#ffffff80] gap-4">
+            <h5
+              className={"cursor-pointer hover:underline"}
+              onClick={() => navigate(`/dashboard/Leaderboards/${userId}`)}
+            >
+              <HoverDetails id={userId} />
+            </h5>
+            <FaCrown />
+          </span>
         </div>
         <div className="flex gap-2 items-center">
           <div className="flex gap-2 ">
@@ -101,11 +92,11 @@ const FeedCard = ({
         </div>
       </div>
 
-      <div className="card-description font-raleway">
+      <div className="text-white font-raleway">
         <p>{prediction}</p>
       </div>
 
-      <div className="flex w-full flex-wrap items-start gap-x-6 gap-y-4 text-[#ffffff80] text-sm pt-4">
+      <div className="flex w-full flex-wrap items-start gap-x-6 gap-y-4 text-[#ffffff80] text-sm pt-2">
         <div className="flex gap-4 order-1">
           <p className="flex gap-2 items-center ">
             <FaRegCalendarPlus /> <span>{madeOn}</span>
@@ -145,40 +136,41 @@ const FeedCard = ({
           # {status}
         </span>
       </div>
-
-      <div className="card-footer">
-        <div className="likes">
-          <ImArrowUp
-            style={{
-              cursor: "pointer",
-              color: "#00000040",
-            }}
-          />
-        </div>
-        <div className="dislikes">
-          <ImArrowDown
-            style={{
-              cursor: "pointer",
-              color: "#00000040",
-            }}
-          />
-        </div>
-        <div className="comment">
-          <IoChatbubbleEllipses
-            style={{
-              cursor: "pointer",
-              color: "#00000040",
-            }}
-          />
-        </div>
-        <div className="share">
-          <RiSendPlaneFill
-            style={{
-              cursor: "pointer",
-              color: "#00000040",
-            }}
-            // onClick={() => setOpenShare(true)}
-          />
+      <div className="w-full md:w-1/2">
+        <div className="flex justify-between w-full pt-4">
+          <div className="likes">
+            <ImArrowUp
+              style={{
+                cursor: "pointer",
+                color: "#00000040",
+              }}
+            />
+          </div>
+          <div className="dislikes">
+            <ImArrowDown
+              style={{
+                cursor: "pointer",
+                color: "#00000040",
+              }}
+            />
+          </div>
+          <div className="comment">
+            <IoChatbubbleEllipses
+              style={{
+                cursor: "pointer",
+                color: "#00000040",
+              }}
+            />
+          </div>
+          <div className="share">
+            <RiSendPlaneFill
+              style={{
+                cursor: "pointer",
+                color: "#00000040",
+              }}
+              // onClick={() => setOpenShare(true)}
+            />
+          </div>
         </div>
       </div>
     </div>

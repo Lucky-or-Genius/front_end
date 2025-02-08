@@ -4,8 +4,6 @@ import { BiSolidCategoryAlt } from "react-icons/bi";
 import { FaCalendarDays } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
-import "../styles/trending-prediction-card.css";
-
 const trendingPredictionCard = ({
   news,
   imgUrl,
