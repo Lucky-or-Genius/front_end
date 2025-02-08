@@ -30,7 +30,7 @@ const PredictionCard = ({
       className="p-4 w-full font-poppins border border-[#ffffff20] cursor-pointer backdrop-blur-md bg-[#ffffff20] h-full rounded-xl hover:border hover:border-primary400 transition-all ease-in-out shadow-black"
       to={`/dashboard/Predictions/${predictionId}`}
     >
-      <div className="card-header h-[20%] gap-2 ">
+      <div className="h-[20%] gap-2 ">
         <div className="flex">
           <div className="card-header-img">
             <Image

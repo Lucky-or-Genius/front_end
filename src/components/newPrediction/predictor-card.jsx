@@ -16,27 +16,21 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
 
   return (
     <div
-      className="feed-card cursor-pointer backdrop-blur-md sm:bg-[#ffffff20] rounded-xl hover:border hover:border-primary400 transition-all ease-in-out shadow-black w-full 2md:w-4/5"
+      className="p-4 font-poppins border border-[#ffffff20] cursor-pointer backdrop-blur-md bg-[#ffffff20] h-full rounded-xl hover:border hover:border-primary400 transition-all ease-in-out shadow-black w-full 2md:w-4/5"
       onClick={() => {
         onCardClick();
       }}
     >
-      <div className="card-header">
-        <div
-          className=""
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <div className="card-header-img">
+      <div className="flex gap-2 justify-between w-full items-center pb-4">
+        <div className="flex items-center gap-2">
+          <div className="w-10 p-0.5 border border-gray-300 flex items-center justify-center h-10 rounded-full">
             <Image
               src={predictionData[0]?.image_url}
               alt="N/A"
-              className="cursor-pointer"
+              className="cursor-pointer rounded-full w-full h-full object-cover"
             />
           </div>
-          <div className="profile-name">
+          <div className="">
             <span className="flex items-center text-[#ffffff80] gap-4">
               <h5
                 className={"cursor-pointer hover:underline"}
@@ -52,16 +46,11 @@ const PredictorCard = ({ onCardClick, isOpen, predictionData }) => {
             </span>
           </div>
         </div>
-        <button
-          className="card-header-btn h-8 w-8 !text-xs !p-0 text-white justify-center hover:shadow-md hover:shadow-primary400 transition-all ease-in-out hover:scale-105 active:scale-95"
-          onClick={() => {
-            // handleProof();
-          }}
-        >
+        <button className="items-center flex border border-[#ffffff20] rounded-full h-8 w-8 !text-xs !p-0 text-white justify-center hover:shadow-md hover:shadow-primary400 transition-all ease-in-out hover:scale-105 active:scale-95">
           <FaPlus />
         </button>
       </div>
-      <div className="card-description font-raleway">
+      <div className="text-white md:text-lg font-raleway">
         <p>{predictionData[0]?.prediction}</p>
       </div>
       <div className="flex w-full gap-4 text-[#ffffff80] text-sm pt-4 flex-col md:flex-row flex-wrap">
