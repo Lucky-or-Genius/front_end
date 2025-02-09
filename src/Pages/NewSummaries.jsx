@@ -40,7 +40,7 @@ const NewSummaries = () => {
   const sortByNumberOfPredictions = async (order) => {
     try {
       const res = await sortNumberOfPredictions(order);
-      setSummaries(res.data);
+      setSummaries(res.data.sources);
     } catch (error) {
       console.log(error);
     }
@@ -77,10 +77,10 @@ const NewSummaries = () => {
     try {
       if (searchQuery === "") {
         const response = await allSummarySources(user?.accountId);
-        setSummaries(response.data);
+        setSummaries(response.data.sources);
       } else {
         const response = await searchTerm(searchQuery);
-        setSummaries(response.data);
+        setSummaries(response.data.sources);
       }
     } catch (error) {
       console.log(error);

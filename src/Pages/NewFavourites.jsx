@@ -48,9 +48,10 @@ const Favourites = () => {
     try {
       const res = await allSummarySources(accountId);
 
-      const filteredData = [...res.data].filter(
+      const filteredData = [...res.data.sources].filter(
         (obj) => obj.is_favourite === true
       );
+
 
       setSources(filteredData);
     } catch (error) {

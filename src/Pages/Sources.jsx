@@ -18,7 +18,7 @@ const Sources = () => {
   const fetchSources = useCallback(async () => {
     try {
       const res = await channelsSourceData(id);
-      setSources(res.data);
+      setSources(res.data.sources);
     } catch (error) {
       console.log(error);
     }
