@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IoOptionsOutline, IoReloadOutline } from "react-icons/io5";
 import { MdOutlinePhotoFilter, MdOutlineTopic } from "react-icons/md";
 import Popper from "./popover";
+import AdvanceSearchBar from "./advance-search-bar";
 
 const FilterButton = ({ buttonName, isActive, onClick }) => (
   <button
@@ -35,7 +36,15 @@ const FilterPopper = ({ triggerLabel, triggerIcon, children }) => (
   </Popper>
 );
 
-const Filters = ({ setCategory, setPredictionType, setCurrentPage }) => {
+const Filters = ({
+  setCategory,
+  setPredictionType,
+  setCurrentPage,
+  setNameTerm,
+  setPredictionTerm,
+  predictionTerm,
+  nameTerm,
+}) => {
   const [activeStatus, setActiveStatus] = useState("");
   const [activeTopic, setActiveTopic] = useState("");
 
@@ -74,49 +83,60 @@ const Filters = ({ setCategory, setPredictionType, setCurrentPage }) => {
   };
 
   return (
-    <div className="flex gap-4 py-4">
-      <span className="flex items-center gap-2 text-primary400 font-raleway font-[500]">
-        Filters
-        <IoOptionsOutline className="border border-primary400 rounded-full p-1 w-6 h-6" />
-      </span>
+    <div className="w-full flex justify-between items-center md:flex-row flex-col">
+      <div className="flex gap-4 py-4">
+        <span className="flex items-center gap-2 text-primary400 font-raleway font-[500]">
+          Filters
+          <IoOptionsOutline className="border border-primary400 rounded-full p-1 w-6 h-6" />
+        </span>
 
-      <div className="flex gap-2 font-raleway">
-        {/* Status Filter */}
-        <FilterPopper
-          triggerLabel="Status"
-          triggerIcon={<MdOutlinePhotoFilter />}
-        >
-          <div className="font-raleway p-4 flex w-full items-end flex-col">
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              {statusOptions.map((status) => (
-                <FilterButton
-                  key={status}
-                  buttonName={status}
-                  isActive={activeStatus === status}
-                  onClick={handleStatusClick}
-                />
-              ))}
+        <div className="flex gap-2 font-raleway">
+          {/* Status Filter */}
+          <FilterPopper
+            triggerLabel="Status"
+            triggerIcon={<MdOutlinePhotoFilter />}
+          >
+            <div className="font-raleway p-4 flex w-full items-end flex-col">
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                {statusOptions.map((status) => (
+                  <FilterButton
+                    key={status}
+                    buttonName={status}
+                    isActive={activeStatus === status}
+                    onClick={handleStatusClick}
+                  />
+                ))}
+              </div>
+              <ResetButton onClick={resetStatus} />
             </div>
-            <ResetButton onClick={resetStatus} />
-          </div>
-        </FilterPopper>
+          </FilterPopper>
 
-        {/* Topic Filter */}
-        <FilterPopper triggerLabel="Topic" triggerIcon={<MdOutlineTopic />}>
-          <div className="font-raleway p-4 flex w-full items-end flex-col">
-            <div className="grid grid-cols-2 gap-2 text-sm">
-              {topicOptions.map((topic) => (
-                <FilterButton
-                  key={topic}
-                  buttonName={topic}
-                  isActive={activeTopic === topic}
-                  onClick={handleTopicClick}
-                />
-              ))}
+          {/* Topic Filter */}
+          <FilterPopper triggerLabel="Topic" triggerIcon={<MdOutlineTopic />}>
+            <div className="font-raleway p-4 flex w-full items-end flex-col">
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                {topicOptions.map((topic) => (
+                  <FilterButton
+                    key={topic}
+                    buttonName={topic}
+                    isActive={activeTopic === topic}
+                    onClick={handleTopicClick}
+                  />
+                ))}
+              </div>
+              <ResetButton onClick={resetTopic} />
             </div>
-            <ResetButton onClick={resetTopic} />
-          </div>
-        </FilterPopper>
+          </FilterPopper>
+        </div>
+      </div>
+
+      <div className="">
+        <AdvanceSearchBar
+          setNameTerm={setNameTerm}
+          setPredictionTerm={setPredictionTerm}
+          predictionTerm={predictionTerm}
+          nameTerm={nameTerm}
+        />
       </div>
     </div>
   );

@@ -32,6 +32,8 @@ const Leader = () => {
   const [summaries, setSummaries] = useState();
   const [category, setCategory] = useState();
   const [predictionType, setPredictionType] = useState();
+  const [nameTerm, setNameTerm] = useState("");
+  const [predictionTerm, setPredictionTerm] = useState("");
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -60,14 +62,16 @@ const Leader = () => {
         id,
         currentPage,
         category,
-        predictionType
+        predictionType,
+        nameTerm,
+        predictionTerm
       );
       setUserPredictions(res.data.predictions);
       setTotalPages(res.data.pagination.totalPages);
     } catch (error) {
       console.log(error);
     }
-  }, [category, id, predictionType, currentPage]);
+  }, [id, currentPage, category, predictionType, nameTerm, predictionTerm]);
 
   /**
    * Fetch user sources
@@ -113,8 +117,18 @@ const Leader = () => {
    * Fetch user prediction upon changes
    */
   useEffect(() => {
-    fetchUserPrediction();
-  }, [fetchUserPrediction]);
+    const handler = setTimeout(
+      () => {
+        fetchUserPrediction();
+      },
+      nameTerm || predictionTerm ? 2000 : 0
+    );
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [fetchUserPrediction, nameTerm, predictionTerm]);
+
   useEffect(() => {
     fetchUserInfo();
   }, [fetchUserInfo]);
@@ -169,6 +183,10 @@ const Leader = () => {
             setPredictionType={setPredictionType}
             setCategory={setCategory}
             setCurrentPage={setCurrentPage}
+            setNameTerm={setNameTerm}
+            setPredictionTerm={setPredictionTerm}
+            nameTerm={nameTerm}
+            predictionTerm={predictionTerm}
           />
 
           <div className="">

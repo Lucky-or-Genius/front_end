@@ -1,6 +1,12 @@
 import Axios from "../utils/axios";
 
-export const getPredictions = async (page, category, prediction) => {
+export const getPredictions = async (
+  page,
+  category,
+  prediction,
+  nameSearch,
+  predictionSearch
+) => {
   if (category !== undefined && prediction !== undefined) {
     return await Axios.get(
       `all-predictions?page=${page}&pageSize=14&category=${category}&predictionValidation=${prediction}`
@@ -13,6 +19,14 @@ export const getPredictions = async (page, category, prediction) => {
     return await Axios.get(
       `all-predictions?page=${page}&pageSize=14&predictionValidation=${prediction}`
     );
+  } else if (nameSearch !== "") {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=14&nameSearch=${nameSearch}`
+    );
+  } else if (predictionSearch !== "") {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=14&searchTerm=${predictionSearch}`
+    );
   } else {
     return await Axios.get(`all-predictions?page=${page}&pageSize=14`);
   }
@@ -22,7 +36,14 @@ export const getPredictionsUser = async (accountId) => {
   return await Axios.get(`all-predictions`);
 };
 
-export const getPredictionSingle = async (id, page, category, prediction) => {
+export const getPredictionSingle = async (
+  id,
+  page,
+  category,
+  prediction,
+  nameSearch,
+  predictionSearch
+) => {
   if (category !== undefined && prediction !== undefined) {
     return await Axios.get(
       `all-predictions?page=${page}&pageSize=8&userId=${id}&category=${category}&predictionValidation=${prediction}`
@@ -35,13 +56,28 @@ export const getPredictionSingle = async (id, page, category, prediction) => {
     return await Axios.get(
       `all-predictions?page=${page}&pageSize=8&userId=${id}&predictionValidation=${prediction}`
     );
+  } else if (nameSearch !== "") {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=14&userId=${id}&nameSearch=${nameSearch}`
+    );
+  } else if (predictionSearch !== "") {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=14&userId=${id}&searchTerm=${predictionSearch}`
+    );
   } else {
     return await Axios.get(
       `all-predictions?page=${page}&pageSize=8&userId=${id}`
     );
   }
 };
-export const getSourcePredictions = async (id, page, category, prediction) => {
+export const getSourcePredictions = async (
+  id,
+  page,
+  category,
+  prediction,
+  nameSearch,
+  predictionSearch
+) => {
   if (category !== undefined && prediction !== undefined) {
     return await Axios.get(
       `all-predictions?page=${page}&pageSize=8&sourceId=${id}&category=${category}&predictionValidation=${prediction}`
@@ -53,6 +89,14 @@ export const getSourcePredictions = async (id, page, category, prediction) => {
   } else if (prediction !== undefined) {
     return await Axios.get(
       `all-predictions?page=${page}&pageSize=8&sourceId=${id}&predictionValidation=${prediction}`
+    );
+  } else if (nameSearch !== "") {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=14&sourceId=${id}&nameSearch=${nameSearch}`
+    );
+  } else if (predictionSearch !== "") {
+    return await Axios.get(
+      `all-predictions?page=${page}&pageSize=14&sourceId=${id}&searchTerm=${predictionSearch}`
     );
   } else {
     return await Axios.get(

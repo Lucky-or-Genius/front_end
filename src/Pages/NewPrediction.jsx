@@ -19,16 +19,24 @@ const NewPrediction = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [category, setCategory] = useState();
   const [predictionType, setPredictionType] = useState();
+  const [nameTerm, setNameTerm] = useState("");
+  const [predictionTerm, setPredictionTerm] = useState("");
 
   const fetchPredictions = useCallback(async () => {
     try {
-      const res = await getPredictions(currentPage, category, predictionType);
+      const res = await getPredictions(
+        currentPage,
+        category,
+        predictionType,
+        nameTerm,
+        predictionTerm
+      );
       setPredictions(res.data.predictions);
       setTotalPages(res.data.pagination.totalPages);
     } catch (error) {
       console.log(error);
     }
-  }, [category, predictionType, currentPage]);
+  }, [currentPage, category, predictionType, nameTerm, predictionTerm]);
 
   const toggleFavourite = async (index, id) => {
     try {
@@ -58,8 +66,17 @@ const NewPrediction = () => {
   };
 
   useEffect(() => {
-    fetchPredictions();
-  }, [fetchPredictions]);
+    const handler = setTimeout(
+      () => {
+        fetchPredictions();
+      },
+      nameTerm || predictionTerm ? 2000 : 0
+    );
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [fetchPredictions, nameTerm, predictionTerm]);
 
   const onPageChange = (page) => {
     if (page > 0 && page <= totalPages) {
@@ -74,11 +91,15 @@ const NewPrediction = () => {
           Predictions
         </span>
       </div>
-      <div className="pb-6 w-full justify-center flex items-center">
+      <div className="pb-6 w-full px-4 md:px-6 justify-center flex items-center">
         <PredictionFilters
           setCategory={setCategory}
           setPredictionType={setPredictionType}
           setCurrentPage={setCurrentPage}
+          setNameTerm={setNameTerm}
+          setPredictionTerm={setPredictionTerm}
+          nameTerm={nameTerm}
+          predictionTerm={predictionTerm}
         />
       </div>
 

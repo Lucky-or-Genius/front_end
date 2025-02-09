@@ -14,6 +14,10 @@ const Section = ({
   setCategory,
   setPredictionType,
   setCurrentPage,
+  setNameTerm,
+  setPredictionTerm,
+  nameTerm,
+  predictionTerm,
 }) => {
   const { user, login } = useAppContext();
 
@@ -52,6 +56,10 @@ const Section = ({
             setCategory={setCategory}
             setPredictionType={setPredictionType}
             setCurrentPage={setCurrentPage}
+            setNameTerm={setNameTerm}
+            setPredictionTerm={setPredictionTerm}
+            nameTerm={nameTerm}
+            predictionTerm={predictionTerm}
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 w-full gap-4">
@@ -88,6 +96,8 @@ const Section = ({
             onClick={() => {
               setCategory("");
               setPredictionType("");
+              setPredictionTerm("");
+              setNameTerm("");
               setCurrentPage(1);
             }}
             className="px-6 font-poppins py-1 h-12 md:text-lg rounded-lg border-white border text-white flex gap-2 items-center transtion-all active:scale-95 transition-all ease-in-out"
