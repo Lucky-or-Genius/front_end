@@ -30,8 +30,8 @@ const Leader = () => {
   const [userInfo, setUserInfo] = useState({});
   const [userPredictions, setUserPredictions] = useState({});
   const [summaries, setSummaries] = useState();
-  const [category, setCategory] = useState();
-  const [predictionType, setPredictionType] = useState();
+  const [category, setCategory] = useState("");
+  const [predictionType, setPredictionType] = useState("");
   const [nameTerm, setNameTerm] = useState("");
   const [predictionTerm, setPredictionTerm] = useState("");
 

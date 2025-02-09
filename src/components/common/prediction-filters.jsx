@@ -71,13 +71,13 @@ const Filters = ({
   };
 
   const resetStatus = () => {
-    setPredictionType();
+    setPredictionType("");
     setCurrentPage(1);
     setActiveStatus("");
   };
 
   const resetTopic = () => {
-    setCategory();
+    setCategory("");
     setCurrentPage(1);
     setActiveTopic("");
   };
