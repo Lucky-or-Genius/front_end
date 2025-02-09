@@ -7,6 +7,7 @@ export { default as PredictionSection } from "./prediction-section";
 export { default as Tabs } from "./tabs";
 export { default as ShareButton } from "./share-button";
 export { default as PredictionCard } from "./prediction-card";
+export { default as AdvanceSearchBar } from "./advance-search-bar";
 
 export { default as DesktopSidebar } from "./sidebar/desktop-sidebar";
 export { default as MobileSidebar } from "./sidebar/mobile-sidebar";

@@ -31,6 +31,8 @@ const SummariesDetails = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [category, setCategory] = useState();
   const [predictionType, setPredictionType] = useState();
+  const [nameTerm, setNameTerm] = useState("");
+  const [predictionTerm, setPredictionTerm] = useState("");
 
   const fetchSourcePredictions = useCallback(async () => {
     try {
@@ -38,14 +40,16 @@ const SummariesDetails = () => {
         id,
         currentPage,
         category,
-        predictionType
+        predictionType,
+        nameTerm,
+        predictionTerm
       );
       setPredictions(res.data.predictions);
       setTotalPages(res.data.pagination.totalPages);
     } catch (error) {
       console.log(error);
     }
-  }, [id, category, predictionType, currentPage]);
+  }, [id, currentPage, category, predictionType, nameTerm, predictionTerm]);
 
   const convertMinsToHrsMins = (minutes) => {
     let h = Math.floor(minutes / 60);
@@ -74,8 +78,17 @@ const SummariesDetails = () => {
   }, [id]);
 
   useEffect(() => {
-    fetchSourcePredictions();
-  }, [fetchSourcePredictions]);
+    const handler = setTimeout(
+      () => {
+        fetchSourcePredictions();
+      },
+      nameTerm || predictionTerm ? 2000 : 0
+    );
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [fetchSourcePredictions, nameTerm, predictionTerm]);
 
   const onPageChange = (page) => {
     if (page > 0 && page <= totalPages) {
@@ -99,6 +112,10 @@ const SummariesDetails = () => {
             setPredictionType={setPredictionType}
             setCategory={setCategory}
             setCurrentPage={setCurrentPage}
+            setNameTerm={setNameTerm}
+            setPredictionTerm={setPredictionTerm}
+            nameTerm={nameTerm}
+            predictionTerm={predictionTerm}
           />
           <Pagination
             currentPage={currentPage}
