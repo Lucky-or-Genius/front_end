@@ -2,17 +2,18 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
-const MobileLeaderBoard = ({ data, toggleFavourite }) => {
+const MobileLeaderBoard = ({ data, toggleFavourite, lastLeaderElementRef, isLoading }) => {
   const navigate = useNavigate();
   return (
     <div>
       {data.length > 0 ? (
         <div className="h-full pb-4 flex flex-col w-full gap-4">
           {data.map((item, index) => (
-            <Link
-              to={`/dashboard/LeaderBoards/${item.user_id}`}
+            <div
               key={index}
+              ref={index === data.length - 1 ? lastLeaderElementRef : null}
               className="w-full bg-[#ffffff10] rounded-xl  p-2"
+              onClick={() => navigate(`/dashboard/LeaderBoards/${item.user_id}`)}
             >
               <div className="flex w-full justify-between pb-4">
                 <div className="col-span-4 flex items-center gap-2">
@@ -24,12 +25,9 @@ const MobileLeaderBoard = ({ data, toggleFavourite }) => {
                     className="rounded-full w-8 h-8 object-cover"
                   />
                   <div className="w-fit flex flex-col truncate  font-poppins">
-                    <Link
-                      to={`/dashboard/LeaderBoards/${item.user_id}`}
-                      className="text-white hover:underline hover:text-primary400 "
-                    >
+                    <span className="text-white hover:underline hover:text-primary400 ">
                       {item.first_name + " " + item.last_name}
-                    </Link>
+                    </span>
                     <span className="text-sm font-semibold text-gray-400">
                       Rank: {item?.rank}
                     </span>
@@ -96,11 +94,16 @@ const MobileLeaderBoard = ({ data, toggleFavourite }) => {
                   {item.total_predictions}
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
+          {isLoading && (
+            <div className="text-white text-center py-4">
+              Loading...
+            </div>
+          )}
         </div>
       ) : (
-        "hello"
+        "No results found"
       )}
     </div>
   );

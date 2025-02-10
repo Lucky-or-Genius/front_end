@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import HoverDetails from "../common/hover-details";
 import Skeleton from "./skeleton";
 
-const Board = ({ data, toggleFavourite }) => {
+const Board = ({ data, toggleFavourite, lastLeaderElementRef, isLoading }) => {
   const navigate = useNavigate();
   const Headings = [
     "Rank",
@@ -43,14 +43,15 @@ const Board = ({ data, toggleFavourite }) => {
         {data.length > 0 ? (
           <div className="h-full overflow-y-auto pb-4">
             {data.map((item, index) => (
-              <Link
-                to={`/dashboard/LeaderBoards/${item.user_id}`}
+              <div
                 key={index}
+                ref={index === data.length - 1 ? lastLeaderElementRef : null}
                 className={`${
                   index % 2 === 1 ? "bg-[#ffffff05]" : ""
                 } grid grid-cols-15 w-full py-4 px-2 gap-4 rounded-xl hover:bg-[#ffffff10] transition-all ease-in-out font-poppins cursor-pointer hover:scale-[1.005]`}
+                onClick={() => navigate(`/dashboard/LeaderBoards/${item.user_id}`)}
               >
-                <div className=" col-span-1">
+                <div className="col-span-1">
                   {item?.rank === "1" ? (
                     <img alt="rank-1" src="/goldmedal-1.svg" className="w-6" />
                   ) : item?.rank === "2" ? (
@@ -70,12 +71,9 @@ const Board = ({ data, toggleFavourite }) => {
                     className="rounded-full w-7 h-7 object-cover"
                   />
                   <div className="w-fit truncate">
-                    <Link
-                      to={`/dashboard/LeaderBoards/${item.user_id}`}
-                      className="text-white hover:underline hover:text-primary400 "
-                    >
+                    <span className="text-white hover:underline hover:text-primary400">
                       <HoverDetails id={item.user_id} />
-                    </Link>
+                    </span>
                   </div>
                 </div>
                 <div className="text-white text-center col-span-2">
@@ -123,8 +121,13 @@ const Board = ({ data, toggleFavourite }) => {
                     />
                   )}
                 </div>
-              </Link>
+              </div>
             ))}
+            {isLoading && (
+              <div className="text-white text-center py-4">
+                Loading...
+              </div>
+            )}
           </div>
         ) : (
           <Skeleton />

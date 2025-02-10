@@ -164,7 +164,7 @@ const Feed = () => {
       setLeaderboardLoading(true);
       try {
         const leaderboardResponse = await leaderBoardData(user?.accountId);
-        setTopPredictors(leaderboardResponse.data);
+        setTopPredictors(leaderboardResponse.data.users);
       } catch (error) {
         console.error("Error fetching leaderboard data:", error);
         toast.error("Failed to load leaderboard data");

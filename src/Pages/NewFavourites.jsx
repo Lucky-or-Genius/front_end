@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 
 import Tabs from "../components/common/tabs";
 import Channels from "../components/newFavourites/channels";
 import Predictors from "../components/newFavourites/predictors";
 import Sources from "../components/newFavourites/sources";
 import Predictions from "../components/newFavourites/predictions";
-import { leaderBoardData } from "../services/Leaderboards.service";
+import { fetchLeaderboardData } from "../services/Leaderboards.service";
 import { channelsData } from "../services/channels.service";
 import { allSummarySources } from "../services/summaries.services";
 import { getPredictionsUser } from "../services/Predictions.service";
@@ -16,19 +16,53 @@ const Favourites = () => {
   const [channels, setChannels] = useState([]);
   const [sources, setSources] = useState([]);
   const [predictions, setPredictions] = useState([]);
+  const [predictorsPage, setPredictorsPage] = useState(1);
+  const [hasMorePredictors, setHasMorePredictors] = useState(true);
+  const [isLoadingPredictors, setIsLoadingPredictors] = useState(false);
+  const pageSize = 20; // constant page size for pagination
+  const observer = useRef();
+  
+  const lastElementRef = useCallback(node => {
+    if (isLoadingPredictors) return;
+    if (observer.current) observer.current.disconnect();
+    
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMorePredictors) {
+        setPredictorsPage(prevPage => prevPage + 1);
+      }
+    });
 
-  const getPredictors = useCallback(async () => {
+    if (node) observer.current.observe(node);
+  }, [isLoadingPredictors, hasMorePredictors]);
+
+  const getPredictors = useCallback(async (page = 1) => {
+    // Prevent duplicate calls if already loading
+    if (isLoadingPredictors) return;
+    setIsLoadingPredictors(true);
     try {
-      const res = await leaderBoardData(accountId);
-
-      const filteredData = [...res?.data]
-        .filter((obj) => obj.is_favourite === true)
-        .map((obj) => ({ ...obj }));
-      setPredictors(filteredData);
+      // Call the consolidated fetch with pagination and filterFavorites set to true
+      const res = await fetchLeaderboardData({ page, pageSize, filterFavorites: true });
+      // Assuming API returns an array of users under res.data.users
+      const users = res?.data?.users || [];
+      
+      if (page === 1) {
+        setPredictors(users);
+      } else {
+        // Append new predictors to the existing list
+        setPredictors(prev => [...prev, ...users]);
+      }
+      
+      // If fewer users than pageSize are returned, assume there are no more pages.
+      if (users.length < pageSize) {
+        setHasMorePredictors(false);
+      }
+      setPredictorsPage(page);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+    } finally {
+      setIsLoadingPredictors(false);
     }
-  }, [accountId]);
+  }, [isLoadingPredictors, pageSize]);
 
   const getChannels = useCallback(async () => {
     try {
@@ -74,17 +108,49 @@ const Favourites = () => {
   }, [accountId]);
 
   useEffect(() => {
-    getPredictors();
+    // Initial load
     getChannels();
     getSources();
     GetPredictions();
-  }, []);
+    getPredictors(1); // Load first page of predictors
+  }, []); // Remove getPredictors from dependencies
+
+  // Separate useEffect for infinite scrolling
+  useEffect(() => {
+    let throttleTimeout = null;
+
+    const handleScroll = () => {
+      if (throttleTimeout) return;
+      
+      throttleTimeout = setTimeout(() => {
+        const scrolledToBottom = 
+          window.innerHeight + window.scrollY >= 
+          document.documentElement.scrollHeight - 100;
+
+        if (scrolledToBottom && hasMorePredictors && !isLoadingPredictors) {
+          getPredictors(predictorsPage + 1);
+        }
+        throttleTimeout = null;
+      }, 200);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (throttleTimeout) clearTimeout(throttleTimeout);
+    };
+  }, [predictorsPage, hasMorePredictors, isLoadingPredictors]); // Remove getPredictors
 
   const Items = [
     {
       title: "Predictors",
       content: (
-        <Predictors predictors={predictors} setPredictors={setPredictors} />
+        <Predictors 
+          predictors={predictors} 
+          setPredictors={setPredictors}
+          lastElementRef={lastElementRef}
+          isLoading={isLoadingPredictors}
+        />
       ),
     },
     {

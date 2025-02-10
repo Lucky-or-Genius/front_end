@@ -9,7 +9,7 @@ import Skeleton from "../newLeaderboard/skeleton";
 import { useAppContext } from "../../utils/appContext";
 import HoverDetails from "../common/hover-details";
 
-const Board = ({ data, setPredictors }) => {
+const Board = ({ data, setPredictors, lastElementRef, isLoading }) => {
   const { user, login } = useAppContext();
   const navigate = useNavigate();
   const Headings = [
@@ -72,12 +72,13 @@ const Board = ({ data, setPredictors }) => {
         {data.length > 0 ? (
           <div className="h-full overflow-y-auto pb-4 overflow-x-hidden">
             {data.map((item, index) => (
-              <Link
-                to={`/dashboard/LeaderBoards/${item.user_id}`}
+              <div
                 key={index}
+                ref={index === data.length - 1 ? lastElementRef : null}
                 className={`${
                   index % 2 === 1 ? "bg-[#ffffff05]" : ""
                 } grid grid-cols-15 w-full py-4 px-2 gap-4 rounded-xl hover:bg-[#ffffff10] transition-all ease-in-out font-poppins cursor-pointer hover:scale-[1.005]`}
+                onClick={() => navigate(`/dashboard/LeaderBoards/${item.user_id}`)}
               >
                 <div className=" col-span-1">
                   {item?.rank === 1 ? (
@@ -99,12 +100,9 @@ const Board = ({ data, setPredictors }) => {
                     className="rounded-full w-7 h-7 object-cover"
                   />
                   <div className="w-fit truncate">
-                    <Link
-                      to={`/dashboard/LeaderBoards/${item.user_id}`}
-                      className="text-white hover:underline hover:text-primary400 "
-                    >
+                    <span className="text-white hover:underline hover:text-primary400">
                       <HoverDetails id={item.user_id} />
-                    </Link>
+                    </span>
                   </div>
                 </div>
                 <div className="text-white text-center col-span-2">
@@ -141,8 +139,13 @@ const Board = ({ data, setPredictors }) => {
                     className="cursor-pointer text-error text-center text-xl active:scale-95 transition-all hover:scale-105"
                   />
                 </div>
-              </Link>
+              </div>
             ))}
+            {isLoading && (
+              <div className="text-white text-center py-4">
+                Loading...
+              </div>
+            )}
           </div>
         ) : (
           <Skeleton />
