@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { CgShutterstock } from "react-icons/cg";
@@ -12,17 +12,43 @@ const Sources = () => {
   const id = useParams().id;
   const [sources, setSources] = useState();
   const navigate = useNavigate();
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const observer = useRef();
 
   const channelInfo = JSON.parse(localStorage.getItem("channelInfo"));
 
+  const lastSourceElementRef = useCallback(node => {
+    if (isLoading) return;
+    if (observer.current) observer.current.disconnect();
+    
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPage(prevPage => prevPage + 1);
+      }
+    });
+
+    if (node) observer.current.observe(node);
+  }, [isLoading, hasMore]);
+
   const fetchSources = useCallback(async () => {
     try {
-      const res = await channelsSourceData(id);
-      setSources(res.data);
+      setIsLoading(true);
+      const response = await channelsSourceData(id);
+      
+      setSources(prevSources => {
+        if (page === 1) return response.data.sources;
+        return [...prevSources, ...response.data.sources];
+      });
+
+      setHasMore(page < response.data.pagination.totalPages);
     } catch (error) {
-      console.log(error);
+      console.error('Error fetching sources:', error);
+    } finally {
+      setIsLoading(false);
     }
-  }, [id]);
+  }, [id, page]);
 
   useEffect(() => {
     fetchSources();
@@ -86,9 +112,15 @@ const Sources = () => {
       </div>
       <div className="w-full grid grid-cols-1 md:grid-cols-2 2md:grid-cols-2 md:px-6 gap-4">
         {sources?.map((source, index) => (
-          <SummaryCard key={index} summary={source} />
+          <div
+            key={source.id}
+            ref={index === sources.length - 1 ? lastSourceElementRef : null}
+          >
+            <SummaryCard summary={source} />
+          </div>
         ))}
       </div>
+      {isLoading && <div>Loading...</div>}
     </div>
   );
 };

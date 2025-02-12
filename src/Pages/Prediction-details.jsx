@@ -24,7 +24,7 @@ const Predictor = () => {
     const fetchUserData = async () => {
       const res = await getSinglePrediction(id);
 
-      setPredictionData(res.data);
+      setPredictionData(res.data.predictions);
     };
 
     fetchUserData();

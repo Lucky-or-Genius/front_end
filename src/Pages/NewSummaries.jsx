@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { FiSearch } from "react-icons/fi";
 import { toast } from "react-hot-toast";
 import { LuPlus } from "react-icons/lu";
@@ -24,23 +24,53 @@ const NewSummaries = () => {
   const [showModal, setShowModal] = useState(false);
   const [url, setUrl] = useState("");
   const [showNotification, setShowNotification] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const observer = useRef();
+  const [sortState, setSortState] = useState({
+    publicationDate: null,  // can be 'asc' or 'desc'
+    numberOfPredictions: null  // can be 'asc' or 'desc'
+  });
+  const [noResults, setNoResults] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
+  useEffect(() => {
+    setPage(1);
+    setHasMore(true);
+    setSortState({
+      publicationDate: null,
+      numberOfPredictions: null
+    });
+  }, [searchQuery]);
+
   const sortByPublicationDate = async (order) => {
     try {
+      setPage(1);
+      setSortState({
+        publicationDate: order,
+        numberOfPredictions: null
+      });
       const res = await sortPublicationDate(order);
-      setSummaries(res.data);
+      setSummaries(res.data.sources);
+      setHasMore(res.data.pagination && page < res.data.pagination.totalPages);
     } catch (error) {
       console.log(error);
     }
   };
   const sortByNumberOfPredictions = async (order) => {
     try {
+      setPage(1);
+      setSortState({
+        publicationDate: null,
+        numberOfPredictions: order
+      });
       const res = await sortNumberOfPredictions(order);
-      setSummaries(res.data);
+      setSummaries(res.data.sources);
+      setHasMore(res.data.pagination && page < res.data.pagination.totalPages);
     } catch (error) {
       console.log(error);
     }
@@ -75,25 +105,44 @@ const NewSummaries = () => {
 
   const fetchSummariesData = useCallback(async () => {
     try {
-      if (searchQuery === "") {
-        const response = await allSummarySources(user?.accountId);
-        setSummaries(response.data);
+      setIsLoading(true);
+      setNoResults(false);
+      let response;
+      
+      if (searchQuery) {
+        response = await searchTerm(searchQuery, page);
+      } else if (sortState.publicationDate) {
+        response = await sortPublicationDate(sortState.publicationDate, page);
+      } else if (sortState.numberOfPredictions) {
+        response = await sortNumberOfPredictions(sortState.numberOfPredictions, page);
       } else {
-        const response = await searchTerm(searchQuery);
-        setSummaries(response.data);
+        response = await allSummarySources(user?.accountId, page);
       }
+
+      const newSources = response.data.sources || [];
+      
+      if (page === 1 && newSources.length === 0) {
+        setNoResults(true);
+      }
+
+      setSummaries(prevSummaries => {
+        if (page === 1) return newSources;
+        return [...prevSummaries, ...newSources];
+      });
+
+      setHasMore(response.data.pagination && page < response.data.pagination.totalPages);
     } catch (error) {
       console.log(error);
+      setNoResults(true);
+    } finally {
+      setIsLoading(false);
     }
-  }, [searchQuery, user]);
+  }, [searchQuery, user?.accountId, page, sortState]);
 
   useEffect(() => {
-    const handler = setTimeout(
-      () => {
-        fetchSummariesData();
-      },
-      searchQuery ? 1000 : 0
-    );
+    const handler = setTimeout(() => {
+      fetchSummariesData();
+    }, searchQuery ? 1000 : 0);
 
     return () => {
       clearTimeout(handler);
@@ -112,6 +161,19 @@ const NewSummaries = () => {
       toast.error("Login process interrupted. Please try again.");
     }
   };
+
+  const lastSummaryElementRef = useCallback(node => {
+    if (isLoading) return;
+    if (observer.current) observer.current.disconnect();
+    
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPage(prevPage => prevPage + 1);
+      }
+    });
+
+    if (node) observer.current.observe(node);
+  }, [isLoading, hasMore]);
 
   return (
     <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0 relative">
@@ -146,16 +208,33 @@ const NewSummaries = () => {
         />
       </div>
 
-      {summaries.length > 0 ? (
+      {noResults ? (
+        <div className="w-full text-center text-white font-raleway mt-8">
+          {searchQuery ? (
+            <p>No results found for "{searchQuery}"</p>
+          ) : (
+            <p>No sources available</p>
+          )}
+        </div>
+      ) : summaries.length > 0 ? (
         <div className="w-full grid grid-cols-1 md:grid-cols-2 md:px-6 gap-4">
           {summaries.map((summary, index) => (
-            <SummaryCard
-              key={index}
-              summary={summary}
-              toggleFavourite={toggleFavourite}
-              index={index}
-            />
+            <div
+              key={summary.id}
+              ref={index === summaries.length - 1 ? lastSummaryElementRef : null}
+            >
+              <SummaryCard
+                summary={summary}
+                toggleFavourite={toggleFavourite}
+                index={index}
+              />
+            </div>
           ))}
+          {isLoading && (
+            <div className="loading text-white text-center col-span-2">
+              Loading...
+            </div>
+          )}
         </div>
       ) : (
         <Skeleton />

@@ -202,7 +202,7 @@ const Leader = () => {
     {
       title: "Sources",
       content: (
-        <SourceSection setSummaries={setSummaries} summaries={summaries} />
+        <SourceSection setSummaries={setSummaries} summaries={summaries} userId={id} />
       ),
     },
   ];
