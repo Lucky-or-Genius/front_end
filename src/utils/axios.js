@@ -8,8 +8,7 @@ const Axios = axios.create({
 // Get account ID from local storage or use demo account
 const getAccountId = () => {
   try {
-    const storedId = localStorage.getItem('accountId');
-    return storedId ? JSON.parse(storedId) : '003d45e5-b3a2-40c0-8e76-59ef89f6a519';
+    return localStorage.getItem('accountId') || '003d45e5-b3a2-40c0-8e76-59ef89f6a519';
   } catch {
     return '003d45e5-b3a2-40c0-8e76-59ef89f6a519';
   }
