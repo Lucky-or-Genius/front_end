@@ -161,9 +161,10 @@ const Feed = () => {
    */
   useEffect(() => {
     const fetchLeaderBoardData = async () => {
+      if (leaderboardLoading) return;
       setLeaderboardLoading(true);
       try {
-        const leaderboardResponse = await leaderBoardData(user?.accountId);
+        const leaderboardResponse = await leaderBoardData();
         setTopPredictors(leaderboardResponse.data.users);
       } catch (error) {
         console.error("Error fetching leaderboard data:", error);
