@@ -1,7 +1,7 @@
 import React from "react";
 
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import HoverDetails from "../common/hover-details";
 import Skeleton from "./skeleton";
@@ -49,7 +49,9 @@ const Board = ({ data, toggleFavourite, lastLeaderElementRef, isLoading }) => {
                 className={`${
                   index % 2 === 1 ? "bg-[#ffffff05]" : ""
                 } grid grid-cols-15 w-full py-4 px-2 gap-4 rounded-xl hover:bg-[#ffffff10] transition-all ease-in-out font-poppins cursor-pointer hover:scale-[1.005]`}
-                onClick={() => navigate(`/dashboard/LeaderBoards/${item.user_id}`)}
+                onClick={() =>
+                  navigate(`/dashboard/LeaderBoards/${item.user_id}`)
+                }
               >
                 <div className="col-span-1">
                   {item?.rank === "1" ? (
@@ -124,9 +126,7 @@ const Board = ({ data, toggleFavourite, lastLeaderElementRef, isLoading }) => {
               </div>
             ))}
             {isLoading && (
-              <div className="text-white text-center py-4">
-                Loading...
-              </div>
+              <div className="text-white text-center py-4">Loading...</div>
             )}
           </div>
         ) : (

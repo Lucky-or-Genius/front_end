@@ -7,20 +7,10 @@ import { useAppContext } from "../../utils/appContext";
 import { addRemoveFavourite } from "../../services/Leaderboards.service";
 
 const MobileLeaderBoard = ({ setPredictors, data }) => {
-  const { user, login } = useAppContext();
+  const { user } = useAppContext();
   const navigate = useNavigate();
 
   const toggleFavourite = async (id) => {
-    try {
-      if (!user) {
-        await login();
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      toast.error("Login process interrupted. Please try again.");
-      return;
-    }
-
     const accountId = user?.accountId;
 
     if (!accountId) {
@@ -71,7 +61,7 @@ const MobileLeaderBoard = ({ setPredictors, data }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      toggleFavourite(index, item?.user_id);
+                      toggleFavourite(item?.user_id);
                     }}
                     className="cursor-pointer text-error text-center text-xl active:scale-95 transition-all hover:scale-105"
                   />

@@ -22,39 +22,44 @@ const NewLeaderboard = () => {
   const [currentSort, setCurrentSort] = useState(null);
   const observer = useRef();
   const isMobile = useIsMobile();
-  
-  const lastLeaderElementRef = useCallback(node => {
-    if (isLoading) return;
-    if (observer.current) observer.current.disconnect();
-    
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage(prevPage => prevPage + 1);
-      }
-    });
 
-    if (node) observer.current.observe(node);
-  }, [isLoading, hasMore]);
+  const lastLeaderElementRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore]
+  );
 
   const getLeaderboardData = useCallback(async () => {
     try {
       setIsLoading(true);
-      let params = { 
+      let params = {
         page,
         orderBy: currentSort,
-        searchTerm: searchQuery
+        searchTerm: searchQuery,
       };
 
       const response = await fetchLeaderboardData(params);
 
       const newUsers = response.data.users || [];
 
-      setData(prevData => {
+      setData((prevData) => {
         if (page === 1) return newUsers;
         return [...prevData, ...newUsers];
       });
 
-      setHasMore(response.data.pagination && page < response.data.pagination.totalPages);
+      setHasMore(
+        response.data.pagination && page < response.data.pagination.totalPages
+      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -63,10 +68,13 @@ const NewLeaderboard = () => {
   }, [searchQuery, currentSort, page]);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setPage(1);
-      getLeaderboardData();
-    }, searchQuery ? 1000 : 0);
+    const handler = setTimeout(
+      () => {
+        setPage(1);
+        getLeaderboardData();
+      },
+      searchQuery ? 1000 : 0
+    );
 
     return () => {
       clearTimeout(handler);
@@ -120,7 +128,7 @@ const NewLeaderboard = () => {
   };
 
   return (
-    <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0">
+    <div className="bg-primary h-full md:h-screen min-h-screen w-full overflow-y-auto md:overflow-hidden px-4">
       <div className="w-full flex py-6 justify-center">
         <span className="font-raleway text-3xl text-white font-[600]">
           Leaderboard
@@ -145,17 +153,17 @@ const NewLeaderboard = () => {
         />
       </div>
 
-      <div className="hidden md:block">
-        <Board 
-          data={data} 
+      <div className="hidden md:block h-full">
+        <Board
+          data={data}
           toggleFavourite={toggleFavourite}
           lastLeaderElementRef={lastLeaderElementRef}
           isLoading={isLoading}
         />
       </div>
       <div className="md:hidden">
-        <MobileLeaderBoard 
-          data={data} 
+        <MobileLeaderBoard
+          data={data}
           toggleFavourite={toggleFavourite}
           lastLeaderElementRef={lastLeaderElementRef}
           isLoading={isLoading}

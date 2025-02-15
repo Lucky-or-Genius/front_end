@@ -6,6 +6,7 @@ import useIsMobile from "../../hooks/useIsMobile";
 
 const Predictors = ({ predictors, setPredictors }) => {
   const isMobile = useIsMobile();
+
   return (
     <div className="w-full">
       {isMobile ? (
