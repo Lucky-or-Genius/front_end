@@ -23,16 +23,6 @@ const Board = ({ data, setPredictors, lastElementRef, isLoading }) => {
   ];
 
   const toggleFavourite = async (id) => {
-    try {
-      if (!user) {
-        await login();
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      toast.error("Login process interrupted. Please try again.");
-      return;
-    }
-
     const accountId = user?.accountId;
 
     if (!accountId) {
@@ -78,7 +68,9 @@ const Board = ({ data, setPredictors, lastElementRef, isLoading }) => {
                 className={`${
                   index % 2 === 1 ? "bg-[#ffffff05]" : ""
                 } grid grid-cols-15 w-full py-4 px-2 gap-4 rounded-xl hover:bg-[#ffffff10] transition-all ease-in-out font-poppins cursor-pointer hover:scale-[1.005]`}
-                onClick={() => navigate(`/dashboard/LeaderBoards/${item.user_id}`)}
+                onClick={() =>
+                  navigate(`/dashboard/LeaderBoards/${item.user_id}`)
+                }
               >
                 <div className=" col-span-1">
                   {item?.rank === 1 ? (
@@ -134,7 +126,7 @@ const Board = ({ data, setPredictors, lastElementRef, isLoading }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      toggleFavourite(index, item?.user_id);
+                      toggleFavourite(item?.user_id);
                     }}
                     className="cursor-pointer text-error text-center text-xl active:scale-95 transition-all hover:scale-105"
                   />
@@ -142,9 +134,7 @@ const Board = ({ data, setPredictors, lastElementRef, isLoading }) => {
               </div>
             ))}
             {isLoading && (
-              <div className="text-white text-center py-4">
-                Loading...
-              </div>
+              <div className="text-white text-center py-4">Loading...</div>
             )}
           </div>
         ) : (
