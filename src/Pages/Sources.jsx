@@ -1,61 +1,74 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { CgShutterstock } from "react-icons/cg";
-import { FaChartLine } from "react-icons/fa";
-import { MdPendingActions } from "react-icons/md";
+import { CircularProgress, ProgressCard } from "../components/common";
 
 import { channelsSourceData } from "../services/channels.service";
 import SummaryCard from "../components/newSummaries/summaryCard";
 
 const Sources = () => {
   const id = useParams().id;
-  const [sources, setSources] = useState();
+  const [sources, setSources] = useState([]);
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const observer = useRef();
+  const sourcesRef = useRef(null);
 
+  const total_predictions =
+    Number(sources[0]?.channel_total_true_partially) +
+    Number(sources[0]?.channel_total_false) +
+    Number(sources[0]?.channel_total_pending);
   const channelInfo = JSON.parse(localStorage.getItem("channelInfo"));
 
-  const lastSourceElementRef = useCallback(node => {
-    if (isLoading) return;
-    if (observer.current) observer.current.disconnect();
-    
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage(prevPage => prevPage + 1);
-      }
-    });
+  const scrollToSources = () => {
+    sourcesRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
-    if (node) observer.current.observe(node);
-  }, [isLoading, hasMore]);
+  const lastSourceElementRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
 
-  const fetchSources = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      const response = await channelsSourceData(id);
-      
-      setSources(prevSources => {
-        if (page === 1) return response.data.sources;
-        return [...prevSources, ...response.data.sources];
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPage((prevPage) => prevPage + 1);
+        }
       });
 
-      setHasMore(page < response.data.pagination.totalPages);
-    } catch (error) {
-      console.error('Error fetching sources:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [id, page]);
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore]
+  );
+
+  const fetchSources = useCallback(
+    async (pageNumber) => {
+      try {
+        setIsLoading(true);
+        const response = await channelsSourceData(id, pageNumber);
+
+        setSources((prevSources) => {
+          if (pageNumber === 1) return response.data.sources;
+          return [...prevSources, ...response.data.sources];
+        });
+
+        setHasMore(pageNumber < response.data.pagination.totalPages);
+      } catch (error) {
+        console.error("Error fetching sources:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [id]
+  );
 
   useEffect(() => {
-    fetchSources();
-  }, [fetchSources]);
+    fetchSources(page);
+  }, [fetchSources, page]);
 
   return (
-    <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0 flex flex-col items-center">
+    <div className="bg-primary min-h-screen smooth-scroll h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0 flex flex-col items-center">
       <div className="w-full flex justify-center relative">
         <div className="flex flex-col items-center md:flex-row gap-4 md:gap-6 w-full justify-center py-6 ">
           <img
@@ -63,10 +76,19 @@ const Sources = () => {
             alt=""
             width={100}
             height={100}
-            className="w-14 h-14 rounded-full object-cover"
+            className="w-16 h-16 rounded-full object-cover"
           />
-          <div className="text-white font-raleway text-3xl">
-            {channelInfo?.channelName}
+          <div className="flex flex-col items-center md:items-start font-raleway text-white gap-2">
+            <div className="text-3xl">{channelInfo?.channelName}</div>
+            <button
+              className="bg-[#ffffff10] rounded-full px-4 py-1 font-semibold w-fit hover:bg-[#ffffff20] transition-all duration-300"
+              onClick={scrollToSources}
+            >
+              <span className="text-[#ffffff80] text-sm font-normal">
+                Total Sources :
+              </span>{" "}
+              {channelInfo?.summaries}
+            </button>
           </div>
         </div>
         <div
@@ -76,41 +98,38 @@ const Sources = () => {
           <FaArrowLeftLong /> Back
         </div>
       </div>
-      <div className="w-full md:w-4/5 grid grid-cols-2 md:grid-cols-4 font-raleway gap-4 py-8">
-        <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
-          <CgShutterstock className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
-          <span className="text-[#ffffff60] text-[16px]">
-            Prediction Accuracy
-          </span>
-          <span className="text-[24px] text-white">
-            {channelInfo?.accuracy}%
-          </span>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 w-4/5 py-12 gap-6 md:gap-4 ">
+        <div className="flex justify-center w-full h-full items-center">
+          <CircularProgress
+            percentage={Math.round(channelInfo?.accuracy)}
+            size={250}
+            key={id}
+          />
         </div>
-        <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
-          <MdPendingActions className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
-          <span className="text-[#ffffff60] text-[16px]">
-            Total Predictions
-          </span>
-          <span className="text-[24px] text-white">
-            {channelInfo?.predictions}
-          </span>
-        </div>
-        <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
-          <FaChartLine className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
-          <span className="text-[#ffffff60] text-[16px]">
-            Pending Predictions
-          </span>
-          <span className="text-[24px] text-white">{channelInfo?.pending}</span>
-        </div>
-        <div className="flex border border-[#ffffff30] rounded-lg p-4 flex-col gap-2 hover:shadow-md hover:shadow-[#ffffff30] transition-all ease-in-out duration-200">
-          <FaChartLine className="w-8 h-8 p-1 rounded-full bg-[#ffffff90] text-primary " />
-          <span className="text-[#ffffff60] text-[16px]">Summaries</span>
-          <span className="text-[24px] text-white">
-            {channelInfo?.summaries}
-          </span>
+        <div className="flex flex-col gap-3">
+          <ProgressCard
+            totalPredictions={total_predictions}
+            value={sources[0]?.channel_total_true_partially}
+            status={"Partially True"}
+          />
+          <ProgressCard
+            totalPredictions={total_predictions}
+            value={sources[0]?.channel_total_pending}
+            status={"Pending"}
+          />
+          <ProgressCard
+            totalPredictions={total_predictions}
+            value={sources[0]?.channel_total_false}
+            status={"False"}
+          />
         </div>
       </div>
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 2md:grid-cols-2 md:px-6 gap-4">
+
+      <div
+        ref={sourcesRef}
+        className="w-full grid grid-cols-1 md:grid-cols-2 2md:grid-cols-2 md:px-6 gap-4"
+      >
         {sources?.map((source, index) => (
           <div
             key={source.id}
@@ -120,7 +139,9 @@ const Sources = () => {
           </div>
         ))}
       </div>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && (
+        <div className="text-white py-4 font-poppins">Loading sources...</div>
+      )}
     </div>
   );
 };
