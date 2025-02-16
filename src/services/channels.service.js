@@ -6,8 +6,10 @@ export const channelsData = async (id) => {
   return await Axios.get(`channel_data`);
 };
 
-export const channelsSourceData = async (id) => {
-  return await Axios.get(`all-sources?channelId=${id}`);
+export const channelsSourceData = async (id, page = 1, pageSize = 10) => {
+  return await Axios.get(
+    `all-sources?channelId=${id}&page=${page}&pageSize=${pageSize}`
+  );
 };
 
 export const addRemoveFavourite = async (params) => {
