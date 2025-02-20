@@ -1,24 +1,14 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 import { addRemoveFavourite } from "../../services/channels.service";
-import ChannelCard from "./channel-card";
-import toast from "react-hot-toast";
+import Board from "../newChannel/board";
 import { useAppContext } from "../../utils/appContext";
 
 const Channels = ({ channels, setChannels }) => {
-  const { user, login } = useAppContext();
+  const { user } = useAppContext();
 
-  const toggleFavourite = async (id) => {
-    try {
-      if (!user) {
-        await login();
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      toast.error("Login process interrupted. Please try again.");
-      return;
-    }
-
+  const toggleFavourite = async (index, id) => {
     const accountId = user?.accountId;
 
     if (!accountId) {
@@ -34,15 +24,8 @@ const Channels = ({ channels, setChannels }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-6 w-full">
-      {channels?.map((channel, index) => (
-        <ChannelCard
-          key={index}
-          channel={channel}
-          toggleFavourite={toggleFavourite}
-          index={index}
-        />
-      ))}
+    <div className="w-full flex py-6 justify-center relative flex-col justify-center items-center gap-4 overflow-y-hidden md:h-[calc(100vh-36px)] h-full">
+      <Board data={channels} toggleFavourite={toggleFavourite} />
     </div>
   );
 };
