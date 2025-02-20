@@ -3,6 +3,7 @@ export { default as AnimatedTooltip } from "./animated-tooltip";
 export { default as Modal } from "./modal";
 export { default as CircularProgress } from "./circular-progress";
 export { default as HoverDetails } from "./hover-details";
+export { default as ChannelHoverDetails } from "./channel-hover-details";
 export { default as PredictionSection } from "./prediction-section";
 export { default as Tabs } from "./tabs";
 export { default as ShareButton } from "./share-button";

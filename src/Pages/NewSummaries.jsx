@@ -29,8 +29,8 @@ const NewSummaries = () => {
   const [isLoading, setIsLoading] = useState(false);
   const observer = useRef();
   const [sortState, setSortState] = useState({
-    publicationDate: null,  // can be 'asc' or 'desc'
-    numberOfPredictions: null  // can be 'asc' or 'desc'
+    publicationDate: null, // can be 'asc' or 'desc'
+    numberOfPredictions: null, // can be 'asc' or 'desc'
   });
   const [noResults, setNoResults] = useState(false);
 
@@ -43,7 +43,7 @@ const NewSummaries = () => {
     setHasMore(true);
     setSortState({
       publicationDate: null,
-      numberOfPredictions: null
+      numberOfPredictions: null,
     });
   }, [searchQuery]);
 
@@ -52,7 +52,7 @@ const NewSummaries = () => {
       setPage(1);
       setSortState({
         publicationDate: order,
-        numberOfPredictions: null
+        numberOfPredictions: null,
       });
       const res = await sortPublicationDate(order);
       setSummaries(res.data.sources);
@@ -66,7 +66,7 @@ const NewSummaries = () => {
       setPage(1);
       setSortState({
         publicationDate: null,
-        numberOfPredictions: order
+        numberOfPredictions: order,
       });
       const res = await sortNumberOfPredictions(order);
       setSummaries(res.data.sources);
@@ -108,29 +108,34 @@ const NewSummaries = () => {
       setIsLoading(true);
       setNoResults(false);
       let response;
-      
+
       if (searchQuery) {
         response = await searchTerm(searchQuery, page);
       } else if (sortState.publicationDate) {
         response = await sortPublicationDate(sortState.publicationDate, page);
       } else if (sortState.numberOfPredictions) {
-        response = await sortNumberOfPredictions(sortState.numberOfPredictions, page);
+        response = await sortNumberOfPredictions(
+          sortState.numberOfPredictions,
+          page
+        );
       } else {
         response = await allSummarySources(user?.accountId, page);
       }
 
       const newSources = response.data.sources || [];
-      
+
       if (page === 1 && newSources.length === 0) {
         setNoResults(true);
       }
 
-      setSummaries(prevSummaries => {
+      setSummaries((prevSummaries) => {
         if (page === 1) return newSources;
         return [...prevSummaries, ...newSources];
       });
 
-      setHasMore(response.data.pagination && page < response.data.pagination.totalPages);
+      setHasMore(
+        response.data.pagination && page < response.data.pagination.totalPages
+      );
     } catch (error) {
       console.log(error);
       setNoResults(true);
@@ -140,9 +145,12 @@ const NewSummaries = () => {
   }, [searchQuery, user?.accountId, page, sortState]);
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      fetchSummariesData();
-    }, searchQuery ? 1000 : 0);
+    const handler = setTimeout(
+      () => {
+        fetchSummariesData();
+      },
+      searchQuery ? 1000 : 0
+    );
 
     return () => {
       clearTimeout(handler);
@@ -162,18 +170,21 @@ const NewSummaries = () => {
     }
   };
 
-  const lastSummaryElementRef = useCallback(node => {
-    if (isLoading) return;
-    if (observer.current) observer.current.disconnect();
-    
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage(prevPage => prevPage + 1);
-      }
-    });
+  const lastSummaryElementRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
 
-    if (node) observer.current.observe(node);
-  }, [isLoading, hasMore]);
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore]
+  );
 
   return (
     <div className="bg-primary min-h-screen h-full w-full overflow-y-auto pb-10 overflow-x-hidden px-4 md:px-0 relative">
@@ -221,7 +232,9 @@ const NewSummaries = () => {
           {summaries.map((summary, index) => (
             <div
               key={summary.id}
-              ref={index === summaries.length - 1 ? lastSummaryElementRef : null}
+              ref={
+                index === summaries.length - 1 ? lastSummaryElementRef : null
+              }
             >
               <SummaryCard
                 summary={summary}
@@ -231,7 +244,7 @@ const NewSummaries = () => {
             </div>
           ))}
           {isLoading && (
-            <div className="loading text-white text-center col-span-2">
+            <div className="loading font-poppins text-white text-center col-span-2">
               Loading...
             </div>
           )}

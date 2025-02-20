@@ -1,37 +1,11 @@
 import React from "react";
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import HoverDetails from "../common/hover-details";
 
-const HeroCard = ({ channel, toggleFavourite, index }) => {
-  const navigate = useNavigate();
-
-  const handleSummariesClick = (e) => {
-    e.preventDefault();
-    const channelInfo = JSON.stringify({
-      imageUrl:
-        channel?.ChannelLogo !== null
-          ? channel?.ChannelLogo
-          : channel?.ChannelImageUrl !== null
-          ? channel?.ChannelImageUrl
-          : "https://i.ibb.co/Ry3bymp/youtube.png",
-      channelName: channel?.ChannelName,
-      predictions: channel?.Predictions,
-      accuracy: channel?.PredictionAccuracyPercent,
-      pending: channel?.TotalPendingPredictions,
-      summaries: channel?.Summaries,
-    });
-
-    localStorage.setItem("channelInfo", channelInfo);
-    navigate(`/dashboard/MyChannels/sources/${channel.channel_id}`);
-  };
-
+const HeroCard = ({ channel }) => {
   return (
-    <div
-      className="bg-[#ffffff10] rounded-xl flex flex-col justify-between cursor-pointer border border-transparent hover:border-primary400"
-      onClick={(e) => handleSummariesClick(e)}
-    >
+    <div className="bg-[#ffffff10] rounded-xl flex flex-col justify-between cursor-pointer border border-transparent hover:border-primary400">
       <div className="">
         <div className="">
           <img
@@ -45,11 +19,11 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
             sizes="50"
             quality="100"
             alt="img"
-            className="w-full h-32 object-cover rounded-t-xl"
+            className="w-full h-24 object-cover rounded-t-xl"
           />
         </div>
-        <div className="flex gap-4 items-center justify-between p-3 bg-[#ffffff20] rounded-md mt-2 mx-2">
-          <div className="flex gap-4 items-center font-semibold ">
+        <div className="flex gap-4 items-center justify-between p-2 bg-[#00000020] rounded-md mt-2 mx-2">
+          <div className="flex gap-4 items-center font-semibold">
             <img
               src={
                 channel?.ChannelLogo !== null
@@ -63,65 +37,41 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
               alt="img"
               className="w-10 h-10 object-cover rounded-full"
             />
-            <span className=" font-raleway text-white uppercase text-lg">
+            <span className=" font-raleway text-white uppercase">
               {channel?.ChannelName}
             </span>
           </div>
-          <div className="z-[9999]" onClick={(e) => e.stopPropagation()}>
-            {channel?.is_favourite_channel ? (
-              <IoMdHeart
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  toggleFavourite(index, channel?.channel_id);
-                }}
-                className="cursor-pointer text-error  text-2xl z-[9]"
-              />
-            ) : (
-              <IoMdHeartEmpty
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  toggleFavourite(index, channel?.channel_id);
-                }}
-                className="cursor-pointer text-[#ffffff60] text-2xl active:scale-95 transition-all hover:scale-105 z-[9]"
-              />
-            )}
-          </div>
         </div>
-        <div className="grid grid-cols-2 px-3 pb-4 pt-2 gap-4">
+        <div className="grid grid-cols-2 p-2 gap-2">
           <div className="border border-[#ffffff40] rounded-lg flex flex-col items-center p-2">
-            <span className="text-[#ffffff70] text-sm font-raleway">
+            <span className="text-[#ffffff70] text-xs font-raleway">
               Predictions
             </span>
-            <span className="text-white font-poppins text-lg font-[600]">
+            <span className="text-white font-poppins font-[600]">
               {channel?.Predictions}
             </span>
           </div>
           <div className="border border-[#ffffff40] rounded-lg flex flex-col items-center p-2">
-            <span className="text-[#ffffff70] text-sm font-raleway flex-wrap text-center flex">
+            <span className="text-[#ffffff70] text-xs font-raleway flex-wrap text-center flex">
               Prediction Accuracy
             </span>
-            <span className="text-white font-poppins text-lg font-[600]">
+            <span className="text-white font-poppins font-[600]">
               {channel?.PredictionAccuracyPercent}%
             </span>
           </div>
           <div className="border border-[#ffffff40] rounded-lg flex flex-col items-center p-2">
-            <span className="text-[#ffffff70] text-sm font-raleway flex-wrap text-center flex">
-              Total Pending Predictions
+            <span className="text-[#ffffff70] text-xs font-raleway flex-wrap text-center flex">
+              Pending Predictions
             </span>
-            <span className="text-white font-poppins text-lg font-[600]">
+            <span className="text-white font-poppins font-[600]">
               {channel?.TotalPendingPredictions}
             </span>
           </div>
-          <div
-            className="border border-[#ffffff60] bg-[#ffffff40] cursor-pointer hover:scale-105 active:scale-95 transition-all ease-in-out rounded-lg flex flex-col items-center p-2"
-            onClick={(e) => handleSummariesClick(e)}
-          >
-            <span className="text-white font-[600] text-sm font-raleway">
+          <div className="border border-[#ffffff40] rounded-lg flex flex-col items-center p-2">
+            <span className="text-[#ffffff70] text-xs font-raleway flex-wrap text-center flex">
               Sources
             </span>
-            <span className="text-white font-poppins text-lg font-[600]">
+            <span className="text-white font-poppins font-[600]">
               {channel?.Summaries}
             </span>
           </div>
@@ -133,7 +83,7 @@ const HeroCard = ({ channel, toggleFavourite, index }) => {
           <div className="flex gap-2 flex-wrap">
             {channel?.Users.map((item, index) => (
               <div
-                className="flex gap-2 items-center rounded-lg bg-[#ffffff20] w-fit py-2 px-4 "
+                className="flex gap-2 items-center rounded-lg bg-[#ffffff20] w-fit p-2 "
                 key={index}
               >
                 <img
