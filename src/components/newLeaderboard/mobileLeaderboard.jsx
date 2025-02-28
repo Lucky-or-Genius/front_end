@@ -1,8 +1,8 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 
-const MobileLeaderBoard = ({ data, toggleFavourite, lastLeaderElementRef, isLoading }) => {
+const MobileLeaderBoard = ({ data, toggleFavourite }) => {
   const navigate = useNavigate();
   return (
     <div>
@@ -11,9 +11,10 @@ const MobileLeaderBoard = ({ data, toggleFavourite, lastLeaderElementRef, isLoad
           {data.map((item, index) => (
             <div
               key={index}
-              ref={index === data.length - 1 ? lastLeaderElementRef : null}
               className="w-full bg-[#ffffff10] rounded-xl  p-2"
-              onClick={() => navigate(`/dashboard/LeaderBoards/${item.user_id}`)}
+              onClick={() =>
+                navigate(`/dashboard/LeaderBoards/${item.user_id}`)
+              }
             >
               <div className="flex w-full justify-between pb-4">
                 <div className="col-span-4 flex items-center gap-2">
@@ -96,11 +97,6 @@ const MobileLeaderBoard = ({ data, toggleFavourite, lastLeaderElementRef, isLoad
               </div>
             </div>
           ))}
-          {isLoading && (
-            <div className="text-white text-center py-4">
-              Loading...
-            </div>
-          )}
         </div>
       ) : (
         "No results found"

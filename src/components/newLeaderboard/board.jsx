@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import HoverDetails from "../common/hover-details";
 import Skeleton from "./skeleton";
 
-const Board = ({ data, toggleFavourite, lastLeaderElementRef, isLoading }) => {
+const Board = ({ data, toggleFavourite, isLoading }) => {
   const navigate = useNavigate();
   const Headings = [
     "Rank",
@@ -20,7 +20,10 @@ const Board = ({ data, toggleFavourite, lastLeaderElementRef, isLoading }) => {
 
   return (
     <div className="flex w-full justify-start lg:justify-center gap-4 h-full md:px-6 overflow-y-hidden">
-      <div className="min-w-[850px] overflow-x-auto w-full md:h-4/6 lg:w-5/6 rounded-2xl bg-[#ffffff10] overflow-y-hidden h-full p-4 relative">
+      <div
+        id="scrollable-container"
+        className="min-w-[850px] overflow-x-auto w-full md:h-4/6 lg:w-5/6 rounded-2xl bg-[#ffffff10] overflow-y-hidden h-full p-4 relative"
+      >
         {/* Table Headings */}
         <div className="grid grid-cols-15 border-b pb-4 gap-4 border-gray-500 w-full px-3 sticky top-0 z-30">
           {Headings.map((item, i) => (
@@ -40,12 +43,11 @@ const Board = ({ data, toggleFavourite, lastLeaderElementRef, isLoading }) => {
         </div>
 
         {/* Table Content */}
-        {data.length > 0 ? (
-          <div className="h-full overflow-y-auto pb-4">
+        {!isLoading ? (
+          <div className="h-full overflow-y-auto pb-4 overflow-x-hidden">
             {data.map((item, index) => (
               <div
                 key={index}
-                ref={index === data.length - 1 ? lastLeaderElementRef : null}
                 className={`${
                   index % 2 === 1 ? "bg-[#ffffff05]" : ""
                 } grid grid-cols-15 w-full py-4 px-2 gap-4 rounded-xl hover:bg-[#ffffff10] transition-all ease-in-out font-poppins cursor-pointer hover:scale-[1.005]`}
@@ -125,9 +127,6 @@ const Board = ({ data, toggleFavourite, lastLeaderElementRef, isLoading }) => {
                 </div>
               </div>
             ))}
-            {isLoading && (
-              <div className="text-white text-center py-4">Loading...</div>
-            )}
           </div>
         ) : (
           <Skeleton />

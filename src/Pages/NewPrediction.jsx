@@ -2,13 +2,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { toast } from "react-hot-toast";
 
-import { PredictionCard } from "../components/common";
+import { PredictionCard, Pagination } from "../components/common";
 import {
   getPredictions,
   addRemoveFavourite,
 } from "../services/Predictions.service";
 import PredictionFilters from "../components/common/prediction-filters";
-import Pagination from "../components/common/pagination";
 import Skeleton from "../components/newPrediction/skeleton";
 import { useAppContext } from "../utils/appContext";
 

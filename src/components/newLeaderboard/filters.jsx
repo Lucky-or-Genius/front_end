@@ -14,7 +14,8 @@ const Filters = ({
   const [bankrollOrder, setBankrollOrder] = useState("bankroll_desc");
 
   const handleAccuracySort = () => {
-    const newOrder = accuracyOrder === "accuracy_desc" ? "accuracy_asc" : "accuracy_desc";
+    const newOrder =
+      accuracyOrder === "accuracy_desc" ? "accuracy_asc" : "accuracy_desc";
     setAccuracyOrder(newOrder);
     sortLeaderboardByAccuracy(newOrder);
     toast.success(newOrder === "accuracy_desc" ? "High to Low" : "Low to High");
@@ -44,7 +45,7 @@ const Filters = ({
           className="hover:bg-[#ffffff20] rounded-full gap-2 text-white px-4 py-1 flex items-center focus:bg-[#ffffff20] border border-[#ffffff20]"
         >
           Accuracy{" "}
-          {accuracyOrder === "desc" ? (
+          {accuracyOrder === "accuracy_desc" ? (
             <PiSortDescendingBold />
           ) : (
             <PiSortAscendingBold />
