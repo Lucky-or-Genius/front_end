@@ -1,76 +1,50 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { toast } from "react-hot-toast";
 import { FiSearch } from "react-icons/fi";
 
 import Board from "../components/newLeaderboard/board";
 import MobileLeaderBoard from "../components/newLeaderboard/mobileLeaderboard";
 import Filters from "../components/newLeaderboard/filters";
+import { Pagination } from "../components/common";
 import {
   fetchLeaderboardData,
   addRemoveFavourite,
 } from "../services/Leaderboards.service";
 import { useAppContext } from "../utils/appContext";
-import useIsMobile from "../hooks/useIsMobile";
 
 const NewLeaderboard = () => {
   const { user, login } = useAppContext();
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [currentSort, setCurrentSort] = useState(null);
-  const observer = useRef();
-  const isMobile = useIsMobile();
-
-  const lastLeaderElementRef = useCallback(
-    (node) => {
-      if (isLoading) return;
-      if (observer.current) observer.current.disconnect();
-
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          setPage((prevPage) => prevPage + 1);
-        }
-      });
-
-      if (node) observer.current.observe(node);
-    },
-    [isLoading, hasMore]
-  );
 
   const getLeaderboardData = useCallback(async () => {
     try {
       setIsLoading(true);
       let params = {
-        page,
+        page: currentPage,
         orderBy: currentSort,
         searchTerm: searchQuery,
       };
 
       const response = await fetchLeaderboardData(params);
 
-      const newUsers = response.data.users || [];
+      setData(response.data.users);
 
-      setData((prevData) => {
-        if (page === 1) return newUsers;
-        return [...prevData, ...newUsers];
-      });
-
-      setHasMore(
-        response.data.pagination && page < response.data.pagination.totalPages
-      );
+      setTotalPages(response.data.pagination.totalPages);
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
-  }, [searchQuery, currentSort, page]);
+  }, [searchQuery, currentSort, currentPage]);
 
   useEffect(() => {
     const handler = setTimeout(
       () => {
-        setPage(1);
         getLeaderboardData();
       },
       searchQuery ? 1000 : 0
@@ -81,23 +55,29 @@ const NewLeaderboard = () => {
     };
   }, [searchQuery, getLeaderboardData]);
 
+  const onPageChange = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   const handleSearchChange = (event) => {
-    setPage(1);
+    setCurrentPage(1);
     setSearchQuery(event.target.value);
   };
 
   const sortLeaderboardByAccuracy = (order) => {
-    setPage(1);
+    setCurrentPage(1);
     setCurrentSort(order);
   };
 
   const sortLeaderboardByScore = (order) => {
-    setPage(1);
+    setCurrentPage(1);
     setCurrentSort(order);
   };
 
   const sortLeaderboardByBankroll = (order) => {
-    setPage(1);
+    setCurrentPage(1);
     setCurrentSort(order);
   };
 
@@ -128,7 +108,7 @@ const NewLeaderboard = () => {
   };
 
   return (
-    <div className="bg-primary h-full md:h-screen min-h-screen w-full overflow-y-auto md:overflow-hidden px-4">
+    <div className="bg-primary h-full md:h-screen min-h-screen w-full overflow-y-auto px-4 pb-10">
       <div className="w-full flex py-6 justify-center">
         <span className="font-raleway text-3xl text-white font-[600]">
           Leaderboard
@@ -153,22 +133,21 @@ const NewLeaderboard = () => {
         />
       </div>
 
-      <div className="hidden md:block h-full">
+      <div className="hidden md:block h-fit overflow-x-hidden">
         <Board
           data={data}
           toggleFavourite={toggleFavourite}
-          lastLeaderElementRef={lastLeaderElementRef}
           isLoading={isLoading}
         />
       </div>
       <div className="md:hidden">
-        <MobileLeaderBoard
-          data={data}
-          toggleFavourite={toggleFavourite}
-          lastLeaderElementRef={lastLeaderElementRef}
-          isLoading={isLoading}
-        />
+        <MobileLeaderBoard data={data} toggleFavourite={toggleFavourite} />
       </div>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={onPageChange}
+      />
     </div>
   );
 };

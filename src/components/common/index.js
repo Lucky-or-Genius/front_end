@@ -10,6 +10,7 @@ export { default as ShareButton } from "./share-button";
 export { default as PredictionCard } from "./prediction-card";
 export { default as AdvanceSearchBar } from "./advance-search-bar";
 export { default as ProgressCard } from "./progress-card";
+export { default as Pagination } from "./pagination";
 
 export { default as DesktopSidebar } from "./sidebar/desktop-sidebar";
 export { default as MobileSidebar } from "./sidebar/mobile-sidebar";
