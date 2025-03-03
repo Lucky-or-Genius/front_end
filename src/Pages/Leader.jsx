@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from "react";
-import DocumentMeta from "react-document-meta";
 import { FaWikipediaW } from "react-icons/fa";
 import {
   FaArrowLeftLong,
@@ -16,7 +15,7 @@ import {
 import { getPredictionSingle } from "../services/Predictions.service";
 import { allPredictorSummarySources } from "../services/summaries.services";
 import { getUserDetails } from "../services/Profiles.service";
-import Tabs from "../components/common/tabs";
+import { Tabs, MetaData } from "../components/common";
 import BarChart from "../components/newLeaderboard/barChart";
 import PieChart from "../components/newLeaderboard/pieChart";
 import ShareLinkModal from "../components/common/share-button";
@@ -215,37 +214,21 @@ const Leader = () => {
     ? `${userInfo?.first_name || ""} ${userInfo?.last_name || ""}`.trim()
     : "LuckyOrGenius";
 
-  const userPredictionAccuracy = userInfo
-    ? `${userInfo?.prediction_accuracy}%`
-    : "50%";
+  const shareDescription = `${userInfo?.summary?.slice(0, 200)}...`;
 
-  const shareDescription = `Prediction Accuracy: ${userPredictionAccuracy}`;
-
-  // Meta tags
-  const meta = {
-    title: `${userName} | LuckyOrGenius`,
-    description: shareDescription,
-    canonical: `https://luckyorgenius.com${shareableURL}`,
-    meta: {
-      charset: "utf-8",
-      name: {
-        keywords: "react,meta,document,html,tags",
-        url: `https://luckyorgenius.com${shareableURL}`,
-        // Twitter
-        "twitter:card": "summary_large_image",
-        "twitter:title": userName || "LuckyOrGenius",
-        "twitter:description": shareDescription,
-      },
-      property: {
-        "og:title": userName || "LuckyOrGenius",
-        "og:description": shareDescription,
-        "og:url": `https://luckyorgenius.com${shareableURL}`,
-      },
-    },
-  };
+  const shareImage = `https://logtest2024.blob.core.windows.net/public-thumbnails/profile_${id}.png`;
 
   return (
-    <DocumentMeta {...meta}>
+    <>
+      <MetaData
+        title={`${userName} | LuckyOrGenius`}
+        description={shareDescription}
+        canonical={`https://luckyorgenius.com${shareableURL}`}
+        image={shareImage}
+        keywords={`${userName}, predictions, influencer, track record, ${
+          userData?.tags?.join(", ") || ""
+        }`}
+      />
       <div className="bg-primary min-h-screen w-full p-4 2md:p-8 overflow-y-auto h-full relative">
         <div>
           <div
@@ -409,7 +392,7 @@ const Leader = () => {
           <Tabs items={items} defaultOpen={defaultOpen} className="!w-full" />
         </div>
       </div>
-    </DocumentMeta>
+    </>
   );
 };
 

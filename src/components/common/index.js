@@ -12,5 +12,7 @@ export { default as AdvanceSearchBar } from "./advance-search-bar";
 export { default as ProgressCard } from "./progress-card";
 export { default as Pagination } from "./pagination";
 
+export { default as MetaData } from "./metadata";
+export { default as Layout } from "./layout";
 export { default as DesktopSidebar } from "./sidebar/desktop-sidebar";
 export { default as MobileSidebar } from "./sidebar/mobile-sidebar";
