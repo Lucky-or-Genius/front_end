@@ -9,16 +9,22 @@ const MetaData = ({
   type = "website",
   keywords = "predictions, influencers, accountability, AI",
 }) => {
+  // Ensure canonical URL has domain if it's a relative path
+  const fullCanonical = canonical.startsWith('http') 
+    ? canonical 
+    : `https://www.luckyorgenius.com${canonical.startsWith('/') ? canonical : `/${canonical}`}`;
+
   return (
     <Helmet>
+      {/* Primary Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      {canonical && <link rel="canonical" href={canonical} />}
+      <link rel="canonical" href={fullCanonical} />
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
-      <meta property="og:url" content={canonical} />
+      <meta property="og:url" content={fullCanonical} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
@@ -27,7 +33,7 @@ const MetaData = ({
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={canonical} />
+      <meta name="twitter:url" content={fullCanonical} />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />

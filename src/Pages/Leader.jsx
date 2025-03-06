@@ -228,7 +228,7 @@ const Leader = () => {
       <MetaData
         title={`${userName} | LuckyOrGenius`}
         description={shareDescription}
-        canonical={`https://luckyorgenius.com${shareableURL}`}
+        canonical={shareableURL}
         image={shareImage}
         keywords={`${userName}, predictions, influencer, track record, ${
           userData?.tags?.join(", ") || ""
