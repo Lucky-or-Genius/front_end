@@ -49,36 +49,34 @@ const Leader = () => {
   // Validate dynamic thumbnail URL
   useEffect(() => {
     const checkImageUrl = async () => {
-      // Both with and without dashes to test different formats
       const idWithDashes = id;
       const idWithoutDashes = id.replace(/-/g, '');
-      
+  
       const dynamicImageUrl1 = `https://logtest2024.blob.core.windows.net/public-thumbnails/profile_${idWithDashes}.png`;
       const dynamicImageUrl2 = `https://logtest2024.blob.core.windows.net/public-thumbnails/profile_${idWithoutDashes}.png`;
-      
+  
       console.log("[Leader] Profile ID:", id);
       console.log("[Leader] Testing URL with dashes:", dynamicImageUrl1);
       console.log("[Leader] Testing URL without dashes:", dynamicImageUrl2);
-      
-      // Check with dashes first
+  
       let validUrl = await getValidImageUrl(
         dynamicImageUrl1,
-        "https://i.ibb.co/vsV4X0S/log.jpg" // Fallback image
+        "https://i.ibb.co/vsV4X0S/log.jpg"
       );
-      
-      // If that fails, try without dashes
+  
       if (validUrl === "https://i.ibb.co/vsV4X0S/log.jpg") {
         validUrl = await getValidImageUrl(
           dynamicImageUrl2,
-          "https://i.ibb.co/vsV4X0S/log.jpg" // Fallback image
+          "https://i.ibb.co/vsV4X0S/log.jpg"
         );
       }
-      
+  
       setValidatedImage(validUrl);
     };
-    
+  
     checkImageUrl();
   }, [id]);
+  
 
   const fetchUserInfo = useCallback(async () => {
     try {

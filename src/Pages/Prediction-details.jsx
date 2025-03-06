@@ -31,36 +31,27 @@ const Predictor = () => {
   // Validate dynamic thumbnail URL
   useEffect(() => {
     const checkImageUrl = async () => {
-      // Test both with and without dashes to see which one works
       const idWithDashes = id;
       const idWithoutDashes = id.replace(/-/g, '');
-      
+  
       const dynamicImageUrl1 = `https://logtest2024.blob.core.windows.net/public-thumbnails/prediction_${idWithDashes}.png`;
       const dynamicImageUrl2 = `https://logtest2024.blob.core.windows.net/public-thumbnails/prediction_${idWithoutDashes}.png`;
-      
+  
       console.log("[Prediction] Prediction ID:", id);
       console.log("[Prediction] Testing URL with dashes:", dynamicImageUrl1);
       console.log("[Prediction] Testing URL without dashes:", dynamicImageUrl2);
-      
-      // Check with dashes first
-      let validUrl = await getValidImageUrl(
-        dynamicImageUrl1,
-        "https://i.ibb.co/vsV4X0S/log.jpg" // Fallback image
-      );
-      
-      // If that fails, try without dashes
+  
+      let validUrl = await getValidImageUrl(dynamicImageUrl1, "https://i.ibb.co/vsV4X0S/log.jpg");
       if (validUrl === "https://i.ibb.co/vsV4X0S/log.jpg") {
-        validUrl = await getValidImageUrl(
-          dynamicImageUrl2,
-          "https://i.ibb.co/vsV4X0S/log.jpg" // Fallback image
-        );
+        validUrl = await getValidImageUrl(dynamicImageUrl2, "https://i.ibb.co/vsV4X0S/log.jpg");
       }
-      
+  
       setValidatedImage(validUrl);
     };
-    
+  
     checkImageUrl();
   }, [id]);
+  
 
   useEffect(() => {
     const fetchUserData = async () => {
