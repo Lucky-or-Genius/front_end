@@ -210,12 +210,17 @@ const Leader = () => {
     },
   ];
 
+  // Safely construct user name from user data
   const userName = userInfo
     ? `${userInfo?.first_name || ""} ${userInfo?.last_name || ""}`.trim()
     : "LuckyOrGenius";
 
-  const shareDescription = `${userInfo?.summary?.slice(0, 200)}...`;
+  // Safely create description with fallback
+  const shareDescription = userInfo?.summary 
+    ? `${userInfo.summary.slice(0, 200)}${userInfo.summary.length > 200 ? '...' : ''}`
+    : `View ${userName}'s prediction track record and accuracy on LuckyOrGenius`;
 
+  // Construct dynamic image URL
   const shareImage = `https://logtest2024.blob.core.windows.net/public-thumbnails/profile_${id}.png`;
 
   return (
