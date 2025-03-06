@@ -10,6 +10,8 @@ import PredictorCard from "../components/newPrediction/predictor-card";
 import { transformApiResponse } from "../utils/convertToResponse";
 import Evidences from "../components/newPrediction/evidences";
 import { MetaData } from "../components/common";
+import { getValidImageUrl } from "../utils/imageValidator";
+import DynamicImage from "../components/common/DynamicImage";
 
 const Predictor = () => {
   const navigate = useNavigate();
@@ -17,14 +19,48 @@ const Predictor = () => {
   const id = useParams().id;
   const [predictionData, setPredictionData] = useState([]);
   const [openRow, setOpenRow] = useState(true);
+  const [validatedImage, setValidatedImage] = useState("https://i.ibb.co/vsV4X0S/log.jpg");
 
   // For metadata and sharing
   const shareableURL = location.pathname;
-  const dynamicThumbnailUrl = `https://logtest2024.blob.core.windows.net/public-thumbnails/prediction_${id}.png`;
 
   const handleClick = () => {
     setOpenRow(!openRow);
   };
+
+  // Validate dynamic thumbnail URL
+  useEffect(() => {
+    const checkImageUrl = async () => {
+      // Test both with and without dashes to see which one works
+      const idWithDashes = id;
+      const idWithoutDashes = id.replace(/-/g, '');
+      
+      const dynamicImageUrl1 = `https://logtest2024.blob.core.windows.net/public-thumbnails/prediction_${idWithDashes}.png`;
+      const dynamicImageUrl2 = `https://logtest2024.blob.core.windows.net/public-thumbnails/prediction_${idWithoutDashes}.png`;
+      
+      console.log("[Prediction] Prediction ID:", id);
+      console.log("[Prediction] Testing URL with dashes:", dynamicImageUrl1);
+      console.log("[Prediction] Testing URL without dashes:", dynamicImageUrl2);
+      
+      // Check with dashes first
+      let validUrl = await getValidImageUrl(
+        dynamicImageUrl1,
+        "https://i.ibb.co/vsV4X0S/log.jpg" // Fallback image
+      );
+      
+      // If that fails, try without dashes
+      if (validUrl === "https://i.ibb.co/vsV4X0S/log.jpg") {
+        validUrl = await getValidImageUrl(
+          dynamicImageUrl2,
+          "https://i.ibb.co/vsV4X0S/log.jpg" // Fallback image
+        );
+      }
+      
+      setValidatedImage(validUrl);
+    };
+    
+    checkImageUrl();
+  }, [id]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -58,7 +94,7 @@ const Predictor = () => {
         title={predictionTitle}
         description={predictionDescription}
         canonical={`https://luckyorgenius.com${shareableURL}`}
-        image={dynamicThumbnailUrl}
+        image={validatedImage}
         keywords={predictionKeywords}
       />
       <div className="bg-primary min-h-screen w-full p-4 2md:p-8 overflow-y-auto h-full relative flex flex-col items-center">
@@ -75,9 +111,9 @@ const Predictor = () => {
         {predictionData?.length > 0 ? (
           <>
             <div className="flex flex-col items-center md:flex-row gap-4 md:gap-6 w-full justify-center">
-              <img
+              <DynamicImage
                 src={predictionData[0]?.image_url}
-                alt=""
+                alt={predictionData[0]?.first_name + " " + predictionData[0]?.last_name}
                 width={100}
                 height={100}
                 className="w-14 h-14 rounded-full object-cover"

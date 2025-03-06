@@ -5,7 +5,7 @@ const MetaData = ({
   title = "Lucky or Genius - Do you trust your favourite influencer?",
   description = "AI-based accountability for predictions made by influencers and public figures. Prediction extraction and validation across any digital medium.",
   canonical = "https://www.luckyorgenius.com/",
-  image = "https://i.ibb.co/vsV4X0S/log.jpg",
+  image = "https://i.ibb.co/vsV4X0S/log.jpg", // Default fallback image
   type = "website",
   keywords = "predictions, influencers, accountability, AI",
 }) => {
@@ -13,6 +13,9 @@ const MetaData = ({
   const fullCanonical = canonical.startsWith('http') 
     ? canonical 
     : `https://www.luckyorgenius.com${canonical.startsWith('/') ? canonical : `/${canonical}`}`;
+
+  // For debugging OG image URLs
+  console.log("[MetaData] Using image URL:", image);
 
   return (
     <Helmet>
